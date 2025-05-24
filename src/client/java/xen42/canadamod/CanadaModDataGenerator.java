@@ -9,5 +9,9 @@ public class CanadaModDataGenerator implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(CanadaModModelGenerator::new);
 		pack.addProvider(CanadaModRecipeGenerator::new);
+		pack.addProvider(CanadaModLanguageProvider.English::new);
+		pack.addProvider(CanadaModLanguageProvider.EnglishUpsideDown::new);
+		CanadaModBlockTagGenerator blockTagProvider = pack.addProvider(CanadaModBlockTagGenerator::new);
+		pack.addProvider((output, registries) -> new CanadaModItemTagGenerator(output, registries, blockTagProvider));
 	}
 }

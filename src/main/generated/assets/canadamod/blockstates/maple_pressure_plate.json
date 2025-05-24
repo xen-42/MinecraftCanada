@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "canadamod:block/maple_pressure_plate"
+    },
+    "powered=true": {
+      "model": "canadamod:block/maple_pressure_plate_down"
+    }
+  }
+}

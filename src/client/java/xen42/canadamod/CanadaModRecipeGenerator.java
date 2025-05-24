@@ -1,27 +1,17 @@
 package xen42.canadamod;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.recipe.CookingRecipeJsonBuilder;
-import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.BlastingRecipe;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class CanadaModRecipeGenerator extends FabricRecipeProvider {
@@ -50,7 +40,59 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input('X', CanadaItems.PELT)
                     .criterion(hasItem(CanadaItems.PELT), conditionsFromItem(CanadaItems.PELT))
                     .offerTo(exporter);
+                
+                createShapeless(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.MAPLE_PLANKS, 4)
+                    .input(CanadaTags.ItemTags.MAPLE_LOGS)
+                    .criterion(hasTag(CanadaTags.ItemTags.MAPLE_LOGS), conditionsFromTag(CanadaTags.ItemTags.MAPLE_LOGS))
+                    .offerTo(exporter);
+                
+                createStairsRecipe(CanadaBlocks.MAPLE_STAIRS.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
+
+                createButtonRecipe(CanadaBlocks.MAPLE_BUTTON.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
+
+                createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.MAPLE_SLAB.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
+
+                createDoorRecipe(CanadaBlocks.MAPLE_DOOR.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
+
+                createFenceGateRecipe(CanadaBlocks.MAPLE_FENCE_GATE.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
+
+                createFenceRecipe(CanadaBlocks.MAPLE_FENCE.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
+
+                createPressurePlateRecipe(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.MAPLE_PRESSURE_PLATE.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
+
+                createSignRecipe(CanadaBlocks.MAPLE_SIGN.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                    .offerTo(exporter);
+
+                createShaped(RecipeCategory.MISC, CanadaBlocks.MAPLE_HANGING_SIGN)
+                    .pattern("X X")
+                    .pattern("YYY")
+                    .pattern("YYY")
+                    .input('X', Items.CHAIN)
+                    .input('Y', CanadaTags.ItemTags.MAPLE_LOGS)
+                    .criterion(hasTag(CanadaTags.ItemTags.MAPLE_LOGS), conditionsFromTag(CanadaTags.ItemTags.MAPLE_LOGS))
+                    .criterion(hasItem(Items.CHAIN), conditionsFromItem(Items.CHAIN))
+                    .offerTo(exporter);
             }
         };
+    }
+
+    private String hasTag(TagKey<Item> tag) {
+        return "has_" + tag.getName();
     }
 }

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chain": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:chain"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "canadamod:maple_hanging_sign"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_translation{key='tag.item.canadamod.maple_logs', fallback='#canadamod:maple_logs', args=[]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#canadamod:maple_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_translation{key='tag.item.canadamod.maple_logs', fallback='#canadamod:maple_logs', args=[]}",
+      "has_chain"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "canadamod:maple_hanging_sign"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "canadamod:block/maple_slab"
+    },
+    "type=double": {
+      "model": "canadamod:block/maple_planks"
+    },
+    "type=top": {
+      "model": "canadamod:block/maple_slab_top"
+    }
+  }
+}

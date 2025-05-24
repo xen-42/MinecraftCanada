@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": "minecraft:chain",
+    "Y": "#canadamod:maple_logs"
+  },
+  "pattern": [
+    "X X",
+    "YYY",
+    "YYY"
+  ],
+  "result": {
+    "count": 1,
+    "id": "canadamod:maple_hanging_sign"
+  }
+}

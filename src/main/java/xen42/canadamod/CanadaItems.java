@@ -32,5 +32,16 @@ public class CanadaItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((itemGroup) -> { 
             itemGroup.add(PELT);
         });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> { 
+            for (var block : CanadaBlocks.MAPLE_BLOCKS) {
+                itemGroup.add(block.asItem());
+            }
+        });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> { 
+            itemGroup.add(CanadaBlocks.MAPLE_SIGN.asItem());
+            itemGroup.add(CanadaBlocks.MAPLE_HANGING_SIGN.asItem());
+        });
     }
 }

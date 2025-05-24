@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "canadamod:maple_planks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "canadamod:maple_button"
+  }
+}

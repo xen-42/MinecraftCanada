@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "canadamod:block/maple_planks",
+    "side": "canadamod:block/maple_planks",
+    "top": "canadamod:block/maple_planks"
+  }
+}

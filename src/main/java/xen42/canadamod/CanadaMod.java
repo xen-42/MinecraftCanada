@@ -22,5 +22,6 @@ public class CanadaMod implements ModInitializer {
 		LOGGER.info("Loading Outer Wilds mod!");
 
 		CanadaItems.initialize();
+		CanadaBlocks.initialize();
 	}
 }

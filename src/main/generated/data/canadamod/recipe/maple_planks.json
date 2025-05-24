@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "#canadamod:maple_logs"
+  ],
+  "result": {
+    "count": 4,
+    "id": "canadamod:maple_planks"
+  }
+}

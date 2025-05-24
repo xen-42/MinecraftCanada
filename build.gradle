@@ -29,6 +29,7 @@ loom {
 		}
 	}
 
+	accessWidenerPath = file("src/main/resources/canadamod.accesswidener")
 }
 
 fabricApi {
