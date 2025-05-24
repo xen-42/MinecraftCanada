@@ -48,7 +48,8 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .pattern("XX")
                     .pattern("XX")
                     .input('X', CanadaItems.PELT)
-                    .criterion(hasItem(CanadaItems.PELT), conditionsFromItem(CanadaItems.PELT));
+                    .criterion(hasItem(CanadaItems.PELT), conditionsFromItem(CanadaItems.PELT))
+                    .offerTo(exporter);
             }
         };
     }
