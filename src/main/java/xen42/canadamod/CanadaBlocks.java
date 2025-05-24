@@ -2,6 +2,7 @@ package xen42.canadamod;
 
 import java.util.function.Function;
 
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -12,7 +13,6 @@ import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.HangingSignBlock;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SignBlock;
@@ -26,6 +26,7 @@ import net.minecraft.block.WoodType;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
@@ -192,6 +193,22 @@ public class CanadaBlocks {
 
 		StrippableBlockRegistry.register(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG);
 		StrippableBlockRegistry.register(CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD);
+
+		FuelRegistryEvents.BUILD.register((builder, context) -> {
+            int time = context.baseSmeltTime(); 
+			for (var woodItem : new Block[] { MAPLE_LOG, MAPLE_WOOD, STRIPPED_MAPLE_LOG, STRIPPED_MAPLE_WOOD, MAPLE_PLANKS,
+												MAPLE_TRAPDOOR, MAPLE_FENCE_GATE, MAPLE_FENCE }) {
+				builder.add(woodItem, time);
+			}
+			for (var woodItem : new Block[] { MAPLE_STAIRS, MAPLE_SLAB, MAPLE_PRESSURE_PLATE }) {
+				builder.add(woodItem, time / 2);
+			}
+			for (var woodItem : new Block[] { MAPLE_DOOR, MAPLE_SIGN, MAPLE_HANGING_SIGN }) {
+				builder.add(woodItem, time * 2 / 3);
+			}
+			builder.add(MAPLE_BUTTON, time / 3);
+        });
+
 	}
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

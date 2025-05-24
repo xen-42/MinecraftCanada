@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "group": "translation{key='item.minecraft.charcoal', args=[]}",
+  "ingredient": "canadamod:maple_wood",
+  "result": {
+    "id": "minecraft:charcoal"
+  }
+}

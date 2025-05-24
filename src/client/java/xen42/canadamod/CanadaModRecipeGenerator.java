@@ -1,5 +1,6 @@
 package xen42.canadamod;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -88,6 +89,10 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasTag(CanadaTags.ItemTags.MAPLE_LOGS), conditionsFromTag(CanadaTags.ItemTags.MAPLE_LOGS))
                     .criterion(hasItem(Items.CHAIN), conditionsFromItem(Items.CHAIN))
                     .offerTo(exporter);
+                
+                offerSmelting(List.of(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD),
+                    RecipeCategory.MISC, 
+                    Items.CHARCOAL, 0.15f, 200, Items.CHARCOAL.getName().toString());
             }
         };
     }

@@ -1,6 +1,5 @@
 package xen42.canadamod;
 
-import net.fabricmc.fabric.impl.tag.convention.v2.TagRegistration;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;

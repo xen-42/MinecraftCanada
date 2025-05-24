@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_maple_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "canadamod:stripped_maple_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:charcoal_from_smelting_stripped_maple_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stripped_maple_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:charcoal_from_smelting_stripped_maple_wood"
+    ]
+  }
+}
