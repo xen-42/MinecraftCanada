@@ -9,5 +9,8 @@
   "item.canadamod.maple_slab": "Maple Slab",
   "item.canadamod.maple_stairs": "Maple Stairs",
   "item.canadamod.maple_trapdoor": "Maple Trapdoor",
-  "item.canadamod.pelt": "Pelt"
+  "item.canadamod.maple_wood": "Maple Wood",
+  "item.canadamod.pelt": "Pelt",
+  "item.canadamod.stripped_maple_log": "Stripped Maple Wood",
+  "item.canadamod.stripped_maple_wood": "Stripped Maple Wood"
 }
