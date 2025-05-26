@@ -1,18 +1,27 @@
 package xen42.canadamod;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.impl.object.builder.client.SignTypeTextureHelper;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.particle.LeavesParticle.CherryLeavesFactory;
+import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.item.model.special.SignModelRenderer;
+import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 
 public class CanadaModClient implements ClientModInitializer {
@@ -39,5 +48,7 @@ public class CanadaModClient implements ClientModInitializer {
 		EntityRendererRegistry.register(MapleBoatEntity.MAPLE_CHEST_BOAT, context -> new BoatEntityRenderer(context, MAPLE_CHEST_BOAT));
 		EntityModelLayerRegistry.registerModelLayer(MAPLE_BOAT, new MapleBoat());
 		EntityModelLayerRegistry.registerModelLayer(MAPLE_CHEST_BOAT, new MapleChestBoat());
+
+		ParticleFactoryRegistry.getInstance().register(CanadaBlocks.MAPLE_LEAF_PARTICLE, MapleLeavesFactory::new);
 	}
 }

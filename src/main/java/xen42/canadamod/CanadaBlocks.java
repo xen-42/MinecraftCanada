@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.mixin.registry.sync.RegistriesAccessor;
@@ -33,7 +34,9 @@ import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -73,6 +76,7 @@ public class CanadaBlocks {
 
     public static BlockEntityType<SignBlockEntity> MAPLE_SIGN_BLOCK_ENTITY;
 
+	public static SimpleParticleType MAPLE_LEAF_PARTICLE = FabricParticleTypes.simple();
 
 	public static void initialize() {
 		MAPLE_PLANKS = register(
@@ -87,9 +91,12 @@ public class CanadaBlocks {
 			AbstractBlock.Settings.copy(Blocks.OAK_LOG),
 			true
 		);
+		Registry.register(Registries.PARTICLE_TYPE,
+					Identifier.of(CanadaMod.MOD_ID, "maple"),
+					MAPLE_LEAF_PARTICLE);
 		MAPLE_LEAVES = register(
 			"maple_leaves",
-			(settings) -> new UntintedParticleLeavesBlock(0.1F, ParticleTypes.CHERRY_LEAVES, settings),
+			(settings) -> new UntintedParticleLeavesBlock(0.01F, MAPLE_LEAF_PARTICLE, settings),
 			AbstractBlock.Settings.copy(Blocks.OAK_LEAVES),
 			true
 		);

@@ -9,3 +9,8 @@ accessible method net/minecraft/entity/EntityType getChestBoatFactory (Ljava/uti
 
 accessible field net/minecraft/block/entity/BlockEntity type Lnet/minecraft/block/entity/BlockEntityType;
 mutable field net/minecraft/block/entity/BlockEntity type Lnet/minecraft/block/entity/BlockEntityType;
+
+accessible method net/minecraft/particle/SimpleParticleType <init> (Z)V
+accessible method net/minecraft/client/particle/ParticleManager registerFactory (Lnet/minecraft/particle/ParticleType;Lnet/minecraft/client/particle/ParticleManager$SpriteAwareFactory;)V
+accessible method net/minecraft/client/particle/LeavesParticle <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/client/particle/SpriteProvider;FFZZFF)V
+
