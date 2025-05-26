@@ -208,7 +208,6 @@ public class CanadaBlocks {
 			}
 			builder.add(MAPLE_BUTTON, time / 3);
         });
-
 	}
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

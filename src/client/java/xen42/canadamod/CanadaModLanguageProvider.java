@@ -81,6 +81,11 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaBlocks.MAPLE_SIGN, "Maple Sign");
 			translationBuilder.add(CanadaBlocks.MAPLE_FENCE, "Maple Fence");
 			translationBuilder.add(CanadaBlocks.MAPLE_FENCE_GATE, "Maple Fence Gate");
+			
+			translationBuilder.add(MapleBoatEntity.MAPLE_BOAT, "Maple Boat");
+			translationBuilder.add(MapleBoatEntity.MAPLE_CHEST_BOAT, "Maple Boat with Chest");
+			translationBuilder.add(CanadaItems.MAPLE_BOAT, "Maple Boat");
+			translationBuilder.add(CanadaItems.MAPLE_CHEST_BOAT, "Maple Boat with Chest");
 		}
 	}
 	

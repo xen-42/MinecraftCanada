@@ -19,9 +19,10 @@ public class CanadaMod implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Loading Outer Wilds mod!");
+		LOGGER.info("Loading Canada mod!");
 
 		CanadaItems.initialize();
 		CanadaBlocks.initialize();
+		MapleBoatEntity.initialize();
 	}
 }
