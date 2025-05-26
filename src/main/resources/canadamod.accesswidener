@@ -6,3 +6,6 @@ accessible method net/minecraft/entity/EntityType register (Ljava/lang/String;Ln
 
 accessible method net/minecraft/entity/EntityType getBoatFactory (Ljava/util/function/Supplier;)Lnet/minecraft/entity/EntityType$EntityFactory;
 accessible method net/minecraft/entity/EntityType getChestBoatFactory (Ljava/util/function/Supplier;)Lnet/minecraft/entity/EntityType$EntityFactory;
+
+accessible field net/minecraft/block/entity/BlockEntity type Lnet/minecraft/block/entity/BlockEntityType;
+mutable field net/minecraft/block/entity/BlockEntity type Lnet/minecraft/block/entity/BlockEntityType;

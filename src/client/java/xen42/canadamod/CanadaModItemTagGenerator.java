@@ -25,5 +25,7 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		
 		this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(CanadaItems.MAPLE_CHEST_BOAT);
 		this.getOrCreateTagBuilder(ItemTags.BOATS).add(CanadaItems.MAPLE_BOAT);
+
+		this.getOrCreateTagBuilder(ItemTags.PLANKS).add(CanadaBlocks.MAPLE_PLANKS.asItem());
 	}
 }

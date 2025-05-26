@@ -1,9 +1,12 @@
 package xen42.canadamod;
 
+import java.util.Set;
 import java.util.function.Function;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.mixin.registry.sync.RegistriesAccessor;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
@@ -23,6 +26,8 @@ import net.minecraft.block.UntintedParticleLeavesBlock;
 import net.minecraft.block.WallHangingSignBlock;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodType;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.BlockItem;
@@ -34,6 +39,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.sign.MapleHangingSignBlock;
+import xen42.canadamod.sign.MapleSignBlock;
+import xen42.canadamod.sign.MapleWallHangingSignBlock;
+import xen42.canadamod.sign.MapleWallSignBlock;
 
 public class CanadaBlocks {
     public static final BlockSetType MAPLE_WOOD_SET = BlockSetType.register(new BlockSetType("maple"));
@@ -61,6 +70,9 @@ public class CanadaBlocks {
 	public static Block[] MAPLE_BLOCKS;
 
 	public static BlockFamily MAPLE;
+
+    public static BlockEntityType<SignBlockEntity> MAPLE_SIGN_BLOCK_ENTITY;
+
 
 	public static void initialize() {
 		MAPLE_PLANKS = register(
@@ -149,25 +161,25 @@ public class CanadaBlocks {
 		);
 		MAPLE_SIGN = register(
 			"maple_sign",
-			(settings) -> new SignBlock(MAPLE_WOOD_TYPE, settings),
+			MapleSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_SIGN),
 			true
 		);
 		MAPLE_WALL_SIGN = register(
 			"maple_wall_sign",
-			(settings) -> new WallSignBlock(MAPLE_WOOD_TYPE, settings),
+			MapleWallSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN),
 			true
 		);
 		MAPLE_HANGING_SIGN = register(
 			"maple_hanging_sign",
-			(settings) -> new HangingSignBlock(MAPLE_WOOD_TYPE, settings),
+			MapleHangingSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN),
 			true
 		);
 		MAPLE_WALL_HANGING_SIGN = register(
 			"maple_hanging_wall_sign",
-			(settings) -> new WallHangingSignBlock(MAPLE_WOOD_TYPE, settings),
+			MapleWallHangingSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN),
 			true
 		);
@@ -208,6 +220,11 @@ public class CanadaBlocks {
 			}
 			builder.add(MAPLE_BUTTON, time / 3);
         });
+
+        MAPLE_SIGN_BLOCK_ENTITY = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE,
+            Identifier.of(CanadaMod.MOD_ID, "maple_sign"),
+			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(SignBlockEntity::new, MAPLE_SIGN, MAPLE_HANGING_SIGN).build());
 	}
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {
