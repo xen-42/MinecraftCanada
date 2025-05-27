@@ -82,8 +82,6 @@ public class CanadaModClient implements ClientModInitializer {
 
 		BlockEntityRendererFactories.register(CanadaBlocks.MAPLE_SIGN_BLOCK_ENTITY, SignBlockEntityRenderer::new);
 		BlockEntityRendererFactories.register(CanadaBlocks.MAPLE_HANGING_SIGN_BLOCK_ENTITY, HangingSignBlockEntityRenderer::new);
-
-
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {

@@ -3,7 +3,8 @@
 	"package": "xen42.canadamod.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"HangingSignEditScreenMixin",
+		"AbstractSignEditScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
