@@ -57,6 +57,10 @@ public class CanadaItems {
             }
         });
 
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register((itemGroup) -> { 
+            itemGroup.add(CanadaBlocks.MAPLE_LEAVES.asItem());
+        });
+
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> { 
             itemGroup.add(MAPLE_SIGN_ITEM);
             itemGroup.add(MAPLE_HANGING_SIGN_ITEM);
