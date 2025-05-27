@@ -1,13 +1,11 @@
 package xen42.canadamod;
 
-import java.util.Set;
 import java.util.function.Function;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.fabricmc.fabric.mixin.registry.sync.RegistriesAccessor;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
@@ -16,26 +14,19 @@ import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.HangingSignBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SignBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.UntintedParticleLeavesBlock;
-import net.minecraft.block.WallHangingSignBlock;
-import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -43,7 +34,9 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.sign.MapleHangingSignBlock;
+import xen42.canadamod.sign.MapleHangingSignBlockEntity;
 import xen42.canadamod.sign.MapleSignBlock;
+import xen42.canadamod.sign.MapleSignEntity;
 import xen42.canadamod.sign.MapleWallHangingSignBlock;
 import xen42.canadamod.sign.MapleWallSignBlock;
 
@@ -171,13 +164,13 @@ public class CanadaBlocks {
 			"maple_sign",
 			MapleSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_SIGN),
-			true
+			false
 		);
 		MAPLE_WALL_SIGN = register(
 			"maple_wall_sign",
 			MapleWallSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN),
-			true
+			false
 		);
 		MAPLE_HANGING_SIGN = register(
 			"maple_hanging_sign",
@@ -232,12 +225,12 @@ public class CanadaBlocks {
         MAPLE_SIGN_BLOCK_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             Identifier.of(CanadaMod.MOD_ID, "maple_sign"),
-			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(SignBlockEntity::new, MAPLE_SIGN, MAPLE_WALL_SIGN).build());
+			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(MapleSignEntity::new, MAPLE_SIGN, MAPLE_WALL_SIGN).build());
 		
 		MAPLE_HANGING_SIGN_BLOCK_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             Identifier.of(CanadaMod.MOD_ID, "maple_hanging_sign"),
-			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(SignBlockEntity::new, MAPLE_SIGN, MAPLE_WALL_HANGING_SIGN).build());
+			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(MapleHangingSignBlockEntity::new, MAPLE_SIGN, MAPLE_WALL_HANGING_SIGN).build());
 	}
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

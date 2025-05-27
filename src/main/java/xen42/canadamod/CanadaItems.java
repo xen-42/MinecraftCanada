@@ -7,6 +7,7 @@ import net.minecraft.item.BoatItem;
 import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.SignItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -21,7 +22,7 @@ public class CanadaItems {
     public static final Item MAPLE_CHEST_BOAT = register("maple_chest_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_CHEST_BOAT, settings), (new Item.Settings()).maxCount(1));
     
-    public static Item MAPLE_HANGING_SIGN_ITEM;
+    public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.
@@ -40,6 +41,10 @@ public class CanadaItems {
         MAPLE_HANGING_SIGN_ITEM = register("maple_hanging_sign", settings -> 
             new HangingSignItem(CanadaBlocks.MAPLE_HANGING_SIGN, CanadaBlocks.MAPLE_WALL_HANGING_SIGN, settings),
             new Item.Settings().maxCount(16));
+        
+        MAPLE_SIGN_ITEM = register("maple_sign", settings -> 
+            new SignItem(CanadaBlocks.MAPLE_SIGN, CanadaBlocks.MAPLE_WALL_SIGN, settings),
+            new Item.Settings().maxCount(16));
 
         // Add custom items to groups
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((itemGroup) -> { 
@@ -53,7 +58,7 @@ public class CanadaItems {
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> { 
-            itemGroup.add(CanadaBlocks.MAPLE_SIGN.asItem());
+            itemGroup.add(MAPLE_SIGN_ITEM);
             itemGroup.add(MAPLE_HANGING_SIGN_ITEM);
         });
 
