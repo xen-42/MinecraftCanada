@@ -69,7 +69,7 @@ public class CanadaModClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		addCustomWoodTypeTexture();
+		addCustomWoodTypeTexture(CanadaBlocks.MAPLE_WOOD_TYPE);
 
 		BlockRenderLayerMap.INSTANCE.putBlock(CanadaBlocks.MAPLE_DOOR, RenderLayer.getCutout());
 
@@ -86,13 +86,13 @@ public class CanadaModClient implements ClientModInitializer {
 
 	}
 
-	public void addCustomWoodTypeTexture() {
-		Identifier textureId = Identifier.of(CanadaMod.MOD_ID, "entity/signs/maple");
+	public void addCustomWoodTypeTexture(WoodType type) {
+		Identifier textureId = Identifier.of(CanadaMod.MOD_ID, "entity/signs/" + type.name());
 		SpriteIdentifier spriteId = new SpriteIdentifier(TexturedRenderLayers.SIGN_TYPE_TEXTURES.get(WoodType.OAK).getAtlasId(), textureId);
-		TexturedRenderLayers.SIGN_TYPE_TEXTURES.put(CanadaBlocks.MAPLE_WOOD_TYPE, spriteId);
+		TexturedRenderLayers.SIGN_TYPE_TEXTURES.put(type, spriteId);
 
-		Identifier hangingTextureId = Identifier.of(CanadaMod.MOD_ID, "entity/signs/hanging/maple");
+		Identifier hangingTextureId = Identifier.of(CanadaMod.MOD_ID, "entity/signs/hanging/" + type.name());
 		SpriteIdentifier hangingSpriteId = new SpriteIdentifier(TexturedRenderLayers.HANGING_SIGN_TYPE_TEXTURES.get(WoodType.OAK).getAtlasId(), hangingTextureId);
-		TexturedRenderLayers.HANGING_SIGN_TYPE_TEXTURES.put(CanadaBlocks.MAPLE_WOOD_TYPE, hangingSpriteId);
+		TexturedRenderLayers.HANGING_SIGN_TYPE_TEXTURES.put(type, hangingSpriteId);
 	}
 }
