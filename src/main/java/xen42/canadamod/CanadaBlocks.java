@@ -75,6 +75,7 @@ public class CanadaBlocks {
 	public static BlockFamily MAPLE;
 
     public static BlockEntityType<SignBlockEntity> MAPLE_SIGN_BLOCK_ENTITY;
+    public static BlockEntityType<SignBlockEntity> MAPLE_HANGING_SIGN_BLOCK_ENTITY;
 
 	public static SimpleParticleType MAPLE_LEAF_PARTICLE = FabricParticleTypes.simple();
 
@@ -182,13 +183,13 @@ public class CanadaBlocks {
 			"maple_hanging_sign",
 			MapleHangingSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN),
-			true
+			false
 		);
 		MAPLE_WALL_HANGING_SIGN = register(
 			"maple_hanging_wall_sign",
 			MapleWallHangingSignBlock::new,
 			AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN),
-			true
+			false
 		);
 
 		MAPLE = BlockFamilies.register(MAPLE_PLANKS)
@@ -231,7 +232,12 @@ public class CanadaBlocks {
         MAPLE_SIGN_BLOCK_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             Identifier.of(CanadaMod.MOD_ID, "maple_sign"),
-			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(SignBlockEntity::new, MAPLE_SIGN, MAPLE_HANGING_SIGN).build());
+			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(SignBlockEntity::new, MAPLE_SIGN, MAPLE_WALL_SIGN).build());
+		
+		MAPLE_HANGING_SIGN_BLOCK_ENTITY = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE,
+            Identifier.of(CanadaMod.MOD_ID, "maple_hanging_sign"),
+			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(SignBlockEntity::new, MAPLE_SIGN, MAPLE_WALL_HANGING_SIGN).build());
 	}
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

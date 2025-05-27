@@ -13,6 +13,6 @@ public class MapleWallHangingSignBlock extends WallHangingSignBlock {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new MapleSignEntity(pos, state);
+        return new MapleHangingSignBlockEntity(pos, state);
     }
 }

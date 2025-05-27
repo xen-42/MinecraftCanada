@@ -21,8 +21,8 @@ public class CanadaMod implements ModInitializer {
 
 		LOGGER.info("Loading Canada mod!");
 
-		CanadaItems.initialize();
 		CanadaBlocks.initialize();
+		CanadaItems.initialize();
 		MapleBoatEntity.initialize();
 	}
 }

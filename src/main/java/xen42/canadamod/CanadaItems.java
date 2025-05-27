@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.BoatItem;
+import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
@@ -19,6 +20,8 @@ public class CanadaItems {
         new BoatItem(MapleBoatEntity.MAPLE_BOAT, settings), (new Item.Settings()).maxCount(1));
     public static final Item MAPLE_CHEST_BOAT = register("maple_chest_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_CHEST_BOAT, settings), (new Item.Settings()).maxCount(1));
+    
+    public static Item MAPLE_HANGING_SIGN_ITEM;
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.
@@ -34,6 +37,10 @@ public class CanadaItems {
 	}
 
     public static void initialize() {
+        MAPLE_HANGING_SIGN_ITEM = register("maple_hanging_sign", settings -> 
+            new HangingSignItem(CanadaBlocks.MAPLE_HANGING_SIGN, CanadaBlocks.MAPLE_WALL_HANGING_SIGN, settings),
+            new Item.Settings().maxCount(16));
+
         // Add custom items to groups
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((itemGroup) -> { 
             itemGroup.add(PELT);
@@ -47,7 +54,7 @@ public class CanadaItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> { 
             itemGroup.add(CanadaBlocks.MAPLE_SIGN.asItem());
-            itemGroup.add(CanadaBlocks.MAPLE_HANGING_SIGN.asItem());
+            itemGroup.add(MAPLE_HANGING_SIGN_ITEM);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register((itemGroup) -> { 
