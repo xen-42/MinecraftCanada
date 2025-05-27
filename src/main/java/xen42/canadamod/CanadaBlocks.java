@@ -22,6 +22,7 @@ import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.UntintedParticleLeavesBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.HangingSignBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
@@ -68,7 +69,7 @@ public class CanadaBlocks {
 	public static BlockFamily MAPLE;
 
     public static BlockEntityType<SignBlockEntity> MAPLE_SIGN_BLOCK_ENTITY;
-    public static BlockEntityType<SignBlockEntity> MAPLE_HANGING_SIGN_BLOCK_ENTITY;
+    public static BlockEntityType<HangingSignBlockEntity> MAPLE_HANGING_SIGN_BLOCK_ENTITY;
 
 	public static SimpleParticleType MAPLE_LEAF_PARTICLE = FabricParticleTypes.simple();
 
@@ -230,7 +231,7 @@ public class CanadaBlocks {
 		MAPLE_HANGING_SIGN_BLOCK_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
             Identifier.of(CanadaMod.MOD_ID, "maple_hanging_sign"),
-			FabricBlockEntityTypeBuilder.<SignBlockEntity>create(MapleHangingSignBlockEntity::new, MAPLE_SIGN, MAPLE_WALL_HANGING_SIGN).build());
+			FabricBlockEntityTypeBuilder.<HangingSignBlockEntity>create(MapleHangingSignBlockEntity::new, MAPLE_HANGING_SIGN, MAPLE_WALL_HANGING_SIGN).build());
 	}
 
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {
