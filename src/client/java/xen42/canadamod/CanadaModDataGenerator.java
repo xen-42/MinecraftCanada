@@ -13,5 +13,6 @@ public class CanadaModDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(CanadaModLanguageProvider.EnglishUpsideDown::new);
 		CanadaModBlockTagGenerator blockTagProvider = pack.addProvider(CanadaModBlockTagGenerator::new);
 		pack.addProvider((output, registries) -> new CanadaModItemTagGenerator(output, registries, blockTagProvider));
+		pack.addProvider(CanadaModEntityLootTableGenerator::new);
 	}
 }
