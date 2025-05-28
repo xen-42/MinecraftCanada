@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.ItemModelGenerator;
 import net.minecraft.client.data.Models;
+import net.minecraft.client.data.BlockStateModelGenerator.CrossType;
 
 public class CanadaModModelGenerator extends FabricModelProvider {
     public CanadaModModelGenerator(FabricDataOutput output) {
@@ -16,6 +17,7 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.PELT, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.MAPLE_BOAT, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.MAPLE_CHEST_BOAT, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.MAPLE_SAPLING, Models.GENERATED);
     }
 
     @Override
@@ -25,6 +27,7 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.createLogTexturePool(CanadaBlocks.STRIPPED_MAPLE_LOG).log(CanadaBlocks.STRIPPED_MAPLE_LOG).wood(CanadaBlocks.STRIPPED_MAPLE_WOOD);
         blockStateModelGenerator.registerSimpleCubeAll(CanadaBlocks.MAPLE_LEAVES);
         blockStateModelGenerator.registerHangingSign(CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_HANGING_SIGN, CanadaBlocks.MAPLE_WALL_HANGING_SIGN);
+        blockStateModelGenerator.registerTintableCrossBlockState(CanadaBlocks.MAPLE_SAPLING, CrossType.NOT_TINTED);
     }
 
     @Override

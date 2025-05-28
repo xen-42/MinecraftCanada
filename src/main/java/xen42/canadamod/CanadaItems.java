@@ -3,6 +3,8 @@ package xen42.canadamod;
 import java.util.function.Function;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.MapColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BoatItem;
 import net.minecraft.item.HangingSignItem;
@@ -18,12 +20,13 @@ import net.minecraft.util.Identifier;
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
+    public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
 
     public static final Item MAPLE_BOAT = register("maple_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_BOAT, settings), (new Item.Settings()).maxCount(1));
     public static final Item MAPLE_CHEST_BOAT = register("maple_chest_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_CHEST_BOAT, settings), (new Item.Settings()).maxCount(1));
-    
+
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
@@ -61,6 +64,7 @@ public class CanadaItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register((itemGroup) -> { 
             itemGroup.add(CanadaBlocks.MAPLE_LEAVES.asItem());
+            itemGroup.add(CanadaBlocks.MAPLE_SAPLING.asItem());
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> { 

@@ -1,5 +1,6 @@
 package xen42.canadamod;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -14,8 +15,11 @@ import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.SaplingBlock;
+import net.minecraft.block.SaplingGenerator;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
@@ -24,6 +28,7 @@ import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HangingSignBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.item.BlockItem;
@@ -33,7 +38,12 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import xen42.canadamod.sign.MapleHangingSignBlock;
 import xen42.canadamod.sign.MapleHangingSignBlockEntity;
 import xen42.canadamod.sign.MapleSignBlock;
@@ -63,6 +73,13 @@ public class CanadaBlocks {
     public static Block MAPLE_WALL_SIGN;
     public static Block MAPLE_HANGING_SIGN;
     public static Block MAPLE_WALL_HANGING_SIGN;
+
+	public static final SaplingGenerator MAPLE_SAPLING_GENERATED = new SaplingGenerator("maple", Optional.empty(), 
+		Optional.of(CanadaConfiguredFeatures.MAPLE_CONFIGURED_FEATURE), Optional.of(CanadaConfiguredFeatures.MAPLE_CONFIGURED_FEATURE));
+	public static final Block MAPLE_SAPLING = register("maple_sapling", 
+        settings -> new SaplingBlock(MAPLE_SAPLING_GENERATED, settings), 
+        AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(MapColor.RED),
+		false);
 
 	public static Block TREE_TAP = register(
 			"tree_tap",

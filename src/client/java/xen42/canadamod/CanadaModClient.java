@@ -53,25 +53,12 @@ public class CanadaModClient implements ClientModInitializer {
 		}
 	}
 
-	public class MapleSignBlockEntityRenderer extends SignBlockEntityRenderer {
-		public MapleSignBlockEntityRenderer(Context ctx) {
-			super(ctx);
-		}
-		
-		@Override
-		protected SpriteIdentifier getTextureId(WoodType woodType) {
-			return new SpriteIdentifier(
-				SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE,
-				Identifier.of("minecraft", "entity/signs/oak")
-			);
-		}
-	}
-
 	@Override
 	public void onInitializeClient() {
 		addCustomWoodTypeTexture(CanadaBlocks.MAPLE_WOOD_TYPE);
 
 		BlockRenderLayerMap.INSTANCE.putBlock(CanadaBlocks.MAPLE_DOOR, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(CanadaBlocks.MAPLE_SAPLING, RenderLayer.getCutout());
 
 		EntityRendererRegistry.register(MapleBoatEntity.MAPLE_BOAT, context -> new BoatEntityRenderer(context, MAPLE_BOAT));
 		EntityRendererRegistry.register(MapleBoatEntity.MAPLE_CHEST_BOAT, context -> new BoatEntityRenderer(context, MAPLE_CHEST_BOAT));
