@@ -64,6 +64,13 @@ public class CanadaBlocks {
     public static Block MAPLE_HANGING_SIGN;
     public static Block MAPLE_WALL_HANGING_SIGN;
 
+	public static Block TREE_TAP = register(
+			"tree_tap",
+			TreeTapBlock::new,
+			AbstractBlock.Settings.copy(Blocks.CHAIN),
+			false
+		);
+
 	public static Block[] MAPLE_BLOCKS;
 
 	public static BlockFamily MAPLE;

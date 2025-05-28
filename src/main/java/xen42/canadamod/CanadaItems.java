@@ -3,6 +3,7 @@ package xen42.canadamod;
 import java.util.function.Function;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.BoatItem;
 import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ import net.minecraft.util.Identifier;
 
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
+    public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
 
     public static final Item MAPLE_BOAT = register("maple_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_BOAT, settings), (new Item.Settings()).maxCount(1));
@@ -64,6 +66,7 @@ public class CanadaItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup) -> { 
             itemGroup.add(MAPLE_SIGN_ITEM);
             itemGroup.add(MAPLE_HANGING_SIGN_ITEM);
+            itemGroup.add(TREE_TAP);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register((itemGroup) -> { 
