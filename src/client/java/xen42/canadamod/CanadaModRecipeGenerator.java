@@ -44,6 +44,15 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasItem(CanadaItems.PELT), conditionsFromItem(CanadaItems.PELT))
                     .offerTo(exporter);
                 
+                createShaped(RecipeCategory.TOOLS, CanadaItems.TREE_TAP)
+                    .pattern("XX")
+                    .pattern("Y ")
+                    .input('X', Items.COPPER_INGOT)
+                    .input('Y', Items.BUCKET)
+                    .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+                    .criterion(hasItem(Items.BUCKET), conditionsFromItem(Items.BUCKET))
+                    .offerTo(exporter);
+                
                 createShapeless(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.MAPLE_PLANKS, 4)
                     .input(CanadaTags.ItemTags.MAPLE_LOGS)
                     .criterion(hasTag(CanadaTags.ItemTags.MAPLE_LOGS), conditionsFromTag(CanadaTags.ItemTags.MAPLE_LOGS))

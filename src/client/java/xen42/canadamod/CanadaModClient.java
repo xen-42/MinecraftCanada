@@ -59,6 +59,7 @@ public class CanadaModClient implements ClientModInitializer {
 
 		BlockRenderLayerMap.INSTANCE.putBlock(CanadaBlocks.MAPLE_DOOR, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(CanadaBlocks.MAPLE_SAPLING, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(CanadaBlocks.TREE_TAP, RenderLayer.getCutout());
 
 		EntityRendererRegistry.register(MapleBoatEntity.MAPLE_BOAT, context -> new BoatEntityRenderer(context, MAPLE_BOAT));
 		EntityRendererRegistry.register(MapleBoatEntity.MAPLE_CHEST_BOAT, context -> new BoatEntityRenderer(context, MAPLE_CHEST_BOAT));

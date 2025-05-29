@@ -38,6 +38,7 @@ a48bb761de4a017b35c7a78347085dd2c0f9c62b assets/canadamod/items/maple_stairs.jso
 3eb8fb258d1b4490ed546193835192ae5a2db09c assets/canadamod/items/pelt.json
 ef0b330d77ba84cfa83b83cf36500c50d7e17987 assets/canadamod/items/stripped_maple_log.json
 7cb40f2faaa23cba287f9813b159a70dba55d212 assets/canadamod/items/stripped_maple_wood.json
+e5292a58fcf66e380204328b4772465334c296b4 assets/canadamod/items/tree_tap.json
 2cef046f0675bc361177286afcbe1d8b1906dd79 assets/canadamod/models/block/maple_button.json
 d8d8d18beb2a9418a5ddc633bf2e1823eb1e2c4f assets/canadamod/models/block/maple_button_inventory.json
 bfcd23e16f06f3632eb17f502c42cd269f99ef6b assets/canadamod/models/block/maple_button_pressed.json
@@ -84,3 +85,4 @@ fc99e9cb93b4493d826388717cd6a705b9f29256 assets/canadamod/models/item/maple_ches
 13a6fb548e79f2c4d0f7ffd70924080fce374d68 assets/canadamod/models/item/maple_sapling.json
 b69570303e8a2fb62613cdb7884182dc0f082d6c assets/canadamod/models/item/maple_sign.json
 ba2955566f913ba7032cad77b767e0f98283cc60 assets/canadamod/models/item/pelt.json
+0a75f8995f75dfa1346f9cfcec9b1b8178f2051e assets/canadamod/models/item/tree_tap.json
