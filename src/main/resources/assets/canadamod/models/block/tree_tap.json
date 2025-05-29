@@ -1,8 +1,8 @@
 {
-	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "canadamod:block/tree_tap",
-		"particle": "canadamod:block/tree_tap"
+		"particle": "canadamod:block/tree_tap",
+		"liquid": "canadamod:block/tree_sap"
 	},
 	"elements": [
 		{
@@ -134,18 +134,6 @@
 				"up": {"uv": [7, 8, 8, 16], "texture": "#0"},
 				"down": {"uv": [6, 8, 7, 16], "texture": "#0"}
 			}
-		}
-	],
-	"display": {},
-	"groups": [
-		0,
-		1,
-		2,
-		{
-			"name": "bucket",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [3, 4, 5, 6, 7, 8, 9, 10]
 		}
 	]
 }
