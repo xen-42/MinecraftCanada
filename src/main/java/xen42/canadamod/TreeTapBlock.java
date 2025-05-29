@@ -8,6 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -23,6 +24,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Pair;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -88,9 +90,25 @@ public class TreeTapBlock extends Block {
         }
     }
 
+    public Pair<Item, Boolean> getReturnItem(BlockState state, World world, BlockPos pos) {
+        var tappedBlock = world.getBlockState(pos.add(state.get(FACING).getOpposite().getVector()));
+
+        if (tappedBlock.isOf(Blocks.PALE_OAK_LOG)) {
+            return new Pair<Item, Boolean>(Items.RESIN_CLUMP, false);
+        }
+        else if (tappedBlock.isOf(CanadaBlocks.MAPLE_LOG)) {
+            return new Pair<Item, Boolean>(CanadaItems.MAPLE_SYRUP_BOTTLE, true);
+        }
+        else {
+            return null;
+        }
+    }
+
     @Override
     protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!isFull(state)) {
+        var pair = getReturnItem(state, world, pos);
+
+        if (pair != null && !isFull(state)) {
             world.setBlockState(pos, state.with(SAP_LEVEL, state.get(SAP_LEVEL) + 1));
             world.playSoundClient(SoundEvents.BLOCK_POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON, SoundCategory.BLOCKS, 1f, 1f);
             world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(state));
@@ -108,26 +126,40 @@ public class TreeTapBlock extends Block {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if(player.getMainHandStack().isOf(Items.GLASS_BOTTLE) && state.get(SAP_LEVEL) > 0) {
-            var stack = player.getMainHandStack();
-            var hand = Hand.MAIN_HAND;
-            var item = stack.getItem();
+        var pair = getReturnItem(state, world, pos);
 
-            var pickUpItem = Items.HONEY_BOTTLE;
+        if (pair == null) {
+            return ActionResult.FAIL;
+        }
 
+        var returnItem = pair.getLeft();
+        var needsBottle = pair.getRight();
+        var hasBottle = player.getMainHandStack().isOf(Items.GLASS_BOTTLE);
+        var canTake = !needsBottle || (needsBottle && hasBottle);
+
+        if(canTake && state.get(SAP_LEVEL) > 0) {
             world.setBlockState(pos, state.with(SAP_LEVEL, state.get(SAP_LEVEL) - 1));
             world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-            if (stack.isEmpty()) {
-               player.setStackInHand(hand, new ItemStack(pickUpItem));
-            } else if (!player.getInventory().insertStack(new ItemStack(pickUpItem))) {
-               player.dropItem(new ItemStack(pickUpItem), false);
+            if (needsBottle) {
+                var stack = player.getMainHandStack();
+                var hand = Hand.MAIN_HAND;
+                var item = stack.getItem();
+
+                if (stack.isEmpty()) {
+                player.setStackInHand(hand, new ItemStack(returnItem));
+                } else if (!player.getInventory().insertStack(new ItemStack(returnItem))) {
+                player.dropItem(new ItemStack(returnItem), false);
+                }
+
+                world.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos);
+
+                if (!world.isClient()) {
+                    player.incrementStat(Stats.USED.getOrCreateStat(item));
+                }
             }
-
-            world.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos);
-
-            if (!world.isClient()) {
-                player.incrementStat(Stats.USED.getOrCreateStat(item));
+            else {
+                player.giveOrDropStack(new ItemStack(returnItem));
             }
 
             return ActionResult.CONSUME;

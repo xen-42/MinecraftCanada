@@ -84,7 +84,7 @@ public class CanadaBlocks {
 	public static Block TREE_TAP = register(
 			"tree_tap",
 			TreeTapBlock::new,
-			AbstractBlock.Settings.copy(Blocks.CHAIN),
+			AbstractBlock.Settings.copy(Blocks.CHAIN).pistonBehavior(PistonBehavior.DESTROY),
 			false
 		);
 
