@@ -1,20 +1,28 @@
 {
-    "variants": 
-    {
-        "sap_level=0": {
-            "model": "canadamod:block/tree_tap"
-        },
-        "sap_level=1": {
-            "model": "canadamod:block/tree_tap_level1"
-        },
-        "sap_level=2": {
-            "model": "canadamod:block/tree_tap_level2"
-        },
-        "sap_level=3": {
-            "model": "canadamod:block/tree_tap_level3"
-        },
-        "sap_level=4": {
-            "model": "canadamod:block/tree_tap_level4"
-        }
+    "variants": {
+        "sap_level=0,facing=north": { "model": "canadamod:block/tree_tap" },
+        "sap_level=0,facing=south": { "model": "canadamod:block/tree_tap", "y": 180 },
+        "sap_level=0,facing=west":  { "model": "canadamod:block/tree_tap", "y": 270 },
+        "sap_level=0,facing=east":  { "model": "canadamod:block/tree_tap", "y": 90 },
+
+        "sap_level=1,facing=north": { "model": "canadamod:block/tree_tap_level1" },
+        "sap_level=1,facing=south": { "model": "canadamod:block/tree_tap_level1", "y": 180 },
+        "sap_level=1,facing=west":  { "model": "canadamod:block/tree_tap_level1", "y": 270 },
+        "sap_level=1,facing=east":  { "model": "canadamod:block/tree_tap_level1", "y": 90 },
+
+        "sap_level=2,facing=north": { "model": "canadamod:block/tree_tap_level2" },
+        "sap_level=2,facing=south": { "model": "canadamod:block/tree_tap_level2", "y": 180 },
+        "sap_level=2,facing=west":  { "model": "canadamod:block/tree_tap_level2", "y": 270 },
+        "sap_level=2,facing=east":  { "model": "canadamod:block/tree_tap_level2", "y": 90 },
+
+        "sap_level=3,facing=north": { "model": "canadamod:block/tree_tap_level3" },
+        "sap_level=3,facing=south": { "model": "canadamod:block/tree_tap_level3", "y": 180 },
+        "sap_level=3,facing=west":  { "model": "canadamod:block/tree_tap_level3", "y": 270 },
+        "sap_level=3,facing=east":  { "model": "canadamod:block/tree_tap_level3", "y": 90 },
+
+        "sap_level=4,facing=north": { "model": "canadamod:block/tree_tap_level4" },
+        "sap_level=4,facing=south": { "model": "canadamod:block/tree_tap_level4", "y": 180 },
+        "sap_level=4,facing=west":  { "model": "canadamod:block/tree_tap_level4", "y": 270 },
+        "sap_level=4,facing=east":  { "model": "canadamod:block/tree_tap_level4", "y": 90 }
     }
 }
