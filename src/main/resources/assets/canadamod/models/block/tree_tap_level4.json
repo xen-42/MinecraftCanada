@@ -1,0 +1,17 @@
+{
+	"parent": "canadamod:block/tree_tap",
+	"textures": {
+		"liquid": "canadamod:block/tree_sap"
+	},
+	"elements": [
+		{
+			"from": [5, 9, 8],
+			"to": [12, 9, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 9, 8]},
+			"color": 9,
+			"faces": {
+				"up": {"uv": [0, 0, 7, 6], "texture": "#liquid"}
+			}
+		}
+	]
+}

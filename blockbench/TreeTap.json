@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "tree_tap_texture",
-		"particle": "tree_tap_texture"
+		"0": "block/tree_tap_texture",
+		"particle": "block/tree_tap_texture"
 	},
 	"elements": [
 		{
@@ -99,7 +99,7 @@
 		{
 			"from": [4, 10, 11],
 			"to": [5, 15, 12],
-			"rotation": {"angle": 0, "axis": "x", "origin": [6, 18, 12]},
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 18, 12]},
 			"faces": {
 				"north": {"uv": [3, 11, 4, 16], "texture": "#0"},
 				"east": {"uv": [3, 11, 4, 16], "texture": "#0"},
@@ -134,18 +134,32 @@
 				"up": {"uv": [7, 8, 8, 16], "texture": "#0"},
 				"down": {"uv": [6, 8, 7, 16], "texture": "#0"}
 			}
+		},
+		{
+			"name": "liquid",
+			"from": [5, 9, 8],
+			"to": [12, 9, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5, 9, 8]},
+			"color": 9,
+			"faces": {
+				"north": {"uv": [0, 0, 7, 0], "texture": "#missing"},
+				"east": {"uv": [0, 0, 6, 0], "texture": "#missing"},
+				"south": {"uv": [0, 0, 7, 0], "texture": "#missing"},
+				"west": {"uv": [0, 0, 6, 0], "texture": "#missing"},
+				"up": {"uv": [0, 0, 7, 6], "texture": "#missing"},
+				"down": {"uv": [0, 0, 7, 6], "texture": "#missing"}
+			}
 		}
 	],
-	"display": {},
 	"groups": [
 		0,
 		1,
-		2,
 		{
 			"name": "bucket",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [3, 4, 5, 6, 7, 8, 9, 10]
-		}
+			"children": [2, 3, 4, 5, 6, 7, 8, 9]
+		},
+		10
 	]
 }

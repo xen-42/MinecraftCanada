@@ -1,8 +1,20 @@
 {
     "variants": 
     {
-        "": {
+        "sap_level=0": {
             "model": "canadamod:block/tree_tap"
+        },
+        "sap_level=1": {
+            "model": "canadamod:block/tree_tap_level1"
+        },
+        "sap_level=2": {
+            "model": "canadamod:block/tree_tap_level2"
+        },
+        "sap_level=3": {
+            "model": "canadamod:block/tree_tap_level3"
+        },
+        "sap_level=4": {
+            "model": "canadamod:block/tree_tap_level4"
         }
     }
 }
