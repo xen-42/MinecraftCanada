@@ -86,6 +86,9 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(MapleBoatEntity.MAPLE_CHEST_BOAT, "Maple Boat with Chest");
 			translationBuilder.add(CanadaItems.MAPLE_BOAT, "Maple Boat");
 			translationBuilder.add(CanadaItems.MAPLE_CHEST_BOAT, "Maple Boat with Chest");
+
+			translationBuilder.add(CanadaItems.TREE_TAP, "Tree Tap");
+			translationBuilder.add(CanadaItems.MAPLE_SYRUP_BOTTLE, "Maple Syrup");
 		}
 	}
 	
