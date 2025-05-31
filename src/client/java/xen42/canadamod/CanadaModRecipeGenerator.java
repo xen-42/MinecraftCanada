@@ -114,6 +114,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input('X', CanadaBlocks.MAPLE_LOG)
                     .criterion(hasItem(CanadaBlocks.MAPLE_LOG), conditionsFromItem(CanadaBlocks.MAPLE_LOG))
                     .offerTo(exporter);
+                
                 createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.STRIPPED_MAPLE_WOOD)
                     .pattern("XX")
                     .pattern("XX")

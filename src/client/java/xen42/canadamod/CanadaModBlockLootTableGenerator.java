@@ -31,7 +31,7 @@ public class CanadaModBlockLootTableGenerator extends FabricBlockLootTableProvid
         addDrop(CanadaBlocks.MAPLE_WALL_HANGING_SIGN, block -> drops(CanadaBlocks.MAPLE_HANGING_SIGN));
         addDrop(CanadaBlocks.MAPLE_WALL_SIGN, block -> drops(CanadaBlocks.MAPLE_SIGN));
         addDrop(CanadaBlocks.MAPLE_WOOD);
-        addDrop(CanadaBlocks.MAPLE_LEAVES, block -> dropsWithShears(block));   
+        addDrop(CanadaBlocks.MAPLE_LEAVES, block -> leavesDrops(block, CanadaBlocks.MAPLE_BUTTON, SAPLING_DROP_CHANCE));   
         addDrop(CanadaBlocks.STRIPPED_MAPLE_LOG);
         addDrop(CanadaBlocks.STRIPPED_MAPLE_WOOD);
         addDrop(CanadaBlocks.TREE_TAP);
