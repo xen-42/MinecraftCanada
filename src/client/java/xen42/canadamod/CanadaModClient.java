@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.WoodType;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
@@ -17,6 +18,7 @@ import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.screen.CookingPotHandledScreen;
 
 public class CanadaModClient implements ClientModInitializer {
 	public static final EntityModelLayer MAPLE_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "boat/maple"), "main");
@@ -53,6 +55,8 @@ public class CanadaModClient implements ClientModInitializer {
 
 		BlockEntityRendererFactories.register(CanadaBlocks.MAPLE_SIGN_BLOCK_ENTITY, SignBlockEntityRenderer::new);
 		BlockEntityRendererFactories.register(CanadaBlocks.MAPLE_HANGING_SIGN_BLOCK_ENTITY, HangingSignBlockEntityRenderer::new);
+
+		HandledScreens.register(CanadaMod.COOKING_POT_SCREEN_HANDLER_TYPE, CookingPotHandledScreen::new);
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {

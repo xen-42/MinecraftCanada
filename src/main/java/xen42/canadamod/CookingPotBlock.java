@@ -5,9 +5,13 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -15,12 +19,16 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import xen42.canadamod.screen.CookingPotScreenHandler;
 
 public class CookingPotBlock extends Block {
 
@@ -86,5 +94,22 @@ public class CookingPotBlock extends Block {
         if (random.nextInt(20) == 0) {
             world.addParticleClient(ParticleTypes.CAMPFIRE_COSY_SMOKE, x, y + 1f, z, 0, 0.025f, 0);
         }
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (!world.isClient) {
+            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+        }
+        return ActionResult.SUCCESS;
+    }
+    
+    public Text getTitle() {
+        return Text.translatable(getTranslationKey());
+    }
+
+    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+        return (NamedScreenHandlerFactory)new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> 
+            new CookingPotScreenHandler(syncId, inventory, ScreenHandlerContext.create(world, pos)), getTitle());
     }
 }
