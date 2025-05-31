@@ -23,6 +23,9 @@
 		],
 		"fabric-datagen": [
 			"xen42.canadamod.CanadaModDataGenerator"
+		],
+		"terrablender": [
+			"xen42.canadamod.CanadaModTerraBlenderAPI"
 		]
 	},
 	"mixins": [

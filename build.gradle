@@ -16,7 +16,7 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
-	maven {url = "https://maven.kyrptonaught.dev"}
+	maven { url = 'https://maven.minecraftforge.net/' }
 }
 
 loom {
@@ -47,8 +47,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta68-1.21.5'
-	include 'net.kyrptonaught:customportalapi:0.0.1-beta68-1.21.5'
+    modImplementation 'com.github.glitchfiend:TerraBlender-fabric:1.21.5-5.0.0.1'
 }
 
 processResources {
@@ -71,6 +70,10 @@ java {
 
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
+
+	toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 jar {
