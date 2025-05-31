@@ -2,6 +2,7 @@ package xen42.canadamod;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 import terrablender.api.ParameterUtils.Continentalness;
 import terrablender.api.ParameterUtils.Depth;
 import terrablender.api.ParameterUtils.Erosion;
@@ -12,6 +13,7 @@ import terrablender.api.ParameterUtils.Weirdness;
 import terrablender.api.Region;
 import terrablender.api.RegionType;
 import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 import terrablender.api.TerraBlenderApi;
 import terrablender.api.VanillaParameterOverlayBuilder;
 
@@ -46,10 +48,10 @@ public class CanadaModTerraBlenderAPI implements TerraBlenderApi {
             new ParameterPointListBuilder()
                 .temperature(Temperature.span(Temperature.COOL, Temperature.ICY))
                 .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.HUMID))
-                .continentalness(Continentalness.INLAND)
+                .continentalness(Continentalness.FULL_RANGE)
                 .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
                 .depth(Depth.SURFACE, Depth.FLOOR)
-                .weirdness(Weirdness.FULL_RANGE)
+                .weirdness(Weirdness.PEAK_NORMAL)
                 .build().forEach(point -> builder.add(point, CanadaMod.MAPLE_BIOME_KEY));
 
             builder.build().forEach(mapper);
