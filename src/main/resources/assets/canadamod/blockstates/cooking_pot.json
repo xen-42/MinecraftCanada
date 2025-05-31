@@ -1,5 +1,13 @@
 {
     "variants": {
-        "": { "model": "canadamod:block/cooking_pot" }
+        "lit=false,facing=north": { "model": "canadamod:block/cooking_pot" },
+        "lit=false,facing=south": { "model": "canadamod:block/cooking_pot", "y": 180 },
+        "lit=false,facing=west":  { "model": "canadamod:block/cooking_pot", "y": 270 },
+        "lit=false,facing=east":  { "model": "canadamod:block/cooking_pot", "y": 90 },
+        
+        "lit=true,facing=north": { "model": "canadamod:block/cooking_pot_lit" },
+        "lit=true,facing=south": { "model": "canadamod:block/cooking_pot_lit", "y": 180 },
+        "lit=true,facing=west":  { "model": "canadamod:block/cooking_pot_lit", "y": 270 },
+        "lit=true,facing=east":  { "model": "canadamod:block/cooking_pot_lit", "y": 90 }
     }
 }

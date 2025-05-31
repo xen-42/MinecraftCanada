@@ -1,0 +1,10 @@
+{
+	"parent": "canadamod:block/cooking_pot",
+	"textures": {
+		"0": "canadamod:block/cooking_pot",
+		"1": "canadamod:block/cooking_pot_base_lit",
+		"2": "canadamod:block/cooking_pot_base_top",
+		"3": "canadamod:block/cooking_pot_filler",
+		"particle": "canadamod:block/cooking_pot"
+	}
+}

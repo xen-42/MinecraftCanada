@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
@@ -39,7 +40,7 @@ import net.minecraft.world.tick.ScheduledTickView;
 public class TreeTapBlock extends Block {
     public static int MAX_SAP = 4;
     public static IntProperty SAP_LEVEL = IntProperty.of("sap_level", 0, MAX_SAP);
-    public static final EnumProperty<Direction> FACING = Properties.FACING; 
+    public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING; 
     public static final MapCodec<TreeTapBlock> CODEC = createCodec(TreeTapBlock::new);
 
     public final VoxelShape northShape;
@@ -191,6 +192,11 @@ public class TreeTapBlock extends Block {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(SAP_LEVEL, 0).with(FACING, ctx.getSide());
+        var dir = ctx.getSide();
+        // Should never happen but want to avoid a crash
+        if (dir == Direction.UP || dir == Direction.DOWN) {
+            dir = Direction.NORTH;
+        }
+        return getDefaultState().with(SAP_LEVEL, 0).with(FACING, dir);
     }
 }

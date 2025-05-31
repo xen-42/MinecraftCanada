@@ -92,7 +92,7 @@ public class CanadaBlocks {
 	public static Block COOKING_POT = register(
 		"cooking_pot",
 		CookingPotBlock::new,
-		AbstractBlock.Settings.copy(Blocks.CAULDRON),
+		AbstractBlock.Settings.copy(Blocks.CAULDRON).luminance(Blocks.createLightLevelFromLitBlockState(13)).nonOpaque(),
 		true
 	);
 
