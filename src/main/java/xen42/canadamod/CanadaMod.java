@@ -35,9 +35,7 @@ public class CanadaMod implements ModInitializer {
 		MapleBoatEntity.initialize();
 		CanadaPlacedFeatures.onInitialize();
 		
-		/*
 		BiomeModifications.addFeature(context -> context.getBiomeKey().getValue()
 			.equals(Identifier.of(CanadaMod.MOD_ID, "maple_forest")), GenerationStep.Feature.VEGETAL_DECORATION, CanadaPlacedFeatures.MAPLE_FOREST_VEGETATION);
-			*/
 	}
 }
