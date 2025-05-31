@@ -11,6 +11,7 @@
   "item.canadamod.maple_leaves": "Maple Leaves",
   "item.canadamod.maple_log": "Maple Log",
   "item.canadamod.maple_planks": "Maple Planks",
+  "item.canadamod.maple_pressure_plate": "Maple Pressure Plate",
   "item.canadamod.maple_sapling": "Maple Sapling",
   "item.canadamod.maple_sign": "Maple Sign",
   "item.canadamod.maple_slab": "Maple Slab",
@@ -19,7 +20,7 @@
   "item.canadamod.maple_trapdoor": "Maple Trapdoor",
   "item.canadamod.maple_wood": "Maple Wood",
   "item.canadamod.pelt": "Pelt",
-  "item.canadamod.stripped_maple_log": "Stripped Maple Wood",
+  "item.canadamod.stripped_maple_log": "Stripped Maple Log",
   "item.canadamod.stripped_maple_wood": "Stripped Maple Wood",
   "item.canadamod.tree_tap": "Tree Tap"
 }

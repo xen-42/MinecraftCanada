@@ -72,7 +72,7 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaBlocks.MAPLE_LEAVES, "Maple Leaves");
 			translationBuilder.add(CanadaBlocks.MAPLE_LOG, "Maple Log");
 			translationBuilder.add(CanadaBlocks.MAPLE_WOOD, "Maple Wood");
-			translationBuilder.add(CanadaBlocks.STRIPPED_MAPLE_LOG, "Stripped Maple Wood");
+			translationBuilder.add(CanadaBlocks.STRIPPED_MAPLE_LOG, "Stripped Maple Log");
 			translationBuilder.add(CanadaBlocks.STRIPPED_MAPLE_WOOD, "Stripped Maple Wood");
 			translationBuilder.add(CanadaBlocks.MAPLE_SLAB, "Maple Slab");
 			translationBuilder.add(CanadaBlocks.MAPLE_STAIRS, "Maple Stairs");
@@ -81,7 +81,9 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaBlocks.MAPLE_SIGN, "Maple Sign");
 			translationBuilder.add(CanadaBlocks.MAPLE_FENCE, "Maple Fence");
 			translationBuilder.add(CanadaBlocks.MAPLE_FENCE_GATE, "Maple Fence Gate");
-			
+			translationBuilder.add(CanadaBlocks.MAPLE_PRESSURE_PLATE, "Maple Pressure Plate");
+
+
 			translationBuilder.add(MapleBoatEntity.MAPLE_BOAT, "Maple Boat");
 			translationBuilder.add(MapleBoatEntity.MAPLE_CHEST_BOAT, "Maple Boat with Chest");
 			translationBuilder.add(CanadaItems.MAPLE_BOAT, "Maple Boat");

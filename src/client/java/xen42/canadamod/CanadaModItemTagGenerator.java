@@ -27,5 +27,19 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ItemTags.BOATS).add(CanadaItems.MAPLE_BOAT);
 
 		this.getOrCreateTagBuilder(ItemTags.PLANKS).add(CanadaBlocks.MAPLE_PLANKS.asItem());
+		this.getOrCreateTagBuilder(ItemTags.LEAVES).add(CanadaBlocks.MAPLE_LEAVES.asItem());
+		this.getOrCreateTagBuilder(ItemTags.LOGS).add(CanadaBlocks.MAPLE_LOG.asItem(),
+			CanadaBlocks.MAPLE_WOOD.asItem(), CanadaBlocks.STRIPPED_MAPLE_LOG.asItem(), CanadaBlocks.STRIPPED_MAPLE_WOOD.asItem());
+		this.getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN).add(CanadaBlocks.MAPLE_LOG.asItem(),
+			CanadaBlocks.MAPLE_WOOD.asItem(), CanadaBlocks.STRIPPED_MAPLE_LOG.asItem(), CanadaBlocks.STRIPPED_MAPLE_WOOD.asItem());
+		this.getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS).add(CanadaBlocks.MAPLE_BUTTON.asItem());
+		this.getOrCreateTagBuilder(ItemTags.WOODEN_DOORS).add(CanadaBlocks.MAPLE_DOOR.asItem());
+		this.getOrCreateTagBuilder(ItemTags.WOODEN_FENCES).add(CanadaBlocks.MAPLE_FENCE.asItem());
+		this.getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES).add(CanadaBlocks.MAPLE_PRESSURE_PLATE.asItem());
+		this.getOrCreateTagBuilder(ItemTags.WOODEN_SLABS).add(CanadaBlocks.MAPLE_SLAB.asItem());
+		this.getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS).add(CanadaBlocks.MAPLE_STAIRS.asItem());
+		this.getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(CanadaBlocks.MAPLE_TRAPDOOR.asItem());
+
+
 	}
 }

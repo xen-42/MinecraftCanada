@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_maple_wood": {
+    "has_maple_log": {
       "conditions": {
         "items": [
           {
-            "items": "canadamod:maple_wood"
+            "items": "canadamod:maple_log"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:charcoal_from_smelting_maple_wood"
+        "recipe": "canadamod:maple_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_maple_wood"
+      "has_maple_log"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:charcoal_from_smelting_maple_wood"
+      "canadamod:maple_wood"
     ]
   }
 }

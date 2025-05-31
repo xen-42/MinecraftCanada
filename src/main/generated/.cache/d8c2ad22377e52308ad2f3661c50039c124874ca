@@ -1,11 +1,19 @@
 // 1.21.5	-999999999-01-01T00:00:00	CanadaMod/PeacefulModBlockTagGenerator
+6585e92b311f42ef9c67e2e634f879419e188ee1 data/c/tags/block/fence_gates.json
+e57451c135199c63ac114f113c09b49996c263b0 data/c/tags/block/fence_gates/wooden.json
+e57451c135199c63ac114f113c09b49996c263b0 data/c/tags/block/fences.json
+e57451c135199c63ac114f113c09b49996c263b0 data/c/tags/block/fences/wooden.json
+09317915d55137388dc51144c17dc70e50148deb data/c/tags/block/stripped_logs.json
+3948016eaf15db0bcce0b7eddf5c467bafcb0d2d data/c/tags/block/stripped_woods.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/canadamod/tags/block/maple_logs.json
 aba537218c7dd933ec02741a81d994f0d6a3cab0 data/minecraft/tags/block/all_hanging_signs.json
 8274c4be05aba93a68e3552387c0bb307952469b data/minecraft/tags/block/all_signs.json
 6585e92b311f42ef9c67e2e634f879419e188ee1 data/minecraft/tags/block/fence_gates.json
 e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/block/fences.json
+2c8ae194c54cdf79b288670fe8b6d5b8c7cddbb9 data/minecraft/tags/block/leaves.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/minecraft/tags/block/logs.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/minecraft/tags/block/logs_that_burn.json
+520258f088838c7e03f483bd5ef83a602445a643 data/minecraft/tags/block/mineable/axe.json
 b589454461d4984095cc3d656f4c2bb09302f970 data/minecraft/tags/block/wooden_buttons.json
 1f42b77e8c6e68a78e6b48deab9976eadc45e537 data/minecraft/tags/block/wooden_doors.json
 190cd66d942f1d044a58f6f715ecb0b16364b56f data/minecraft/tags/block/wooden_pressure_plates.json

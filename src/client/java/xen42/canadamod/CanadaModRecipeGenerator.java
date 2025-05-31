@@ -90,6 +90,10 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
                     .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                     .offerTo(exporter);
+                
+                createTrapdoorRecipe(CanadaBlocks.MAPLE_TRAPDOOR.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
+                    .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
+                    .offerTo(exporter);
 
                 createShaped(RecipeCategory.MISC, CanadaBlocks.MAPLE_HANGING_SIGN)
                     .pattern("X X")
@@ -100,13 +104,22 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasTag(CanadaTags.ItemTags.MAPLE_LOGS), conditionsFromTag(CanadaTags.ItemTags.MAPLE_LOGS))
                     .criterion(hasItem(Items.CHAIN), conditionsFromItem(Items.CHAIN))
                     .offerTo(exporter);
-                
-                offerSmelting(List.of(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD),
-                    RecipeCategory.MISC, 
-                    Items.CHARCOAL, 0.15f, 200, Items.CHARCOAL.getName().toString());
 
                 offerBoatRecipe(CanadaItems.MAPLE_BOAT, CanadaBlocks.MAPLE_PLANKS);
                 offerChestBoatRecipe(CanadaItems.MAPLE_CHEST_BOAT, CanadaBlocks.MAPLE_PLANKS);
+
+                createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.MAPLE_WOOD)
+                    .pattern("XX")
+                    .pattern("XX")
+                    .input('X', CanadaBlocks.MAPLE_LOG)
+                    .criterion(hasItem(CanadaBlocks.MAPLE_LOG), conditionsFromItem(CanadaBlocks.MAPLE_LOG))
+                    .offerTo(exporter);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.STRIPPED_MAPLE_WOOD)
+                    .pattern("XX")
+                    .pattern("XX")
+                    .input('X', CanadaBlocks.STRIPPED_MAPLE_LOG)
+                    .criterion(hasItem(CanadaBlocks.STRIPPED_MAPLE_LOG), conditionsFromItem(CanadaBlocks.STRIPPED_MAPLE_LOG))
+                    .offerTo(exporter);
             }
         };
     }

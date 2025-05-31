@@ -2,4 +2,14 @@
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/canadamod/tags/item/maple_logs.json
 1f0e4eb100fd6c9c7c9f605d3cf1430ff6d9aaef data/minecraft/tags/item/boats.json
 dbb00795c33f763a3a5a9bb8e1661240a19751f9 data/minecraft/tags/item/chest_boats.json
+2c8ae194c54cdf79b288670fe8b6d5b8c7cddbb9 data/minecraft/tags/item/leaves.json
+171336db91c5099bd64f5526b8bc838565d71357 data/minecraft/tags/item/logs.json
+171336db91c5099bd64f5526b8bc838565d71357 data/minecraft/tags/item/logs_that_burn.json
 81d11b013877909d5b23de6b24651641c230cc24 data/minecraft/tags/item/planks.json
+b589454461d4984095cc3d656f4c2bb09302f970 data/minecraft/tags/item/wooden_buttons.json
+1f42b77e8c6e68a78e6b48deab9976eadc45e537 data/minecraft/tags/item/wooden_doors.json
+e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/item/wooden_fences.json
+190cd66d942f1d044a58f6f715ecb0b16364b56f data/minecraft/tags/item/wooden_pressure_plates.json
+89520cdd9ac28a6d804bb6093a6e7b8f38530127 data/minecraft/tags/item/wooden_slabs.json
+54db9bfbbd003500655a258d0a1c289259440acf data/minecraft/tags/item/wooden_stairs.json
+5ec113b25958220de7d5ed54490686013b4101f2 data/minecraft/tags/item/wooden_trapdoors.json

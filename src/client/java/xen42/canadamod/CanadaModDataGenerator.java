@@ -14,5 +14,6 @@ public class CanadaModDataGenerator implements DataGeneratorEntrypoint {
 		CanadaModBlockTagGenerator blockTagProvider = pack.addProvider(CanadaModBlockTagGenerator::new);
 		pack.addProvider((output, registries) -> new CanadaModItemTagGenerator(output, registries, blockTagProvider));
 		pack.addProvider(CanadaModEntityLootTableGenerator::new);
+		pack.addProvider(CanadaModBlockLootTableGenerator::new);
 	}
 }
