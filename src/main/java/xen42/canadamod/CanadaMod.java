@@ -2,7 +2,6 @@ package xen42.canadamod;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
@@ -36,9 +35,9 @@ public class CanadaMod implements ModInitializer {
 		MapleBoatEntity.initialize();
 		CanadaPlacedFeatures.onInitialize();
 		
-		BiomeModifications.addFeature(context -> context.getBiomeKey().getValue().equals(Identifier.of(CanadaMod.MOD_ID, "maple_forest")), GenerationStep.Feature.VEGETAL_DECORATION, CanadaPlacedFeatures.MAPLE_PLACED_KEY);
-		//BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.VEGETAL_DECORATION, CanadaPlacedFeatures.MAPLE_PLACED_KEY);
-
-
+		/*
+		BiomeModifications.addFeature(context -> context.getBiomeKey().getValue()
+			.equals(Identifier.of(CanadaMod.MOD_ID, "maple_forest")), GenerationStep.Feature.VEGETAL_DECORATION, CanadaPlacedFeatures.MAPLE_FOREST_VEGETATION);
+			*/
 	}
 }

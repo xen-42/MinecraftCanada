@@ -1,5 +1,5 @@
 {
-  "feature": "canadamod:maple",
+  "feature": "canadamod:maple_forest_vegetation",
   "placement": [
     {
       "type": "minecraft:noise_threshold_count",
@@ -16,15 +16,6 @@
     },
     {
       "type": "minecraft:biome"
-    },
-    {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "minecraft:would_survive",
-        "state": {
-          "Name": "canadamod:maple_sapling"
-        }
-      }
     }
   ]
 }
