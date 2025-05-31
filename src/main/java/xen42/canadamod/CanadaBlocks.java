@@ -76,6 +76,7 @@ public class CanadaBlocks {
 
 	public static final SaplingGenerator MAPLE_SAPLING_GENERATED = new SaplingGenerator("maple", Optional.empty(), 
 		Optional.of(CanadaConfiguredFeatures.MAPLE_CONFIGURED_FEATURE), Optional.of(CanadaConfiguredFeatures.MAPLE_CONFIGURED_FEATURE));
+
 	public static final Block MAPLE_SAPLING = register("maple_sapling", 
         settings -> new SaplingBlock(MAPLE_SAPLING_GENERATED, settings), 
         AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(MapColor.RED),
@@ -84,9 +85,16 @@ public class CanadaBlocks {
 	public static Block TREE_TAP = register(
 			"tree_tap",
 			TreeTapBlock::new,
-			AbstractBlock.Settings.copy(Blocks.CHAIN).pistonBehavior(PistonBehavior.DESTROY),
+			AbstractBlock.Settings.copy(Blocks.CHAIN).pistonBehavior(PistonBehavior.DESTROY).breakInstantly(),
 			false
 		);
+	
+	public static Block COOKING_POT = register(
+		"cooking_pot",
+		CookingPotBlock::new,
+		AbstractBlock.Settings.copy(Blocks.CAULDRON),
+		true
+	);
 
 	public static Block[] MAPLE_BLOCKS;
 

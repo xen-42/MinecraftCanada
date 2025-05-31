@@ -1,10 +1,11 @@
 // 1.21.5	-999999999-01-01T00:00:00	CanadaMod/Block Loot Tables
+0fbdc6b0d1b535f4d63fdbf3b06a5ac5bfb105b1 data/canadamod/loot_table/blocks/cooking_pot.json
 f5af5164865deaf67a8eaf79fbf88ea8155a0528 data/canadamod/loot_table/blocks/maple_button.json
 451501bb1cb258d6e93ed184bd758915091fa790 data/canadamod/loot_table/blocks/maple_door.json
 1f696fcea1f109daeb54313a998436c28b808457 data/canadamod/loot_table/blocks/maple_fence.json
 0ef3d54078ecdba6be7b2ac31843428ccf43693d data/canadamod/loot_table/blocks/maple_fence_gate.json
 aefbbd1e6d3fe080045b4feddb15df71075a20bf data/canadamod/loot_table/blocks/maple_hanging_sign.json
-fd150d6f6051605927e6813de9ff8ca24113fbaf data/canadamod/loot_table/blocks/maple_leaves.json
+354af5b8473abdd98fac5af318ccc75f0c91b89b data/canadamod/loot_table/blocks/maple_leaves.json
 ec5a778d0646e4aecc5a9788871da99727f19c12 data/canadamod/loot_table/blocks/maple_log.json
 5c36da9c99198d0723925c0389f73b7c48dacf23 data/canadamod/loot_table/blocks/maple_planks.json
 566523f569e54c7152b5ca5f20dc022145e03a1c data/canadamod/loot_table/blocks/maple_pressure_plate.json
