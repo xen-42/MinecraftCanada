@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -131,5 +132,19 @@ public class CookingPotBlock extends BlockWithEntity {
     @Override
     protected MapCodec<? extends BlockWithEntity> getCodec() {
         return CODEC;
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(world, type, CanadaMod.COOKING_POT_ENTITY);
+    }
+
+    protected static <T extends BlockEntity> BlockEntityTicker<T> validateTicker(World world, BlockEntityType<T> givenType, BlockEntityType<? extends CookingPotBlockEntity> expectedType) {
+        if (world instanceof ServerWorld serverWorld) {
+            return validateTicker(givenType, expectedType, (__, pos, state, blockEntity) -> CookingPotBlockEntity.tick(serverWorld, pos, state, blockEntity));
+        }
+        else {
+            return null;
+        }
     }
 }

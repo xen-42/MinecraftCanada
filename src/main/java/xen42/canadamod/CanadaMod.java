@@ -5,6 +5,10 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.recipe.display.RecipeDisplay;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -13,6 +17,8 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
+import xen42.canadamod.recipe.CookingPotRecipe;
+import xen42.canadamod.recipe.CookingPotRecipeDisplay;
 import xen42.canadamod.screen.CookingPotScreenHandler;
 
 import org.slf4j.Logger;
@@ -22,6 +28,20 @@ public class CanadaMod implements ModInitializer {
 	public static final String MOD_ID = "canadamod";
 
 	public static final RegistryKey<Biome> MAPLE_BIOME_KEY = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(CanadaMod.MOD_ID, "maple_forest"));
+
+	public static final RegistryKey<RecipeType<?>> COOKING_POT_RECIPE_TYPE_KEY = RegistryKey.of(RegistryKeys.RECIPE_TYPE, Identifier.of(MOD_ID, "cooking_pot"));
+	public static final RecipeType<CookingPotRecipe> COOKING_POT_RECIPE_TYPE = Registry.register(Registries.RECIPE_TYPE, Identifier.of(MOD_ID, "cooking_pot"), new RecipeType<CookingPotRecipe>() {
+		public String toString() {
+			return "cooking_pot";
+		}
+	});
+	public static final RecipeSerializer<CookingPotRecipe> COOKING_POT_RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(MOD_ID, "cooking_pot"), new CookingPotRecipe.Serializer());
+	public static final RecipeDisplay.Serializer<CookingPotRecipeDisplay> COOKING_POT_RECIPE_DISPLAY = Registry.register(Registries.RECIPE_DISPLAY, Identifier.of(MOD_ID, "cooking_pot"), CookingPotRecipeDisplay.SERIALIZER);
+	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = Registry.register(Registries.RECIPE_BOOK_CATEGORY, Identifier.of(MOD_ID, "cooking_pot"), new RecipeBookCategory() {
+		public String toString() {
+			return "COOKING_POT";
+		}
+	});
 
 	public static final ScreenHandlerType<CookingPotScreenHandler> COOKING_POT_SCREEN_HANDLER_TYPE = Registry.register(
 		Registries.SCREEN_HANDLER,

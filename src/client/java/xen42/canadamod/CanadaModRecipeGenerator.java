@@ -10,12 +10,15 @@ import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.recipe.CookingPotRecipeJsonBuilder;
 
 public class CanadaModRecipeGenerator extends FabricRecipeProvider {
     public CanadaModRecipeGenerator(FabricDataOutput generator, CompletableFuture<WrapperLookup> registriesFuture) {
@@ -121,9 +124,22 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input('X', CanadaBlocks.STRIPPED_MAPLE_LOG)
                     .criterion(hasItem(CanadaBlocks.STRIPPED_MAPLE_LOG), conditionsFromItem(CanadaBlocks.STRIPPED_MAPLE_LOG))
                     .offerTo(exporter);
+                
+                createCookingPotRecipe(registryLookup, Items.RABBIT_STEW, 2)
+                    .input(Items.RABBIT, this)
+                    .input(Items.CARROT, this)
+                    .input(Items.POTATO, this)
+                    .requiresBowl()
+                    .offerTo(exporter);
+            }
+
+            public static CookingPotRecipeJsonBuilder createCookingPotRecipe(WrapperLookup registryLookup, ItemConvertible output, int count) {
+                return new CookingPotRecipeJsonBuilder(registryLookup.getOrThrow(RegistryKeys.ITEM), output, count);
             }
         };
     }
+
+
 
     private String hasTag(TagKey<Item> tag) {
         return "has_" + tag.getName();
