@@ -2,6 +2,9 @@ package xen42.canadamod;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -24,6 +27,15 @@ public class CanadaMod implements ModInitializer {
 		Registries.SCREEN_HANDLER,
 		Identifier.of(MOD_ID, "cooking_pot"),
 		new ScreenHandlerType<CookingPotScreenHandler>(CookingPotScreenHandler::new, null));
+
+	public static final BlockEntityType<CookingPotBlockEntity> COOKING_POT_ENTITY = registerBlockEntityType(
+		"cooking_pot_entity",
+		FabricBlockEntityTypeBuilder.create(CookingPotBlockEntity::new, 
+			new Block[] { CanadaBlocks.COOKING_POT }).build()
+	);
+	public static <T extends BlockEntityType<?>> T registerBlockEntityType(String path, T blockEntityType) {
+		return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(CanadaMod.MOD_ID, path), blockEntityType);
+	}
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.

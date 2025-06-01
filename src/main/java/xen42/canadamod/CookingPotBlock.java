@@ -4,7 +4,14 @@ import com.mojang.serialization.MapCodec;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.BrushableBlockEntity;
+import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleEffect;
@@ -12,6 +19,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -30,7 +38,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import xen42.canadamod.screen.CookingPotScreenHandler;
 
-public class CookingPotBlock extends Block {
+public class CookingPotBlock extends BlockWithEntity {
 
     public CookingPotBlock(Settings settings) {
         super(settings);
@@ -99,7 +107,7 @@ public class CookingPotBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
-            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+            openScreen(world, pos, player);
         }
         return ActionResult.SUCCESS;
     }
@@ -108,8 +116,20 @@ public class CookingPotBlock extends Block {
         return Text.translatable(getTranslationKey());
     }
 
-    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-        return (NamedScreenHandlerFactory)new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> 
-            new CookingPotScreenHandler(syncId, inventory, ScreenHandlerContext.create(world, pos)), getTitle());
+    public void openScreen(World world, BlockPos pos, PlayerEntity player) {
+        var blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof CookingPotBlockEntity) {
+            player.openHandledScreen((NamedScreenHandlerFactory)blockEntity);
+        }
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new CookingPotBlockEntity(pos, state);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
     }
 }

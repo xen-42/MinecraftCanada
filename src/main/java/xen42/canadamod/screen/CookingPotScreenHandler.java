@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.recipe.book.RecipeBookType;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ScreenHandler;
@@ -30,7 +31,7 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
     public static final int MAX_WIDTH_AND_HEIGHT = 2;
 
-    public final RecipeInputInventory inventory;
+    public Inventory inventory;
     private final CraftingResultInventory resultInventory;
 
     public ScreenHandlerContext context;
@@ -46,10 +47,18 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
     }
 
+    public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        this(syncId, playerInventory, ScreenHandlerContext.EMPTY, inventory);
+    }
+
     public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
+        this(syncId, playerInventory, ScreenHandlerContext.EMPTY, null);
+    }
+
+    public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, Inventory inventory) {
         super(CanadaMod.COOKING_POT_SCREEN_HANDLER_TYPE, syncId);
+        this.inventory = inventory == null ? new CookingPotSimpleInventory(this, 8) : inventory;
         this.context = context;
-        inventory = new CookingPotSimpleInventory(this, 8);
         this.resultInventory = new CookingPotResultInventory(this);
         this.player = playerInventory.player;
 
@@ -80,7 +89,9 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
     @Override
     public void populateRecipeFinder(RecipeFinder finder) {
-        this.inventory.provideRecipeInputs(finder);
+        if (this.inventory instanceof RecipeInputProvider recipeInputProvider) {
+            recipeInputProvider.provideRecipeInputs(finder);
+        }
     }
 
     @Override
