@@ -8,8 +8,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.RegistryByteBuf;
@@ -66,9 +64,6 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
 
     @Override
     public boolean matches(CookingPotRecipeInput input, World world) {
-        CanadaMod.LOGGER.info("CHECKING CHECKING!!!");
-        CanadaMod.LOGGER.info(input.toString());
-
         var flagHasBottle = false;
         var flagHasBowl = false;
         // Skip output and fuel slots
@@ -82,28 +77,22 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
             }
             else {
                 if (!ingredients.stream().anyMatch(ingredient -> stack.isEmpty() || Ingredient.matches(Optional.of(ingredient), stack))) {
-                    CanadaMod.LOGGER.info("Uneeded ingredient!" + stack.getName());
                     return false;
                 }
             }
 
         }
         for (var ingredient : ingredients) {
-            CanadaMod.LOGGER.info("Checking " + ingredient.getMatchingItems().findFirst().toString());
             if (!input.stacks.stream().anyMatch(stack -> Ingredient.matches(Optional.of(ingredient), stack))) {
-                CanadaMod.LOGGER.info("There wasnt one!");
                 return false;
             }
         }
         if (this.requiresBottle != flagHasBottle) {
-            CanadaMod.LOGGER.info("No bottle");
             return false;
         }
         if (this.requiresBowl != flagHasBowl) {
-            CanadaMod.LOGGER.info("No bowl" + this.requiresBowl);
             return false;
         }
-        CanadaMod.LOGGER.info("It match recipe!");
 
         return true;
     }

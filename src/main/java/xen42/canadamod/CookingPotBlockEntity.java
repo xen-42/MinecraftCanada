@@ -8,11 +8,13 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.AbstractCookingRecipe;
+import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -31,7 +33,7 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
 
     int litTimeRemaining;
     int litTimeTotal;
-    RecipeEntry currentRecipe;
+    RegistryKey<Recipe<?>> currentRecipeID;
 
     private final ServerRecipeManager.MatchGetter<CookingPotRecipeInput, ? extends CookingPotRecipe> matchGetter;
 
@@ -103,17 +105,40 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
     }
 
     public static void tick(ServerWorld world, BlockPos pos, BlockState state, CookingPotBlockEntity blockEntity) {
+        var wasBurning = blockEntity.isBurning();
+
         if (blockEntity.isBurning()) {
             blockEntity.litTimeRemaining--;
         }
 
         var didUpdate = false;
 
-        didUpdate = craftRecipe(blockEntity, world);
+        // Just finished crafting
+        if (wasBurning && !blockEntity.isBurning()) {
+            didUpdate = craftRecipe(blockEntity, world);
+        }
+
+        // Todo: only check this when the inventory actually changed
+        var inputRecipe = getRecipeFromInputs(blockEntity, world);
+        var activeRecipe = getCurrentRecipe(blockEntity, world);
+
+        var shouldBeCooking = inputRecipe != null;
+        var isCooking = blockEntity.isBurning() && activeRecipe == inputRecipe;
+
+        CanadaMod.LOGGER.info(shouldBeCooking + " " + isCooking);
+        if (shouldBeCooking && !isCooking) {
+            // Debug: 2 seconds to craft
+            blockEntity.litTimeRemaining = 40;
+            setCurrentRecipe(inputRecipe, blockEntity, world);
+        }
+        else if (!shouldBeCooking && isCooking) {
+            blockEntity.litTimeRemaining = 0;
+            setCurrentRecipe(null, blockEntity, world);
+        }
 
         var isLit = state.get(CookingPotBlock.LIT);
         if (isLit != blockEntity.isBurning()) {
-            world.setBlockState(pos, state.with(CookingPotBlock.LIT, isLit));
+            world.setBlockState(pos, state.with(CookingPotBlock.LIT, blockEntity.isBurning()));
             didUpdate = true;
         }
 
@@ -122,32 +147,60 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         }
     }
 
+    @SuppressWarnings("unchecked")
+    private static RecipeEntry<CookingPotRecipe> getRecipeFromInputs(CookingPotBlockEntity blockEntity, ServerWorld world) {
+        var input = new CookingPotRecipeInput(blockEntity.inventory);
+        var recipeEntry = blockEntity.matchGetter.getFirstMatch(input, world).orElse(null);
+        return (RecipeEntry<CookingPotRecipe>)recipeEntry;
+    }
+
+    private static void setCurrentRecipe(RecipeEntry<CookingPotRecipe> recipe, CookingPotBlockEntity blockEntity, ServerWorld world) {
+        blockEntity.currentRecipeID = recipe == null ? null : recipe.id();
+    }
+
+    @SuppressWarnings("unchecked")
+    private static RecipeEntry<CookingPotRecipe> getCurrentRecipe(CookingPotBlockEntity blockEntity, ServerWorld world) {
+        var recipe = world.getRecipeManager().get(blockEntity.currentRecipeID).orElse(null);
+        if (recipe == null) {
+            return null;
+        }
+        else {
+            return (RecipeEntry<CookingPotRecipe>)recipe;
+        }
+    }
+
+    /// Called when crafting bar time is up
     private static boolean craftRecipe(CookingPotBlockEntity blockEntity, ServerWorld world) {
-        if (blockEntity.getStack(CookingPotScreenHandler.OUTPUT_SLOT).isEmpty()) {
-            var input = new CookingPotRecipeInput(blockEntity.inventory);
-            var recipeEntry = blockEntity.matchGetter.getFirstMatch(input, world).orElse(null);
-            if (recipeEntry != null) {
-                var resultItem = recipeEntry.value().result;
+        var recipeEntry = getRecipeFromInputs(blockEntity, world);
+        if (recipeEntry == null) {
+            return false;
+        }
+        var recipe = recipeEntry.value();
 
-                var currentOutput = blockEntity.getStack(CookingPotScreenHandler.OUTPUT_SLOT);
-                 var canAcceptOutput = currentOutput.isEmpty() || 
-                    (currentOutput.isOf(resultItem.getItem()) && currentOutput.getMaxCount() < currentOutput.getCount() + resultItem.getCount());
+        if (recipe != null) {
+            var resultItem = recipe.result;
 
-                if (canAcceptOutput) {
-                    var finalResult = resultItem.copy();
-                    if (!currentOutput.isEmpty()) {
-                        finalResult = new ItemStack(finalResult.getItem(), finalResult.getCount() + currentOutput.getCount());
-                    }
+            var currentOutput = blockEntity.getStack(CookingPotScreenHandler.OUTPUT_SLOT);
+            var canAcceptOutput = currentOutput.isEmpty() || 
+                (currentOutput.isOf(resultItem.getItem()) && currentOutput.getMaxCount() > currentOutput.getCount() + resultItem.getCount());
 
-                    blockEntity.setStack(CookingPotScreenHandler.OUTPUT_SLOT, finalResult);
-                    for (var slotIndex : new int[] { 1, 2, 3, 4, 5, 6 }) {
-                        var slot = blockEntity.inventory.get(slotIndex);
-                        if (!slot.isEmpty()) {
-                            slot.decrement(1);
-                        }
-                    }
-                    return true;
+            if (canAcceptOutput) {
+                var finalResult = resultItem.copy();
+                if (!currentOutput.isEmpty()) {
+                    finalResult = new ItemStack(finalResult.getItem(), finalResult.getCount() + currentOutput.getCount());
                 }
+
+                blockEntity.setStack(CookingPotScreenHandler.OUTPUT_SLOT, finalResult);
+                for (var slotIndex : new int[] { 1, 2, 3, 4, 5, 6 }) {
+                    var slot = blockEntity.inventory.get(slotIndex);
+                    if (!slot.isEmpty()) {
+                        slot.decrement(1);
+                    }
+                }
+
+                setCurrentRecipe(null, blockEntity, world);
+
+                return true;
             }
         }
         return false;
