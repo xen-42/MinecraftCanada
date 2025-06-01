@@ -1,5 +1,8 @@
 package xen42.canadamod.screen;
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingResultInventory;
@@ -15,7 +18,6 @@ import net.minecraft.recipe.book.RecipeBookType;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.world.ServerWorld;
 import xen42.canadamod.CanadaBlocks;
@@ -42,6 +44,22 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
     private Slot _fuelSlot;
     private Slot _containerSlot;
     private Slot _outputSlot;
+
+    public List<Slot> getInputSlots() {
+        return Arrays.asList(_slots);
+    }
+
+    public Slot getFuelSlot() {
+        return _fuelSlot;
+    }
+
+    public Slot getContainerSlot() {
+        return _containerSlot;
+    }
+
+    public Slot getOutputSlot() {
+        return _outputSlot;
+    }
 
     public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);

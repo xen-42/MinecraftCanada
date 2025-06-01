@@ -37,7 +37,8 @@ public class CanadaMod implements ModInitializer {
 	});
 	public static final RecipeSerializer<CookingPotRecipe> COOKING_POT_RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(MOD_ID, "cooking_pot"), new CookingPotRecipe.Serializer());
 	public static final RecipeDisplay.Serializer<CookingPotRecipeDisplay> COOKING_POT_RECIPE_DISPLAY = Registry.register(Registries.RECIPE_DISPLAY, Identifier.of(MOD_ID, "cooking_pot"), CookingPotRecipeDisplay.SERIALIZER);
-	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = Registry.register(Registries.RECIPE_BOOK_CATEGORY, Identifier.of(MOD_ID, "cooking_pot"), new RecipeBookCategory() {
+	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = Registry.register(Registries.RECIPE_BOOK_CATEGORY, 
+		Identifier.of(MOD_ID, "cooking_pot"), new RecipeBookCategory() {
 		public String toString() {
 			return "COOKING_POT";
 		}

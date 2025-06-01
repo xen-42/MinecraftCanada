@@ -14,3 +14,10 @@ accessible method net/minecraft/particle/SimpleParticleType <init> (Z)V
 accessible method net/minecraft/client/particle/ParticleManager registerFactory (Lnet/minecraft/particle/ParticleType;Lnet/minecraft/client/particle/ParticleManager$SpriteAwareFactory;)V
 accessible method net/minecraft/client/particle/LeavesParticle <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/client/particle/SpriteProvider;FFZZFF)V
 
+accessible field net/minecraft/client/gui/screen/recipebook/RecipeBookWidget ghostRecipe Lnet/minecraft/client/gui/screen/recipebook/GhostRecipe;
+accessible class net/minecraft/client/gui/screen/recipebook/GhostRecipe$CyclingItem
+accessible field net/minecraft/client/gui/screen/recipebook/GhostRecipe items Lit/unimi/dsi/fastutil/objects/Reference2ObjectMap;
+accessible field net/minecraft/client/gui/screen/ingame/RecipeBookScreen recipeBook Lnet/minecraft/client/gui/screen/recipebook/RecipeBookWidget;
+
+accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addResults (Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
+accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addInputs (Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
