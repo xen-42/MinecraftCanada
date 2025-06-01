@@ -162,6 +162,7 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         public void markDirty() {
             super.markDirty();
             _handler.onContentChanged(_handler.inventory);
+            _handler.inventory.markDirty();
         }
 
         @Override

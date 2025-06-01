@@ -26,6 +26,7 @@ import net.minecraft.util.Identifier;
 
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
+    public static final Item FLOUR = register("flour", Item::new, new Item.Settings());
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
     public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
 
@@ -85,6 +86,7 @@ public class CanadaItems {
         // Add custom items to groups
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((itemGroup) -> { 
             itemGroup.add(PELT);
+            itemGroup.add(FLOUR);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> { 

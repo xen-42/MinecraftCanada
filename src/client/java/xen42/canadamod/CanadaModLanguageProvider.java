@@ -66,6 +66,8 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 		@Override
 		public void generate(WrapperLookup registryLookup, ModTranslationBuilder translationBuilder) {
 			translationBuilder.add(CanadaItems.PELT, "Pelt");
+			translationBuilder.add(CanadaItems.FLOUR, "Flour");
+			
 			translationBuilder.add(CanadaBlocks.MAPLE_PLANKS, "Maple Planks");
 			translationBuilder.add(CanadaBlocks.MAPLE_BUTTON, "Maple Button");
 			translationBuilder.add(CanadaBlocks.MAPLE_DOOR, "Maple Door");

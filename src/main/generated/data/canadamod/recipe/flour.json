@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:wheat"
+  ],
+  "result": {
+    "count": 1,
+    "id": "canadamod:flour"
+  }
+}

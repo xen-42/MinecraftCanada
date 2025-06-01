@@ -125,12 +125,43 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasItem(CanadaBlocks.STRIPPED_MAPLE_LOG), conditionsFromItem(CanadaBlocks.STRIPPED_MAPLE_LOG))
                     .offerTo(exporter);
                 
-                createCookingPotRecipe(registryLookup, Items.RABBIT_STEW, 2)
+                createCookingPotRecipe(registryLookup, Items.RABBIT_STEW, 1)
                     .input(Items.RABBIT, this)
+                    // Todo: change to tag for a vegetable
                     .input(Items.CARROT, this)
                     .input(Items.POTATO, this)
                     .requiresBowl()
                     .offerTo(exporter);
+                
+                createShapeless(RecipeCategory.FOOD, CanadaItems.FLOUR)
+                    .input(Items.WHEAT)
+                    .criterion(hasItem(Items.WHEAT), conditionsFromItem(Items.WHEAT))
+                    .offerTo(exporter);
+
+                createCookingPotRecipe(registryLookup, Items.CAKE, 1)
+                    .input(Items.MILK_BUCKET, this)
+                    .input(Items.EGG, this)
+                    .input(Items.SUGAR, this)
+                    .input(CanadaItems.FLOUR, this)
+                    .offerTo(exporter);
+
+                createCookingPotRecipe(registryLookup, Items.PUMPKIN_PIE, 3)
+                    .input(Blocks.PUMPKIN, this)
+                    .input(Items.EGG, this)
+                    .input(Items.SUGAR, this)
+                    .offerTo(exporter);
+                
+                createCookingPotRecipe(registryLookup, Items.BEETROOT_SOUP, 1)
+                    .input(Items.BEETROOT, this)
+                    .input(Items.BEETROOT, this)
+                    .requiresBowl()
+                    .offerTo(exporter);
+
+                createCookingPotRecipe(registryLookup, Items.SLIME_BALL, 3)
+                    .input(CanadaItems.FLOUR, this)
+                    .input(Items.WATER_BUCKET, this)
+                    .input(Items.LIME_DYE, this)
+                    .offerTo(exporter);                    
             }
 
             public static CookingPotRecipeJsonBuilder createCookingPotRecipe(WrapperLookup registryLookup, ItemConvertible output, int count) {

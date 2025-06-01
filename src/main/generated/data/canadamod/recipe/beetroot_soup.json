@@ -1,13 +1,12 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
-    "minecraft:rabbit",
-    "minecraft:carrot",
-    "minecraft:potato"
+    "minecraft:beetroot",
+    "minecraft:beetroot"
   ],
   "requiresBowl": true,
   "result": {
     "count": 1,
-    "id": "minecraft:rabbit_stew"
+    "id": "minecraft:beetroot_soup"
   }
 }

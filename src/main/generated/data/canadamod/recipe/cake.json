@@ -1,0 +1,13 @@
+{
+  "type": "canadamod:cooking_pot",
+  "ingredients": [
+    "minecraft:milk_bucket",
+    "minecraft:egg",
+    "minecraft:sugar",
+    "canadamod:flour"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cake"
+  }
+}
