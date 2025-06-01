@@ -7,6 +7,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.RegistryByteBuf;
@@ -27,12 +29,10 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
 	public final List<Ingredient> ingredients;
     public final boolean requiresBowl;
     public final boolean requiresBottle;
-    private final int count;
 
-    public CookingPotRecipe(String group, ItemStack result, int count, List<Ingredient> ingredients, boolean requiresBowl, boolean requiresBottle) {
+    public CookingPotRecipe(String group, ItemStack result, List<Ingredient> ingredients, boolean requiresBowl, boolean requiresBottle) {
         this.group = group;
         this.result = result;
-        this.count = count;
         this.ingredients = ingredients;
         this.requiresBowl = requiresBowl;
         this.requiresBottle = requiresBottle;
@@ -94,8 +94,7 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
 		public static final MapCodec<CookingPotRecipe> CODEC = RecordCodecBuilder.mapCodec(
 			instance -> instance.group(
 					Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
-					ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
-                    Codec.INT.fieldOf("count").forGetter(recipe -> recipe.count),
+					ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
 					Ingredient.CODEC.listOf(1, 4).fieldOf("ingredients").forGetter(recipe -> recipe.ingredients),
                     Codec.BOOL.optionalFieldOf("requiresBowl", false).forGetter(recipe -> recipe.requiresBowl),
                     Codec.BOOL.optionalFieldOf("requiresBottle", false).forGetter(recipe -> recipe.requiresBottle)
@@ -120,7 +119,6 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
 		private static CookingPotRecipe read(RegistryByteBuf buf) {
 			var string = buf.readString();
 			var result = ItemStack.PACKET_CODEC.decode(buf);
-            var count = buf.readInt();
             var ingredientsCount = buf.readInt();
             var ingredients = new ArrayList<Ingredient>();
             for (int i = 0; i < ingredientsCount; i++) {
@@ -129,13 +127,12 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
             var requiresBottle = buf.readBoolean();
             var requiresBowl = buf.readBoolean();
 
-			return new CookingPotRecipe(string, result, count, ingredients, requiresBottle, requiresBowl);
+			return new CookingPotRecipe(string, result, ingredients, requiresBottle, requiresBowl);
 		}
 
 		private static void write(RegistryByteBuf buf, CookingPotRecipe recipe) {
 			buf.writeString(recipe.group);
 			ItemStack.PACKET_CODEC.encode(buf, recipe.result);
-            buf.writeInt(recipe.count);
             buf.writeInt(recipe.ingredients.size());
             for (var ingredient : recipe.ingredients) {
 			    Ingredient.PACKET_CODEC.encode(buf, ingredient);

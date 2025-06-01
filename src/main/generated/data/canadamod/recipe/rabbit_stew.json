@@ -1,6 +1,5 @@
 {
   "type": "canadamod:cooking_pot",
-  "count": 2,
   "ingredients": [
     "minecraft:rabbit",
     "minecraft:carrot",
@@ -8,7 +7,7 @@
   ],
   "requiresBowl": true,
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "minecraft:rabbit_stew"
   }
 }

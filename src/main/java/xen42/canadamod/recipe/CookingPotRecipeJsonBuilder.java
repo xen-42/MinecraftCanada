@@ -35,13 +35,11 @@ public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     private final ArrayList<Ingredient> _inputsList;
     private boolean _requiresBowl;
     private boolean _requiresBottle;
-    private final int _count;
     // For later I should make it work with tags oh well
     private final RegistryEntryLookup<Item> _registryLookup;
 
     public CookingPotRecipeJsonBuilder(RegistryEntryLookup<Item> registryLookup, ItemConvertible result, int count) {
-        this.result = new ItemStack(result);
-        this._count = count;
+        this.result = new ItemStack(result, count);
 
         this._registryLookup = registryLookup;
         _inputsList = new ArrayList<>();
@@ -95,7 +93,7 @@ public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
             group = "";
         }
 
-        var recipe = new CookingPotRecipe(this.group, this.result, this._count, this._inputsList, this._requiresBowl, this._requiresBottle);
+        var recipe = new CookingPotRecipe(this.group, this.result, this._inputsList, this._requiresBowl, this._requiresBottle);
 
 		Advancement.Builder builder = exporter.getAdvancementBuilder()
 			.criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeKey))
