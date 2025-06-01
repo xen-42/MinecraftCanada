@@ -25,16 +25,15 @@ import xen42.canadamod.CanadaMod;
 
 public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
-    public final int OUTPUT_SLOT = 0;
-    public final int CONTAINER_SLOT = 1;
-    public final int FUEL_SLOT = 2;
-    public final int INPUT_SLOTS_START = 3;
-    public final int INPUT_SLOTS_END = 7;
+    public final static int OUTPUT_SLOT = 0;
+    public final static int FUEL_SLOT = 1;
+    public final static int CONTAINER_SLOT = 2;    
+    public final static int INPUT_SLOTS_START = 3;
+    public final static int INPUT_SLOTS_END = 7;
 
     public static final int MAX_WIDTH_AND_HEIGHT = 2;
 
     public Inventory inventory;
-    private final CraftingResultInventory resultInventory;
 
     public ScreenHandlerContext context;
 
@@ -77,20 +76,18 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         super(CanadaMod.COOKING_POT_SCREEN_HANDLER_TYPE, syncId);
         this.inventory = inventory == null ? new CookingPotSimpleInventory(this, 8) : inventory;
         this.context = context;
-        this.resultInventory = new CookingPotResultInventory(this);
         this.player = playerInventory.player;
 
-        _outputSlot = this.addSlot(new OutputSlot(this, this.resultInventory, OUTPUT_SLOT, 142, 36));
-        
+        _outputSlot = this.addSlot(new OutputSlot(this, this.inventory, OUTPUT_SLOT, 141, 35));
+        _fuelSlot = this.addSlot(new FuelSlot(this, this.inventory, FUEL_SLOT, 80, 61));
+        _containerSlot = this.addSlot(new ContainerSlot(this, this.inventory, CONTAINER_SLOT, 23, 35));
+
         _slots = new Slot[] {
             this.addSlot(new CustomSlot(this, this.inventory, INPUT_SLOTS_START, 71, 8)),
             this.addSlot(new CustomSlot(this, this.inventory, INPUT_SLOTS_START+1, 89, 8)),
             this.addSlot(new CustomSlot(this, this.inventory, INPUT_SLOTS_START+2, 71, 26)),
             this.addSlot(new CustomSlot(this, this.inventory, INPUT_SLOTS_START+3, 89, 26))
         };
-        
-        _containerSlot = this.addSlot(new ContainerSlot(this, this.inventory, CONTAINER_SLOT, 23, 35));
-        _fuelSlot = this.addSlot(new FuelSlot(this, this.inventory, FUEL_SLOT, 80, 61));
 
         this.addPlayerSlots(playerInventory, 8, 84);
     }
@@ -154,19 +151,6 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         }
     }
 
-    private class CookingPotResultInventory extends CraftingResultInventory {
-        private ScreenHandler _screen;
-        CookingPotResultInventory(CookingPotScreenHandler screen) {
-            super();
-            _screen = screen;
-        }
-
-        public void markDirty() {
-            _screen.onContentChanged(this);
-            super.markDirty();
-        }
-    }
-
     private class CustomSlot extends Slot {
         protected CookingPotScreenHandler _handler;
         public CustomSlot(CookingPotScreenHandler handler, Inventory inventory, int index, int x, int y) {
@@ -218,5 +202,4 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
             return _handler.isFuel(stack);
         }
     }
-    
 }

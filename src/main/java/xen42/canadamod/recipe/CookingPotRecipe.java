@@ -2,6 +2,7 @@ package xen42.canadamod.recipe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -65,27 +66,44 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
 
     @Override
     public boolean matches(CookingPotRecipeInput input, World world) {
+        CanadaMod.LOGGER.info("CHECKING CHECKING!!!");
+        CanadaMod.LOGGER.info(input.toString());
+
         var flagHasBottle = false;
         var flagHasBowl = false;
-        for (var stack : input.stacks) {
+        // Skip output and fuel slots
+        for (int i = 2; i < input.stacks.size(); i++) {
+            var stack = input.stacks.get(i);
             if (stack.isOf(Items.BOWL)) {
                 flagHasBowl = true;
-                continue;
             }
-            if (stack.isOf(Items.GLASS_BOTTLE)) {
+            else if (stack.isOf(Items.GLASS_BOTTLE)) {
                 flagHasBottle = true;
-                continue;
             }
-            if (!this.ingredients.stream().anyMatch(ingredient -> ingredient.test(stack))) {
+            else {
+                if (!ingredients.stream().anyMatch(ingredient -> stack.isEmpty() || Ingredient.matches(Optional.of(ingredient), stack))) {
+                    CanadaMod.LOGGER.info("Uneeded ingredient!" + stack.getName());
+                    return false;
+                }
+            }
+
+        }
+        for (var ingredient : ingredients) {
+            CanadaMod.LOGGER.info("Checking " + ingredient.getMatchingItems().findFirst().toString());
+            if (!input.stacks.stream().anyMatch(stack -> Ingredient.matches(Optional.of(ingredient), stack))) {
+                CanadaMod.LOGGER.info("There wasnt one!");
                 return false;
             }
         }
         if (this.requiresBottle != flagHasBottle) {
+            CanadaMod.LOGGER.info("No bottle");
             return false;
         }
         if (this.requiresBowl != flagHasBowl) {
+            CanadaMod.LOGGER.info("No bowl" + this.requiresBowl);
             return false;
         }
+        CanadaMod.LOGGER.info("It match recipe!");
 
         return true;
     }

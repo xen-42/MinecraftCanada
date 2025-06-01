@@ -12,7 +12,7 @@ public class CookingPotRecipeInput implements RecipeInput {
     private final RecipeFinder matcher = new RecipeFinder();
     private final int stackCount;
 
-	private CookingPotRecipeInput(List<ItemStack> stacks) {
+	public CookingPotRecipeInput(List<ItemStack> stacks) {
 		this.stacks = stacks;
 		int i = 0;
 
@@ -28,6 +28,15 @@ public class CookingPotRecipeInput implements RecipeInput {
 
     public static CookingPotRecipeInput create(List<ItemStack> stacks) {
 		return new CookingPotRecipeInput(stacks);
+	}
+
+	@Override
+	public String toString() {
+		var str = "";
+		for (var stack : stacks) {
+			str += stack.toString() + " ";
+		}
+		return str;
 	}
 
 	@Override
