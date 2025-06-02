@@ -39,7 +39,5 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ItemTags.WOODEN_SLABS).add(CanadaBlocks.MAPLE_SLAB.asItem());
 		this.getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS).add(CanadaBlocks.MAPLE_STAIRS.asItem());
 		this.getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(CanadaBlocks.MAPLE_TRAPDOOR.asItem());
-
-
 	}
 }

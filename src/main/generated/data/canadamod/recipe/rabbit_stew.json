@@ -2,8 +2,7 @@
   "type": "canadamod:cooking_pot",
   "ingredients": [
     "minecraft:rabbit",
-    "minecraft:carrot",
-    "minecraft:potato"
+    "#c:foods/vegetable"
   ],
   "requiresBowl": true,
   "result": {

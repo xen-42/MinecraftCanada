@@ -1,11 +1,11 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
-    "minecraft:beetroot"
+    "canadamod:flour",
+    "minecraft:water_bucket"
   ],
-  "requiresBowl": true,
   "result": {
     "count": 1,
-    "id": "minecraft:beetroot_soup"
+    "id": "minecraft:bread"
   }
 }

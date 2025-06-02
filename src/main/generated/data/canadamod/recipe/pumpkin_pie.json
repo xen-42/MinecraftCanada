@@ -2,7 +2,7 @@
   "type": "canadamod:cooking_pot",
   "ingredients": [
     "minecraft:pumpkin",
-    "minecraft:egg",
+    "#minecraft:eggs",
     "minecraft:sugar"
   ],
   "result": {

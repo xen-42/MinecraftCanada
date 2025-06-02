@@ -188,8 +188,14 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
                 blockEntity.setStack(CookingPotScreenHandler.OUTPUT_SLOT, finalResult);
                 for (var slotIndex : new int[] { 1, 2, 3, 4, 5, 6 }) {
                     var slot = blockEntity.inventory.get(slotIndex);
+
                     if (!slot.isEmpty()) {
-                        slot.decrement(1);
+                        if (slot.getRecipeRemainder().isEmpty()) {
+                            slot.decrement(1);
+                        }
+                        else {
+                            blockEntity.inventory.set(slotIndex, slot.getRecipeRemainder());
+                        }
                     }
                 }
 

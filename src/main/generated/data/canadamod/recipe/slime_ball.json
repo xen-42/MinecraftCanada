@@ -2,8 +2,7 @@
   "type": "canadamod:cooking_pot",
   "ingredients": [
     "canadamod:flour",
-    "minecraft:water_bucket",
-    "minecraft:lime_dye"
+    "canadamod:sap_bottle"
   ],
   "result": {
     "count": 3,

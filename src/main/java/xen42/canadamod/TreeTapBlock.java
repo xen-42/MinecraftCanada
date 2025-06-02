@@ -14,6 +14,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -99,6 +100,9 @@ public class TreeTapBlock extends Block {
         }
         else if (tappedBlock.isOf(CanadaBlocks.MAPLE_LOG)) {
             return new Pair<Item, Boolean>(CanadaItems.MAPLE_SYRUP_BOTTLE, true);
+        }
+        else if (tappedBlock.isIn(BlockTags.LOGS)) {
+            return new Pair<Item, Boolean>(CanadaItems.SAP_BOTTLE, true);
         }
         else {
             return null;

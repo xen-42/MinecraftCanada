@@ -1,11 +1,11 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
-    "minecraft:beetroot"
+    "#c:mushrooms"
   ],
   "requiresBowl": true,
   "result": {
     "count": 1,
-    "id": "minecraft:beetroot_soup"
+    "id": "minecraft:mushroom_stew"
   }
 }
