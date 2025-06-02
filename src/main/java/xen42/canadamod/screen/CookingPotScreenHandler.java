@@ -161,7 +161,7 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
     }
 
     public float getCookProgress() {
-        return (float)this.propertyDelegate.get(2) / (float)this.propertyDelegate.get(3); 
+        return 1f - ((float)this.propertyDelegate.get(2) / (float)this.propertyDelegate.get(3)); 
     }
 
     @Override

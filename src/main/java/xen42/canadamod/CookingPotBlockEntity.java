@@ -5,6 +5,7 @@ import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Recipe;
@@ -55,6 +56,10 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
 
     public boolean isCooking() {
         return cookTimeRemaining > 0;
+    }
+
+    public boolean hasFuel() {
+        return burnTimeRemaining > 0;
     }
 
     @Override
@@ -118,8 +123,37 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
     public static void tick(ServerWorld world, BlockPos pos, BlockState state, CookingPotBlockEntity blockEntity) {
         var wasBurning = blockEntity.isCooking();
 
-        if (blockEntity.isCooking()) {
-            blockEntity.cookTimeRemaining--;
+        // Todo: only check this when the inventory actually changed
+        var inputRecipe = getRecipeFromInputs(blockEntity, world);
+        var activeRecipe = getCurrentRecipe(blockEntity, world);
+        var currentOutput = blockEntity.getStack(CookingPotScreenHandler.OUTPUT_SLOT);
+        var currentRecipeResult = inputRecipe == null ? ItemStack.EMPTY : inputRecipe.value().result;
+
+        var canAcceptOutput = blockEntity.canAcceptOutput(currentOutput, currentRecipeResult);
+
+        if (currentRecipeResult == ItemStack.EMPTY) {
+            blockEntity.cookTimeRemaining = 0;
+            blockEntity.cookTimeTotal = 0;
+        }
+
+        // Only progress or use fuel if we actually can create an output
+        if (canAcceptOutput) {
+            var fuelStack = blockEntity.getStack(CookingPotScreenHandler.FUEL_SLOT);
+            if (!blockEntity.hasFuel() && !fuelStack.isEmpty()) {
+                blockEntity.burnTimeRemaining = world.getFuelRegistry().getFuelTicks(fuelStack);
+                blockEntity.burnTimeTotal = blockEntity.burnTimeRemaining;
+                if (fuelStack.getRecipeRemainder().isEmpty()) {
+                    fuelStack.decrement(1);
+                }
+                else {
+                    blockEntity.inventory.set(CookingPotScreenHandler.FUEL_SLOT, fuelStack.getRecipeRemainder());
+                }
+            }
+
+            if (blockEntity.isCooking() && blockEntity.hasFuel()) {
+                blockEntity.cookTimeRemaining--;
+                blockEntity.burnTimeRemaining-=5;
+            }
         }
 
         var didUpdate = false;
@@ -128,10 +162,6 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         if (wasBurning && !blockEntity.isCooking()) {
             didUpdate = craftRecipe(blockEntity, world);
         }
-
-        // Todo: only check this when the inventory actually changed
-        var inputRecipe = getRecipeFromInputs(blockEntity, world);
-        var activeRecipe = getCurrentRecipe(blockEntity, world);
 
         var shouldBeCooking = inputRecipe != null;
         var isCooking = blockEntity.isCooking() && activeRecipe == inputRecipe;
@@ -148,8 +178,9 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         }
 
         var isLit = state.get(CookingPotBlock.LIT);
-        if (isLit != blockEntity.isCooking()) {
-            world.setBlockState(pos, state.with(CookingPotBlock.LIT, blockEntity.isCooking()));
+        var shouldBeLit = blockEntity.isCooking() && blockEntity.hasFuel();
+        if (isLit != shouldBeLit) {
+            world.setBlockState(pos, state.with(CookingPotBlock.LIT, shouldBeLit));
             didUpdate = true;
         }
 
@@ -185,6 +216,11 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         }
     }
 
+    private boolean canAcceptOutput(ItemStack currentOutput, ItemStack resultItem) {
+        return currentOutput.isEmpty() || 
+                (currentOutput.isOf(resultItem.getItem()) && currentOutput.getMaxCount() > currentOutput.getCount() + resultItem.getCount());
+    }
+
     /// Called when crafting bar time is up
     private static boolean craftRecipe(CookingPotBlockEntity blockEntity, ServerWorld world) {
         var recipeEntry = getRecipeFromInputs(blockEntity, world);
@@ -197,17 +233,15 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
             var resultItem = recipe.result;
 
             var currentOutput = blockEntity.getStack(CookingPotScreenHandler.OUTPUT_SLOT);
-            var canAcceptOutput = currentOutput.isEmpty() || 
-                (currentOutput.isOf(resultItem.getItem()) && currentOutput.getMaxCount() > currentOutput.getCount() + resultItem.getCount());
 
-            if (canAcceptOutput) {
+            if (blockEntity.canAcceptOutput(currentOutput, resultItem)) {
                 var finalResult = resultItem.copy();
                 if (!currentOutput.isEmpty()) {
                     finalResult = new ItemStack(finalResult.getItem(), finalResult.getCount() + currentOutput.getCount());
                 }
 
                 blockEntity.setStack(CookingPotScreenHandler.OUTPUT_SLOT, finalResult);
-                for (var slotIndex : new int[] { 1, 2, 3, 4, 5, 6 }) {
+                for (var slotIndex : new int[] { 2, 3, 4, 5, 6 }) {
                     var slot = blockEntity.inventory.get(slotIndex);
 
                     if (!slot.isEmpty()) {
