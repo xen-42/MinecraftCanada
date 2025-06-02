@@ -1,7 +1,9 @@
 package xen42.canadamod.screen;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -10,6 +12,7 @@ import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeInputProvider;
@@ -21,6 +24,7 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.world.ServerWorld;
 import xen42.canadamod.CanadaBlocks;
 import xen42.canadamod.CanadaMod;
+import xen42.canadamod.recipe.CookingPotRecipe;
 
 public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
@@ -96,9 +100,54 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         this.addPlayerSlots(playerInventory, 8, 84);
     }
 
+    private int getSlotWithIngredient(Ingredient ingredient) {
+        for (int i = 0; i < slots.size(); i++) {
+            if (Ingredient.matches(Optional.of(ingredient), this.slots.get(i).getStack())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override
-    public PostFillAction fillInputSlots(boolean craftAll, boolean creative, RecipeEntry<?> recipe, ServerWorld world, PlayerInventory inventory) {
-        return AbstractRecipeScreenHandler.PostFillAction.NOTHING;
+    public PostFillAction fillInputSlots(boolean craftAll, boolean creative, RecipeEntry<?> recipeEntry, ServerWorld world, PlayerInventory inventory) {
+        var recipe = (CookingPotRecipe)recipeEntry.value();
+
+        // Clear stuff
+        this.quickMove(player, CONTAINER_SLOT);
+        for (int i = INPUT_SLOTS_START; i <= INPUT_SLOTS_END; i++) {
+            this.quickMove(player, i);
+        }
+
+        var outputSlot = getSlot(OUTPUT_SLOT);
+        if (!outputSlot.getStack().isEmpty() && !outputSlot.getStack().isOf(recipe.result.getItem())) {
+            this.quickMove(player, OUTPUT_SLOT);
+        }
+
+        var bottleSlot = getSlotWithIngredient(Ingredient.ofItem(Items.GLASS_BOTTLE));
+        var bowlSlot = getSlotWithIngredient(Ingredient.ofItem(Items.BOWL));
+        var ingredientSlots = new int[recipe.ingredients.size()];
+        
+        for (int j = 0; j < recipe.ingredients.size(); j++) {
+            ingredientSlots[j] = getSlotWithIngredient(recipe.ingredients.get(j));
+        }
+
+        if ((recipe.requiresBottle && bottleSlot == -1) || (recipe.requiresBowl && bowlSlot == -1) || Arrays.stream(ingredientSlots).anyMatch(x -> x == -1)) {
+            return AbstractRecipeScreenHandler.PostFillAction.PLACE_GHOST_RECIPE;
+        }
+        else {
+            CanadaMod.LOGGER.info(recipe.requiresBottle + " " + bottleSlot + " " + recipe.requiresBowl + " " + bowlSlot);
+            if (recipe.requiresBottle) {
+                this.quickMove(player, bottleSlot);
+            }
+            if (recipe.requiresBowl) {
+                this.quickMove(player, bowlSlot);
+            }
+            for (var slot : ingredientSlots) {
+                this.quickMove(player, slot);
+            }
+            return AbstractRecipeScreenHandler.PostFillAction.NOTHING;
+        }
     }
 
     @Override

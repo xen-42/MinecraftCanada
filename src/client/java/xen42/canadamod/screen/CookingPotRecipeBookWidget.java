@@ -71,6 +71,9 @@ public class CookingPotRecipeBookWidget extends RecipeBookWidget<CookingPotScree
 		List<Slot> inputSlots = this.craftingScreenHandler.getInputSlots();
 		List<SlotDisplay> ingredients = cookingPotDisplay.ingredients(); 
 		for (int i = 0; i < inputSlots.size(); i++) {
+			if (i >= ingredients.size()) {
+				continue;
+			}
 			ghostRecipe.addInputs(inputSlots.get(i), context, ingredients.get(i));
 		}
 		
