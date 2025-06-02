@@ -178,7 +178,7 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         }
 
         var isLit = state.get(CookingPotBlock.LIT);
-        var shouldBeLit = blockEntity.isCooking() && blockEntity.hasFuel();
+        var shouldBeLit = blockEntity.isCooking() && blockEntity.hasFuel() && canAcceptOutput;
         if (isLit != shouldBeLit) {
             world.setBlockState(pos, state.with(CookingPotBlock.LIT, shouldBeLit));
             didUpdate = true;
