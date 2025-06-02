@@ -145,6 +145,9 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
 
                 createCookingPotRecipe(registryLookup, Items.BEETROOT_SOUP, 1)
                     .input(Items.BEETROOT, this)
+                    .input(Items.BEETROOT, this)
+                    .input(Items.BEETROOT, this)
+                    .input(Items.BEETROOT, this)
                     .requiresBowl()
                     .offerTo(exporter);
 

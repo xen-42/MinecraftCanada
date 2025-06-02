@@ -115,17 +115,25 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
                 flagHasBottle = true;
             }
             else {
+                // Check that all ingredients match an input
                 if (!ingredients.stream().anyMatch(ingredient -> stack.isEmpty() || Ingredient.matches(Optional.of(ingredient), stack))) {
                     return false;
                 }
             }
 
         }
+
+        // Check that all inputs match an ingredient
         for (var ingredient : ingredients) {
             if (!input.stacks.stream().anyMatch(stack -> Ingredient.matches(Optional.of(ingredient), stack))) {
                 return false;
             }
         }
+
+        if (ingredients.size() != input.stacks.subList(3, input.stacks.size()).stream().filter(x -> !x.isEmpty()).count()) {
+            return false;
+        }
+
         if (this.requiresBottle != flagHasBottle) {
             return false;
         }

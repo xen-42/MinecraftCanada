@@ -1,6 +1,9 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
+    "minecraft:beetroot",
+    "minecraft:beetroot",
+    "minecraft:beetroot",
     "minecraft:beetroot"
   ],
   "requiresBowl": true,
