@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.FurnaceBlockEntity;
@@ -112,6 +114,16 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         return -1;
     }
 
+    private int[] getSlotsWithIngredient(Ingredient ingredient) {
+        var matches = new ArrayList<Integer>();
+        for (int i = INVENTORY_SLOTS_START; i < slots.size(); i++) {
+            if (Ingredient.matches(Optional.of(ingredient), this.slots.get(i).getStack())) {
+                matches.add(i);
+            }
+        }
+        return matches.stream().mapToInt(Integer::intValue).toArray();
+    }
+
     @Override
     public PostFillAction fillInputSlots(boolean craftAll, boolean creative, RecipeEntry<?> recipeEntry, ServerWorld world, PlayerInventory inventory) {
         var recipe = (CookingPotRecipe)recipeEntry.value();
@@ -139,16 +151,53 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
             return AbstractRecipeScreenHandler.PostFillAction.PLACE_GHOST_RECIPE;
         }
         else {
+            // Surely theres a better way
             if (recipe.requiresBottle) {
-                this.quickMove(player, bottleSlot);
+                for (int slot : getSlotsWithIngredient(Ingredient.ofItem(Items.GLASS_BOTTLE))) {
+                    this.insertItem(this.slots.get(slot).getStack(), CONTAINER_SLOT, CONTAINER_SLOT + 1, false);
+                }
             }
             if (recipe.requiresBowl) {
-                this.quickMove(player, bowlSlot);
+                for (int slot : getSlotsWithIngredient(Ingredient.ofItem(Items.BOWL))) {
+                    this.insertItem(this.slots.get(slot).getStack(), CONTAINER_SLOT, CONTAINER_SLOT + 1, false);
+                }
             }
-            for (var slot : ingredientSlots) {
-                this.quickMove(player, slot);
+
+            var ingredientCounts = recipe.ingredients.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+            int start = INPUT_SLOTS_START;
+            for (var entry : ingredientCounts.entrySet()) {
+                var ingredient = entry.getKey();
+                var count = entry.getValue();
+
+                var slots = getSlotsWithIngredient(ingredient);
+                var end = start + (int)(long)count;
+                for (int slot : slots) {
+                    this.insertItem(this.slots.get(slot).getStack(), start, end, false);
+                }
+                if (count > 1) {
+                    // Equalize them
+                    var stacks = IntStream.range(start, end).mapToObj(x -> this.slots.get(x)).collect(Collectors.toList());
+                    equalizeStacks(stacks);
+                }
+                start = end;
             }
+
             return AbstractRecipeScreenHandler.PostFillAction.NOTHING;
+        }
+    }
+
+    public static void equalizeStacks(List<Slot> slots) {
+        var totalItems = slots.stream().mapToInt(slot -> slot.getStack().getCount()).sum();
+        var numStacks = slots.size();
+        var itemsPerStack = totalItems / numStacks;
+        var remainder = totalItems % numStacks;
+        var item = slots.get(0).getStack().getItem();
+
+        CanadaMod.LOGGER.info(numStacks + " " + itemsPerStack + " " + remainder + " " + totalItems);
+
+        for (int i = 0; i < numStacks; i++) {
+            int count = itemsPerStack + (i < remainder ? 1 : 0);
+            slots.get(i).setStack(new ItemStack(item, count));
         }
     }
 
