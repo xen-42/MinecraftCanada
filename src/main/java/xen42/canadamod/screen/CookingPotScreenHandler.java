@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -18,6 +20,8 @@ import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.recipe.book.RecipeBookType;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
@@ -40,6 +44,8 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
     public static final int HOTBAR_SLOTS_END = 42;
 
     public static final int MAX_WIDTH_AND_HEIGHT = 2;
+
+    private final PropertyDelegate propertyDelegate;
 
     public Inventory inventory;
 
@@ -69,22 +75,17 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
     }
 
     public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
+        this(syncId, playerInventory, ScreenHandlerContext.EMPTY, null, new ArrayPropertyDelegate(4));
     }
 
-    public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        this(syncId, playerInventory, ScreenHandlerContext.EMPTY, inventory);
-    }
-
-    public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        this(syncId, playerInventory, ScreenHandlerContext.EMPTY, null);
-    }
-
-    public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, Inventory inventory) {
+    public CookingPotScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, Inventory inventory, PropertyDelegate delegate) {
         super(CanadaMod.COOKING_POT_SCREEN_HANDLER_TYPE, syncId);
         this.inventory = inventory == null ? new CookingPotSimpleInventory(this, 8) : inventory;
         this.context = context;
         this.player = playerInventory.player;
+        
+        checkSize(this.inventory, 8);
+        this.propertyDelegate = delegate;
 
         _outputSlot = this.addSlot(new OutputSlot(this, this.inventory, OUTPUT_SLOT, 141, 35));
         _fuelSlot = this.addSlot(new FuelSlot(this, this.inventory, FUEL_SLOT, 80, 61));
@@ -98,6 +99,8 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         };
 
         this.addPlayerSlots(playerInventory, 8, 84);
+
+        this.addProperties(this.propertyDelegate);
     }
 
     private int getSlotWithIngredient(Ingredient ingredient) {
@@ -136,7 +139,6 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
             return AbstractRecipeScreenHandler.PostFillAction.PLACE_GHOST_RECIPE;
         }
         else {
-            CanadaMod.LOGGER.info(recipe.requiresBottle + " " + bottleSlot + " " + recipe.requiresBowl + " " + bowlSlot);
             if (recipe.requiresBottle) {
                 this.quickMove(player, bottleSlot);
             }
@@ -148,6 +150,18 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
             }
             return AbstractRecipeScreenHandler.PostFillAction.NOTHING;
         }
+    }
+
+    public boolean isCooking() {
+        return this.getCookProgress() > 0f;
+    }
+
+    public float getFuelProgress() {
+        return (float)this.propertyDelegate.get(0) / (float)this.propertyDelegate.get(1); 
+    }
+
+    public float getCookProgress() {
+        return (float)this.propertyDelegate.get(2) / (float)this.propertyDelegate.get(3); 
     }
 
     @Override
@@ -182,7 +196,6 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
                 slotAtIndex.onQuickTransfer(itemStackAtIndex, itemStack);
             } else if (slot >= INVENTORY_SLOTS_START && slot < HOTBAR_SLOTS_END) {
-                CanadaMod.LOGGER.info("Time to wtv the fuck");
                 if (isContainer(itemStackAtIndex)) {
                     this.insertItem(itemStackAtIndex, CONTAINER_SLOT, CONTAINER_SLOT + 1, false);
                 }

@@ -1,6 +1,7 @@
 package xen42.canadamod;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -13,7 +14,10 @@ import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
@@ -23,18 +27,25 @@ import xen42.canadamod.recipe.CookingPotRecipeInput;
 import xen42.canadamod.screen.CookingPotScreenHandler;
 
 public class CookingPotBlockEntity extends LockableContainerBlockEntity implements RecipeInputProvider {
-
     protected DefaultedList<ItemStack> inventory;
     private BlockState _blockState;
 
-    int litTimeRemaining;
-    int litTimeTotal;
-    RegistryKey<Recipe<?>> currentRecipeID;
+    public int cookTimeRemaining;
+    public int cookTimeTotal;
+
+    public int burnTimeRemaining;
+    public int burnTimeTotal;
+
+    public  RegistryKey<Recipe<?>> currentRecipeID;
 
     private final ServerRecipeManager.MatchGetter<CookingPotRecipeInput, ? extends CookingPotRecipe> matchGetter;
 
+    protected final PropertyDelegate propertyDelegate;
+
     protected CookingPotBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(CanadaMod.COOKING_POT_ENTITY, blockPos, blockState);
+        this.propertyDelegate = new ArrayPropertyDelegate(4);
+
         this.inventory = DefaultedList.ofSize(8, ItemStack.EMPTY);
         _blockState = blockState;
         this.matchGetter = ServerRecipeManager.createCachedMatchGetter(CanadaMod.COOKING_POT_RECIPE_TYPE);
@@ -42,8 +53,8 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
 
     private CookingPotScreenHandler _handler;
 
-    public boolean isBurning() {
-        return litTimeRemaining > 0;
+    public boolean isCooking() {
+        return cookTimeRemaining > 0;
     }
 
     @Override
@@ -53,7 +64,7 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
 
     @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        _handler = new CookingPotScreenHandler(syncId, playerInventory, this);
+        _handler = new CookingPotScreenHandler(syncId, playerInventory, ScreenHandlerContext.EMPTY, this, this.propertyDelegate);
         return _handler;
     }
 
@@ -82,8 +93,10 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         super.readNbt(nbt, registries);
         this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
         Inventories.readNbt(nbt, this.inventory, registries);
-        this.litTimeRemaining = nbt.getShort("lit_time_remaining").orElse((short)0);
-        this.litTimeTotal = nbt.getShort("litTimeTotal").orElse((short)0);
+        this.cookTimeRemaining = nbt.getShort("cookTimeRemaining").orElse((short)0);
+        this.cookTimeTotal = nbt.getShort("cookTimeTotal").orElse((short)0);
+        this.burnTimeRemaining = nbt.getShort("burnTimeRemaining").orElse((short)0);
+        this.burnTimeTotal = nbt.getShort("burnTimeTotal").orElse((short)0);
     }
 
     @Override
@@ -96,21 +109,23 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) { 
         super.writeNbt(nbt, registries);
         Inventories.writeNbt(nbt, this.inventory, registries);
-        nbt.putShort("lit_time_remaining", (short)this.litTimeRemaining);
-        nbt.putShort("litTimeTotal", (short)this.litTimeTotal);
+        nbt.putShort("cookTimeRemaining", (short)this.cookTimeRemaining);
+        nbt.putShort("cookTimeTotal", (short)this.cookTimeTotal);
+        nbt.putShort("burnTimeRemaining", (short)this.burnTimeRemaining);
+        nbt.putShort("burnTimeTotal", (short)this.burnTimeTotal);
     }
 
     public static void tick(ServerWorld world, BlockPos pos, BlockState state, CookingPotBlockEntity blockEntity) {
-        var wasBurning = blockEntity.isBurning();
+        var wasBurning = blockEntity.isCooking();
 
-        if (blockEntity.isBurning()) {
-            blockEntity.litTimeRemaining--;
+        if (blockEntity.isCooking()) {
+            blockEntity.cookTimeRemaining--;
         }
 
         var didUpdate = false;
 
         // Just finished crafting
-        if (wasBurning && !blockEntity.isBurning()) {
+        if (wasBurning && !blockEntity.isCooking()) {
             didUpdate = craftRecipe(blockEntity, world);
         }
 
@@ -119,27 +134,33 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         var activeRecipe = getCurrentRecipe(blockEntity, world);
 
         var shouldBeCooking = inputRecipe != null;
-        var isCooking = blockEntity.isBurning() && activeRecipe == inputRecipe;
+        var isCooking = blockEntity.isCooking() && activeRecipe == inputRecipe;
 
         if (shouldBeCooking && !isCooking) {
             // Debug: 2 seconds to craft
-            blockEntity.litTimeRemaining = 40;
+            blockEntity.cookTimeRemaining = 40;
+            blockEntity.cookTimeTotal = 40;
             setCurrentRecipe(inputRecipe, blockEntity, world);
         }
         else if (!shouldBeCooking && isCooking) {
-            blockEntity.litTimeRemaining = 0;
+            blockEntity.cookTimeRemaining = 0;
             setCurrentRecipe(null, blockEntity, world);
         }
 
         var isLit = state.get(CookingPotBlock.LIT);
-        if (isLit != blockEntity.isBurning()) {
-            world.setBlockState(pos, state.with(CookingPotBlock.LIT, blockEntity.isBurning()));
+        if (isLit != blockEntity.isCooking()) {
+            world.setBlockState(pos, state.with(CookingPotBlock.LIT, blockEntity.isCooking()));
             didUpdate = true;
         }
 
         if (didUpdate) {
             markDirty(world, pos, state);
         }
+
+        blockEntity.propertyDelegate.set(0, blockEntity.burnTimeRemaining);
+        blockEntity.propertyDelegate.set(1, blockEntity.burnTimeTotal);
+        blockEntity.propertyDelegate.set(2, blockEntity.cookTimeRemaining);
+        blockEntity.propertyDelegate.set(3, blockEntity.cookTimeTotal);
     }
 
     @SuppressWarnings("unchecked")
