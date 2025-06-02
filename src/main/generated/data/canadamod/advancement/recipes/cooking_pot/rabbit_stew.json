@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:rabbit_stew"
+        "recipe": "canadamod:rabbit_stew"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:rabbit_stew"
+      "canadamod:rabbit_stew"
     ]
   }
 }

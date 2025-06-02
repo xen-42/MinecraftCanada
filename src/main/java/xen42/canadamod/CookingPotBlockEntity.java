@@ -1,19 +1,16 @@
 package xen42.canadamod;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.recipe.ServerRecipeManager;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandler;
@@ -21,7 +18,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeInput;
 import xen42.canadamod.screen.CookingPotScreenHandler;
@@ -125,7 +121,6 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         var shouldBeCooking = inputRecipe != null;
         var isCooking = blockEntity.isBurning() && activeRecipe == inputRecipe;
 
-        CanadaMod.LOGGER.info(shouldBeCooking + " " + isCooking);
         if (shouldBeCooking && !isCooking) {
             // Debug: 2 seconds to craft
             blockEntity.litTimeRemaining = 40;

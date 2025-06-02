@@ -43,7 +43,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:cake"
+        "recipe": "canadamod:cake"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -59,7 +59,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:cake"
+      "canadamod:cake"
     ]
   }
 }

@@ -14,13 +14,13 @@ import net.minecraft.recipe.display.SlotDisplay.ItemSlotDisplay;
 import net.minecraft.recipe.display.SlotDisplay.StackSlotDisplay;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 
-public record CookingPotRecipeDisplay(List<SlotDisplay> ingredients, StackSlotDisplay containers, StackSlotDisplay result, ItemSlotDisplay craftingStation)
+public record CookingPotRecipeDisplay(List<SlotDisplay> ingredients, SlotDisplay containers, StackSlotDisplay result, ItemSlotDisplay craftingStation)
 	implements RecipeDisplay {
 
 	public static final MapCodec<CookingPotRecipeDisplay> CODEC = RecordCodecBuilder.mapCodec(
 		instance -> instance.group(
 				SlotDisplay.CODEC.listOf().fieldOf("ingredients").forGetter(CookingPotRecipeDisplay::ingredients),
-				StackSlotDisplay.CODEC.fieldOf("containers").forGetter(CookingPotRecipeDisplay::containers),
+				SlotDisplay.CODEC.fieldOf("containers").forGetter(CookingPotRecipeDisplay::containers),
 				StackSlotDisplay.CODEC.fieldOf("result").forGetter(CookingPotRecipeDisplay::result),
 				ItemSlotDisplay.CODEC.fieldOf("crafting_station").forGetter(CookingPotRecipeDisplay::craftingStation)
 			)
@@ -29,7 +29,7 @@ public record CookingPotRecipeDisplay(List<SlotDisplay> ingredients, StackSlotDi
 	public static final PacketCodec<RegistryByteBuf, CookingPotRecipeDisplay> PACKET_CODEC = PacketCodec.tuple(
 		SlotDisplay.PACKET_CODEC.collect(PacketCodecs.toList()),
 		CookingPotRecipeDisplay::ingredients,
-		StackSlotDisplay.PACKET_CODEC,
+		SlotDisplay.PACKET_CODEC,
 		CookingPotRecipeDisplay::containers,
 		StackSlotDisplay.PACKET_CODEC,
 		CookingPotRecipeDisplay::result,

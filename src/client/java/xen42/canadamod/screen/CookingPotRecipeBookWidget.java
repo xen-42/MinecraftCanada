@@ -2,10 +2,13 @@ package xen42.canadamod.screen;
 
 import java.util.List;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.screen.recipebook.GhostRecipe;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.screen.recipebook.RecipeResultCollection;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.NetworkRecipeId;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.display.RecipeDisplay;
 import net.minecraft.recipe.display.SlotDisplay;

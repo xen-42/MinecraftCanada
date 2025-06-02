@@ -28,7 +28,12 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
     public final static int FUEL_SLOT = 1;
     public final static int CONTAINER_SLOT = 2;    
     public final static int INPUT_SLOTS_START = 3;
-    public final static int INPUT_SLOTS_END = 7;
+    public final static int INPUT_SLOTS_END = 6;
+
+    public static final int INVENTORY_SLOTS_START = 7;
+    public static final int INVENTORY_SLOTS_END = 33;
+    public static final int HOTBAR_SLOTS_START = 34;
+    public static final int HOTBAR_SLOTS_END = 42;
 
     public static final int MAX_WIDTH_AND_HEIGHT = 2;
 
@@ -115,7 +120,58 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
     @Override
     public ItemStack quickMove(PlayerEntity player, int slot) {
-        return ItemStack.EMPTY;
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slotAtIndex = this.slots.get(slot);
+        if (slotAtIndex != null && slotAtIndex.hasStack() && slotAtIndex.canTakeItems(player)) {
+            ItemStack itemStackAtIndex = slotAtIndex.getStack();
+            itemStack = itemStackAtIndex.copy();
+            if (slot == OUTPUT_SLOT) {
+                itemStackAtIndex.getItem().onCraftByPlayer(itemStackAtIndex, player);
+                if (!this.insertItem(itemStackAtIndex, INVENTORY_SLOTS_START, HOTBAR_SLOTS_END, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slotAtIndex.onQuickTransfer(itemStackAtIndex, itemStack);
+            } else if (slot >= INVENTORY_SLOTS_START && slot < HOTBAR_SLOTS_END) {
+                CanadaMod.LOGGER.info("Time to wtv the fuck");
+                if (isContainer(itemStackAtIndex)) {
+                    this.insertItem(itemStackAtIndex, CONTAINER_SLOT, CONTAINER_SLOT + 1, false);
+                }
+                else if (isFuel(itemStackAtIndex)) {
+                    this.insertItem(itemStackAtIndex, FUEL_SLOT, FUEL_SLOT + 1, false);
+                }
+                else {
+                    if (!this.insertItem(itemStackAtIndex, INPUT_SLOTS_START, INVENTORY_SLOTS_START, false)) {
+                        if (slot < HOTBAR_SLOTS_START) {
+                            if (!this.insertItem(itemStackAtIndex, HOTBAR_SLOTS_START, HOTBAR_SLOTS_END, false)) {
+                                return ItemStack.EMPTY;
+                            }
+                        } else if (!this.insertItem(itemStackAtIndex, INVENTORY_SLOTS_START, HOTBAR_SLOTS_START, false)) {
+                            return ItemStack.EMPTY;
+                        }
+                    }
+                }
+            } else if (!this.insertItem(itemStackAtIndex, INVENTORY_SLOTS_START, HOTBAR_SLOTS_END, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemStackAtIndex.isEmpty()) {
+                slotAtIndex.setStack(ItemStack.EMPTY);
+            } else {
+                slotAtIndex.markDirty();
+            }
+
+            if (itemStackAtIndex.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slotAtIndex.onTakeItem(player, itemStackAtIndex);
+            if (slot == OUTPUT_SLOT) {
+                player.dropItem(itemStackAtIndex, false);
+            }
+        }
+
+        return itemStack;
     }
 
     public boolean isFuel(ItemStack item) {

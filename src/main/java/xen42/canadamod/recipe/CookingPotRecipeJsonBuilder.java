@@ -2,7 +2,6 @@ package xen42.canadamod.recipe;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.jetbrains.annotations.Nullable;
@@ -18,12 +17,14 @@ import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
-import xen42.canadamod.CanadaBlocks;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import xen42.canadamod.CanadaMod;
 
 public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
@@ -35,7 +36,6 @@ public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     private final ArrayList<Ingredient> _inputsList;
     private boolean _requiresBowl;
     private boolean _requiresBottle;
-    // For later I should make it work with tags oh well
     private final RegistryEntryLookup<Item> _registryLookup;
 
     public CookingPotRecipeJsonBuilder(RegistryEntryLookup<Item> registryLookup, ItemConvertible result, int count) {
@@ -62,6 +62,11 @@ public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
         return this.criterion(RecipeGenerator.hasItem(item), recipeGenerator.conditionsFromItem(item));
 	}
 
+	public CookingPotRecipeJsonBuilder input(TagKey<Item> tag, RecipeGenerator recipeGenerator) {
+		this._inputsList.add(Ingredient.fromTag(_registryLookup.getOrThrow(tag)));
+        return this.criterion("has_" + tag.getName(), recipeGenerator.conditionsFromTag(tag));
+	}
+
     @Override
     public CookingPotRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
 		this.criteria.put(name, criterion);
@@ -74,7 +79,7 @@ public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     }
 
     @Override
-    public CookingPotRecipeJsonBuilder group(String group) {
+    public CookingPotRecipeJsonBuilder group(@Nullable String group) {
 		this.group = group;
 		return this;
     }
@@ -104,4 +109,24 @@ public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
 
 		exporter.accept(recipeKey, recipe, builder.build(recipeKey.getValue().withPrefixedPath("recipes/cooking_pot/")));
     }
+
+    @Override
+    public void offerTo(RecipeExporter exporter) {
+		this.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, getItemId(this.getOutputItem())));
+    }
+
+    @Override
+	public void offerTo(RecipeExporter exporter, String recipePath) {
+		Identifier identifier = getItemId(this.getOutputItem());
+		Identifier identifier2 = Identifier.of(CanadaMod.MOD_ID, recipePath);
+		if (identifier2.equals(identifier)) {
+			throw new IllegalStateException("Recipe " + recipePath + " should remove its 'save' argument as it is equal to default one");
+		} else {
+			this.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, identifier2));
+		}
+	}
+
+    public static Identifier getItemId(ItemConvertible item) {
+		return Identifier.of(CanadaMod.MOD_ID, Registries.ITEM.getId(item.asItem()).getPath());
+	}
 }

@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:pumpkin_pie"
+        "recipe": "canadamod:pumpkin_pie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:pumpkin_pie"
+      "canadamod:pumpkin_pie"
     ]
   }
 }

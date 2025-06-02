@@ -37,7 +37,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import xen42.canadamod.screen.CookingPotScreenHandler;
 
 public class CookingPotBlock extends BlockWithEntity {
 

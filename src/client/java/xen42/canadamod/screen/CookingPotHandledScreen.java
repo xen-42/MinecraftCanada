@@ -32,4 +32,11 @@ public class CookingPotHandledScreen extends RecipeBookScreen<CookingPotScreenHa
         context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, i, j, 0.0F, 0.0F, 
             this.backgroundWidth, this.backgroundHeight, 256, 256);
     }
+
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        renderBackground(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
+        drawMouseoverTooltip(context, mouseX, mouseY);
+    }
 }

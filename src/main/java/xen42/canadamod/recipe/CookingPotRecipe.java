@@ -3,6 +3,9 @@ package xen42.canadamod.recipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.jetbrains.annotations.VisibleForTesting;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -18,8 +21,12 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.recipe.display.RecipeDisplay;
+import net.minecraft.recipe.display.SlotDisplay;
+import net.minecraft.recipe.display.SlotDisplay.StackSlotDisplay;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.world.World;
+import xen42.canadamod.CanadaBlocks;
 import xen42.canadamod.CanadaMod;
 
 public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
@@ -42,6 +49,11 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
         return this.result.copy();
     }
 
+	@VisibleForTesting
+	public List<Optional<Ingredient>> getIngredients() {
+		return this.ingredients.stream().map(x -> Optional.of(x)).collect(Collectors.toList());
+	}
+
 	@Override
 	public IngredientPlacement getIngredientPlacement() {
 		return IngredientPlacement.forShapeless(this.ingredients);
@@ -53,13 +65,40 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
 	}
 
 	@Override
-	public RecipeSerializer<CookingPotRecipe> getSerializer() {
+	public RecipeSerializer<? extends CookingPotRecipe> getSerializer() {
 		return CanadaMod.COOKING_POT_RECIPE_SERIALIZER;
 	}
 
 	@Override
 	public RecipeType<CookingPotRecipe> getType() {
 		return CanadaMod.COOKING_POT_RECIPE_TYPE;
+	}
+
+    @Override
+	public boolean isIgnoredInRecipeBook() {
+		return false;
+	}
+
+    @Override
+	public boolean showNotification() {
+		return true;
+	}
+
+    @Override
+	public String getGroup() {
+		return this.group;
+	}
+
+	@Override
+	public List<RecipeDisplay> getDisplays() {
+        var containerItem = this.requiresBottle ? Items.GLASS_BOTTLE : (this.requiresBowl ? Items.BOWL : null);
+        var containerDisplay = containerItem == null ? SlotDisplay.EmptySlotDisplay.INSTANCE : new SlotDisplay.ItemSlotDisplay(containerItem);
+        var ingredientDisplays = this.ingredients.stream().map(Ingredient::toDisplay).toList();
+        var cookingPotItem = CanadaBlocks.COOKING_POT.asItem();
+		return List.of(
+            new CookingPotRecipeDisplay(ingredientDisplays, containerDisplay,
+                new StackSlotDisplay(this.result), new SlotDisplay.ItemSlotDisplay(cookingPotItem))
+        );
 	}
 
     @Override
