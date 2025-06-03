@@ -18,11 +18,14 @@ import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.entity.BeaverEntityModel;
+import xen42.canadamod.entity.BeaverEntityRenderer;
 import xen42.canadamod.screen.CookingPotHandledScreen;
 
 public class CanadaModClient implements ClientModInitializer {
 	public static final EntityModelLayer MAPLE_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "boat/maple"), "main");
 	public static final EntityModelLayer MAPLE_CHEST_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "chest_boat/maple"), "main");
+	public static final EntityModelLayer MODEL_BEAVER_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "beaver"), "main");
 
 	public class MapleBoat implements EntityModelLayerRegistry.TexturedModelDataProvider {
 		@Override
@@ -57,6 +60,9 @@ public class CanadaModClient implements ClientModInitializer {
 		BlockEntityRendererFactories.register(CanadaBlocks.MAPLE_HANGING_SIGN_BLOCK_ENTITY, HangingSignBlockEntityRenderer::new);
 
 		HandledScreens.register(CanadaMod.COOKING_POT_SCREEN_HANDLER_TYPE, CookingPotHandledScreen::new);
+
+		EntityRendererRegistry.register(CanadaMod.BEAVER_ENTITY, context -> new BeaverEntityRenderer(context));
+		EntityModelLayerRegistry.registerModelLayer(MODEL_BEAVER_LAYER, BeaverEntityModel::getTexturedModelData);
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {

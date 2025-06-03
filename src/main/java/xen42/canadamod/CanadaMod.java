@@ -3,8 +3,11 @@ package xen42.canadamod;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
@@ -17,6 +20,7 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
+import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeDisplay;
 import xen42.canadamod.screen.CookingPotScreenHandler;
@@ -58,6 +62,13 @@ public class CanadaMod implements ModInitializer {
 		return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(CanadaMod.MOD_ID, path), blockEntityType);
 	}
 
+	public static final RegistryKey<EntityType<?>> BEAVER_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"beaver"));
+	public static final EntityType<BeaverEntity> BEAVER_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "beaver"), 
+		EntityType.Builder.create(BeaverEntity::new, SpawnGroup.CREATURE).dimensions(0.5f, 1.5f).build(BEAVER_ENTITY_KEY));
+
+
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
@@ -70,6 +81,8 @@ public class CanadaMod implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Loading Canada mod!");
+
+		FabricDefaultAttributeRegistry.register(BEAVER_ENTITY, BeaverEntity.createMobAttributes());
 
 		CanadaBlocks.initialize();
 		CanadaConfiguredFeatures.onInitialize();

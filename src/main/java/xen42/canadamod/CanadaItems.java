@@ -23,6 +23,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.item.DispensibleSpawnEggItem;
 
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
@@ -31,6 +32,9 @@ public class CanadaItems {
         .food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.1f).build()));
     public static final Item POUTINE = register("poutine", Item::new, new Item.Settings()
         .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).build()));
+
+    public static final Item BEAVER_SPAWN_EGG = register("beaver_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.BEAVER_ENTITY, settings), new Item.Settings());
 
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
     public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
@@ -128,6 +132,10 @@ public class CanadaItems {
             itemGroup.add(GRAVY);
             itemGroup.add(CHEESE_CURD);
             itemGroup.add(POUTINE);
+        });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register((itemGroup) -> {
+            itemGroup.add(BEAVER_SPAWN_EGG);
         });
     }
 }
