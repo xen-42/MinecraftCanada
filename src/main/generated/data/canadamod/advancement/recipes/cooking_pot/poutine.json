@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cheese_curd": {
+      "conditions": {
+        "items": [
+          {
+            "items": "canadamod:cheese_curd"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gravy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "canadamod:gravy"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_potato": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:potato"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "canadamod:poutine"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gravy",
+      "has_potato",
+      "has_cheese_curd"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "canadamod:poutine"
+    ]
+  }
+}

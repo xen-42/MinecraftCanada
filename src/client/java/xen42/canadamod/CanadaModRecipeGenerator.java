@@ -164,7 +164,9 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(Items.SUGAR, this)
                     .offerTo(exporter);
 
-                createCookingPotRecipe(registryLookup, Items.BREAD, 1)
+                createCookingPotRecipe(registryLookup, Items.BREAD, 3)
+                    .input(CanadaItems.FLOUR, this)
+                    .input(CanadaItems.FLOUR, this)
                     .input(CanadaItems.FLOUR, this)
                     .input(Items.WATER_BUCKET, this)
                     .offerTo(exporter);   
@@ -172,7 +174,22 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                 createCookingPotRecipe(registryLookup, Items.SLIME_BALL, 3)
                     .input(CanadaItems.FLOUR, this)
                     .input(CanadaItems.SAP_BOTTLE, this)
-                    .offerTo(exporter);       
+                    .offerTo(exporter);   
+                    
+                createCookingPotRecipe(registryLookup, CanadaItems.GRAVY, 1)
+                    .input(CanadaItems.FLOUR, this)
+                    .input(Items.CHICKEN, this)
+                    .input(Items.BEEF, this)
+                    .input(Items.WATER_BUCKET, this)
+                    .requiresBottle()
+                    .offerTo(exporter);   
+
+                createCookingPotRecipe(registryLookup, CanadaItems.POUTINE, 1)
+                    .input(CanadaItems.GRAVY, this)
+                    .input(Items.POTATO, this)
+                    .input(CanadaItems.CHEESE_CURD, this)
+                    .requiresBowl()
+                    .offerTo(exporter);
             }
 
             public static CookingPotRecipeJsonBuilder createCookingPotRecipe(WrapperLookup registryLookup, ItemConvertible output, int count) {

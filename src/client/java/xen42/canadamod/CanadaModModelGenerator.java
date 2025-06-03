@@ -22,7 +22,9 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.TREE_TAP, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.MAPLE_SYRUP_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.SAP_BOTTLE, Models.GENERATED);
-        itemModelGenerator.register(CanadaItems.LIQUID_RESIN, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.GRAVY, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.CHEESE_CURD, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.POUTINE, Models.GENERATED);
     }
 
     @Override

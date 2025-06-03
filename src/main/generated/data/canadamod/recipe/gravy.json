@@ -1,0 +1,14 @@
+{
+  "type": "canadamod:cooking_pot",
+  "ingredients": [
+    "canadamod:flour",
+    "minecraft:chicken",
+    "minecraft:beef",
+    "minecraft:water_bucket"
+  ],
+  "requiresBottle": true,
+  "result": {
+    "count": 1,
+    "id": "canadamod:gravy"
+  }
+}

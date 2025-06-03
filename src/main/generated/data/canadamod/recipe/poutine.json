@@ -1,0 +1,13 @@
+{
+  "type": "canadamod:cooking_pot",
+  "ingredients": [
+    "canadamod:gravy",
+    "minecraft:potato",
+    "canadamod:cheese_curd"
+  ],
+  "requiresBowl": true,
+  "result": {
+    "count": 1,
+    "id": "canadamod:poutine"
+  }
+}

@@ -95,6 +95,11 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaItems.MAPLE_SYRUP_BOTTLE, "Maple Syrup");
 			translationBuilder.add(CanadaItems.MAPLE_SAPLING, "Maple Sapling");
 			
+			translationBuilder.add(CanadaItems.GRAVY, "Gravy");
+			translationBuilder.add(CanadaItems.SAP_BOTTLE, "Sap");
+			translationBuilder.add(CanadaItems.CHEESE_CURD, "Cheese Curd");
+			translationBuilder.add(CanadaItems.POUTINE, "Poutine");
+
 			translationBuilder.add(CanadaBlocks.COOKING_POT, "Cooking Pot");
 			translationBuilder.add("block." + CanadaMod.MOD_ID + ".cooking_pot", "Cooking Pot");
 		}

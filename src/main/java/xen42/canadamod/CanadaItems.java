@@ -27,10 +27,15 @@ import net.minecraft.util.Identifier;
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
     public static final Item FLOUR = register("flour", Item::new, new Item.Settings());
+    public static final Item CHEESE_CURD = register("cheese_curd", Item::new, new Item.Settings()
+        .food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.1f).build()));
+    public static final Item POUTINE = register("poutine", Item::new, new Item.Settings()
+        .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).build()));
+
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
     public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
 
-    public static final FoodComponent MAPLE_SYRUP_FOOD = new FoodComponent.Builder().nutrition(6).saturationModifier(0.1F).alwaysEdible().build();
+    public static final FoodComponent MAPLE_SYRUP_FOOD = new FoodComponent.Builder().nutrition(4).saturationModifier(1.4F).alwaysEdible().build();
     public static final ConsumableComponent MAPLE_SYRUP_CONSUME = ConsumableComponents.drink().consumeSeconds(2.0F)
         .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK).consumeEffect(new ApplyEffectsConsumeEffect(List.of(
         new StatusEffectInstance(StatusEffects.SPEED, 600, 1), 
@@ -43,16 +48,21 @@ public class CanadaItems {
         new StatusEffectInstance(StatusEffects.SLOWNESS, 200, 1), 
         new StatusEffectInstance(StatusEffects.NAUSEA, 200, 1)
         ))).build();
+    
+    public static final FoodComponent GRAVY_FOOD = new FoodComponent.Builder().nutrition(4).saturationModifier(1.0F).alwaysEdible().build();
+    public static final ConsumableComponent GRAVY_CONSUME = ConsumableComponents.drink().consumeSeconds(2.0F)
+        .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK).build();
 
     public static final Item MAPLE_SYRUP_BOTTLE = register("maple_syrup_bottle", Item::new, new Item.Settings()
         .recipeRemainder(Items.GLASS_BOTTLE).food(MAPLE_SYRUP_FOOD, MAPLE_SYRUP_CONSUME)
-        .useRemainder(Items.GLASS_BOTTLE).maxCount(16));
+        .useRemainder(Items.GLASS_BOTTLE).maxCount(1));
     public static final Item SAP_BOTTLE = register("sap_bottle", Item::new, new Item.Settings()
         .recipeRemainder(Items.GLASS_BOTTLE).food(SAP_FOOD, SAP_CONSUME)
-        .useRemainder(Items.GLASS_BOTTLE).maxCount(16));
-    public static final Item LIQUID_RESIN = register("liquid_resin_bottle", Item::new, new Item.Settings()
-        .recipeRemainder(Items.GLASS_BOTTLE).food(SAP_FOOD, SAP_CONSUME)
-        .useRemainder(Items.GLASS_BOTTLE).maxCount(16));
+        .useRemainder(Items.GLASS_BOTTLE).maxCount(1));
+    public static final Item GRAVY = register("gravy", Item::new, new Item.Settings()
+        .recipeRemainder(Items.GLASS_BOTTLE).food(GRAVY_FOOD, GRAVY_CONSUME)
+        .useRemainder(Items.GLASS_BOTTLE).maxCount(1));
+
 
     public static final Item MAPLE_BOAT = register("maple_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_BOAT, settings), (new Item.Settings()).maxCount(1));
@@ -87,6 +97,7 @@ public class CanadaItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((itemGroup) -> { 
             itemGroup.add(PELT);
             itemGroup.add(FLOUR);
+            itemGroup.add(SAP_BOTTLE);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> { 
@@ -108,14 +119,15 @@ public class CanadaItems {
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register((itemGroup) -> { 
-            itemGroup.add(CanadaItems.MAPLE_BOAT);
-            itemGroup.add(CanadaItems.MAPLE_CHEST_BOAT);
+            itemGroup.add(MAPLE_BOAT);
+            itemGroup.add(MAPLE_CHEST_BOAT);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register((itemGroup) -> { 
-            itemGroup.add(CanadaItems.MAPLE_SYRUP_BOTTLE);
-            itemGroup.add(CanadaItems.SAP_BOTTLE);
-            itemGroup.add(CanadaItems.LIQUID_RESIN);
+            itemGroup.add(MAPLE_SYRUP_BOTTLE);
+            itemGroup.add(GRAVY);
+            itemGroup.add(CHEESE_CURD);
+            itemGroup.add(POUTINE);
         });
     }
 }
