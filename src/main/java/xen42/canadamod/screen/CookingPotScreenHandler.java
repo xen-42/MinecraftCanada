@@ -289,7 +289,7 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         return this.player.getWorld().getFuelRegistry().isFuel(item);
     }
 
-    public boolean isContainer(ItemStack item) {
+    public static boolean isContainer(ItemStack item) {
         return item.isOf(Items.BOWL) || item.isOf(Items.GLASS_BOTTLE);
     }
 

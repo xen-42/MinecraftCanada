@@ -5,6 +5,7 @@ import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -23,11 +24,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeInput;
 import xen42.canadamod.screen.CookingPotScreenHandler;
 
-public class CookingPotBlockEntity extends LockableContainerBlockEntity implements RecipeInputProvider {
+public class CookingPotBlockEntity extends LockableContainerBlockEntity implements RecipeInputProvider, SidedInventory {
     protected DefaultedList<ItemStack> inventory;
     private BlockState _blockState;
 
@@ -266,6 +268,33 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
     public void provideRecipeInputs(RecipeFinder finder) {
         for (ItemStack itemStack : this.inventory) {
             finder.addInput(itemStack); 
+        }
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return slot == CookingPotScreenHandler.OUTPUT_SLOT;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        if (CookingPotScreenHandler.isContainer(stack)) {
+            return slot == CookingPotScreenHandler.CONTAINER_SLOT;
+        }
+        else if (world.getFuelRegistry().isFuel(stack)) {
+            return slot == CookingPotScreenHandler.FUEL_SLOT;
+        }
+
+        return false;
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN) {
+            return new int[] { CookingPotScreenHandler.OUTPUT_SLOT };
+        }
+        else {
+            return new int[] { CookingPotScreenHandler.CONTAINER_SLOT, CookingPotScreenHandler.FUEL_SLOT };
         }
     }
 }
