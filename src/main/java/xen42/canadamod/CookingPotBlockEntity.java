@@ -1,5 +1,7 @@
 package xen42.canadamod;
 
+import com.ibm.icu.text.AlphabeticIndex.Bucket;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
@@ -8,6 +10,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
@@ -273,7 +276,7 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return slot == CookingPotScreenHandler.OUTPUT_SLOT;
+        return (slot == CookingPotScreenHandler.OUTPUT_SLOT) || stack.isOf(Items.BUCKET);
     }
 
     @Override
@@ -291,7 +294,7 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
     @Override
     public int[] getAvailableSlots(Direction side) {
         if (side == Direction.DOWN) {
-            return new int[] { CookingPotScreenHandler.OUTPUT_SLOT };
+            return new int[] { CookingPotScreenHandler.OUTPUT_SLOT, 3, 4, 5, 6 };
         }
         else {
             return new int[] { CookingPotScreenHandler.CONTAINER_SLOT, CookingPotScreenHandler.FUEL_SLOT };

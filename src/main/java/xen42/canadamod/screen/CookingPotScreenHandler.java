@@ -129,9 +129,15 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         var recipe = (CookingPotRecipe)recipeEntry.value();
 
         // Clear stuff
+        // If we can't clear, don't show ghost recipe
         this.quickMove(player, CONTAINER_SLOT);
         for (int i = INPUT_SLOTS_START; i <= INPUT_SLOTS_END; i++) {
-            this.quickMove(player, i);
+            if (this.slots.get(i).getStack().isEmpty()) {
+                continue;
+            }
+            if (this.quickMove(player, i).isEmpty()) {
+                return AbstractRecipeScreenHandler.PostFillAction.NOTHING;
+            }
         }
 
         var outputSlot = getSlot(OUTPUT_SLOT);
