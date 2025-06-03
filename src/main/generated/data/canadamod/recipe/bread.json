@@ -2,10 +2,12 @@
   "type": "canadamod:cooking_pot",
   "ingredients": [
     "canadamod:flour",
+    "canadamod:flour",
+    "canadamod:flour",
     "minecraft:water_bucket"
   ],
   "result": {
-    "count": 1,
+    "count": 3,
     "id": "minecraft:bread"
   }
 }

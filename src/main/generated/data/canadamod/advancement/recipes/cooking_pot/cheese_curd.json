@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fermented_spider_eye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:fermented_spider_eye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_milk_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:milk_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "canadamod:cheese_curd"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_milk_bucket",
+      "has_fermented_spider_eye"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "canadamod:cheese_curd"
+    ]
+  }
+}

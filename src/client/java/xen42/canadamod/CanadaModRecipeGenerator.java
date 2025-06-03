@@ -183,6 +183,11 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(Items.WATER_BUCKET, this)
                     .requiresBottle()
                     .offerTo(exporter);   
+                
+                createCookingPotRecipe(registryLookup, CanadaItems.CHEESE_CURD, 3)
+                    .input(Items.MILK_BUCKET, this)
+                    .input(Items.FERMENTED_SPIDER_EYE, this)
+                    .offerTo(exporter);   
 
                 createCookingPotRecipe(registryLookup, CanadaItems.POUTINE, 1)
                     .input(CanadaItems.GRAVY, this)
