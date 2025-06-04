@@ -67,13 +67,13 @@ public class CanadaMod implements ModInitializer {
 	public static final EntityType<BeaverEntity> BEAVER_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
 		Identifier.of(MOD_ID, "beaver"), 
-		EntityType.Builder.create(BeaverEntity::new, SpawnGroup.CREATURE).dimensions(0.5f, 1.5f).build(BEAVER_ENTITY_KEY));
+		EntityType.Builder.create(BeaverEntity::new, SpawnGroup.CREATURE).dimensions(0.5f, 0.5f).build(BEAVER_ENTITY_KEY));
 
 	public static final RegistryKey<EntityType<?>> MOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"moose"));
 	public static final EntityType<MooseEntity> MOOSE_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
 		Identifier.of(MOD_ID, "moose"), 
-		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(0.5f, 1.5f).build(MOOSE_ENTITY_KEY));
+		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.5f, 1.5f).build(MOOSE_ENTITY_KEY));
 
 
 	// This logger is used to write text to the console and the log file.
@@ -89,8 +89,8 @@ public class CanadaMod implements ModInitializer {
 
 		LOGGER.info("Loading Canada mod!");
 
-		FabricDefaultAttributeRegistry.register(BEAVER_ENTITY, BeaverEntity.createMobAttributes());
-		FabricDefaultAttributeRegistry.register(MOOSE_ENTITY, MooseEntity.createMobAttributes());
+		FabricDefaultAttributeRegistry.register(BEAVER_ENTITY, BeaverEntity.createBeaverAttributes());
+		FabricDefaultAttributeRegistry.register(MOOSE_ENTITY, MooseEntity.createMooseAttributes());
 
 		CanadaBlocks.initialize();
 		CanadaConfiguredFeatures.onInitialize();
