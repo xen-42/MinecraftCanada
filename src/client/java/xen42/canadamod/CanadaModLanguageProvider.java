@@ -102,6 +102,9 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 			translationBuilder.add(CanadaBlocks.COOKING_POT, "Cooking Pot");
 			translationBuilder.add("block." + CanadaMod.MOD_ID + ".cooking_pot", "Cooking Pot");
+
+			translationBuilder.add(CanadaItems.BEAVER_SPAWN_EGG, "Beaver Spawn Egg");
+			translationBuilder.add(CanadaItems.MOOSE_SPAWN_EGG, "Moose Spawn Egg");
 		}
 	}
 	

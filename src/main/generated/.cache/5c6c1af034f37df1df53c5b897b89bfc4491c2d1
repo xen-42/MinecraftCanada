@@ -40,6 +40,7 @@ a48bb761de4a017b35c7a78347085dd2c0f9c62b assets/canadamod/items/maple_stairs.jso
 431bb0a980876477fe1402fd53b0dd6108277a30 assets/canadamod/items/maple_syrup_bottle.json
 907311bb63043e4908bc61b6a1423237f89b5a32 assets/canadamod/items/maple_trapdoor.json
 9ec74c76c0ed6d082ee6f43e8ff5692ba795221a assets/canadamod/items/maple_wood.json
+c4bf476aafc62134099863dd67537b1476569572 assets/canadamod/items/moose_spawn_egg.json
 3eb8fb258d1b4490ed546193835192ae5a2db09c assets/canadamod/items/pelt.json
 abf75f4b7dd89fd8579c33f641b9310fd3f34d48 assets/canadamod/items/poutine.json
 9d832f694998543fb5a522de0c53b31b081bcb87 assets/canadamod/items/sap_bottle.json
@@ -96,6 +97,7 @@ fc99e9cb93b4493d826388717cd6a705b9f29256 assets/canadamod/models/item/maple_ches
 13a6fb548e79f2c4d0f7ffd70924080fce374d68 assets/canadamod/models/item/maple_sapling.json
 b69570303e8a2fb62613cdb7884182dc0f082d6c assets/canadamod/models/item/maple_sign.json
 6581f2941b12b1ff6cb4906836f8b3e3ac8ec96a assets/canadamod/models/item/maple_syrup_bottle.json
+c76fac748693346c8a93719df0860a5d88c1ae42 assets/canadamod/models/item/moose_spawn_egg.json
 ba2955566f913ba7032cad77b767e0f98283cc60 assets/canadamod/models/item/pelt.json
 54fb024494dbb2244ce84d7521f2f91a43b43639 assets/canadamod/models/item/poutine.json
 26f35322d6f86fded431b81bb1d90f0255407f63 assets/canadamod/models/item/sap_bottle.json

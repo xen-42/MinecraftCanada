@@ -36,6 +36,9 @@ public class CanadaItems {
     public static final Item BEAVER_SPAWN_EGG = register("beaver_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.BEAVER_ENTITY, settings), new Item.Settings());
 
+    public static final Item MOOSE_SPAWN_EGG = register("moose_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.MOOSE_ENTITY, settings), new Item.Settings());
+
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
     public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
 
@@ -136,6 +139,7 @@ public class CanadaItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register((itemGroup) -> {
             itemGroup.add(BEAVER_SPAWN_EGG);
+            itemGroup.add(MOOSE_SPAWN_EGG);
         });
     }
 }

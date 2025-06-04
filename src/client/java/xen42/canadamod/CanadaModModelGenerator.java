@@ -26,6 +26,7 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.CHEESE_CURD, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.POUTINE, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.BEAVER_SPAWN_EGG, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.MOOSE_SPAWN_EGG, Models.GENERATED);
     }
 
     @Override

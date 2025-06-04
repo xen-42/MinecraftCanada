@@ -10,7 +10,7 @@ import xen42.canadamod.entities.BeaverEntity;
 public class BeaverEntityRenderer extends MobEntityRenderer<BeaverEntity, BeaverEntityRenderState, BeaverEntityModel> {
 
     public BeaverEntityRenderer(Context context) {
-        super(context, new BeaverEntityModel(context.getPart(CanadaModClient.MODEL_BEAVER_LAYER)), 0.2f);
+        super(context, new BeaverEntityModel(context.getPart(CanadaModClient.MODEL_BEAVER_LAYER)), 0.4f);
     }
 
     @Override
@@ -22,5 +22,4 @@ public class BeaverEntityRenderer extends MobEntityRenderer<BeaverEntity, Beaver
     public BeaverEntityRenderState createRenderState() {
         return new BeaverEntityRenderState();
     }
-    
 }

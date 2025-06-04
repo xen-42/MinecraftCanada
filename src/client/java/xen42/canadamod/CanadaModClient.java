@@ -20,12 +20,15 @@ import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
+import xen42.canadamod.entity.MooseEntityModel;
+import xen42.canadamod.entity.MooseEntityRenderer;
 import xen42.canadamod.screen.CookingPotHandledScreen;
 
 public class CanadaModClient implements ClientModInitializer {
 	public static final EntityModelLayer MAPLE_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "boat/maple"), "main");
 	public static final EntityModelLayer MAPLE_CHEST_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "chest_boat/maple"), "main");
 	public static final EntityModelLayer MODEL_BEAVER_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "beaver"), "main");
+	public static final EntityModelLayer MODEL_MOOSE_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "moose"), "main");
 
 	public class MapleBoat implements EntityModelLayerRegistry.TexturedModelDataProvider {
 		@Override
@@ -63,6 +66,9 @@ public class CanadaModClient implements ClientModInitializer {
 
 		EntityRendererRegistry.register(CanadaMod.BEAVER_ENTITY, context -> new BeaverEntityRenderer(context));
 		EntityModelLayerRegistry.registerModelLayer(MODEL_BEAVER_LAYER, BeaverEntityModel::getTexturedModelData);
+
+		EntityRendererRegistry.register(CanadaMod.MOOSE_ENTITY, context -> new MooseEntityRenderer(context));
+		EntityModelLayerRegistry.registerModelLayer(MODEL_MOOSE_LAYER, MooseEntityModel::getTexturedModelData);
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {
