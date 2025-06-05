@@ -48,7 +48,7 @@ public class BeaverEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createBeaverAttributes() {
         return AnimalEntity.createAnimalAttributes().add(EntityAttributes.MAX_HEALTH, 5.0f).add(EntityAttributes.MOVEMENT_SPEED, 0.25f)
-            .add(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, 2f);
+            .add(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, 2f).add(EntityAttributes.OXYGEN_BONUS);
     }
 
     @Override
@@ -59,6 +59,11 @@ public class BeaverEntity extends AnimalEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return (BeaverEntity)CanadaMod.BEAVER_ENTITY.create(world, SpawnReason.BREEDING);
+    }
+
+    @Override
+    public float getScaleFactor() {
+        return isBaby() ? 0.5F : 1.0F;
     }
 
     @Override
