@@ -3,6 +3,7 @@ package xen42.canadamod;
 import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider.ItemTagProvider;
+import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.ItemTags;
 
@@ -39,5 +40,7 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ItemTags.WOODEN_SLABS).add(CanadaBlocks.MAPLE_SLAB.asItem());
 		this.getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS).add(CanadaBlocks.MAPLE_STAIRS.asItem());
 		this.getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(CanadaBlocks.MAPLE_TRAPDOOR.asItem());
+
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.RED_MEAT).add(CanadaItems.VENISON, Items.BEEF, Items.MUTTON, Items.PORKCHOP);
 	}
 }

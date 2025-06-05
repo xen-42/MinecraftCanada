@@ -1,16 +1,6 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_beef": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:beef"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_chicken": {
       "conditions": {
         "items": [
@@ -37,6 +27,16 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
+    "has_translation{key='tag.item.canadamod.red_meat', fallback='#canadamod:red_meat', args=[]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#canadamod:red_meat"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_water_bucket": {
       "conditions": {
         "items": [
@@ -53,7 +53,7 @@
       "has_the_recipe",
       "has_flour",
       "has_chicken",
-      "has_beef",
+      "has_translation{key='tag.item.canadamod.red_meat', fallback='#canadamod:red_meat', args=[]}",
       "has_water_bucket"
     ]
   ],

@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.component.type.FoodComponents;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -69,6 +70,10 @@ public class CanadaItems {
     public static final Item GRAVY = register("gravy", Item::new, new Item.Settings()
         .recipeRemainder(Items.GLASS_BOTTLE).food(GRAVY_FOOD, GRAVY_CONSUME)
         .useRemainder(Items.GLASS_BOTTLE).maxCount(1));
+
+    public static final Item VENISON = register("venison", Item::new, (new Item.Settings()).food(FoodComponents.MUTTON));
+    public static final Item COOKED_VENISON = register("cooked_venison", Item::new, (new Item.Settings()).food(FoodComponents.COOKED_MUTTON));
+    public static final Item ANTLERS = register("antlers", Item::new, new Item.Settings());
 
 
     public static final Item MAPLE_BOAT = register("maple_boat", settings -> 
@@ -135,6 +140,8 @@ public class CanadaItems {
             itemGroup.add(GRAVY);
             itemGroup.add(CHEESE_CURD);
             itemGroup.add(POUTINE);
+            itemGroup.add(VENISON);
+            itemGroup.add(COOKED_VENISON);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register((itemGroup) -> {

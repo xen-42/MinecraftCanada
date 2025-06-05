@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "group": "translation{key='item.canadamod.venison', args=[]}",
+  "ingredient": "canadamod:venison",
+  "result": {
+    "id": "canadamod:cooked_venison"
+  }
+}

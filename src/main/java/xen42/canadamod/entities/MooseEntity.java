@@ -20,12 +20,10 @@ import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
-import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.Angerable;
-import net.minecraft.entity.mob.ZombifiedPiglinEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -72,7 +70,6 @@ public class MooseEntity extends AnimalEntity implements Angerable {
         super.mobTick(world);
         tickAngerLogic(world, true);
         if (this.attacker != null) {
-            CanadaMod.LOGGER.info("Alive");
             if (!this.attacker.isAlive() || this.age - this.lastAttackedTime > 100) {
                 setAttacker(null);
             }
@@ -162,7 +159,6 @@ public class MooseEntity extends AnimalEntity implements Angerable {
     public void onDamaged(DamageSource damageSource) {
         if (damageSource.getSource() instanceof LivingEntity entity) {
             this.setAttacker(entity);
-            CanadaMod.LOGGER.info("owie he hit me!");
         }
         super.onDamaged(damageSource);
     }

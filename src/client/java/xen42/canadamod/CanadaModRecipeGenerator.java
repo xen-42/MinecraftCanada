@@ -131,6 +131,11 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(Items.WHEAT)
                     .criterion(hasItem(Items.WHEAT), conditionsFromItem(Items.WHEAT))
                     .offerTo(exporter);
+
+                createShapeless(RecipeCategory.MISC, Items.BONE_MEAL)
+                    .input(CanadaItems.ANTLERS)
+                    .criterion(hasItem(CanadaItems.ANTLERS), conditionsFromItem(CanadaItems.ANTLERS))
+                    .offerTo(exporter);
                 
                 createCookingPotRecipe(registryLookup, Items.RABBIT_STEW, 1)
                     .input(Items.RABBIT, this)
@@ -179,7 +184,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                 createCookingPotRecipe(registryLookup, CanadaItems.GRAVY, 1)
                     .input(CanadaItems.FLOUR, this)
                     .input(Items.CHICKEN, this)
-                    .input(Items.BEEF, this)
+                    .input(CanadaTags.ItemTags.RED_MEAT, this)
                     .input(Items.WATER_BUCKET, this)
                     .requiresBottle()
                     .offerTo(exporter);   
@@ -195,6 +200,8 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(CanadaItems.CHEESE_CURD, this)
                     .requiresBowl()
                     .offerTo(exporter);
+
+                offerSmelting(List.of(CanadaItems.VENISON), RecipeCategory.FOOD, CanadaItems.COOKED_VENISON, 0.35f, 200, CanadaItems.VENISON.getName().toString());
             }
 
             public static CookingPotRecipeJsonBuilder createCookingPotRecipe(WrapperLookup registryLookup, ItemConvertible output, int count) {

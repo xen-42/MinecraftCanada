@@ -3,7 +3,7 @@
   "ingredients": [
     "canadamod:flour",
     "minecraft:chicken",
-    "minecraft:beef",
+    "#canadamod:red_meat",
     "minecraft:water_bucket"
   ],
   "requiresBottle": true,
