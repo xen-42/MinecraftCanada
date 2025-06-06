@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.AttackGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.HorseBondWithPlayerGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
@@ -30,6 +31,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -86,6 +88,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new AttackGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 2.0D, moose -> moose.isBaby() ? DamageTypeTags.PANIC_CAUSES : DamageTypeTags.PANIC_ENVIRONMENTAL_CAUSES));
+        this.goalSelector.add(2, new HorseBondWithPlayerGoal(this, 1.2));
         this.goalSelector.add(3, new AnimalMateGoal(this, 1.0D));
         this.goalSelector.add(4, new TemptGoal(this, 1.2D, stack -> this.isBreedingItem(stack), false));
         this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
@@ -188,23 +191,39 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) { 
-        if (!isTame()) {
+        if (attacking != null) {
             return ActionResult.FAIL;
         }
 
         var itemStack = player.getStackInHand(hand);
+        if (isBreedingItem(itemStack)) {
+            return interactHorse(player, itemStack);
+        }
+
         if (player.shouldCancelInteraction() && !isBaby()) {
             openInventory(player);
             return (ActionResult)ActionResult.SUCCESS;
         } 
-        ActionResult actionResult = itemStack.useOnEntity(player, (LivingEntity)this, hand);
-        if (actionResult.isAccepted())
-            return actionResult; 
-        if (isBreedingItem(itemStack)) {
-            return interactHorse(player, itemStack);
+
+        if (!itemStack.isEmpty()) {
+            if (this.isTame()) {
+                ActionResult actionResult = itemStack.useOnEntity(player, (LivingEntity)this, hand);
+                if (actionResult.isAccepted())
+                    return actionResult; 
+
+                if (getPassengerList().size() < 1 && !isBaby()) {
+                    putPlayerOnBack(player);
+                }
+            }
+            else {
+                this.playAngrySound();
+                return ActionResult.SUCCESS;
+            }
         }
-        if (getPassengerList().size() < 1 && !isBaby()) {
-            putPlayerOnBack(player);
+
+        // Try taming
+        if (!this.isTame() && !this.isBaby()) {
+            super.interactMob(player, hand);
         }
 
         return (ActionResult)ActionResult.SUCCESS;
@@ -236,7 +255,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
             }
         }
 
-        boolean canLove = (isTame() && getBreedingAge() == 0 && canEat());
+        boolean canLove = (getBreedingAge() == 0 && canEat());
         if (canLove) {
             lovePlayer(player);
         }
@@ -258,7 +277,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public boolean isTame() {
-        return attacking == null;
+        return super.isTame() && attacking == null;
     }
 
     private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
