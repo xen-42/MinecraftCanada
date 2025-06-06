@@ -276,6 +276,11 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     }
 
     @Override
+    protected SoundEvent getAngrySound() {
+        return SoundEvents.ENTITY_HORSE_ANGRY;
+    }
+
+    @Override
     public boolean isTame() {
         return super.isTame() && attacking == null;
     }
