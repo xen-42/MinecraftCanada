@@ -1,9 +1,13 @@
 {
   "block.canadamod.cooking_pot": "Cooking Pot",
+  "entity.canadamod.beaver": "Beaver",
+  "entity.canadamod.moose": "Moose",
   "entity.minecraft.maple_boat": "Maple Boat",
   "entity.minecraft.maple_chest_boat": "Maple Boat with Chest",
+  "item.canadamod.antlers": "Antler",
   "item.canadamod.beaver_spawn_egg": "Beaver Spawn Egg",
   "item.canadamod.cheese_curd": "Cheese Curd",
+  "item.canadamod.cooked_venison": "Cooked venison",
   "item.canadamod.cooking_pot": "Cooking Pot",
   "item.canadamod.flour": "Flour",
   "item.canadamod.gravy": "Gravy",
@@ -31,5 +35,6 @@
   "item.canadamod.sap_bottle": "Sap",
   "item.canadamod.stripped_maple_log": "Stripped Maple Log",
   "item.canadamod.stripped_maple_wood": "Stripped Maple Wood",
-  "item.canadamod.tree_tap": "Tree Tap"
+  "item.canadamod.tree_tap": "Tree Tap",
+  "item.canadamod.venison": "Venison"
 }

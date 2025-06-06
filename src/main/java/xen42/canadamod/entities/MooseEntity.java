@@ -21,6 +21,7 @@ import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -51,6 +52,9 @@ import xen42.canadamod.CanadaMod;
 public class MooseEntity extends AbstractHorseEntity implements Angerable {
     public MooseEntity(EntityType<? extends AbstractHorseEntity> entityType, World world) {
         super(entityType, world);
+        var mobNavigation = (MobNavigation)this.getNavigation();
+        mobNavigation.setCanSwim(true);
+        mobNavigation.setCanWalkOverFences(true);
     }
 
     private static final EntityDimensions BABY_BASE_DIMENSIONS = EntityType.COW.getDimensions().scaled(0.5F).withEyeHeight(0.665F);
@@ -116,6 +120,10 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) { 
+        if (!isTame()) {
+            return ActionResult.FAIL;
+        }
+
         var itemStack = player.getStackInHand(hand);
         if (player.shouldCancelInteraction() && !isBaby()) {
             openInventory(player);
@@ -175,7 +183,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public boolean isTame() {
-        return true;
+        return attacking == null;
     }
 
     private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
@@ -201,6 +209,12 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         }
         
         super.setTarget(target);
+    }
+
+    public void openInventory(PlayerEntity player) {
+        if (!this.getWorld().isClient) {
+            player.openHorseInventory(this, this.items);
+        }
     }
 
     @Override

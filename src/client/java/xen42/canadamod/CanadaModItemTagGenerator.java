@@ -15,7 +15,7 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 
 	@Override
 	public String getName() {
-		return "PeacefulModItemTagGenerator";
+		return "CanadaModItemTagGenerator";
 	}
 	
 	@Override

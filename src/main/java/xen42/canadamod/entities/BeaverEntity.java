@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.goal.SwimAroundGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
@@ -31,6 +32,8 @@ public class BeaverEntity extends AnimalEntity {
     public BeaverEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         //this.moveControl = new BeaverMoveControl(this);
+        var mobNavigation = (MobNavigation)this.getNavigation();
+        mobNavigation.setCanSwim(true);
     }
 
     private static final EntityDimensions BABY_BASE_DIMENSIONS = EntityType.COW.getDimensions().scaled(0.5F).withEyeHeight(0.665F);

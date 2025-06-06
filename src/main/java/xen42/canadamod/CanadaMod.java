@@ -2,6 +2,7 @@ package xen42.canadamod;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
 import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.MooseEntity;
@@ -100,5 +102,17 @@ public class CanadaMod implements ModInitializer {
 		
 		BiomeModifications.addFeature(context -> context.getBiomeKey().getValue()
 			.equals(Identifier.of(CanadaMod.MOD_ID, "maple_forest")), GenerationStep.Feature.VEGETAL_DECORATION, CanadaPlacedFeatures.MAPLE_FOREST_VEGETATION);
+
+		var mooseBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
+			.or(BiomeSelectors.includeByKey(BiomeKeys.TAIGA))
+			.or(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA))
+			.or(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_PINE_TAIGA))
+			.or(BiomeSelectors.includeByKey(BiomeKeys.SNOWY_TAIGA));
+		BiomeModifications.addSpawn(mooseBiomes, SpawnGroup.AMBIENT, MOOSE_ENTITY, 1, 1, 3);
+
+		var beaverBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
+			.or(BiomeSelectors.includeByKey(BiomeKeys.RIVER))
+			.or(BiomeSelectors.includeByKey(BiomeKeys.SWAMP));
+		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.AMBIENT, BEAVER_ENTITY, 1, 1, 3);
 	}
 }
