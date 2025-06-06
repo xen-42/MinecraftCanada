@@ -49,15 +49,6 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
                     LootPool.builder()
                         .rolls(ConstantLootNumberProvider.create(0.5F))
                         .with(
-                            ItemEntry.builder(CanadaItems.ANTLERS)
-                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 2.0F)))
-                                .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(1.0F, 2.0F)))
-                        )
-                )
-                .pool(
-                    LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(0.5F))
-                        .with(
                             ItemEntry.builder(CanadaItems.VENISON)
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 2.0F)))
                                 .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(1.0F, 2.0F)))

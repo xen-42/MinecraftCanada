@@ -41,23 +41,23 @@ public class moose extends EntityModel<Entity> {
 		.uv(57, 46).cuboid(-4.0F, -9.924F, -4.8682F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F))
 		.uv(57, 46).cuboid(2.0F, -9.924F, -4.8682F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 5.0F, -10.0F, 0.0F, 3.1416F, 0.0F));
 
-		ModelPartData left_antler = oops_the_head_is_backwards.addChild("left_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-8.0F, -6.924F, -3.8682F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
-		.uv(50, 19).cuboid(-8.0F, -9.924F, -4.8682F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(25, 30).cuboid(-9.0F, -10.924F, -4.8682F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 28).cuboid(-3.0F, -13.924F, -4.8682F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(14, 30).cuboid(-5.0F, -13.924F, -4.8682F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 9).cuboid(-7.0F, -12.924F, -4.8682F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 32).cuboid(-4.0F, -11.924F, -4.8682F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(21, 14).cuboid(-6.0F, -10.924F, -4.8682F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, 0.0F, 1.0F));
+		ModelPartData left_antler = oops_the_head_is_backwards.addChild("left_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-8.0F, -7.0F, -4.0F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
+		.uv(50, 19).cuboid(-8.0F, -10.0F, -5.0F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
+		.uv(25, 30).cuboid(-9.0F, -11.0F, -5.0F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
+		.uv(0, 28).cuboid(-3.0F, -14.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+		.uv(14, 30).cuboid(-5.0F, -14.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+		.uv(0, 9).cuboid(-7.0F, -13.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+		.uv(0, 32).cuboid(-4.0F, -13.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+		.uv(21, 14).cuboid(-6.0F, -12.0F, -5.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, 0.0F, 1.0F));
 
-		ModelPartData right_antler = oops_the_head_is_backwards.addChild("right_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-7.0F, -6.924F, -3.8682F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
-		.uv(50, 19).cuboid(-5.0F, -9.924F, -4.8682F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(0, 11).cuboid(1.0F, -10.924F, -4.8682F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
-		.uv(35, 15).cuboid(-3.0F, -13.924F, -4.8682F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(49, 29).cuboid(-5.0F, -13.924F, -4.8682F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
-		.uv(20, 22).cuboid(-1.0F, -12.924F, -4.8682F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(40, 31).cuboid(-4.0F, -11.924F, -4.8682F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
-		.uv(28, 23).cuboid(-2.0F, -10.924F, -4.8682F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(12.0F, 0.0F, 1.0F));
+		ModelPartData right_antler = oops_the_head_is_backwards.addChild("right_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-7.0F, -12.0F, -4.0F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
+		.uv(50, 19).cuboid(-5.0F, -15.0F, -5.0F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
+		.uv(0, 11).cuboid(1.0F, -16.0F, -5.0F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
+		.uv(35, 15).cuboid(-3.0F, -19.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+		.uv(49, 29).cuboid(-5.0F, -19.0F, -5.0F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
+		.uv(20, 22).cuboid(-1.0F, -18.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+		.uv(40, 31).cuboid(-4.0F, -18.0F, -5.0F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
+		.uv(28, 23).cuboid(-2.0F, -17.0F, -5.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(12.0F, 5.0F, 1.0F));
 
 		ModelPartData harness = oops_the_head_is_backwards.addChild("harness", ModelPartBuilder.create().uv(156, 35).cuboid(-5.0F, -6.0F, -8.0F, 10.0F, 8.0F, 1.0F, new Dilation(0.1F))
 		.uv(148, 16).cuboid(-5.0F, -2.0F, -8.0F, 10.0F, 1.0F, 8.0F, new Dilation(0.14F))
