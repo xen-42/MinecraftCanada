@@ -3,6 +3,7 @@ package xen42.canadamod.entity;
 import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaModClient;
@@ -30,6 +31,12 @@ public class MooseEntityRenderer extends MobEntityRenderer<MooseEntity, MooseEnt
             matrices.scale(0.5F, 0.5F, 0.5F); 
         }
         super.scale(state, matrices);
+    }
+
+    @Override
+    public void updateRenderState(MooseEntity mooseEntity, MooseEntityRenderState mooseEntityRenderState, float f) {
+        super.updateRenderState(mooseEntity, mooseEntityRenderState, f);
+        mooseEntityRenderState.saddleStack = mooseEntity.getEquippedStack(EquipmentSlot.SADDLE).copy();
     }
 }
 
