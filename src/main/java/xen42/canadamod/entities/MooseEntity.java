@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SaddledComponent;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
@@ -38,6 +39,7 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
@@ -116,6 +118,16 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     @Override
     public EntityDimensions getBaseDimensions(EntityPose pose) {
         return isBaby() ? BABY_BASE_DIMENSIONS : super.getBaseDimensions(pose);
+    }
+
+    @Override
+    public void tickMovement() {
+        if (this.getControllingPassenger() != null) {
+            if (this.isSubmergedInWater() || (this.isTouchingWater() && this.jumping)) {
+                this.swimUpward(FluidTags.WATER);
+            }
+        }
+        super.tickMovement();
     }
 
     @Override
