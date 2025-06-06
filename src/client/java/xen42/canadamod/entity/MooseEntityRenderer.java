@@ -2,6 +2,7 @@ package xen42.canadamod.entity;
 
 import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaModClient;
@@ -21,6 +22,14 @@ public class MooseEntityRenderer extends MobEntityRenderer<MooseEntity, MooseEnt
     @Override
     public Identifier getTexture(MooseEntityRenderState state) {
         return Identifier.of(CanadaMod.MOD_ID, "textures/entity/moose/moose.png");
+    }
+
+    @Override
+    protected void scale(MooseEntityRenderState state, MatrixStack matrices) {
+        if (state.baby) {
+            matrices.scale(0.5F, 0.5F, 0.5F); 
+        }
+        super.scale(state, matrices);
     }
 }
 

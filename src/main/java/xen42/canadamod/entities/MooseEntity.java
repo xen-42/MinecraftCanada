@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.jetbrains.annotations.Nullable;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -24,21 +25,31 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.Angerable;
+import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CamelEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.TimeHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaMod;
 
-public class MooseEntity extends AnimalEntity implements Angerable {
-    public MooseEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+public class MooseEntity extends AbstractHorseEntity implements Angerable {
+    public MooseEntity(EntityType<? extends AbstractHorseEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -61,7 +72,11 @@ public class MooseEntity extends AnimalEntity implements Angerable {
 
     public static DefaultAttributeContainer.Builder createMooseAttributes() {
         return AnimalEntity.createAnimalAttributes().add(EntityAttributes.MAX_HEALTH, 25.0f).add(EntityAttributes.MOVEMENT_SPEED, 0.25f)
-            .add(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, 2f).add(EntityAttributes.ATTACK_DAMAGE, 6.0D).add(EntityAttributes.OXYGEN_BONUS)
+            .add(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, 2f)
+            .add(EntityAttributes.ATTACK_DAMAGE, 6.0D)
+            .add(EntityAttributes.OXYGEN_BONUS)
+            .add(EntityAttributes.JUMP_STRENGTH, 0.4D)
+            .add(EntityAttributes.STEP_HEIGHT, 1.5D)
             .add(EntityAttributes.FOLLOW_RANGE, 20.0D);
     }
 
@@ -82,6 +97,14 @@ public class MooseEntity extends AnimalEntity implements Angerable {
     }
 
     @Override
+    public boolean canBreedWith(AnimalEntity other) { 
+        if (other != this && other instanceof MooseEntity otherMoose) {
+            return canBreed() && otherMoose.canBreed();
+        } 
+        return false;
+    }
+
+    @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return (MooseEntity)CanadaMod.MOOSE_ENTITY.create(world, SpawnReason.BREEDING);
     }
@@ -89,6 +112,70 @@ public class MooseEntity extends AnimalEntity implements Angerable {
     @Override
     public EntityDimensions getBaseDimensions(EntityPose pose) {
         return isBaby() ? BABY_BASE_DIMENSIONS : super.getBaseDimensions(pose);
+    }
+
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) { 
+        var itemStack = player.getStackInHand(hand);
+        if (player.shouldCancelInteraction() && !isBaby()) {
+            openInventory(player);
+            return (ActionResult)ActionResult.SUCCESS;
+        } 
+        ActionResult actionResult = itemStack.useOnEntity(player, (LivingEntity)this, hand);
+        if (actionResult.isAccepted())
+            return actionResult; 
+        if (isBreedingItem(itemStack)) {
+            return interactHorse(player, itemStack);
+        }
+        if (getPassengerList().size() < 1 && !isBaby()) {
+            putPlayerOnBack(player);
+        }
+
+        return (ActionResult)ActionResult.SUCCESS;
+    }
+
+    @Override
+    protected boolean receiveFood(PlayerEntity player, ItemStack item) {
+        if (!isBreedingItem(item)) {
+            return false;
+        }
+
+        boolean isHurt = (getHealth() < getMaxHealth());
+        if (isHurt) {
+            heal(2.0F);
+        }
+
+        boolean isBaby = isBaby();
+        if (isBaby) {
+            getWorld().addParticleClient((ParticleEffect)ParticleTypes.HAPPY_VILLAGER, getParticleX(1.0D), getRandomBodyY() + 0.5D, getParticleZ(1.0D), 0.0D, 0.0D, 0.0D);
+            if (!(getWorld()).isClient) {
+                growUp(10);
+            }
+        }
+
+        boolean canLove = (isTame() && getBreedingAge() == 0 && canEat());
+        if (canLove) {
+            lovePlayer(player);
+        }
+
+        if (isHurt || canLove || isBaby) {
+            if (!isSilent()) {
+                SoundEvent soundEvent = getEatSound();
+                if (soundEvent != null) {
+                    getWorld().playSound(null, getX(), getY(), getZ(), soundEvent, getSoundCategory(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+                }
+            }
+
+            emitGameEvent(GameEvent.EAT);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean isTame() {
+        return true;
     }
 
     private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);

@@ -29,7 +29,7 @@
           "name": "canadamod:antlers"
         }
       ],
-      "rolls": 1.0
+      "rolls": 0.5
     },
     {
       "bonus_rolls": 0.0,
@@ -95,7 +95,7 @@
           "name": "canadamod:venison"
         }
       ],
-      "rolls": 1.0
+      "rolls": 0.5
     },
     {
       "bonus_rolls": 0.0,
@@ -125,7 +125,7 @@
           "name": "minecraft:leather"
         }
       ],
-      "rolls": 1.0
+      "rolls": 0.5
     }
   ]
 }
