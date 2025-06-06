@@ -10,8 +10,11 @@ import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.QuadrupedEntityModel;
 
 public class MooseEntityModel extends QuadrupedEntityModel<MooseEntityRenderState> {
+	private ModelPart leftAntler, rightAntler;
     protected MooseEntityModel(ModelPart root) {
         super(root);
+		this.leftAntler = head.getChild("oops_the_head_is_backwards").getChild("left_antler");
+		this.rightAntler = head.getChild("oops_the_head_is_backwards").getChild("right_antler");
     }
     
 	public static TexturedModelData getTexturedModelData() {
@@ -25,11 +28,9 @@ public class MooseEntityModel extends QuadrupedEntityModel<MooseEntityRenderStat
 		.uv(33, 112).cuboid(-5.0F, -8.924F, -7.8682F, 10.0F, 8.0F, 8.0F, new Dilation(0.0F))
 		.uv(36, 95).cuboid(-3.0F, -6.924F, 0.1318F, 6.0F, 5.0F, 7.0F, new Dilation(0.0F))
 		.uv(57, 46).cuboid(-4.0F, -10.924F, -5.8682F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F))
-		.uv(57, 46).cuboid(2.0F, -10.924F, -5.8682F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F))
-		.uv(0, 21).cuboid(-5.0F, -7.924F, -3.8682F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F))
-		.uv(1, 21).cuboid(3.0F, -7.924F, -3.8682F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 5.0F, -6.0F, 0.0F, 3.1416F, 0.0F));
+		.uv(57, 46).cuboid(2.0F, -10.924F, -5.8682F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 5.0F, -6.0F, 0.0F, 3.1416F, 0.0F));
 
-		ModelPartData antler = oops_the_head_is_backwards.addChild("antler", ModelPartBuilder.create().uv(0, 13).cuboid(-8.0F, -7.924F, -4.8682F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
+		ModelPartData antler = oops_the_head_is_backwards.addChild("left_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-8.0F, -7.924F, -4.8682F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
 		.uv(50, 19).cuboid(-8.0F, -10.924F, -5.8682F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
 		.uv(25, 30).cuboid(-9.0F, -11.924F, -5.8682F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
 		.uv(0, 28).cuboid(-3.0F, -14.924F, -5.8682F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
@@ -38,7 +39,7 @@ public class MooseEntityModel extends QuadrupedEntityModel<MooseEntityRenderStat
 		.uv(0, 32).cuboid(-4.0F, -12.924F, -5.8682F, 1.0F, 3.0F, 2.0F, new Dilation(0.0F))
 		.uv(21, 14).cuboid(-6.0F, -11.924F, -5.8682F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.origin(-5.0F, 0.0F, 1.0F));
 
-		ModelPartData antler2 = oops_the_head_is_backwards.addChild("antler2", ModelPartBuilder.create().uv(0, 13).cuboid(-7.0F, -7.924F, -4.8682F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
+		ModelPartData antler2 = oops_the_head_is_backwards.addChild("right_antler", ModelPartBuilder.create().uv(0, 13).cuboid(-7.0F, -7.924F, -4.8682F, 8.0F, 2.0F, 2.0F, new Dilation(0.0F))
 		.uv(50, 19).cuboid(-5.0F, -10.924F, -5.8682F, 6.0F, 4.0F, 2.0F, new Dilation(0.0F))
 		.uv(0, 11).cuboid(1.0F, -11.924F, -5.8682F, 1.0F, 5.0F, 2.0F, new Dilation(0.0F))
 		.uv(35, 15).cuboid(-3.0F, -14.924F, -5.8682F, 1.0F, 4.0F, 2.0F, new Dilation(0.0F))
@@ -60,5 +61,25 @@ public class MooseEntityModel extends QuadrupedEntityModel<MooseEntityRenderStat
 
 		ModelPartData right_hind_leg = modelPartData.addChild("right_hind_leg", ModelPartBuilder.create().uv(0, 102).cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)), ModelTransform.origin(5.5F, 3.0F, -10.5F));
 		return TexturedModelData.of(modelData, 128, 128);
+	}
+
+	@Override
+	public void setAngles(MooseEntityRenderState livingEntityRenderState) {
+		super.setAngles(livingEntityRenderState);
+
+		leftAntler.hidden = livingEntityRenderState.baby;
+		rightAntler.hidden = livingEntityRenderState.baby;
+
+		leftAntler.xScale = livingEntityRenderState.baby ? 0 : 1;
+		leftAntler.yScale = livingEntityRenderState.baby ? 0 : 1;
+		leftAntler.zScale = livingEntityRenderState.baby ? 0 : 1;
+
+		rightAntler.xScale = livingEntityRenderState.baby ? 0 : 1;
+		rightAntler.yScale = livingEntityRenderState.baby ? 0 : 1;
+		rightAntler.zScale = livingEntityRenderState.baby ? 0 : 1;
+
+		head.xScale = livingEntityRenderState.baby ? 1.5f : 1f;
+		head.yScale = livingEntityRenderState.baby ? 1.5f : 1f;
+		head.zScale = livingEntityRenderState.baby ? 1.5f : 1f;
 	}
 }

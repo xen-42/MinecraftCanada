@@ -38,4 +38,13 @@ public class BeaverEntityModel extends QuadrupedEntityModel<BeaverEntityRenderSt
 
 		return TexturedModelData.of(ModelData, 64, 64);
 	}
+
+	@Override
+	public void setAngles(BeaverEntityRenderState livingEntityRenderState) {
+		super.setAngles(livingEntityRenderState);
+
+		head.xScale = livingEntityRenderState.baby ? 1.5f : 1f;
+		head.yScale = livingEntityRenderState.baby ? 1.5f : 1f;
+		head.zScale = livingEntityRenderState.baby ? 1.5f : 1f;
+	}
 }
