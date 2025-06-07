@@ -3,7 +3,7 @@
 	"package": "xen42.canadamod.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"BundleContentsComponentMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
