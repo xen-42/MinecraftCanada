@@ -4,7 +4,9 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"HangingSignEditScreenMixin",
-		"AbstractSignEditScreenMixin"
+		"AbstractSignEditScreenMixin",
+		"DrawContextMixin",
+		"HandledScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

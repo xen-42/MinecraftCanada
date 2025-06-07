@@ -2,8 +2,10 @@ package xen42.canadamod;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BundleContentsComponent;
 import net.minecraft.component.type.ConsumableComponent;
@@ -28,6 +30,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
+import xen42.canadamod.item.ThermosContentsComponent;
 import xen42.canadamod.item.ThermosItem;
 
 public class CanadaItems {
@@ -84,9 +87,14 @@ public class CanadaItems {
     public static final Item MAPLE_CHEST_BOAT = register("maple_chest_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_CHEST_BOAT, settings), (new Item.Settings()).maxCount(1));
 
+    private static <T> ComponentType<T> registerContentsComponent(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+        return Registry.register(Registries.DATA_COMPONENT_TYPE, id, builderOperator.apply(ComponentType.builder()).build());
+    }
+    public static final ComponentType<ThermosContentsComponent> THERMOS_CONTENTS = registerContentsComponent("thermos_contents", (builder) -> {
+        return builder.codec(ThermosContentsComponent.CODEC).packetCodec(ThermosContentsComponent.PACKET_CODEC).cache();
+    });
     public static final Item THERMOS = register("thermos",
-        settings -> new ThermosItem(settings), (new Item.Settings()).maxCount(1).component(DataComponentTypes.BUNDLE_CONTENTS, BundleContentsComponent.DEFAULT));
-
+        settings -> new ThermosItem(settings), (new Item.Settings()).maxCount(1).component(THERMOS_CONTENTS, ThermosContentsComponent.DEFAULT));
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
