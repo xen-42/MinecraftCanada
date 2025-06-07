@@ -39,6 +39,7 @@
   "item.canadamod.stripped_maple_log": "Stripped Maple Log",
   "item.canadamod.stripped_maple_wood": "Stripped Maple Wood",
   "item.canadamod.thermos": "Thermos",
+  "item.canadamod.thermos.empty.description": "Can hold a mixed stack of soups, drinks, and potions",
   "item.canadamod.tree_tap": "Tree Tap",
   "item.canadamod.venison": "Venison"
 }

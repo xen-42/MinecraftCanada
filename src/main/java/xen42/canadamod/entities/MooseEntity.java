@@ -163,8 +163,8 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
             return;
         }
 
-        // Average length 10 minutes to shed antlers
-        if (force || this.random.nextFloat() < 1f / (float)(10 * 60 * 20)) {
+        // Average length 20 minutes to shed antlers
+        if (force || this.random.nextFloat() < 1f / (float)(20 * 60 * 20)) {
             if (left ? !this.isLeftAntlerMissing() : !this.isRightAntlerMissing()) {
                 var yaw = (float)(this.bodyYaw * (Math.PI / 180));
                 var offset = new Vec3d(left ? 0.4f : -0.4f, 0f, -1.5f);

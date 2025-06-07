@@ -119,6 +119,8 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
 
 			translationBuilder.add(CanadaBlocks.RUBBER_BLOCK, "Rubber Block");
+
+			translationBuilder.add("item.canadamod.thermos.empty.description", "Can hold a mixed stack of soups, drinks, and potions");
 		}
 	}
 	

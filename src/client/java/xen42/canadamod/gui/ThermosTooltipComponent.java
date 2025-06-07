@@ -29,7 +29,7 @@ public class ThermosTooltipComponent implements TooltipComponent {
     private static final Identifier BUNDLE_SLOT_BACKGROUND_TEXTURE = Identifier.ofVanilla("container/bundle/slot_background");
     private static final Text BUNDLE_FULL = Text.translatable("item.minecraft.bundle.full");
     private static final Text BUNDLE_EMPTY = Text.translatable("item.minecraft.bundle.empty");
-    private static final Text BUNDLE_EMPTY_DESCRIPTION = Text.translatable("item.minecraft.bundle.empty.description");
+    private static final Text BUNDLE_EMPTY_DESCRIPTION = Text.translatable("item.canadamod.thermos.empty.description");
     private final ThermosContentsComponent thermosContents;
 
     public ThermosTooltipComponent(ThermosContentsComponent bundleContents) {
