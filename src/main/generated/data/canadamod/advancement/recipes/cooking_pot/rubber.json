@@ -11,27 +11,27 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_sap": {
-      "conditions": {
-        "items": [
-          {
-            "items": "canadamod:sap"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "canadamod:rubber"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_translation{key='tag.item.canadamod.sap', fallback='#canadamod:sap', args=[]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#canadamod:sap"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_sap",
+      "has_translation{key='tag.item.canadamod.sap', fallback='#canadamod:sap', args=[]}",
       "has_fermented_spider_eye"
     ]
   ],
