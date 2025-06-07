@@ -161,9 +161,9 @@ public class ThermosItem extends Item {
             ThermosContentsComponent.Builder builder = thermosContentsComponent.new Builder(thermosContentsComponent);
             if (clickType == ClickType.LEFT && !itemStack.isEmpty()) {
                 if (builder.add(slot, player) > 0) {
-                playInsertSound(player);
+                    playInsertSound(player);
                 } else {
-                playInsertFailSound(player);
+                    playInsertFailSound(player);
                 }
 
                 stack.set(CanadaItems.THERMOS_CONTENTS, builder.build());
@@ -172,12 +172,12 @@ public class ThermosItem extends Item {
             } else if (clickType == ClickType.RIGHT && itemStack.isEmpty()) {
                 ItemStack itemStack2 = builder.removeSelected();
                 if (itemStack2 != null) {
-                ItemStack itemStack3 = slot.insertStack(itemStack2);
-                if (itemStack3.getCount() > 0) {
-                    builder.add(itemStack3);
-                } else {
-                    playRemoveOneSound(player);
-                }
+                    ItemStack itemStack3 = slot.insertStack(itemStack2);
+                    if (itemStack3.getCount() > 0) {
+                        builder.add(itemStack3);
+                    } else {
+                        playRemoveOneSound(player);
+                    }
                 }
 
                 stack.set(CanadaItems.THERMOS_CONTENTS, builder.build());

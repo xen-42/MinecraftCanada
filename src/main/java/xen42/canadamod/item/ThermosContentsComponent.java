@@ -10,12 +10,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
+
+import net.minecraft.component.ComponentType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.screen.slot.Slot;
+import xen42.canadamod.CanadaItems;
 
 import org.apache.commons.lang3.math.Fraction;
 import org.jetbrains.annotations.Nullable;
@@ -63,12 +68,16 @@ public class ThermosContentsComponent implements TooltipData {
         return fraction;
     }
 
+    // Modified to not care about max count
     public static Fraction getOccupancy(ItemStack stack) {
         return Fraction.getFraction(1, 64);
     }
 
+    // Modified
     public static boolean canBeBundled(ItemStack stack) {
-        return !stack.isEmpty() && stack.getItem().canBeNested();
+        // Only allow food items going in, or their containers
+        return !stack.isEmpty() && (stack.get(DataComponentTypes.CONSUMABLE) != null 
+            || stack.isOf(Items.BUCKET) || stack.isOf(Items.GLASS_BOTTLE) || stack.isOf(Items.BOWL));
     }
 
     public int getNumberOfStacksShown() {
