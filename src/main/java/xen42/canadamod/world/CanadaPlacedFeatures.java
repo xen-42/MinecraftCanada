@@ -1,9 +1,10 @@
-package xen42.canadamod;
+package xen42.canadamod.world;
 
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import xen42.canadamod.CanadaMod;
 
 public class CanadaPlacedFeatures {
 

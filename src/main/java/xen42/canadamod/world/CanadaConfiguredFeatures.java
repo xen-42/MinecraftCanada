@@ -1,9 +1,10 @@
-package xen42.canadamod;
+package xen42.canadamod.world;
 
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import xen42.canadamod.CanadaMod;
 
 public class CanadaConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> MAPLE_CONFIGURED_FEATURE = registerKey("maple");

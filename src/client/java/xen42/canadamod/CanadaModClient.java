@@ -18,6 +18,7 @@ import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
 import xen42.canadamod.entity.MooseEntityModel;

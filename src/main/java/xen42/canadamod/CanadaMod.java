@@ -22,11 +22,15 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
+import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.entities.BeaverEntity;
+import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeDisplay;
 import xen42.canadamod.screen.CookingPotScreenHandler;
+import xen42.canadamod.world.CanadaConfiguredFeatures;
+import xen42.canadamod.world.CanadaPlacedFeatures;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

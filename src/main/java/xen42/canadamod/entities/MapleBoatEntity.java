@@ -1,4 +1,4 @@
-package xen42.canadamod;
+package xen42.canadamod.entities;
 
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.BoatDispenserBehavior;
@@ -7,6 +7,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.item.Items;
+import xen42.canadamod.CanadaItems;
 
 public class MapleBoatEntity {
     public static final EntityType<BoatEntity> MAPLE_BOAT = 

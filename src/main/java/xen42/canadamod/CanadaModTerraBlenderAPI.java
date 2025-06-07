@@ -2,7 +2,6 @@ package xen42.canadamod;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 import terrablender.api.ParameterUtils.Continentalness;
 import terrablender.api.ParameterUtils.Depth;
 import terrablender.api.ParameterUtils.Erosion;
@@ -13,7 +12,6 @@ import terrablender.api.ParameterUtils.Weirdness;
 import terrablender.api.Region;
 import terrablender.api.RegionType;
 import terrablender.api.Regions;
-import terrablender.api.SurfaceRuleManager;
 import terrablender.api.TerraBlenderApi;
 import terrablender.api.VanillaParameterOverlayBuilder;
 
@@ -23,7 +21,6 @@ import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 public class CanadaModTerraBlenderAPI implements TerraBlenderApi {

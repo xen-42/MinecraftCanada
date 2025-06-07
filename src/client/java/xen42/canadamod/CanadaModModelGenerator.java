@@ -43,6 +43,8 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(CanadaBlocks.MAPLE_LEAVES);
         blockStateModelGenerator.registerHangingSign(CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_HANGING_SIGN, CanadaBlocks.MAPLE_WALL_HANGING_SIGN);
         blockStateModelGenerator.registerTintableCrossBlockState(CanadaBlocks.MAPLE_SAPLING, CrossType.NOT_TINTED);
+
+        blockStateModelGenerator.registerSimpleCubeAll(CanadaBlocks.RUBBER_BLOCK);
     }
 
     @Override

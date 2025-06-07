@@ -21,6 +21,7 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SaplingGenerator;
 import net.minecraft.block.SlabBlock;
+import net.minecraft.block.SlimeBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.UntintedParticleLeavesBlock;
@@ -40,16 +41,16 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
-import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import xen42.canadamod.block.CookingPotBlock;
+import xen42.canadamod.block.RubberBlock;
+import xen42.canadamod.block.TreeTapBlock;
 import xen42.canadamod.sign.MapleHangingSignBlock;
 import xen42.canadamod.sign.MapleHangingSignBlockEntity;
 import xen42.canadamod.sign.MapleSignBlock;
 import xen42.canadamod.sign.MapleSignEntity;
 import xen42.canadamod.sign.MapleWallHangingSignBlock;
 import xen42.canadamod.sign.MapleWallSignBlock;
+import xen42.canadamod.world.CanadaConfiguredFeatures;
 
 public class CanadaBlocks {
     public static final BlockSetType MAPLE_WOOD_SET = BlockSetType.register(new BlockSetType("maple"));
@@ -95,6 +96,9 @@ public class CanadaBlocks {
 		AbstractBlock.Settings.copy(Blocks.CAULDRON).luminance(Blocks.createLightLevelFromLitBlockState(13)).nonOpaque(),
 		true
 	);
+
+	public static Block RUBBER_BLOCK = register("rubber_block", RubberBlock::new, AbstractBlock.Settings.create()
+		.sounds(BlockSoundGroup.FUNGUS).mapColor(MapColor.BLACK).hardness(0.1f), true);
 
 	public static Block[] MAPLE_BLOCKS;
 

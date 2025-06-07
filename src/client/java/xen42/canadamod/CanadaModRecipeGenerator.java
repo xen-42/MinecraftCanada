@@ -223,6 +223,13 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
                     .offerTo(exporter);
 
+                createShaped(RecipeCategory.FOOD, CanadaBlocks.RUBBER_BLOCK)
+                    .pattern("XX")
+                    .pattern("XX")
+                    .input('X', CanadaItems.RUBBER)
+                    .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
+                    .offerTo(exporter);
+
                 offerSmelting(List.of(CanadaItems.VENISON), RecipeCategory.FOOD, CanadaItems.COOKED_VENISON, 0.35f, 200, CanadaItems.VENISON.getName().toString());
             }
 

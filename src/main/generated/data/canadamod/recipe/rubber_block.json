@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": "canadamod:rubber"
+  },
+  "pattern": [
+    "XX",
+    "XX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "canadamod:rubber_block"
+  }
+}

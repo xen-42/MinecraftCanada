@@ -1,14 +1,10 @@
-package xen42.canadamod;
-
-import com.ibm.icu.text.AlphabeticIndex.Bucket;
+package xen42.canadamod.block;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
-import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -28,6 +24,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import xen42.canadamod.CanadaMod;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeInput;
 import xen42.canadamod.screen.CookingPotScreenHandler;
@@ -48,7 +45,7 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
 
     protected final PropertyDelegate propertyDelegate;
 
-    protected CookingPotBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public CookingPotBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(CanadaMod.COOKING_POT_ENTITY, blockPos, blockState);
         this.propertyDelegate = new ArrayPropertyDelegate(4);
 

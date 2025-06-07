@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rubber": {
+      "conditions": {
+        "items": [
+          {
+            "items": "canadamod:rubber"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "canadamod:rubber_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rubber"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "canadamod:rubber_block"
+    ]
+  }
+}

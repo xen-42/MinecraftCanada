@@ -1,4 +1,4 @@
-package xen42.canadamod;
+package xen42.canadamod.block;
 
 import com.mojang.serialization.MapCodec;
 
@@ -31,6 +31,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.tick.ScheduledTickView;
+import xen42.canadamod.CanadaBlocks;
+import xen42.canadamod.CanadaItems;
 
 public class TreeTapBlock extends Block {
     public static int MAX_SAP = 4;

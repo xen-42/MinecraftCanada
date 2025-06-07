@@ -29,6 +29,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
 import xen42.canadamod.item.ThermosContentsComponent;
 import xen42.canadamod.item.ThermosItem;

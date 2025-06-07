@@ -11,6 +11,7 @@ import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.gen.structure.Structure;
+import xen42.canadamod.entities.MapleBoatEntity;
 
 public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
     public CanadaModLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
@@ -116,6 +117,8 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
 
 			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
+
+			translationBuilder.add(CanadaBlocks.RUBBER_BLOCK, "Rubber Block");
 		}
 	}
 	

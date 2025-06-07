@@ -36,5 +36,6 @@ public class CanadaModBlockLootTableGenerator extends FabricBlockLootTableProvid
         addDrop(CanadaBlocks.STRIPPED_MAPLE_WOOD);
         addDrop(CanadaBlocks.TREE_TAP);
         addDrop(CanadaBlocks.COOKING_POT);
+        addDrop(CanadaBlocks.RUBBER_BLOCK);
     }
 }
