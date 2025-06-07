@@ -42,8 +42,21 @@ public class ThermosItem extends BundleItem {
 
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (currentConsumableComponent != null) {
-            // todo: remove it from the thermos and replace with the empty container
-            currentConsumableComponent.finishConsumption(world, user, currentFoodStack);
+            var finishedConsumption = currentConsumableComponent.finishConsumption(world, user, currentFoodStack.copy());
+            
+            // If it has a remainder give that instead
+            var remainder = currentFoodStack.copy().finishUsing(world, user);
+            if (remainder != currentFoodStack) {
+                finishedConsumption = remainder;
+            }
+
+            BundleContentsComponent bundleContentsComponent = (BundleContentsComponent)stack.get(DataComponentTypes.BUNDLE_CONTENTS);
+            BundleContentsComponent.Builder builder = new BundleContentsComponent.Builder(bundleContentsComponent);
+            builder.removeSelected();
+            
+            builder.add(finishedConsumption);
+            stack.set(DataComponentTypes.BUNDLE_CONTENTS, builder.build());
+
             currentConsumableComponent = null;
             currentFoodStack = null;
         }
