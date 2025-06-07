@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flour": {
+    "has_fermented_spider_eye": {
       "conditions": {
         "items": [
           {
-            "items": "canadamod:flour"
+            "items": "minecraft:fermented_spider_eye"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "canadamod:slime_ball"
+        "recipe": "canadamod:rubber"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -31,13 +31,13 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_flour",
-      "has_sap"
+      "has_sap",
+      "has_fermented_spider_eye"
     ]
   ],
   "rewards": {
     "recipes": [
-      "canadamod:slime_ball"
+      "canadamod:rubber"
     ]
   }
 }

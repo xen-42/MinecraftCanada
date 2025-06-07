@@ -76,8 +76,14 @@ public class ThermosContentsComponent implements TooltipData {
     // Modified
     public static boolean canBeBundled(ItemStack stack) {
         // Only allow food items going in, or their containers
-        return !stack.isEmpty() && (stack.get(DataComponentTypes.CONSUMABLE) != null 
-            || stack.isOf(Items.BUCKET) || stack.isOf(Items.GLASS_BOTTLE) || stack.isOf(Items.BOWL));
+        if (stack.isEmpty()) {
+            return false;
+        }
+
+        var isSoup = stack.get(DataComponentTypes.CONSUMABLE) != null && stack.getMaxCount() < 64;
+        var isContainer = stack.isOf(Items.BUCKET) || stack.isOf(Items.GLASS_BOTTLE) || stack.isOf(Items.BOWL);
+
+        return isSoup || isContainer;
     }
 
     public int getNumberOfStacksShown() {

@@ -1,0 +1,11 @@
+{
+  "type": "canadamod:cooking_pot",
+  "ingredients": [
+    "canadamod:maple_sap"
+  ],
+  "requiresBottle": true,
+  "result": {
+    "count": 1,
+    "id": "canadamod:maple_syrup_bottle"
+  }
+}

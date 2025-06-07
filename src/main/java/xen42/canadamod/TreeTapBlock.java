@@ -8,25 +8,19 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Pair;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -92,17 +86,17 @@ public class TreeTapBlock extends Block {
         }
     }
 
-    public Pair<Item, Boolean> getReturnItem(BlockState state, World world, BlockPos pos) {
+    public Item getReturnItem(BlockState state, World world, BlockPos pos) {
         var tappedBlock = world.getBlockState(pos.add(state.get(FACING).getOpposite().getVector()));
 
         if (tappedBlock.isOf(Blocks.PALE_OAK_LOG)) {
-            return new Pair<Item, Boolean>(Items.RESIN_CLUMP, false);
+            return Items.RESIN_CLUMP;
         }
         else if (tappedBlock.isOf(CanadaBlocks.MAPLE_LOG)) {
-            return new Pair<Item, Boolean>(CanadaItems.MAPLE_SYRUP_BOTTLE, true);
+            return CanadaItems.MAPLE_SAP;
         }
         else if (tappedBlock.isIn(BlockTags.LOGS)) {
-            return new Pair<Item, Boolean>(CanadaItems.SAP_BOTTLE, true);
+            return CanadaItems.SAP;
         }
         else {
             return null;
@@ -131,41 +125,17 @@ public class TreeTapBlock extends Block {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        var pair = getReturnItem(state, world, pos);
+        var returnItem = getReturnItem(state, world, pos);
 
-        if (pair == null) {
+        if (returnItem == null) {
             return ActionResult.FAIL;
         }
 
-        var returnItem = pair.getLeft();
-        var needsBottle = pair.getRight();
-        var hasBottle = player.getMainHandStack().isOf(Items.GLASS_BOTTLE);
-        var canTake = !needsBottle || (needsBottle && hasBottle);
-
-        if(canTake && state.get(SAP_LEVEL) > 0) {
+        if(state.get(SAP_LEVEL) > 0) {
             world.setBlockState(pos, state.with(SAP_LEVEL, state.get(SAP_LEVEL) - 1));
             world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-            if (needsBottle) {
-                var stack = player.getMainHandStack();
-                var hand = Hand.MAIN_HAND;
-                var item = stack.getItem();
-
-                if (stack.isEmpty()) {
-                player.setStackInHand(hand, new ItemStack(returnItem));
-                } else if (!player.getInventory().insertStack(new ItemStack(returnItem))) {
-                player.dropItem(new ItemStack(returnItem), false);
-                }
-
-                world.emitGameEvent(player, GameEvent.FLUID_PICKUP, pos);
-
-                if (!world.isClient()) {
-                    player.incrementStat(Stats.USED.getOrCreateStat(item));
-                }
-            }
-            else {
-                player.giveOrDropStack(new ItemStack(returnItem));
-            }
+            player.giveOrDropStack(new ItemStack(returnItem));
 
             return ActionResult.CONSUME;
         }

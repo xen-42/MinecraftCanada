@@ -3,11 +3,11 @@
   "category": "misc",
   "key": {
     "X": "minecraft:iron_ingot",
-    "Y": "canadamod:sap_bottle"
+    "Y": "canadamod:rubber"
   },
   "pattern": [
     " X ",
-    "XYX",
+    "Y Y",
     "XXX"
   ],
   "result": {

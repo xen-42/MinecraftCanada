@@ -178,7 +178,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
 
                 createCookingPotRecipe(registryLookup, Items.SLIME_BALL, 3)
                     .input(CanadaItems.FLOUR, this)
-                    .input(CanadaItems.SAP_BOTTLE, this)
+                    .input(CanadaItems.SAP, this)
                     .offerTo(exporter);   
                     
                 createCookingPotRecipe(registryLookup, CanadaItems.GRAVY, 1)
@@ -194,6 +194,18 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(Items.FERMENTED_SPIDER_EYE, this)
                     .offerTo(exporter);   
 
+                createCookingPotRecipe(registryLookup, CanadaItems.RUBBER, 4)
+                    .input(CanadaItems.SAP, this)
+                    .input(CanadaItems.SAP, this)
+                    .input(CanadaItems.SAP, this)
+                    .input(Items.FERMENTED_SPIDER_EYE, this)
+                    .offerTo(exporter);   
+
+                createCookingPotRecipe(registryLookup, CanadaItems.MAPLE_SYRUP_BOTTLE, 1)
+                    .input(CanadaItems.MAPLE_SAP, this)
+                    .requiresBottle()
+                    .offerTo(exporter);
+
                 createCookingPotRecipe(registryLookup, CanadaItems.POUTINE, 1)
                     .input(CanadaItems.GRAVY, this)
                     .input(Items.POTATO, this)
@@ -203,12 +215,12 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
 
                 createShaped(RecipeCategory.FOOD, CanadaItems.THERMOS)
                     .pattern(" X ")
-                    .pattern("XYX")
+                    .pattern("Y Y")
                     .pattern("XXX")
                     .input('X', Items.IRON_INGOT)
-                    .input('Y', CanadaItems.SAP_BOTTLE)
+                    .input('Y', CanadaItems.RUBBER)
                     .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
-                    .criterion(hasItem(CanadaItems.SAP_BOTTLE), conditionsFromItem(CanadaItems.SAP_BOTTLE))
+                    .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
                     .offerTo(exporter);
 
                 offerSmelting(List.of(CanadaItems.VENISON), RecipeCategory.FOOD, CanadaItems.COOKED_VENISON, 0.35f, 200, CanadaItems.VENISON.getName().toString());

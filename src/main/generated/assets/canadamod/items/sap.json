@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "canadamod:item/sap_bottle"
+    "model": "canadamod:item/sap"
   }
 }

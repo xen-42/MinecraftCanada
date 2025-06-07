@@ -11,11 +11,11 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_sap_bottle": {
+    "has_rubber": {
       "conditions": {
         "items": [
           {
-            "items": "canadamod:sap_bottle"
+            "items": "canadamod:rubber"
           }
         ]
       },
@@ -32,7 +32,7 @@
     [
       "has_the_recipe",
       "has_iron_ingot",
-      "has_sap_bottle"
+      "has_rubber"
     ]
   ],
   "rewards": {

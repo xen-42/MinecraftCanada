@@ -53,16 +53,15 @@ public class CanadaItems {
     public static final FoodComponent MAPLE_SYRUP_FOOD = new FoodComponent.Builder().nutrition(4).saturationModifier(1.4F).alwaysEdible().build();
     public static final ConsumableComponent MAPLE_SYRUP_CONSUME = ConsumableComponents.drink().consumeSeconds(2.0F)
         .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK).consumeEffect(new ApplyEffectsConsumeEffect(List.of(
-        new StatusEffectInstance(StatusEffects.SPEED, 600, 1), 
-        new StatusEffectInstance(StatusEffects.REGENERATION, 60, 1)
-        ))).build();
+        new StatusEffectInstance(StatusEffects.HASTE, 600, 1)
+    ))).build();
 
     public static final FoodComponent SAP_FOOD = new FoodComponent.Builder().nutrition(3).saturationModifier(0.1F).alwaysEdible().build();
     public static final ConsumableComponent SAP_CONSUME = ConsumableComponents.drink().consumeSeconds(2.0F)
         .sound(SoundEvents.ITEM_HONEY_BOTTLE_DRINK).consumeEffect(new ApplyEffectsConsumeEffect(List.of(
         new StatusEffectInstance(StatusEffects.SLOWNESS, 200, 1), 
         new StatusEffectInstance(StatusEffects.NAUSEA, 200, 1)
-        ))).build();
+    ))).build();
     
     public static final FoodComponent GRAVY_FOOD = new FoodComponent.Builder().nutrition(4).saturationModifier(1.0F).alwaysEdible().build();
     public static final ConsumableComponent GRAVY_CONSUME = ConsumableComponents.drink().consumeSeconds(2.0F)
@@ -71,9 +70,13 @@ public class CanadaItems {
     public static final Item MAPLE_SYRUP_BOTTLE = register("maple_syrup_bottle", Item::new, new Item.Settings()
         .recipeRemainder(Items.GLASS_BOTTLE).food(MAPLE_SYRUP_FOOD, MAPLE_SYRUP_CONSUME)
         .useRemainder(Items.GLASS_BOTTLE).maxCount(1));
-    public static final Item SAP_BOTTLE = register("sap_bottle", Item::new, new Item.Settings()
-        .recipeRemainder(Items.GLASS_BOTTLE).food(SAP_FOOD, SAP_CONSUME)
-        .useRemainder(Items.GLASS_BOTTLE).maxCount(1));
+
+
+    public static final Item MAPLE_SAP = register("maple_sap", Item::new, new Item.Settings().food(SAP_FOOD));
+    public static final Item SAP = register("sap", Item::new, new Item.Settings().food(SAP_FOOD, SAP_CONSUME));
+
+    public static final Item RUBBER = register("rubber", Item::new, new Item.Settings());
+
     public static final Item GRAVY = register("gravy", Item::new, new Item.Settings()
         .recipeRemainder(Items.GLASS_BOTTLE).food(GRAVY_FOOD, GRAVY_CONSUME)
         .useRemainder(Items.GLASS_BOTTLE).maxCount(1));
@@ -124,7 +127,9 @@ public class CanadaItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((itemGroup) -> { 
             itemGroup.add(PELT);
             itemGroup.add(FLOUR);
-            itemGroup.add(SAP_BOTTLE);
+            itemGroup.add(SAP);
+            itemGroup.add(MAPLE_SAP);
+            itemGroup.add(RUBBER);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> { 

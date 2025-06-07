@@ -2,7 +2,7 @@
   "type": "canadamod:cooking_pot",
   "ingredients": [
     "canadamod:flour",
-    "canadamod:sap_bottle"
+    "canadamod:sap"
   ],
   "result": {
     "count": 3,

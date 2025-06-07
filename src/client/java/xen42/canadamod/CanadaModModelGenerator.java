@@ -21,7 +21,9 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.MAPLE_SAPLING, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.TREE_TAP, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.MAPLE_SYRUP_BOTTLE, Models.GENERATED);
-        itemModelGenerator.register(CanadaItems.SAP_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.SAP, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.MAPLE_SAP, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.RUBBER, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.GRAVY, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.CHEESE_CURD, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.POUTINE, Models.GENERATED);

@@ -1,0 +1,13 @@
+{
+  "type": "canadamod:cooking_pot",
+  "ingredients": [
+    "canadamod:sap",
+    "canadamod:sap",
+    "canadamod:sap",
+    "minecraft:fermented_spider_eye"
+  ],
+  "result": {
+    "count": 4,
+    "id": "canadamod:rubber"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "canadamod:item/sap_bottle"
+    "layer0": "canadamod:item/rubber"
   }
 }
