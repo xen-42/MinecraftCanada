@@ -1,19 +1,26 @@
 package xen42.canadamod.entities;
 
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import org.jetbrains.annotations.Nullable;
 
+import net.minecraft.entity.AnimationState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.AttackGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.HorseBondWithPlayerGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -59,15 +66,18 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     private static final TrackedData<Boolean> LEFT_ANTLER_MISSING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> RIGHT_ANTLER_MISSING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
+    public final AnimationState attackAnimationState;
+    private int attackAnimationEnd;
 
     public MooseEntity(EntityType<? extends AbstractHorseEntity> entityType, World world) {
         super(entityType, world);
         var mobNavigation = (MobNavigation)this.getNavigation();
         mobNavigation.setCanSwim(true);
         mobNavigation.setCanWalkOverFences(true);
+        attackAnimationState = new AnimationState();
     }
 
-    private static final EntityDimensions BABY_BASE_DIMENSIONS = EntityType.COW.getDimensions().scaled(0.5F).withEyeHeight(0.665F);
+    private static final EntityDimensions BABY_BASE_DIMENSIONS = CanadaMod.MOOSE_ENTITY.getDimensions().scaled(0.5F).withEyeHeight(0.665F);
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
@@ -88,8 +98,8 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new AttackGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 2.0D, moose -> moose.isBaby() ? DamageTypeTags.PANIC_CAUSES : DamageTypeTags.PANIC_ENVIRONMENTAL_CAUSES));
-        this.goalSelector.add(2, new HorseBondWithPlayerGoal(this, 1.2));
-        this.goalSelector.add(3, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(3, new HorseBondWithPlayerGoal(this, 1.2));
         this.goalSelector.add(4, new TemptGoal(this, 1.2D, stack -> this.isBreedingItem(stack), false));
         this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
         this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
@@ -110,19 +120,32 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
             .add(EntityAttributes.FOLLOW_RANGE, 20.0D);
     }
 
+    public void updateAnimations() {
+        if (attackAnimationState.isRunning() && age > attackAnimationEnd) {
+            attackAnimationState.stop();
+        }
+    }
+
     @Override
     public void mobTick(ServerWorld world) {
         super.mobTick(world);
         tickAngerLogic(world, true);
-        if (this.attacker != null) {
-            if (!this.attacker.isAlive() || this.age - this.lastAttackedTime > 100) {
-                setAttacker(null);
-            }
-        }
         tryRegenAntler(true, false);
         tryRegenAntler(false, false);
         tryShedAntler(true, false);
         tryShedAntler(false, false);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        updateAnimations();
+    }
+
+    @Override
+    public boolean isAngry() {
+        // This is horse anger not attacking anger which we override
+        return false;
     }
 
     private void tryRegenAntler(boolean left, boolean force) {
@@ -170,6 +193,11 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     }
 
     @Override
+    protected boolean canBreed() {
+        return !this.hasPassengers() && !this.hasVehicle() && !this.isBaby() && this.getHealth() >= this.getMaxHealth() && this.isInLove();
+    }
+
+    @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return (MooseEntity)CanadaMod.MOOSE_ENTITY.create(world, SpawnReason.BREEDING);
     }
@@ -190,43 +218,73 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     }
 
     @Override
+    public int addTemper(int difference) {
+        if (difference > 0) {
+            this.playAttackAnimation();
+        }
+        return super.addTemper(difference);
+    }
+
+    @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) { 
-        if (attacking != null) {
+        // If the moose wants to kill something it should not let u do anything
+        if (attacking != null || this.attackingPlayer != null || this.getTarget() != null) {
             return ActionResult.FAIL;
         }
 
         var itemStack = player.getStackInHand(hand);
-        if (isBreedingItem(itemStack)) {
-            return interactHorse(player, itemStack);
+
+        // No idea why but its using the wrong hand here
+        var mainHandStack = player.getStackInHand(Hand.MAIN_HAND);
+        if (isBreedingItem(mainHandStack)) {
+            hand = Hand.MAIN_HAND;
+            itemStack = mainHandStack;
+        }
+        var offHandStack = player.getStackInHand(Hand.OFF_HAND);
+        if (isBreedingItem(offHandStack)) {
+            hand = Hand.OFF_HAND;
+            itemStack = offHandStack;
         }
 
-        if (player.shouldCancelInteraction() && !isBaby()) {
-            openInventory(player);
-            return (ActionResult)ActionResult.SUCCESS;
-        } 
+        var isBreedingItem = isBreedingItem(itemStack);
 
-        if (!itemStack.isEmpty()) {
-            if (this.isTame()) {
-                ActionResult actionResult = itemStack.useOnEntity(player, (LivingEntity)this, hand);
-                if (actionResult.isAccepted())
-                    return actionResult; 
+        var canBreed = this.getHealth() == this.getMaxHealth() && !this.isLeftAntlerMissing() && !this.isRightAntlerMissing() && !isBaby();
 
-                if (getPassengerList().size() < 1 && !isBaby()) {
-                    putPlayerOnBack(player);
+        // does healing interaction stuff
+        if (isBreedingItem) {
+            if (!canBreed) {
+                return interactHorse(player, itemStack);
+            }
+            // does breeding
+            else if (this.getBreedingAge() == 0 && this.canEat()) {
+                this.setLoveTicks(600);
+
+                if (!this.getWorld().isClient ) {
+                    this.eat(player, hand, itemStack);
+                    this.lovePlayer(player);
+                    this.playEatSound();
+                    return ActionResult.SUCCESS_SERVER;
+                }
+
+                if (this.getWorld().isClient) {
+                    return ActionResult.CONSUME;
                 }
             }
-            else {
-                this.playAngrySound();
-                return ActionResult.SUCCESS;
-            }
         }
 
-        // Try taming
-        if (!this.isTame() && !this.isBaby()) {
-            super.interactMob(player, hand);
+        // If not giving food, make untame guy angry and refuse ur item
+        if (!isBreedingItem && !itemStack.isEmpty() && !this.isTame()) {
+            this.playAngrySound();
+            return ActionResult.SUCCESS;
         }
 
-        return (ActionResult)ActionResult.SUCCESS;
+        // Not hungry
+        if (isBreedingItem) {
+            return ActionResult.FAIL;
+        }
+
+        // Does saddling and stuff
+        return super.interactMob(player, hand);
     }
 
     @Override
@@ -281,8 +339,30 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     }
 
     @Override
+    public void playAngrySound() {
+        this.playSound(this.getAngrySound());
+    }
+
+    @Override
     public boolean isTame() {
         return super.isTame() && attacking == null;
+    }
+
+    @Override
+    public void onAttacking(Entity target) {
+        super.onAttacking(target);
+        playAttackAnimation();
+    }
+
+    @Override
+    public boolean tryAttack(ServerWorld world, Entity target) {
+        playAttackAnimation();
+        return super.tryAttack(world, target);
+    }
+
+    private void playAttackAnimation() {
+        attackAnimationState.start(this.age);
+        this.attackAnimationEnd = this.age + 20;
     }
 
     private static final UniformIntProvider ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
@@ -299,12 +379,22 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     @Nullable
     private PlayerEntity attackingPlayer;
 
-    private int lastAttackedTime;
-
     @Override
     public void setTarget(@Nullable LivingEntity target) {        
+        if (this.isControlledByPlayer()) {
+            return;
+        }
+
+        if (target == null && target != this.getTarget()) {
+            this.playAngrySound();
+            this.playAttackAnimation();
+        }
+
         if (target instanceof PlayerEntity player) {
             setPlayerTarget(player);
+        }
+        else if (target == null) {
+            setPlayerTarget(null);
         }
         
         super.setTarget(target);
@@ -344,9 +434,13 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public void setAttacker(@Nullable LivingEntity attacker) {
-        setTarget(attacker);
+        if (this.isControlledByPlayer()) {
+            return;
+        }
+
+        super.setAttacker(attacker);
         this.attacker = attacker;
-        this.lastAttackedTime = this.age;
+        setTarget(attacker);
     }
 
     @Nullable

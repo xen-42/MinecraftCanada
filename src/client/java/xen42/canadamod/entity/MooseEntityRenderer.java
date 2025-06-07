@@ -39,6 +39,8 @@ public class MooseEntityRenderer extends MobEntityRenderer<MooseEntity, MooseEnt
         mooseEntityRenderState.saddleStack = mooseEntity.getEquippedStack(EquipmentSlot.SADDLE).copy();
         mooseEntityRenderState.leftAntlerMissing = mooseEntity.isLeftAntlerMissing();
         mooseEntityRenderState.rightAntlerMissing = mooseEntity.isRightAntlerMissing();
+        
+        mooseEntityRenderState.attackAnimationState.copyFrom(mooseEntity.attackAnimationState);
     }
 }
 

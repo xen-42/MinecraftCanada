@@ -75,7 +75,7 @@ public class CanadaMod implements ModInitializer {
 	public static final EntityType<MooseEntity> MOOSE_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
 		Identifier.of(MOD_ID, "moose"), 
-		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.5f, 2.5f).build(MOOSE_ENTITY_KEY));
+		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.75f, 2.5f).build(MOOSE_ENTITY_KEY));
 
 
 	// This logger is used to write text to the console and the log file.

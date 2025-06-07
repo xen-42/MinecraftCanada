@@ -199,8 +199,6 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
         var remainder = totalItems % numStacks;
         var item = slots.get(0).getStack().getItem();
 
-        CanadaMod.LOGGER.info(numStacks + " " + itemsPerStack + " " + remainder + " " + totalItems);
-
         for (int i = 0; i < numStacks; i++) {
             int count = itemsPerStack + (i < remainder ? 1 : 0);
             slots.get(i).setStack(new ItemStack(item, count));

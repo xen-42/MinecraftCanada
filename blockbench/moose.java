@@ -2,7 +2,6 @@
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
 public class moose extends EntityModel<Entity> {
-	private final ModelPart tail;
 	private final ModelPart head;
 	private final ModelPart oops_the_head_is_backwards;
 	private final ModelPart left_antler;
@@ -10,12 +9,12 @@ public class moose extends EntityModel<Entity> {
 	private final ModelPart harness;
 	private final ModelPart body;
 	private final ModelPart saddle;
+	private final ModelPart tail;
 	private final ModelPart left_front_leg;
 	private final ModelPart right_front_leg;
 	private final ModelPart left_hind_leg;
 	private final ModelPart right_hind_leg;
 	public moose(ModelPart root) {
-		this.tail = root.getChild("tail");
 		this.head = root.getChild("head");
 		this.oops_the_head_is_backwards = this.head.getChild("oops_the_head_is_backwards");
 		this.left_antler = this.oops_the_head_is_backwards.getChild("left_antler");
@@ -23,6 +22,7 @@ public class moose extends EntityModel<Entity> {
 		this.harness = this.oops_the_head_is_backwards.getChild("harness");
 		this.body = root.getChild("body");
 		this.saddle = this.body.getChild("saddle");
+		this.tail = this.body.getChild("tail");
 		this.left_front_leg = root.getChild("left_front_leg");
 		this.right_front_leg = root.getChild("right_front_leg");
 		this.left_hind_leg = root.getChild("left_hind_leg");
@@ -31,8 +31,6 @@ public class moose extends EntityModel<Entity> {
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData tail = modelPartData.addChild("tail", ModelPartBuilder.create().uv(32, 48).cuboid(-2.0F, 0.0F, 0.0F, 4.0F, 5.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -8.0F, 14.0F, 0.5236F, 0.0F, 0.0F));
-
 		ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -10.0F, -15.0F));
 
 		ModelPartData oops_the_head_is_backwards = head.addChild("oops_the_head_is_backwards", ModelPartBuilder.create().uv(84, 24).cuboid(-1.0F, 0.0F, -7.0F, 2.0F, 4.0F, 6.0F, new Dilation(0.0F))
@@ -64,20 +62,22 @@ public class moose extends EntityModel<Entity> {
 		.uv(164, 2).cuboid(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 5.0F, new Dilation(0.14F))
 		.uv(134, 5).cuboid(-3.0F, -4.0F, 3.0F, 6.0F, 5.0F, 1.0F, new Dilation(0.1F)), ModelTransform.pivot(0.0F, -2.0F, 1.0F));
 
-		ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 56).cuboid(-9.0F, -41.0F, -1.0F, 18.0F, 20.0F, 11.0F, new Dilation(0.0F))
-		.uv(86, 49).cuboid(-7.0F, -39.0F, 10.0F, 14.0F, 16.0F, 3.0F, new Dilation(0.0F))
-		.uv(62, 69).cuboid(-8.0F, -38.0F, -18.0F, 16.0F, 17.0F, 17.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 24.0F, -4.0F, 0.0F, 3.1416F, 0.0F));
+		ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 56).cuboid(-9.0F, -20.0F, -1.0F, 18.0F, 20.0F, 11.0F, new Dilation(0.0F))
+		.uv(86, 49).cuboid(-7.0F, -18.0F, 10.0F, 14.0F, 16.0F, 3.0F, new Dilation(0.0F))
+		.uv(62, 69).cuboid(-8.0F, -17.0F, -18.0F, 16.0F, 17.0F, 17.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 3.0F, -4.0F, 0.0F, 3.1416F, 0.0F));
 
 		ModelPartData saddle = body.addChild("saddle", ModelPartBuilder.create().uv(139, 66).cuboid(-8.0F, -38.0F, -12.0F, 16.0F, 2.0F, 11.0F, new Dilation(0.1F))
-		.uv(146, 83).cuboid(-8.0F, -36.0F, -8.0F, 16.0F, 8.0F, 3.0F, new Dilation(0.09F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		.uv(146, 83).cuboid(-8.0F, -36.0F, -8.0F, 16.0F, 8.0F, 3.0F, new Dilation(0.09F)), ModelTransform.pivot(0.0F, 21.0F, 0.0F));
 
-		ModelPartData left_front_leg = modelPartData.addChild("left_front_leg", ModelPartBuilder.create().uv(0, 102).mirrored().cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-5.5F, 3.0F, 10.5F));
+		ModelPartData tail = body.addChild("tail", ModelPartBuilder.create().uv(32, 48).cuboid(-2.0F, 0.0F, 0.0F, 4.0F, 5.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -11.0F, -18.0F, -0.3491F, 0.0F, 0.0F));
 
-		ModelPartData right_front_leg = modelPartData.addChild("right_front_leg", ModelPartBuilder.create().uv(0, 102).cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(5.5F, 3.0F, 10.5F));
+		ModelPartData left_front_leg = modelPartData.addChild("left_front_leg", ModelPartBuilder.create().uv(0, 102).mirrored().cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(5.5F, 3.0F, -10.5F));
 
-		ModelPartData left_hind_leg = modelPartData.addChild("left_hind_leg", ModelPartBuilder.create().uv(0, 102).mirrored().cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-5.5F, 3.0F, -10.5F));
+		ModelPartData right_front_leg = modelPartData.addChild("right_front_leg", ModelPartBuilder.create().uv(0, 102).cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.5F, 3.0F, -10.5F));
 
-		ModelPartData right_hind_leg = modelPartData.addChild("right_hind_leg", ModelPartBuilder.create().uv(0, 102).cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(5.5F, 3.0F, -10.5F));
+		ModelPartData left_hind_leg = modelPartData.addChild("left_hind_leg", ModelPartBuilder.create().uv(0, 102).mirrored().cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(5.5F, 3.0F, 10.5F));
+
+		ModelPartData right_hind_leg = modelPartData.addChild("right_hind_leg", ModelPartBuilder.create().uv(0, 102).cuboid(-2.5F, 0.0F, -2.5F, 5.0F, 21.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.5F, 3.0F, 10.5F));
 		return TexturedModelData.of(modelData, 192, 128);
 	}
 	@Override
@@ -85,7 +85,6 @@ public class moose extends EntityModel<Entity> {
 	}
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		tail.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 		head.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 		body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 		left_front_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
