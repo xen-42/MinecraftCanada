@@ -28,6 +28,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import xen42.canadamod.CanadaItems;
+import xen42.canadamod.CanadaMod;
 
 public class ThermosItem extends Item {
     @Nullable
@@ -36,6 +37,8 @@ public class ThermosItem extends Item {
     @Nullable
     private ConsumableComponent currentConsumableComponent;
 
+    private int selectedIndex = -1;
+
     public ThermosItem(Settings settings) {
         super(settings);
     }
@@ -43,8 +46,9 @@ public class ThermosItem extends Item {
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        currentFoodStack = getFirstFood(user, itemStack);
-        currentConsumableComponent = (ConsumableComponent)currentFoodStack.get(DataComponentTypes.CONSUMABLE);
+
+        selectFirstFood(itemStack, user);
+
         if (currentConsumableComponent != null) {
             return currentConsumableComponent.consume(user, itemStack, hand);
         } 
@@ -64,6 +68,9 @@ public class ThermosItem extends Item {
 
             ThermosContentsComponent thermosContentsComponent = (ThermosContentsComponent)stack.get(CanadaItems.THERMOS_CONTENTS);
             ThermosContentsComponent.Builder builder = thermosContentsComponent.new Builder(thermosContentsComponent);
+
+            CanadaMod.LOGGER.info("" + selectedIndex);
+            builder.setSelectedStackIndex(selectedIndex);
             builder.removeSelected();
             
             builder.add(finishedConsumption);
@@ -71,6 +78,7 @@ public class ThermosItem extends Item {
 
             currentConsumableComponent = null;
             currentFoodStack = null;
+            selectedIndex = -1;
         }
         return stack;
     }
@@ -97,28 +105,30 @@ public class ThermosItem extends Item {
     @Override
     public boolean onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         this.currentConsumableComponent = null;
+        currentFoodStack = null;
+        selectedIndex = -1;
         return false;
     }
 
-    private ItemStack getFirstFood(PlayerEntity player, ItemStack stack) {
-        ThermosContentsComponent ThermosContentsComponent = (ThermosContentsComponent)stack.get(CanadaItems.THERMOS_CONTENTS);
-        if (ThermosContentsComponent != null && !ThermosContentsComponent.isEmpty()) {
-            Optional<ItemStack> optional = getFirstBundledStack(stack, player, ThermosContentsComponent);
-            if (optional.isPresent()) {
-                return optional.get();
+    private void selectFirstFood(ItemStack stack, PlayerEntity player) {
+        var thermosContentsComponent = stack.get(CanadaItems.THERMOS_CONTENTS);
+        var builder = thermosContentsComponent.new Builder(thermosContentsComponent);
+
+        for (int index = 0; index < 64; index++) {
+            builder.setSelectedStackIndex(index);
+            var itemStack = builder.removeSelected();
+
+            if (itemStack != null && itemStack.get(DataComponentTypes.CONSUMABLE) != null) {
+                currentFoodStack = itemStack;
+                currentConsumableComponent = itemStack.get(DataComponentTypes.CONSUMABLE);
+                selectedIndex = index;
+                return;
             } 
         }
-        return ItemStack.EMPTY;
-    }
 
-    private static Optional<ItemStack> getFirstBundledStack(ItemStack stack, PlayerEntity player, ThermosContentsComponent contents) {
-        ThermosContentsComponent.Builder builder = contents.new Builder(contents);
-        ItemStack itemStack = builder.removeSelected();
-        if (itemStack != null) {
-            return Optional.of(itemStack);
-        } else {
-            return Optional.empty();
-        }
+        currentFoodStack = null;
+        currentConsumableComponent = null;
+        selectedIndex = -1;
     }
 
     @Override
