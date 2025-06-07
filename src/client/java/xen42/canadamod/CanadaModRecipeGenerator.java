@@ -11,7 +11,6 @@ import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -132,7 +131,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasItem(Items.WHEAT), conditionsFromItem(Items.WHEAT))
                     .offerTo(exporter);
 
-                createShapeless(RecipeCategory.MISC, Items.BONE_MEAL)
+                createShapeless(RecipeCategory.MISC, Items.BONE_MEAL, 3)
                     .input(CanadaItems.ANTLERS)
                     .criterion(hasItem(CanadaItems.ANTLERS), conditionsFromItem(CanadaItems.ANTLERS))
                     .offerTo(exporter);
@@ -178,7 +177,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
 
                 createCookingPotRecipe(registryLookup, Items.SLIME_BALL, 3)
                     .input(CanadaItems.FLOUR, this)
-                    .input(CanadaItems.SAP, this)
+                    .input(CanadaTags.ItemTags.SAP, this)
                     .offerTo(exporter);   
                     
                 createCookingPotRecipe(registryLookup, CanadaItems.GRAVY, 1)
@@ -195,9 +194,9 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .offerTo(exporter);   
 
                 createCookingPotRecipe(registryLookup, CanadaItems.RUBBER, 4)
-                    .input(CanadaItems.SAP, this)
-                    .input(CanadaItems.SAP, this)
-                    .input(CanadaItems.SAP, this)
+                    .input(CanadaTags.ItemTags.SAP, this)
+                    .input(CanadaTags.ItemTags.SAP, this)
+                    .input(CanadaTags.ItemTags.SAP, this)
                     .input(Items.FERMENTED_SPIDER_EYE, this)
                     .offerTo(exporter);   
 

@@ -42,5 +42,6 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(CanadaBlocks.MAPLE_TRAPDOOR.asItem());
 
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.RED_MEAT).add(CanadaItems.VENISON, Items.BEEF, Items.MUTTON, Items.PORKCHOP);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAP).add(CanadaItems.SAP, CanadaItems.MAPLE_SAP);
 	}
 }
