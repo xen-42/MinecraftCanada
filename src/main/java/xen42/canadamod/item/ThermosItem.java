@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.BlocksAttacksComponent;
-import net.minecraft.component.type.BundleContentsComponent;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,6 +14,7 @@ import net.minecraft.item.consume.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import xen42.canadamod.CanadaItems;
 
 public class ThermosItem extends BundleItem {
     @Nullable
@@ -50,12 +49,12 @@ public class ThermosItem extends BundleItem {
                 finishedConsumption = remainder;
             }
 
-            BundleContentsComponent bundleContentsComponent = (BundleContentsComponent)stack.get(DataComponentTypes.BUNDLE_CONTENTS);
-            BundleContentsComponent.Builder builder = new BundleContentsComponent.Builder(bundleContentsComponent);
+            ThermosContentsComponent thermosContentsComponent = (ThermosContentsComponent)stack.get(CanadaItems.THERMOS_CONTENTS);
+            ThermosContentsComponent.Builder builder = thermosContentsComponent.new Builder(thermosContentsComponent);
             builder.removeSelected();
             
             builder.add(finishedConsumption);
-            stack.set(DataComponentTypes.BUNDLE_CONTENTS, builder.build());
+            stack.set(CanadaItems.THERMOS_CONTENTS, builder.build());
 
             currentConsumableComponent = null;
             currentFoodStack = null;
@@ -89,9 +88,9 @@ public class ThermosItem extends BundleItem {
     }
 
     private ItemStack getFirstFood(PlayerEntity player, ItemStack stack) {
-        BundleContentsComponent bundleContentsComponent = (BundleContentsComponent)stack.get(DataComponentTypes.BUNDLE_CONTENTS);
-        if (bundleContentsComponent != null && !bundleContentsComponent.isEmpty()) {
-            Optional<ItemStack> optional = getFirstBundledStack(stack, player, bundleContentsComponent);
+        ThermosContentsComponent ThermosContentsComponent = (ThermosContentsComponent)stack.get(CanadaItems.THERMOS_CONTENTS);
+        if (ThermosContentsComponent != null && !ThermosContentsComponent.isEmpty()) {
+            Optional<ItemStack> optional = getFirstBundledStack(stack, player, ThermosContentsComponent);
             if (optional.isPresent()) {
                 return optional.get();
             } 
@@ -99,8 +98,8 @@ public class ThermosItem extends BundleItem {
         return ItemStack.EMPTY;
     }
 
-    private static Optional<ItemStack> getFirstBundledStack(ItemStack stack, PlayerEntity player, BundleContentsComponent contents) {
-        BundleContentsComponent.Builder builder = new BundleContentsComponent.Builder(contents);
+    private static Optional<ItemStack> getFirstBundledStack(ItemStack stack, PlayerEntity player, ThermosContentsComponent contents) {
+        ThermosContentsComponent.Builder builder = contents.new Builder(contents);
         ItemStack itemStack = builder.removeSelected();
         if (itemStack != null) {
             return Optional.of(itemStack);
