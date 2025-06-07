@@ -42,6 +42,7 @@ accessible field net/minecraft/client/gui/screen/ingame/RecipeBookScreen recipeB
 accessible method net/minecraft/component/type/BundleContentsComponent getOccupancy (Lnet/minecraft/item/ItemStack;)Lorg/apache/commons/lang3/math/Fraction;
 accessible method net/minecraft/client/gui/DrawContext drawTooltip (Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V
 
+accessible method net/minecraft/entity/effect/StatusEffect <init> (Lnet/minecraft/entity/effect/StatusEffectCategory;I)V
 
 
 

@@ -29,6 +29,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
 import xen42.canadamod.item.ThermosContentsComponent;
@@ -39,7 +40,7 @@ public class CanadaItems {
     public static final Item FLOUR = register("flour", Item::new, new Item.Settings());
     public static final Item CHEESE_CURD = register("cheese_curd", Item::new, new Item.Settings()
         .food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.1f).build()));
-    public static final Item POUTINE = register("poutine", Item::new, new Item.Settings()
+    public static final Item POUTINE = register("poutine", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
         .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).build()));
 
     public static final Item BEAVER_SPAWN_EGG = register("beaver_spawn_egg", (settings) -> 

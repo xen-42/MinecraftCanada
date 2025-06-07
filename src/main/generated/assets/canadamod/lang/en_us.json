@@ -1,5 +1,7 @@
 {
   "block.canadamod.cooking_pot": "Cooking Pot",
+  "effect.canadamod.beaver_effect": "Beaver's Grace",
+  "effect.canadamod.moose_effect": "Moose's Grace",
   "entity.canadamod.beaver": "Beaver",
   "entity.canadamod.moose": "Moose",
   "entity.minecraft.maple_boat": "Maple Boat",

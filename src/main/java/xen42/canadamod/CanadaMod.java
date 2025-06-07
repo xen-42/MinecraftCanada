@@ -9,6 +9,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
@@ -17,6 +22,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
@@ -80,6 +86,20 @@ public class CanadaMod implements ModInitializer {
 		Registries.ENTITY_TYPE, 
 		Identifier.of(MOD_ID, "moose"), 
 		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.75f, 2.5f).build(MOOSE_ENTITY_KEY));
+
+	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
+		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);
+	}
+	public static final RegistryEntry<StatusEffect> BEAVER_EFFECT = registerStatusEffect("beaver_effect",
+		(new StatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
+		.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
+		.addAttributeModifier(EntityAttributes.SUBMERGED_MINING_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
+	);
+	public static final RegistryEntry<StatusEffect> MOOSE_EFFECT = registerStatusEffect("moose_effect",
+		(new StatusEffect(StatusEffectCategory.BENEFICIAL, 7079970))
+		.addAttributeModifier(EntityAttributes.MAX_HEALTH, Identifier.of(MOD_ID, "effect.moose_effect"), 6.0, Operation.ADD_VALUE)
+		.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
+	);
 
 
 	// This logger is used to write text to the console and the log file.
