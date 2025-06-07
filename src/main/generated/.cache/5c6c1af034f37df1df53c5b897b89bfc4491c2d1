@@ -48,6 +48,7 @@ abf75f4b7dd89fd8579c33f641b9310fd3f34d48 assets/canadamod/items/poutine.json
 9d832f694998543fb5a522de0c53b31b081bcb87 assets/canadamod/items/sap_bottle.json
 ef0b330d77ba84cfa83b83cf36500c50d7e17987 assets/canadamod/items/stripped_maple_log.json
 7cb40f2faaa23cba287f9813b159a70dba55d212 assets/canadamod/items/stripped_maple_wood.json
+69cdd0c150143d0be42efc7610d198b76d270ae8 assets/canadamod/items/thermos.json
 e5292a58fcf66e380204328b4772465334c296b4 assets/canadamod/items/tree_tap.json
 754dd39ce7d24f0d2a74df94a981530e7a020e35 assets/canadamod/items/venison.json
 2cef046f0675bc361177286afcbe1d8b1906dd79 assets/canadamod/models/block/maple_button.json
@@ -106,5 +107,6 @@ c76fac748693346c8a93719df0860a5d88c1ae42 assets/canadamod/models/item/moose_spaw
 ba2955566f913ba7032cad77b767e0f98283cc60 assets/canadamod/models/item/pelt.json
 54fb024494dbb2244ce84d7521f2f91a43b43639 assets/canadamod/models/item/poutine.json
 26f35322d6f86fded431b81bb1d90f0255407f63 assets/canadamod/models/item/sap_bottle.json
+5310c261bc3116d0bcd1a959f113ef04e0c36e7a assets/canadamod/models/item/thermos.json
 0a75f8995f75dfa1346f9cfcec9b1b8178f2051e assets/canadamod/models/item/tree_tap.json
 4436dcb783cdfceee55edc68db7c45a4f812a6fe assets/canadamod/models/item/venison.json

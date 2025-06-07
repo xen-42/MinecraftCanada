@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": "minecraft:iron_ingot",
+    "Y": "canadamod:sap_bottle"
+  },
+  "pattern": [
+    " X ",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "canadamod:thermos"
+  }
+}

@@ -30,6 +30,7 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.VENISON, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.COOKED_VENISON, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.ANTLERS, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.THERMOS, Models.GENERATED);
     }
 
     @Override

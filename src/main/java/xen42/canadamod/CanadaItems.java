@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Function;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.BundleContentsComponent;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
@@ -12,6 +14,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BoatItem;
+import net.minecraft.item.BundleItem;
 import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -25,6 +28,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
+import xen42.canadamod.item.ThermosItem;
 
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
@@ -75,11 +79,14 @@ public class CanadaItems {
     public static final Item COOKED_VENISON = register("cooked_venison", Item::new, (new Item.Settings()).food(FoodComponents.COOKED_MUTTON));
     public static final Item ANTLERS = register("antlers", Item::new, new Item.Settings());
 
-
     public static final Item MAPLE_BOAT = register("maple_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_BOAT, settings), (new Item.Settings()).maxCount(1));
     public static final Item MAPLE_CHEST_BOAT = register("maple_chest_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_CHEST_BOAT, settings), (new Item.Settings()).maxCount(1));
+
+    public static final Item THERMOS = register("thermos",
+        settings -> new ThermosItem(settings), (new Item.Settings()).maxCount(1).component(DataComponentTypes.BUNDLE_CONTENTS, BundleContentsComponent.DEFAULT));
+
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
@@ -142,6 +149,7 @@ public class CanadaItems {
             itemGroup.add(POUTINE);
             itemGroup.add(VENISON);
             itemGroup.add(COOKED_VENISON);
+            itemGroup.add(THERMOS);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register((itemGroup) -> {

@@ -201,6 +201,16 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .requiresBowl()
                     .offerTo(exporter);
 
+                createShaped(RecipeCategory.FOOD, CanadaItems.THERMOS)
+                    .pattern(" X ")
+                    .pattern("XYX")
+                    .pattern("XXX")
+                    .input('X', Items.IRON_INGOT)
+                    .input('Y', CanadaItems.SAP_BOTTLE)
+                    .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
+                    .criterion(hasItem(CanadaItems.SAP_BOTTLE), conditionsFromItem(CanadaItems.SAP_BOTTLE))
+                    .offerTo(exporter);
+
                 offerSmelting(List.of(CanadaItems.VENISON), RecipeCategory.FOOD, CanadaItems.COOKED_VENISON, 0.35f, 200, CanadaItems.VENISON.getName().toString());
             }
 

@@ -112,6 +112,8 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			
 			translationBuilder.add(CanadaMod.MOOSE_ENTITY, "Moose");
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
+
+			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
 		}
 	}
 	

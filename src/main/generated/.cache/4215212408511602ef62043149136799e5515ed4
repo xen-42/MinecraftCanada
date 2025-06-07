@@ -19,6 +19,7 @@ ff901390f28626efad2c37b3b69261a0908516e5 data/canadamod/advancement/recipes/cook
 73ca41c36cb18fb2200ee23f2401d39edfa1a436 data/canadamod/advancement/recipes/decorations/maple_sign.json
 d0895a074cb14509aa3a30fa966ed885741515d6 data/canadamod/advancement/recipes/food/cooked_venison_from_smelting_venison.json
 09c02299ca9bee53c19209eab067f48a17a4dd4b data/canadamod/advancement/recipes/food/flour.json
+5ed52d78ede2c28f71cc22a8a6131fa7e80fee1f data/canadamod/advancement/recipes/food/thermos.json
 84942ef864b31faff423ec256e0a6328766b7881 data/canadamod/advancement/recipes/misc/bone_meal.json
 4c553c1479fe110d9fdf1fc0b1822a0e6fe38724 data/canadamod/advancement/recipes/misc/leather.json
 a6d072182bf61a6aa5d2828f53bf301ba5685b43 data/canadamod/advancement/recipes/misc/maple_hanging_sign.json
@@ -58,4 +59,5 @@ a3c7654594a018188d5fb452970fa06aed4554b8 data/canadamod/recipe/maple_stairs.json
 1c807b4acf2548aade0a92c2ae703df3251bfe87 data/canadamod/recipe/rabbit_stew.json
 28aaca382981a626b80a242c1e68418ea9c0da85 data/canadamod/recipe/slime_ball.json
 2bd659659bc4b5ede1b02141d9634656d635d480 data/canadamod/recipe/stripped_maple_wood.json
+94d3ed4d9dc45d55bc62c02999539353a565d621 data/canadamod/recipe/thermos.json
 c190ea7ac018346b68882b251148400cbbfb1e7e data/canadamod/recipe/tree_tap.json
