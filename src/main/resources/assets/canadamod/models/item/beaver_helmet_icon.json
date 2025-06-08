@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "canadamod:item/beaver_helmet_icon"
+	}
+}

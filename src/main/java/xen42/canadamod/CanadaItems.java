@@ -23,6 +23,8 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.minecraft.item.SignItem;
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
+import net.minecraft.item.equipment.ArmorMaterials;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -101,6 +103,8 @@ public class CanadaItems {
     public static final Item THERMOS = register("thermos",
         settings -> new ThermosItem(settings), (new Item.Settings()).maxCount(1).component(THERMOS_CONTENTS, ThermosContentsComponent.DEFAULT));
 
+    public static final Item BEAVER_HELMET = register("beaver_helmet", Item::new, new Item.Settings().armor(ArmorMaterials.LEATHER, EquipmentType.HELMET));
+
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
@@ -170,6 +174,10 @@ public class CanadaItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register((itemGroup) -> {
             itemGroup.add(BEAVER_SPAWN_EGG);
             itemGroup.add(MOOSE_SPAWN_EGG);
+        });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((itemGroup) -> {
+            itemGroup.add(BEAVER_HELMET);
         });
     }
 }
