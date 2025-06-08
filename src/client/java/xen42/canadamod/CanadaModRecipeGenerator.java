@@ -218,7 +218,6 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .pattern("XXX")
                     .input('X', Items.IRON_INGOT)
                     .input('Y', CanadaItems.RUBBER)
-                    .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
                     .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
                     .offerTo(exporter);
 
@@ -227,6 +226,24 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .pattern("XX")
                     .input('X', CanadaItems.RUBBER)
                     .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
+                    .offerTo(exporter);
+
+                createShaped(RecipeCategory.COMBAT, CanadaItems.BEAVER_HELMET)
+                    .pattern("XXX")
+                    .pattern("XYX")
+                    .input('X', CanadaItems.PELT)
+                    .input('Y', CanadaTags.ItemTags.SAP)
+                    .criterion(hasItem(CanadaItems.PELT), conditionsFromItem(CanadaItems.PELT))
+                    .offerTo(exporter);
+
+                createShaped(RecipeCategory.COMBAT, CanadaItems.MOOSE_HELMET)
+                    .pattern("ZYZ")
+                    .pattern("XXX")
+                    .pattern("X X")
+                    .input('X', Items.LEATHER)
+                    .input('Y', CanadaTags.ItemTags.SAP)
+                    .input('Z', CanadaItems.ANTLERS)
+                    .criterion(hasItem(CanadaItems.ANTLERS), conditionsFromItem(CanadaItems.ANTLERS))
                     .offerTo(exporter);
 
                 offerSmelting(List.of(CanadaItems.VENISON), RecipeCategory.FOOD, CanadaItems.COOKED_VENISON, 0.35f, 200, CanadaItems.VENISON.getName().toString());

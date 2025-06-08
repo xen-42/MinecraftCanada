@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rubber": {
+    "has_pelt": {
       "conditions": {
         "items": [
           {
-            "items": "canadamod:rubber"
+            "items": "canadamod:pelt"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "canadamod:thermos"
+        "recipe": "canadamod:beaver_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_rubber"
+      "has_pelt"
     ]
   ],
   "rewards": {
     "recipes": [
-      "canadamod:thermos"
+      "canadamod:beaver_helmet"
     ]
   }
 }
