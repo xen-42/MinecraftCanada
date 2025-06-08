@@ -117,11 +117,13 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
 
 			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
+			translationBuilder.add(CanadaItems.BEAVER_HELMET, "Beaver Pelt Hat");
+			translationBuilder.add(CanadaItems.MOOSE_HELMET, "Moose Antler Hat");
 
 			translationBuilder.add(CanadaBlocks.RUBBER_BLOCK, "Rubber Block");
 
 			translationBuilder.add("item.canadamod.thermos.empty.description", "Can hold a mixed stack of soups, drinks, and potions");
-			translationBuilder.add("effect.canadamod.beaver_effect", "Beaver's Ethic");
+			translationBuilder.add("effect.canadamod.beaver_effect", "Busy Beaver");
 			translationBuilder.add("effect.canadamod.moose_effect", "Moose's Strength");
 		}
 	}

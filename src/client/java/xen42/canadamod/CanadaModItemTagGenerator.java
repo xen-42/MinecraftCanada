@@ -43,5 +43,8 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.RED_MEAT).add(CanadaItems.VENISON, Items.BEEF, Items.MUTTON, Items.PORKCHOP);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAP).add(CanadaItems.SAP, CanadaItems.MAPLE_SAP);
+
+		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
+		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
 	}
 }

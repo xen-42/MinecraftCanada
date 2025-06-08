@@ -44,6 +44,7 @@ accessible method net/minecraft/client/gui/DrawContext drawTooltip (Lnet/minecra
 
 accessible method net/minecraft/entity/effect/StatusEffect <init> (Lnet/minecraft/entity/effect/StatusEffectCategory;I)V
 
+accessible method net/minecraft/entity/player/PlayerEntity isEquipped (Lnet/minecraft/item/Item;)Z
 
 
 

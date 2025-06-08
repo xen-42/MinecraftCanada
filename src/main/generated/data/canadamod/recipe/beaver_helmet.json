@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": "canadamod:pelt",
+    "Y": "#canadamod:sap"
+  },
+  "pattern": [
+    "XXX",
+    "XYX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "canadamod:beaver_helmet"
+  }
+}

@@ -1,23 +1,39 @@
 package xen42.canadamod;
 
+import java.util.function.Supplier;
+
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.WoodType;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.util.SpriteIdentifier;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemDisplayContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.armor.BeaverHatModel;
+import xen42.canadamod.armor.MooseHatModel;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
@@ -70,6 +86,9 @@ public class CanadaModClient implements ClientModInitializer {
 
 		EntityRendererRegistry.register(CanadaMod.MOOSE_ENTITY, context -> new MooseEntityRenderer(context));
 		EntityModelLayerRegistry.registerModelLayer(MODEL_MOOSE_LAYER, MooseEntityModel::getTexturedModelData);
+
+		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
+		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {
@@ -80,5 +99,32 @@ public class CanadaModClient implements ClientModInitializer {
 		Identifier hangingTextureId = Identifier.of(CanadaMod.MOD_ID, "entity/signs/hanging/" + type.name());
 		SpriteIdentifier hangingSpriteId = new SpriteIdentifier(TexturedRenderLayers.HANGING_SIGN_TYPE_TEXTURES.get(WoodType.OAK).getAtlasId(), hangingTextureId);
 		TexturedRenderLayers.HANGING_SIGN_TYPE_TEXTURES.put(type, hangingSpriteId);
+	}
+
+	private class CustomArmorRenderer implements ArmorRenderer {
+		private Supplier<TexturedModelData> model;
+
+		public CustomArmorRenderer(Supplier<TexturedModelData> model) {
+			this.model = model;
+		}
+
+		@Override
+		public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack,
+				BipedEntityRenderState bipedEntityRenderState, EquipmentSlot slot, int light,
+				BipedEntityModel<BipedEntityRenderState> contextModel) {
+			if (slot != EquipmentSlot.HEAD) {
+				return;
+			}
+
+			var name = stack.getItem().toString().split(":")[1];
+			CanadaMod.LOGGER.info("NAME:" + name);
+			ModelPart part = model.get().createModel().getChild("hat");
+			part.copyTransform(contextModel.getHead());
+			part.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(Identifier.of(CanadaMod.MOD_ID, "textures/armor/" + name + ".png"))),
+				light, OverlayTexture.DEFAULT_UV);
+
+			MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ItemDisplayContext.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,
+				vertexConsumers, MinecraftClient.getInstance().world, 0);
+		}
 	}
 }
