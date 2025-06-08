@@ -92,7 +92,7 @@ public class CanadaMod implements ModInitializer {
 	}
 	public static final RegistryEntry<StatusEffect> BEAVER_EFFECT = registerStatusEffect("beaver_effect",
 		(new StatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
-		.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
+		.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 3f, Operation.ADD_MULTIPLIED_TOTAL)
 		.addAttributeModifier(EntityAttributes.SUBMERGED_MINING_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
 	);
 	public static final RegistryEntry<StatusEffect> MOOSE_EFFECT = registerStatusEffect("moose_effect",
