@@ -2,12 +2,5 @@
   "model": {
     "type": "minecraft:model",
     "model": "canadamod:item/beaver_helmet"
-  },
-  "special": {
-    "type": "minecraft:special",
-    "model": {
-      "type": "minecraft:head",
-      "model": "canadamod:item/beaver_helmet"
-    }
   }
 }

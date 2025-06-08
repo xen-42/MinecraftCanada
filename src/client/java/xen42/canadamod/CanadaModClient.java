@@ -10,6 +10,7 @@ import net.minecraft.block.WoodType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.model.Model;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -29,6 +30,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import xen42.canadamod.armor.BeaverHatModel;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
@@ -82,10 +84,7 @@ public class CanadaModClient implements ClientModInitializer {
 		EntityRendererRegistry.register(CanadaMod.MOOSE_ENTITY, context -> new MooseEntityRenderer(context));
 		EntityModelLayerRegistry.registerModelLayer(MODEL_MOOSE_LAYER, MooseEntityModel::getTexturedModelData);
 
-		
-
 		ArmorRenderer.register(new CustomArmorRenderer(), CanadaItems.BEAVER_HELMET);
-		
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {
@@ -99,7 +98,6 @@ public class CanadaModClient implements ClientModInitializer {
 	}
 
 	private class CustomArmorRenderer implements ArmorRenderer {
-
 		@Override
 		public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack,
 				BipedEntityRenderState bipedEntityRenderState, EquipmentSlot slot, int light,
@@ -107,6 +105,11 @@ public class CanadaModClient implements ClientModInitializer {
 			if (slot != EquipmentSlot.HEAD) {
 				return;
 			}
+
+			ModelPart part = BeaverHatModel.getModel().createModel().getChild("hat");
+			part.copyTransform(contextModel.getHead());
+			part.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(Identifier.of(CanadaMod.MOD_ID, "textures/armor/beaver_helmet.png"))),
+				light, OverlayTexture.DEFAULT_UV);
 
 			MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ItemDisplayContext.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,
 				vertexConsumers, MinecraftClient.getInstance().world, 0);
