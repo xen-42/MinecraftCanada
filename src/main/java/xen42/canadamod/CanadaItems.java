@@ -103,7 +103,10 @@ public class CanadaItems {
     public static final Item THERMOS = register("thermos",
         settings -> new ThermosItem(settings), (new Item.Settings()).maxCount(1).component(THERMOS_CONTENTS, ThermosContentsComponent.DEFAULT));
 
-    public static final Item BEAVER_HELMET = register("beaver_helmet", Item::new, new Item.Settings().armor(ArmorMaterials.LEATHER, EquipmentType.HELMET));
+    public static final Item BEAVER_HELMET = register("beaver_helmet", Item::new, 
+        new Item.Settings().armor(ArmorMaterials.LEATHER, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
+    public static final Item MOOSE_HELMET = register("moose_helmet", Item::new, 
+        new Item.Settings().armor(ArmorMaterials.LEATHER, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
@@ -178,6 +181,7 @@ public class CanadaItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((itemGroup) -> {
             itemGroup.add(BEAVER_HELMET);
+            itemGroup.add(MOOSE_HELMET);
         });
     }
 }

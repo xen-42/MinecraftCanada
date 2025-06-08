@@ -1,5 +1,7 @@
 package xen42.canadamod;
 
+import java.util.function.Supplier;
+
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -31,6 +33,7 @@ import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.armor.BeaverHatModel;
+import xen42.canadamod.armor.MooseHatModel;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
@@ -84,7 +87,8 @@ public class CanadaModClient implements ClientModInitializer {
 		EntityRendererRegistry.register(CanadaMod.MOOSE_ENTITY, context -> new MooseEntityRenderer(context));
 		EntityModelLayerRegistry.registerModelLayer(MODEL_MOOSE_LAYER, MooseEntityModel::getTexturedModelData);
 
-		ArmorRenderer.register(new CustomArmorRenderer(), CanadaItems.BEAVER_HELMET);
+		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
+		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {
@@ -98,6 +102,12 @@ public class CanadaModClient implements ClientModInitializer {
 	}
 
 	private class CustomArmorRenderer implements ArmorRenderer {
+		private Supplier<TexturedModelData> model;
+
+		public CustomArmorRenderer(Supplier<TexturedModelData> model) {
+			this.model = model;
+		}
+
 		@Override
 		public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack,
 				BipedEntityRenderState bipedEntityRenderState, EquipmentSlot slot, int light,
@@ -106,9 +116,11 @@ public class CanadaModClient implements ClientModInitializer {
 				return;
 			}
 
-			ModelPart part = BeaverHatModel.getModel().createModel().getChild("hat");
+			var name = stack.getItem().toString().split(":")[1];
+			CanadaMod.LOGGER.info("NAME:" + name);
+			ModelPart part = model.get().createModel().getChild("hat");
 			part.copyTransform(contextModel.getHead());
-			part.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(Identifier.of(CanadaMod.MOD_ID, "textures/armor/beaver_helmet.png"))),
+			part.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(Identifier.of(CanadaMod.MOD_ID, "textures/armor/" + name + ".png"))),
 				light, OverlayTexture.DEFAULT_UV);
 
 			MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ItemDisplayContext.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,

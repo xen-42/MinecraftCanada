@@ -4,8 +4,8 @@
 dcfd9f02e66f14b76ae6153ca457a83472efcb5b data/canadamod/tags/item/sap.json
 1f0e4eb100fd6c9c7c9f605d3cf1430ff6d9aaef data/minecraft/tags/item/boats.json
 dbb00795c33f763a3a5a9bb8e1661240a19751f9 data/minecraft/tags/item/chest_boats.json
-e1aa780221ad9879d551f4de8a3075d7dd17da2e data/minecraft/tags/item/enchantable/head_armor.json
-e1aa780221ad9879d551f4de8a3075d7dd17da2e data/minecraft/tags/item/head_armor.json
+e86d0cf7ba8cc8b92cf53f7847d10269cba2d20a data/minecraft/tags/item/enchantable/head_armor.json
+e86d0cf7ba8cc8b92cf53f7847d10269cba2d20a data/minecraft/tags/item/head_armor.json
 2c8ae194c54cdf79b288670fe8b6d5b8c7cddbb9 data/minecraft/tags/item/leaves.json
 171336db91c5099bd64f5526b8bc838565d71357 data/minecraft/tags/item/logs.json
 171336db91c5099bd64f5526b8bc838565d71357 data/minecraft/tags/item/logs_that_burn.json
