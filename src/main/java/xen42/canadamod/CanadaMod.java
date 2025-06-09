@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
@@ -28,6 +29,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.poi.PointOfInterestType;
 import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
@@ -101,7 +103,6 @@ public class CanadaMod implements ModInitializer {
 		.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
 	);
 
-
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
@@ -122,6 +123,7 @@ public class CanadaMod implements ModInitializer {
 		CanadaConfiguredFeatures.onInitialize();
 		CanadaItems.initialize();
 		MapleBoatEntity.initialize();
+		CanadaVillagers.initialize();
 		CanadaPlacedFeatures.onInitialize();
 		
 		BiomeModifications.addFeature(context -> context.getBiomeKey().getValue()

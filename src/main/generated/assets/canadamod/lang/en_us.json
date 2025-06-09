@@ -4,6 +4,7 @@
   "effect.canadamod.moose_effect": "Moose's Strength",
   "entity.canadamod.beaver": "Beaver",
   "entity.canadamod.moose": "Moose",
+  "entity.canadamod.villager.sugar_shack": "Cook",
   "entity.minecraft.maple_boat": "Maple Boat",
   "entity.minecraft.maple_chest_boat": "Maple Boat with Chest",
   "item.canadamod.antlers": "Antler",
@@ -45,5 +46,10 @@
   "item.canadamod.thermos": "Thermos",
   "item.canadamod.thermos.empty.description": "Can hold a mixed stack of soups, drinks, and potions",
   "item.canadamod.tree_tap": "Tree Tap",
-  "item.canadamod.venison": "Venison"
+  "item.canadamod.venison": "Venison",
+  "tag.block.canadamod.maple_logs": "Maple Logs",
+  "tag.item.canadamod.maple_logs": "Maple Logs",
+  "tag.item.canadamod.red_meat": "Red Meat",
+  "tag.item.canadamod.sap": "Sap",
+  "tag.worldgen.structure.canadamod.sugar_shack": "Sugar Shack"
 }

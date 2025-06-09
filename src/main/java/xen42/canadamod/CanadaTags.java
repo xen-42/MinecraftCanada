@@ -20,8 +20,7 @@ public class CanadaTags {
 	}
 	
 	public class StructureTags {
-		public static final TagKey<Structure> EFFIGY_ALTAR_DUNGEON = ofStructure("effigy_altar_dungeon");
-		public static final TagKey<Structure> TRAIL_RUINS = ofStructure("trail_ruins");
+		public static final TagKey<Structure> SUGAR_SHACK = ofStructure("sugar_shack");
 	}
 
 	public static TagKey<Block> ofBlock(String name) {

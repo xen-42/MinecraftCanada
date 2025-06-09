@@ -4,6 +4,7 @@
   "effect.canadamod.moose_effect": "ɥʇᵷuǝɹʇS s,ǝsooW",
   "entity.canadamod.beaver": "ɹǝʌɐǝᗺ",
   "entity.canadamod.moose": "ǝsooW",
+  "entity.canadamod.villager.sugar_shack": "ʞooƆ",
   "entity.minecraft.maple_boat": "ʇɐoᗺ ǝꞁdɐW",
   "entity.minecraft.maple_chest_boat": "ʇsǝɥƆ ɥʇᴉʍ ʇɐoᗺ ǝꞁdɐW",
   "item.canadamod.antlers": "ɹǝꞁʇuⱯ",
@@ -45,5 +46,10 @@
   "item.canadamod.thermos": "soɯɹǝɥ⟘",
   "item.canadamod.thermos.empty.description": "suoᴉʇod puɐ 'sʞuᴉɹp 'sdnos ɟo ʞɔɐʇs pǝxᴉɯ ɐ pꞁoɥ uɐƆ",
   "item.canadamod.tree_tap": "dɐ⟘ ǝǝɹ⟘",
-  "item.canadamod.venison": "uosᴉuǝΛ"
+  "item.canadamod.venison": "uosᴉuǝΛ",
+  "tag.block.canadamod.maple_logs": "sᵷoꞀ ǝꞁdɐW",
+  "tag.item.canadamod.maple_logs": "sᵷoꞀ ǝꞁdɐW",
+  "tag.item.canadamod.red_meat": "ʇɐǝW pǝᴚ",
+  "tag.item.canadamod.sap": "dɐS",
+  "tag.worldgen.structure.canadamod.sugar_shack": "ʞɔɐɥS ɹɐᵷnS"
 }
