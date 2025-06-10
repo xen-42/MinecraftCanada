@@ -1,7 +1,5 @@
 {
   "variants": {
-    "": {
-      "model": "canadamod:block/moose_head"
-    }
+    "":  { "model": "canadamod:block/moose_head" }
   }
 }

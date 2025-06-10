@@ -1,7 +1,8 @@
 {
   "variants": {
-    "": {
-      "model": "canadamod:block/moose_head"
-    }
+    "facing=south": { "model": "canadamod:block/moose_wall_head", "y": 180 },
+    "facing=west":  { "model": "canadamod:block/moose_wall_head", "y": 270 },
+    "facing=north": { "model": "canadamod:block/moose_wall_head", "y": 0 },
+    "facing=east":  { "model": "canadamod:block/moose_wall_head", "y": 90 }
   }
 }
