@@ -6,6 +6,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
@@ -36,11 +37,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import xen42.canadamod.armor.BeaverHatModel;
 import xen42.canadamod.armor.MooseHatModel;
+import xen42.canadamod.block.MooseSkullBlock;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
 import xen42.canadamod.entity.MooseEntityModel;
 import xen42.canadamod.entity.MooseEntityRenderer;
+import xen42.canadamod.entity.MooseSkullBlockEntityRenderer;
 import xen42.canadamod.screen.CookingPotHandledScreen;
 
 public class CanadaModClient implements ClientModInitializer {
@@ -92,6 +95,8 @@ public class CanadaModClient implements ClientModInitializer {
 		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
 		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
 		ArmorRenderer.register(new BlockOnHeadArmorRenderer(CanadaBlocks.MOOSE_HEAD), CanadaItems.MOOSE_HEAD);
+
+		BlockEntityRendererFactories.register(CanadaMod.MOOSE_HEAD_ENTITY, MooseSkullBlockEntityRenderer::new);
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {
@@ -153,13 +158,17 @@ public class CanadaModClient implements ClientModInitializer {
 			matrices.multiply(RotationAxis.POSITIVE_Z.rotation(head.roll));
 			matrices.multiply(RotationAxis.POSITIVE_Y.rotation(head.yaw));
 			matrices.multiply(RotationAxis.POSITIVE_X.rotation(head.pitch));
-			matrices.translate(0.5f, 0f, -0.75f);
+			matrices.translate(0.5f, -0.025f, -0.75f);
 			matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float)Math.PI));
 			matrices.scale(1.05f, 1.05f, 1.05f);
 			matrices.translate(-0.025f, -0.025f, -0.025f);
 
+			var state = block.getDefaultState();
+			if (state.isOf(CanadaBlocks.MOOSE_HEAD)) {
+				state = state.with(MooseSkullBlock.WEIRD_HACK, false);
+			}
 
-			MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(block.getDefaultState(), matrices, vertexConsumers,
+			MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(state, matrices, vertexConsumers,
 				light, OverlayTexture.DEFAULT_UV);
 
 			matrices.pop();

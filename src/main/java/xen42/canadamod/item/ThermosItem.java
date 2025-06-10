@@ -69,7 +69,6 @@ public class ThermosItem extends Item {
             ThermosContentsComponent thermosContentsComponent = (ThermosContentsComponent)stack.get(CanadaItems.THERMOS_CONTENTS);
             ThermosContentsComponent.Builder builder = thermosContentsComponent.new Builder(thermosContentsComponent);
 
-            CanadaMod.LOGGER.info("" + selectedIndex);
             builder.setSelectedStackIndex(selectedIndex);
             builder.removeSelected();
             
