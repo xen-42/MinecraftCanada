@@ -46,6 +46,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -62,6 +63,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import xen42.canadamod.CanadaBlocks;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
@@ -526,5 +528,10 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     @Override
     public void setAngryAt(UUID angryAt) {
         this.angryAt = angryAt;
+    }
+
+    @Override
+    public ItemStack getPickBlockStack() {
+        return new ItemStack(CanadaItems.MOOSE_SPAWN_EGG);
     }
 }

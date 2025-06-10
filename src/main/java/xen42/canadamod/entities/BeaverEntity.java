@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
 public class BeaverEntity extends AnimalEntity {
@@ -87,5 +88,10 @@ public class BeaverEntity extends AnimalEntity {
         public SwimToRandomPlaceGoal(BeaverEntity beaver) {
             super(beaver, 1.0D, 40);
         }
+    }
+
+    @Override
+    public ItemStack getPickBlockStack() {
+        return new ItemStack(CanadaItems.BEAVER_SPAWN_EGG);
     }
 }
