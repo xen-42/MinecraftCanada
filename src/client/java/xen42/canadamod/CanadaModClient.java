@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
@@ -32,6 +33,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.RotationAxis;
 import xen42.canadamod.armor.BeaverHatModel;
 import xen42.canadamod.armor.MooseHatModel;
 import xen42.canadamod.entities.MapleBoatEntity;
@@ -89,6 +91,7 @@ public class CanadaModClient implements ClientModInitializer {
 
 		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
 		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
+		ArmorRenderer.register(new BlockOnHeadArmorRenderer(CanadaBlocks.MOOSE_HEAD), CanadaItems.MOOSE_HEAD);
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {
@@ -117,7 +120,7 @@ public class CanadaModClient implements ClientModInitializer {
 			}
 
 			var name = stack.getItem().toString().split(":")[1];
-			CanadaMod.LOGGER.info("NAME:" + name);
+
 			ModelPart part = model.get().createModel().getChild("hat");
 			part.copyTransform(contextModel.getHead());
 			part.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(Identifier.of(CanadaMod.MOD_ID, "textures/armor/" + name + ".png"))),
@@ -125,6 +128,41 @@ public class CanadaModClient implements ClientModInitializer {
 
 			MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ItemDisplayContext.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,
 				vertexConsumers, MinecraftClient.getInstance().world, 0);
+		}
+	}
+
+	private class BlockOnHeadArmorRenderer implements ArmorRenderer {
+		private Block block;
+
+		public BlockOnHeadArmorRenderer(Block block) {
+			this.block = block;
+		}
+
+		@Override
+		public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack,
+				BipedEntityRenderState bipedEntityRenderState, EquipmentSlot slot, int light,
+				BipedEntityModel<BipedEntityRenderState> contextModel) {
+			if (slot != EquipmentSlot.HEAD) {
+				return;
+			}
+
+			matrices.push();
+
+			var head = contextModel.getHead();
+			matrices.translate(head.originX / 16.0f, head.originY / 16.0f, head.originZ / 16.0f);
+			matrices.multiply(RotationAxis.POSITIVE_Z.rotation(head.roll));
+			matrices.multiply(RotationAxis.POSITIVE_Y.rotation(head.yaw));
+			matrices.multiply(RotationAxis.POSITIVE_X.rotation(head.pitch));
+			matrices.translate(0.5f, 0f, -0.75f);
+			matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float)Math.PI));
+			matrices.scale(1.05f, 1.05f, 1.05f);
+			matrices.translate(-0.025f, -0.025f, -0.025f);
+
+
+			MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(block.getDefaultState(), matrices, vertexConsumers,
+				light, OverlayTexture.DEFAULT_UV);
+
+			matrices.pop();
 		}
 	}
 }

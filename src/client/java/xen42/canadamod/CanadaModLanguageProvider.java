@@ -119,6 +119,7 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
 			translationBuilder.add(CanadaItems.BEAVER_HELMET, "Beaver Pelt Hat");
 			translationBuilder.add(CanadaItems.MOOSE_HELMET, "Moose Antler Hat");
+			translationBuilder.add(CanadaItems.MOOSE_HEAD, "Moose Head");
 
 			translationBuilder.add(CanadaBlocks.RUBBER_BLOCK, "Rubber Block");
 

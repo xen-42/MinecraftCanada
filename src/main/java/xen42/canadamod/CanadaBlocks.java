@@ -20,11 +20,13 @@ import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SaplingGenerator;
+import net.minecraft.block.SkullBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SlimeBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.UntintedParticleLeavesBlock;
+import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HangingSignBlockEntity;
@@ -42,6 +44,8 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.block.CookingPotBlock;
+import xen42.canadamod.block.MooseSkullBlock;
+import xen42.canadamod.block.MooseWallSkullBlock;
 import xen42.canadamod.block.RubberBlock;
 import xen42.canadamod.block.TreeTapBlock;
 import xen42.canadamod.sign.MapleHangingSignBlock;
@@ -99,6 +103,20 @@ public class CanadaBlocks {
 
 	public static Block RUBBER_BLOCK = register("rubber_block", RubberBlock::new, AbstractBlock.Settings.create()
 		.sounds(BlockSoundGroup.FUNGUS).mapColor(MapColor.BLACK).hardness(0.1f), true);
+
+	public static Block MOOSE_HEAD = register(
+		"moose_head",
+		MooseSkullBlock::new,
+		AbstractBlock.Settings.copy(Blocks.ZOMBIE_HEAD),
+		false
+	);
+
+	public static Block MOOSE_WALL_HEAD = register(
+		"moose_head_wall",
+		MooseWallSkullBlock::new,
+		AbstractBlock.Settings.copy(Blocks.ZOMBIE_WALL_HEAD),
+		false
+	);
 
 	public static Block[] MAPLE_BLOCKS;
 

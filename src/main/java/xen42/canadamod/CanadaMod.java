@@ -31,6 +31,7 @@ import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.poi.PointOfInterestType;
 import xen42.canadamod.block.CookingPotBlockEntity;
+import xen42.canadamod.block.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
@@ -72,6 +73,11 @@ public class CanadaMod implements ModInitializer {
 		"cooking_pot_entity",
 		FabricBlockEntityTypeBuilder.create(CookingPotBlockEntity::new, 
 			new Block[] { CanadaBlocks.COOKING_POT }).build()
+	);
+	public static final BlockEntityType<MooseSkullBlockEntity> MOOSE_HEAD_ENTITY = registerBlockEntityType(
+		"moose_head_entity",
+		FabricBlockEntityTypeBuilder.create(MooseSkullBlockEntity::new, 
+			new Block[] { CanadaBlocks.MOOSE_HEAD, CanadaBlocks.MOOSE_WALL_HEAD }).build()
 	);
 	public static <T extends BlockEntityType<?>> T registerBlockEntityType(String path, T blockEntityType) {
 		return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(CanadaMod.MOD_ID, path), blockEntityType);

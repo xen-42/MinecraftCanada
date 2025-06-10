@@ -10,6 +10,7 @@ e86d0cf7ba8cc8b92cf53f7847d10269cba2d20a data/minecraft/tags/item/head_armor.jso
 171336db91c5099bd64f5526b8bc838565d71357 data/minecraft/tags/item/logs.json
 171336db91c5099bd64f5526b8bc838565d71357 data/minecraft/tags/item/logs_that_burn.json
 81d11b013877909d5b23de6b24651641c230cc24 data/minecraft/tags/item/planks.json
+6eb535e0000f2e274e830ce5d4fdc03eddab1909 data/minecraft/tags/item/skulls.json
 b589454461d4984095cc3d656f4c2bb09302f970 data/minecraft/tags/item/wooden_buttons.json
 1f42b77e8c6e68a78e6b48deab9976eadc45e537 data/minecraft/tags/item/wooden_doors.json
 e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/item/wooden_fences.json

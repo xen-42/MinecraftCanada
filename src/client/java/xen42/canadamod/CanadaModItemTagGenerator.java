@@ -46,5 +46,7 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 
 		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
 		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
+
+		this.getOrCreateTagBuilder(ItemTags.SKULLS).add(CanadaItems.MOOSE_HEAD);
 	}
 }
