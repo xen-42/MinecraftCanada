@@ -36,11 +36,14 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.Angerable;
+import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -285,6 +288,25 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
         // Does saddling and stuff
         return super.interactMob(player, hand);
+    }
+
+    protected void dropEquipment(ServerWorld world, DamageSource source, boolean causedByPlayer) {
+        super.dropEquipment(world, source, causedByPlayer);
+        Entity entity = source.getAttacker();
+        if (entity instanceof CreeperEntity creeperEntity) {
+            if (creeperEntity.shouldDropHead()) {
+                ItemStack itemStack = this.getSkull();
+                if (!itemStack.isEmpty()) {
+                    creeperEntity.onHeadDropped();
+                    this.dropStack(world, itemStack);
+                }
+            }
+        }
+
+    }
+
+    protected ItemStack getSkull() {
+        return new ItemStack(CanadaItems.MOOSE_HEAD);
     }
 
     @Override
