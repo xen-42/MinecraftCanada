@@ -112,6 +112,10 @@ public class CanadaVillagers {
 				new TradeOfferFactory(new TradeOffer(
 					new TradedItem(Items.EMERALD, 2),
 					new ItemStack(CanadaItems.MAPLE_SAPLING, 1), 12, 20, 0.05f)
+				),
+                new TradeOfferFactory(new TradeOffer(
+					new TradedItem(Items.EMERALD, 4),
+					new ItemStack(CanadaItems.MOOSE_HEAD, 1), 12, 20, 0.05f)
 				)
 			);
 		});
