@@ -22,6 +22,6 @@ public class CanadaModPOITagGenerator extends FabricTagProvider<PointOfInterestT
     @Override
     protected void configure(WrapperLookup registries) {
         getOrCreateTagBuilder(PointOfInterestTypeTags.ACQUIRABLE_JOB_SITE)
-            .add(CanadaVillagers.COOKING_POT_KET);
+            .add(CanadaVillagers.LUMBERJACK_POI_KEY);
     }
 }

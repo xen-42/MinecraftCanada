@@ -134,7 +134,7 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaTags.ItemTags.RED_MEAT, "Red Meat");
 			translationBuilder.add(CanadaTags.ItemTags.SAP, "Sap");
 			translationBuilder.add(CanadaTags.BlockTags.MAPLE_LOGS, "Maple Logs");
-			translationBuilder.addVillagerProfession(CanadaVillagers.SUGAR_SHACK_VILLAGER_KEY, "Cook");
+			translationBuilder.addVillagerProfession(CanadaVillagers.SUGAR_SHACK_VILLAGER_KEY, "Lumberjack");
 		}
 	}
 	

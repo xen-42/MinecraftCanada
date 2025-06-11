@@ -31,11 +31,11 @@ import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.poi.PointOfInterestType;
 
 public class CanadaVillagers {
-    public static final RegistryKey<PointOfInterestType> COOKING_POT_KET = RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.of(CanadaMod.MOD_ID, "cooking_pot_poi"));
-    public static final PointOfInterestType COOKING_POT_POI = registerNewPOI("cooking_pot_poi", CanadaBlocks.COOKING_POT);
+    public static final RegistryKey<PointOfInterestType> LUMBERJACK_POI_KEY = RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.of(CanadaMod.MOD_ID, "lumberjack_poi"));
+    public static final PointOfInterestType LUMBERJACK_POI = registerNewPOI("lumberjack_poi", CanadaBlocks.TREE_TAP);
 
     public static final RegistryKey<VillagerProfession> SUGAR_SHACK_VILLAGER_KEY = RegistryKey.of(RegistryKeys.VILLAGER_PROFESSION, Identifier.of(CanadaMod.MOD_ID, "sugar_shack"));
-    public static final VillagerProfession SUGAR_SHACK_VILLAGER = registerNewProfession(SUGAR_SHACK_VILLAGER_KEY, COOKING_POT_KET, SoundEvents.ENTITY_VILLAGER_WORK_BUTCHER);
+    public static final VillagerProfession SUGAR_SHACK_VILLAGER = registerNewProfession(SUGAR_SHACK_VILLAGER_KEY, LUMBERJACK_POI_KEY, SoundEvents.ENTITY_VILLAGER_WORK_BUTCHER);
 
     public static VillagerProfession registerNewProfession(RegistryKey<VillagerProfession> key, RegistryKey<PointOfInterestType> poi, SoundEvent sound) {
         var profession = new VillagerProfession(
@@ -75,8 +75,8 @@ public class CanadaVillagers {
 				new TradedItem(CanadaItems.PELT, 9),
 				new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
-                new TradedItem(Items.EMERALD, 2),
-                new ItemStack(CanadaItems.CHEESE_CURD, 3), 12, 5, 0.05f));
+				new TradedItem(CanadaBlocks.MAPLE_PLANKS, 12),
+				new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
 		});
 
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 3, factories -> {
@@ -84,8 +84,8 @@ public class CanadaVillagers {
 				new TradedItem(CanadaItems.ANTLERS, 4),
 				new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
-                new TradedItem(Items.EMERALD, 1),
-                new ItemStack(CanadaItems.GRAVY, 1), 12, 5, 0.05f));
+                new TradedItem(Items.EMERALD, 2),
+                new ItemStack(CanadaItems.CHEESE_CURD, 3), 12, 5, 0.05f));
 		});
 
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 4, factories -> {
