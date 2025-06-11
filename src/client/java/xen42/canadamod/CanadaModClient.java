@@ -112,9 +112,13 @@ public class CanadaModClient implements ClientModInitializer {
 					beaver.isChopping = payload.stage != -1;
 				}
 				context.client().worldRenderer.setBlockBreakingInfo(payload.id, payload.pos, payload.stage);
-				context.client().world.playSoundAtBlockCenterClient(
-					payload.pos, BlockSoundGroup.WOOD.getHitSound(), SoundCategory.BLOCKS, 1.0f, 1.0f, false
-				);
+				
+				// Don't play sound when setting a guy to -1
+				if (payload.stage > 0) {
+					context.client().world.playSoundAtBlockCenterClient(
+						payload.pos, BlockSoundGroup.WOOD.getHitSound(), SoundCategory.BLOCKS, 1.0f, 1.0f, false
+					);
+				}
 			});
 		});
 	}

@@ -114,6 +114,7 @@ public class BeaverChopTreeGoal extends Goal {
             for (int i = 3; i < 8; i++) {
                 var topBlockPos = pos.add(0, i, 0);
                 var topBlock = world.getBlockState(topBlockPos);
+                // TODO: also check for tree taps near the base
                 if (!noLogsNextToBlock(topBlockPos)) {
                     return false;
                 }

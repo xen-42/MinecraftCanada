@@ -34,6 +34,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
@@ -47,6 +48,8 @@ import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
 public class BeaverEntity extends AnimalEntity {
+    private static final TrackedData<Integer> CHOP_FATIGUE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
     @Nullable
     private BlockPos choppingTree;
 
@@ -68,7 +71,7 @@ public class BeaverEntity extends AnimalEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
         this.goalSelector.add(3, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(4, new TemptGoal(this, 1.2D, stack -> this.isBreedingItem(stack), false));
+        this.goalSelector.add(4, new TemptGoal(this, 1.2D, stack -> this.isTemptItem(stack), false));
         this.goalSelector.add(5, new FollowParentGoal(this, 1.1D));
         this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -88,6 +91,10 @@ public class BeaverEntity extends AnimalEntity {
     public void tick() {
         super.tick();
         updateAnimations();
+
+        if (this.getDataTracker().get(CHOP_FATIGUE) > 0) {
+            this.getDataTracker().set(CHOP_FATIGUE, this.getDataTracker().get(CHOP_FATIGUE) - 1);
+        }
     }
 
     public void updateAnimations() {
@@ -102,11 +109,18 @@ public class BeaverEntity extends AnimalEntity {
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
+
+        builder.add(CHOP_FATIGUE, 0);
     }
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isOf(Items.STICK);
+    }
+
+    public boolean isTemptItem(ItemStack stack) {
+        return (this.getDataTracker().get(CHOP_FATIGUE) > 0 && stack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE))
+            || isBreedingItem(stack);
     }
 
     @Override
@@ -158,6 +172,26 @@ public class BeaverEntity extends AnimalEntity {
     }
 
     @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        var itemStack = player.getStackInHand(hand);
+
+        // TODO: If fed poutine/donair/perogi have it chop trees like mad
+        if (itemStack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE) && this.getDataTracker().get(CHOP_FATIGUE) > 0) {
+            if (!this.getWorld().isClient) {
+                this.eat(player, hand, itemStack);
+                this.playEatSound();
+                this.getDataTracker().set(CHOP_FATIGUE, 0);
+                return ActionResult.SUCCESS_SERVER;
+            }
+            else {
+                this.getWorld().addParticleClient(ParticleTypes.HAPPY_VILLAGER, this.getParticleX(1.0), this.getRandomBodyY() + 0.5, this.getParticleZ(1.0), 0.0, 0.0, 0.0);
+            }
+        }
+
+        return super.interactMob(player, hand);
+    }
+
+    @Override
     public void onDeath(DamageSource source) {
         setChoppingProgress(-1);
         super.onDeath(source);
@@ -186,10 +220,24 @@ public class BeaverEntity extends AnimalEntity {
 
     public void onChopTree() {
         // Pause for 5 to 10 minutes
-
+        this.getDataTracker().set(CHOP_FATIGUE, this.random.nextBetween(5 * 60 * 20, 10 * 60 * 20));
     }
 
     public boolean canChopTree() {
-        return !this.isBaby();
+        return !this.isBaby() && this.getDataTracker().get(CHOP_FATIGUE) <= 0;
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+
+        nbt.putInt("chopFatigue", this.getDataTracker().get(CHOP_FATIGUE));
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+
+        this.getDataTracker().set(CHOP_FATIGUE, nbt.getInt("chopFatigue").orElse(0));
     }
 }
