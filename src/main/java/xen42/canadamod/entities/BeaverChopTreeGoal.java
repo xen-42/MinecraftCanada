@@ -18,6 +18,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
+import xen42.canadamod.CanadaMod;
 
 public class BeaverChopTreeGoal extends Goal {
     public static Map<LeavesBlock, SaplingBlock> saplingMap = new HashMap();
@@ -40,7 +41,7 @@ public class BeaverChopTreeGoal extends Goal {
     }
 
     public boolean canStart() {
-        if (beaver.canChopTree()) {
+        if (!beaver.canChopTree()) {
             return false;
         }
 
@@ -48,11 +49,11 @@ public class BeaverChopTreeGoal extends Goal {
             return false;
         }
 
-        if (this.beaver.isFrenzied() || this.beaver.getRandom().nextInt(toGoalTicks(20)) != 0) {
+        if (this.beaver.getRandom().nextInt(toGoalTicks(20)) != 0) {
             return false;
         }
 
-        this.beaver.setChoppingTree(findChoppableTree(this.beaver.isFrenzied() ? 8 : 5));
+        this.beaver.setChoppingTree(findChoppableTree(5));
         if (this.beaver.getChoppingTreePos() == null) {
             return false;
         }

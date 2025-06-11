@@ -47,11 +47,6 @@ import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
 public class BeaverEntity extends AnimalEntity {
-    private static final TrackedData<BlockPos> TARGET_TREE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
-    private static final TrackedData<Boolean> HAS_TARGET_TREE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> CHOP_FATIGUE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> CHOP_FRENZY = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
     @Nullable
     private BlockPos choppingTree;
 
@@ -93,14 +88,6 @@ public class BeaverEntity extends AnimalEntity {
     public void tick() {
         super.tick();
         updateAnimations();
-
-        if (this.getDataTracker().get(CHOP_FATIGUE) > 0) {
-            this.getDataTracker().set(CHOP_FATIGUE, this.getDataTracker().get(CHOP_FATIGUE) - 1);
-        }
-
-        if (this.getDataTracker().get(CHOP_FRENZY) > 0) {
-            this.getDataTracker().set(CHOP_FRENZY, this.getDataTracker().get(CHOP_FRENZY) - 1);
-        }
     }
 
     public void updateAnimations() {
@@ -115,10 +102,6 @@ public class BeaverEntity extends AnimalEntity {
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-		builder.add(CHOP_FATIGUE, 0);
-		builder.add(CHOP_FRENZY, 0);
-		builder.add(HAS_TARGET_TREE, false);
-		builder.add(TARGET_TREE, BlockPos.ORIGIN);
     }
 
     @Override
@@ -180,24 +163,6 @@ public class BeaverEntity extends AnimalEntity {
         super.onDeath(source);
     }
 
-    @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        var itemStack = player.getStackInHand(hand);
-
-        // TODO: If fed poutine/donair/perogi have it chop trees like mad
-        if (itemStack.isOf(CanadaItems.POUTINE)) {
-            if (!this.getWorld().isClient) {
-                this.eat(player, hand, itemStack);
-                this.playEatSound();
-                this.getDataTracker().set(CHOP_FRENZY, 30 * 20);
-                this.getDataTracker().set(CHOP_FATIGUE, 0);
-                return ActionResult.SUCCESS_SERVER;
-            }
-        }
-
-        return super.interactMob(player, hand);
-    }
-
     public void setChoppingProgress(int progress) {
         if (choppingTree != null) {
             PlayerLookup.tracking(this).forEach(player -> {
@@ -208,8 +173,6 @@ public class BeaverEntity extends AnimalEntity {
 
     public void setChoppingTree(BlockPos pos) {
         this.choppingTree = pos;
-        this.getDataTracker().set(TARGET_TREE, pos == null ? BlockPos.ORIGIN : pos);
-        this.getDataTracker().set(HAS_TARGET_TREE, pos != null);
     }
 
     public BlockPos getChoppingTreePos() {
@@ -223,48 +186,10 @@ public class BeaverEntity extends AnimalEntity {
 
     public void onChopTree() {
         // Pause for 5 to 10 minutes
-        if (!this.isFrenzied()) {
-            this.getDataTracker().set(CHOP_FATIGUE, this.random.nextBetween(5 * 60 * 20, 10 * 60 * 20));
-        }
+
     }
 
     public boolean canChopTree() {
-        return !this.isBaby() && (this.getDataTracker().get(CHOP_FATIGUE) <= 0 || this.getDataTracker().get(CHOP_FRENZY) > 0);
-    }
-
-    public boolean isFrenzied() {
-        return this.getDataTracker().get(CHOP_FRENZY) > 0;
-    }
-
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-
-        nbt.putInt("chopFatigue", this.getDataTracker().get(CHOP_FATIGUE));
-        nbt.putInt("chopFrenzy", this.getDataTracker().get(CHOP_FRENZY));
-        nbt.putBoolean("hasTargetTree", this.getDataTracker().get(HAS_TARGET_TREE));
-        var tree = this.getDataTracker().get(TARGET_TREE);
-        nbt.putInt("targetTreeX", tree == null ? 0 : tree.getX());
-        nbt.putInt("targetTreeY", tree == null ? 0 : tree.getY());
-        nbt.putInt("targetTreeZ", tree == null ? 0 : tree.getZ());
-    }
-
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-
-        this.getDataTracker().set(CHOP_FATIGUE, nbt.getInt("chopFatigue").orElse(0));
-        this.getDataTracker().set(CHOP_FRENZY, nbt.getInt("chopFrenzy").orElse(0));
-        this.getDataTracker().set(HAS_TARGET_TREE, nbt.getBoolean("hasTargetTree").orElse(false));
-
-        var i = nbt.getInt("targetTreeX");
-        var j = nbt.getInt("targetTreeY");
-        var k = nbt.getInt("targetTreeZ");
-        if (i.isPresent() && j.isPresent() && k.isPresent()) {
-            this.getDataTracker().set(TARGET_TREE, new BlockPos(i.get(), j.get(), k.get()));
-        }
-        else {
-            this.getDataTracker().set(TARGET_TREE, BlockPos.ORIGIN);
-        }
+        return !this.isBaby();
     }
 }
