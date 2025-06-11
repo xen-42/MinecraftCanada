@@ -3,6 +3,7 @@ package xen42.canadamod;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
@@ -32,6 +33,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.poi.PointOfInterestType;
 import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.block.MooseSkullBlockEntity;
+import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
@@ -146,5 +148,7 @@ public class CanadaMod implements ModInitializer {
 			.or(BiomeSelectors.includeByKey(BiomeKeys.RIVER))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.SWAMP));
 		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.AMBIENT, BEAVER_ENTITY, 1, 1, 3);
+
+		PayloadTypeRegistry.playS2C().register(BeaverChopTreeEffectPayload.PAYLOAD_ID, BeaverChopTreeEffectPayload.CODEC);
 	}
 }

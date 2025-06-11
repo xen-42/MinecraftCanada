@@ -1,5 +1,10 @@
 package xen42.canadamod.entities;
 
+import org.jetbrains.annotations.Nullable;
+
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -17,18 +22,28 @@ import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
 public class BeaverEntity extends AnimalEntity {
+
+    @Nullable
+    public BlockPos choppingTree;
 
     public BeaverEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -94,5 +109,39 @@ public class BeaverEntity extends AnimalEntity {
     @Override
     public ItemStack getPickBlockStack() {
         return new ItemStack(CanadaItems.BEAVER_SPAWN_EGG);
+    }
+
+    @Override
+    public boolean isInsideWall() {
+        // Same as super but ignoring logs
+        if (this.noClip) {
+            return false;
+        } else {
+            var f = this.getDimensions(this.getPose()).width() * 0.8F;
+            var box = Box.of(this.getEyePos(), (double)f, 1.0E-6, (double)f);
+            return BlockPos.stream(box).anyMatch((pos) -> {
+                BlockState blockState = this.getWorld().getBlockState(pos);
+                return !blockState.isAir() && !blockState.isIn(BlockTags.LOGS) && blockState.shouldSuffocate(this.getWorld(), pos) && VoxelShapes.matchesAnywhere(blockState.getCollisionShape(this.getWorld(), pos).offset(pos), VoxelShapes.cuboid(box), BooleanBiFunction.AND);
+            });
+        }
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        setChoppingProgress(-1);
+        super.onDeath(source);
+    }
+
+    public void setChoppingProgress(int progress) {
+        if (choppingTree != null) {
+            PlayerLookup.tracking(this).forEach(player -> {
+                ServerPlayNetworking.send(player, new BeaverChopTreeEffectPayload(this.getId(), progress, choppingTree));
+            });
+        }
+    }
+
+    public void stopChopping() {
+        setChoppingProgress(-1);
+        this.choppingTree = null;
     }
 }

@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -33,11 +34,15 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import xen42.canadamod.armor.BeaverHatModel;
 import xen42.canadamod.armor.MooseHatModel;
 import xen42.canadamod.block.MooseSkullBlock;
+import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
+import xen42.canadamod.entities.BeaverChopTreeGoal;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
@@ -97,6 +102,15 @@ public class CanadaModClient implements ClientModInitializer {
 		ArmorRenderer.register(new BlockOnHeadArmorRenderer(CanadaBlocks.MOOSE_HEAD), CanadaItems.MOOSE_HEAD);
 
 		BlockEntityRendererFactories.register(CanadaMod.MOOSE_HEAD_ENTITY, MooseSkullBlockEntityRenderer::new);
+
+		ClientPlayNetworking.registerGlobalReceiver(BeaverChopTreeEffectPayload.PAYLOAD_ID, (payload, context) -> {
+			context.client().execute(() -> {
+				context.client().worldRenderer.setBlockBreakingInfo(payload.id, payload.pos, payload.stage);
+				context.client().world.playSoundAtBlockCenterClient(
+					payload.pos, BlockSoundGroup.WOOD.getHitSound(), SoundCategory.BLOCKS, 1.0f, 1.0f, false
+				);
+			});
+		});
 	}
 
 	public void addCustomWoodTypeTexture(WoodType type) {
