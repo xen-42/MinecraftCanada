@@ -46,6 +46,8 @@ accessible method net/minecraft/entity/effect/StatusEffect <init> (Lnet/minecraf
 
 accessible method net/minecraft/entity/player/PlayerEntity isEquipped (Lnet/minecraft/item/Item;)Z
 
+accessible field net/minecraft/entity/mob/MobEntity goalSelector Lnet/minecraft/entity/ai/goal/GoalSelector;
+
 
 
 
