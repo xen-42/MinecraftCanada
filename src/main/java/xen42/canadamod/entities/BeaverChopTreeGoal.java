@@ -18,6 +18,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
+import xen42.canadamod.CanadaBlocks;
 import xen42.canadamod.CanadaMod;
 
 public class BeaverChopTreeGoal extends Goal {
@@ -111,7 +112,7 @@ public class BeaverChopTreeGoal extends Goal {
         var dirt = world.getBlockState(pos.down());
         if (trunk.isIn(BlockTags.LOGS) && (dirt.isIn(BlockTags.DIRT) || dirt.isOf(Blocks.GRASS_BLOCK) || dirt.isOf(Blocks.PODZOL))) {
             // Move up to find leaves
-            for (int i = 3; i < 8; i++) {
+            for (int i = 0; i < 8; i++) {
                 var topBlockPos = pos.add(0, i, 0);
                 var topBlock = world.getBlockState(topBlockPos);
                 // TODO: also check for tree taps near the base
@@ -172,7 +173,7 @@ public class BeaverChopTreeGoal extends Goal {
                     continue;
                 }
                 var block = world.getBlockState(pos.add(ddx, 0, ddz));
-                if (block.isIn(BlockTags.LOGS)) {
+                if (block.isIn(BlockTags.LOGS) || block.isOf(CanadaBlocks.TREE_TAP)) {
                     return false;
                 }
             }

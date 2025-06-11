@@ -127,7 +127,7 @@ public class BeaverEntity extends AnimalEntity {
     }
 
     public boolean isFrenzyItem(ItemStack stack) {
-        return stack.isOf(CanadaItems.DONAIR) || stack.isOf(CanadaItems.DONAIR) || stack.isOf(CanadaItems.PIEROGI);
+        return stack.isOf(CanadaItems.DONAIR) || stack.isOf(CanadaItems.POUTINE) || stack.isOf(CanadaItems.PIEROGI);
     }
 
     public boolean isFatigueRefreshItem(ItemStack stack) {
