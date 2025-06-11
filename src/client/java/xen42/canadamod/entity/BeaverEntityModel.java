@@ -57,6 +57,10 @@ public class BeaverEntityModel extends QuadrupedEntityModel<BeaverEntityRenderSt
 			this.tail.pitch = -20 / MathHelper.DEGREES_PER_RADIAN;
 		}
 
+		float f = livingEntityRenderState.limbSwingAnimationProgress;
+		float g = livingEntityRenderState.limbSwingAmplitude;
+		this.tail.pitch += MathHelper.cos(f * 0.6662F) * 0.2F * g;
+
 		head.xScale = livingEntityRenderState.baby ? 1.5f : 1f;
 		head.yScale = livingEntityRenderState.baby ? 1.5f : 1f;
 		head.zScale = livingEntityRenderState.baby ? 1.5f : 1f;
