@@ -1,9 +1,7 @@
 package xen42.canadamod.entity;
 
 import net.minecraft.client.render.entity.EntityRendererFactory.Context;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.PigEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.CanadaMod;
@@ -32,5 +30,12 @@ public class BeaverEntityRenderer extends MobEntityRenderer<BeaverEntity, Beaver
             matrices.scale(0.5F, 0.5F, 0.5F); 
         }
         super.scale(state, matrices);
+    }
+
+    @Override
+    public void updateRenderState(BeaverEntity beaverEntity, BeaverEntityRenderState beaverEntityRenderState, float f) {
+        super.updateRenderState(beaverEntity, beaverEntityRenderState, f);
+
+        beaverEntityRenderState.chopAnimationState.copyFrom(beaverEntity.chopAnimationState);
     }
 }

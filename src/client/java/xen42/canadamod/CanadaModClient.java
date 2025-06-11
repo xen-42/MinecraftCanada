@@ -43,6 +43,7 @@ import xen42.canadamod.armor.MooseHatModel;
 import xen42.canadamod.block.MooseSkullBlock;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverChopTreeGoal;
+import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
@@ -105,6 +106,11 @@ public class CanadaModClient implements ClientModInitializer {
 
 		ClientPlayNetworking.registerGlobalReceiver(BeaverChopTreeEffectPayload.PAYLOAD_ID, (payload, context) -> {
 			context.client().execute(() -> {
+				// Animations and rendering all done on the client side, but Goal behaviours run on the server
+				var beaver = (BeaverEntity)context.client().world.getEntityById(payload.id);
+				if (beaver != null) {
+					beaver.isChopping = payload.stage != -1;
+				}
 				context.client().worldRenderer.setBlockBreakingInfo(payload.id, payload.pos, payload.stage);
 				context.client().world.playSoundAtBlockCenterClient(
 					payload.pos, BlockSoundGroup.WOOD.getHitSound(), SoundCategory.BLOCKS, 1.0f, 1.0f, false

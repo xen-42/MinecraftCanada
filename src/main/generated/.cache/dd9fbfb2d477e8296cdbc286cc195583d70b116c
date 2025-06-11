@@ -14,6 +14,7 @@ e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/block/fences.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/minecraft/tags/block/logs.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/minecraft/tags/block/logs_that_burn.json
 520258f088838c7e03f483bd5ef83a602445a643 data/minecraft/tags/block/mineable/axe.json
+5b7df77812d18ef992c2126e40a855b3def78d4d data/minecraft/tags/block/saplings.json
 b589454461d4984095cc3d656f4c2bb09302f970 data/minecraft/tags/block/wooden_buttons.json
 1f42b77e8c6e68a78e6b48deab9976eadc45e537 data/minecraft/tags/block/wooden_doors.json
 190cd66d942f1d044a58f6f715ecb0b16364b56f data/minecraft/tags/block/wooden_pressure_plates.json
