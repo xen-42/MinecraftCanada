@@ -2,6 +2,7 @@ package xen42.canadamod.entity;
 
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.QuadrupedEntityModel;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPartBuilder;
@@ -10,8 +11,11 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 
 public class BeaverEntityModel extends QuadrupedEntityModel<BeaverEntityRenderState> {
+	private ModelPart tail;
+	
 	public BeaverEntityModel(ModelPart root) {
         super(root);
+      	this.tail = root.getChild("tail");	
 	}
 
 	public static TexturedModelData getTexturedModelData() {
@@ -41,9 +45,17 @@ public class BeaverEntityModel extends QuadrupedEntityModel<BeaverEntityRenderSt
 
 	@Override
 	public void setAngles(BeaverEntityRenderState livingEntityRenderState) {
+		this.resetTransforms();
 		super.setAngles(livingEntityRenderState);
 
 		this.animate(livingEntityRenderState.chopAnimationState, BeaverEntityAnimation.CHOP, livingEntityRenderState.age, 1f);
+
+		if (livingEntityRenderState.isFrenzied) {
+			this.tail.pitch = 30 / MathHelper.DEGREES_PER_RADIAN;
+		}
+		else if (livingEntityRenderState.isFatigued) {
+			this.tail.pitch = -20 / MathHelper.DEGREES_PER_RADIAN;
+		}
 
 		head.xScale = livingEntityRenderState.baby ? 1.5f : 1f;
 		head.yScale = livingEntityRenderState.baby ? 1.5f : 1f;

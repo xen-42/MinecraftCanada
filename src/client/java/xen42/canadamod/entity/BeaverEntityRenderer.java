@@ -37,5 +37,7 @@ public class BeaverEntityRenderer extends MobEntityRenderer<BeaverEntity, Beaver
         super.updateRenderState(beaverEntity, beaverEntityRenderState, f);
 
         beaverEntityRenderState.chopAnimationState.copyFrom(beaverEntity.chopAnimationState);
+        beaverEntityRenderState.isFrenzied = beaverEntity.isFrenzied();
+        beaverEntityRenderState.isFatigued = beaverEntity.isFatigued();
     }
 }

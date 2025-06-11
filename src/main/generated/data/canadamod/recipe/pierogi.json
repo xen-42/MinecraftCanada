@@ -1,0 +1,12 @@
+{
+  "type": "canadamod:cooking_pot",
+  "ingredients": [
+    "canadamod:flour",
+    "canadamod:cheese_curd",
+    "minecraft:potato"
+  ],
+  "result": {
+    "count": 2,
+    "id": "canadamod:pierogi"
+  }
+}

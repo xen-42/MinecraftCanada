@@ -31,12 +31,15 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -49,6 +52,7 @@ import xen42.canadamod.CanadaMod;
 
 public class BeaverEntity extends AnimalEntity {
     private static final TrackedData<Integer> CHOP_FATIGUE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> CHOP_FRENZY = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     @Nullable
     private BlockPos choppingTree;
@@ -95,6 +99,9 @@ public class BeaverEntity extends AnimalEntity {
         if (this.getDataTracker().get(CHOP_FATIGUE) > 0) {
             this.getDataTracker().set(CHOP_FATIGUE, this.getDataTracker().get(CHOP_FATIGUE) - 1);
         }
+        if (this.getDataTracker().get(CHOP_FRENZY) > 0) {
+            this.getDataTracker().set(CHOP_FRENZY, this.getDataTracker().get(CHOP_FRENZY) - 1);
+        }
     }
 
     public void updateAnimations() {
@@ -111,6 +118,7 @@ public class BeaverEntity extends AnimalEntity {
         super.initDataTracker(builder);
 
         builder.add(CHOP_FATIGUE, 0);
+        builder.add(CHOP_FRENZY, 0);
     }
 
     @Override
@@ -118,8 +126,17 @@ public class BeaverEntity extends AnimalEntity {
         return stack.isOf(Items.STICK);
     }
 
+    public boolean isFrenzyItem(ItemStack stack) {
+        return stack.isOf(CanadaItems.DONAIR) || stack.isOf(CanadaItems.DONAIR) || stack.isOf(CanadaItems.PIEROGI);
+    }
+
+    public boolean isFatigueRefreshItem(ItemStack stack) {
+        return stack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE);
+    }
+
     public boolean isTemptItem(ItemStack stack) {
-        return (this.getDataTracker().get(CHOP_FATIGUE) > 0 && stack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE))
+        return (this.getDataTracker().get(CHOP_FATIGUE) > 0 && isFatigueRefreshItem(stack))
+            || (this.getDataTracker().get(CHOP_FRENZY) <= 0 && isFrenzyItem(stack))
             || isBreedingItem(stack);
     }
 
@@ -171,20 +188,47 @@ public class BeaverEntity extends AnimalEntity {
         }
     }
 
+    public boolean isFrenzied() {
+        return this.getDataTracker().get(CHOP_FRENZY) > 0;
+    }
+
+    public boolean isFatigued() {
+        return this.getDataTracker().get(CHOP_FATIGUE) > 0;
+    }
+
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         var itemStack = player.getStackInHand(hand);
 
-        // TODO: If fed poutine/donair/perogi have it chop trees like mad
-        if (itemStack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE) && this.getDataTracker().get(CHOP_FATIGUE) > 0) {
+        var didEat = false;
+        if (this.isFatigueRefreshItem(itemStack) && this.isFatigued()) {
+            didEat = true;
+            if (!this.getWorld().isClient) {
+                this.getDataTracker().set(CHOP_FATIGUE, 0);
+            }
+        }
+        if (this.isFrenzyItem(itemStack) && !this.isFrenzied()) {
+            didEat = true;
+            if (!this.getWorld().isClient) {
+                this.getDataTracker().set(CHOP_FRENZY, 20 * 30);
+            }
+        }
+
+        if (didEat) {
             if (!this.getWorld().isClient) {
                 this.eat(player, hand, itemStack);
                 this.playEatSound();
-                this.getDataTracker().set(CHOP_FATIGUE, 0);
                 return ActionResult.SUCCESS_SERVER;
             }
             else {
                 this.getWorld().addParticleClient(ParticleTypes.HAPPY_VILLAGER, this.getParticleX(1.0), this.getRandomBodyY() + 0.5, this.getParticleZ(1.0), 0.0, 0.0, 0.0);
+                if (itemStack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE)) {
+                    this.getWorld().playSoundFromEntityClient(this, SoundEvents.ITEM_HONEY_BOTTLE_DRINK.value(), SoundCategory.NEUTRAL, 1f, 1f);
+                }
+                else {
+                    this.getWorld().playSoundFromEntityClient(this, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1f, 1f);
+                }
+                return ActionResult.SUCCESS;
             }
         }
 
@@ -224,7 +268,7 @@ public class BeaverEntity extends AnimalEntity {
     }
 
     public boolean canChopTree() {
-        return !this.isBaby() && this.getDataTracker().get(CHOP_FATIGUE) <= 0;
+        return !this.isBaby() && (this.getDataTracker().get(CHOP_FATIGUE) <= 0 || isFrenzied());
     }
 
     @Override
@@ -232,6 +276,7 @@ public class BeaverEntity extends AnimalEntity {
         super.writeCustomDataToNbt(nbt);
 
         nbt.putInt("chopFatigue", this.getDataTracker().get(CHOP_FATIGUE));
+        nbt.putInt("chopFrenzy", this.getDataTracker().get(CHOP_FRENZY));
     }
 
     @Override
@@ -239,5 +284,6 @@ public class BeaverEntity extends AnimalEntity {
         super.readCustomDataFromNbt(nbt);
 
         this.getDataTracker().set(CHOP_FATIGUE, nbt.getInt("chopFatigue").orElse(0));
+        this.getDataTracker().set(CHOP_FRENZY, nbt.getInt("chopFrenzy").orElse(0));
     }
 }

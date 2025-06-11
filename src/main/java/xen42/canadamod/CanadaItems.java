@@ -52,8 +52,12 @@ public class CanadaItems {
     public static final Item FLOUR = register("flour", Item::new, new Item.Settings());
     public static final Item CHEESE_CURD = register("cheese_curd", Item::new, new Item.Settings()
         .food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.1f).build()));
-    public static final Item POUTINE = register("poutine", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
+    public static final Item POUTINE = register("poutine", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON).maxCount(1)
         .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).build()));
+    public static final Item DONAIR = register("donair", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
+        .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
+    public static final Item PIEROGI = register("pierogi", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
+        .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
 
     public static final Item BEAVER_SPAWN_EGG = register("beaver_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.BEAVER_ENTITY, settings), new Item.Settings());
@@ -187,6 +191,8 @@ public class CanadaItems {
             itemGroup.add(GRAVY);
             itemGroup.add(CHEESE_CURD);
             itemGroup.add(POUTINE);
+            itemGroup.add(DONAIR);
+            itemGroup.add(PIEROGI);
             itemGroup.add(VENISON);
             itemGroup.add(COOKED_VENISON);
             itemGroup.add(THERMOS);

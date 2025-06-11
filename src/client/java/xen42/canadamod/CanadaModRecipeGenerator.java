@@ -211,6 +211,18 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(CanadaItems.CHEESE_CURD, this)
                     .requiresBowl()
                     .offerTo(exporter);
+                
+                createCookingPotRecipe(registryLookup, CanadaItems.DONAIR, 2)
+                    .input(CanadaItems.FLOUR, this)
+                    .input(Items.BEEF, this)
+                    .input(Items.SUGAR, this)
+                    .offerTo(exporter);
+
+                createCookingPotRecipe(registryLookup, CanadaItems.PIEROGI, 2)
+                    .input(CanadaItems.FLOUR, this)
+                    .input(CanadaItems.CHEESE_CURD, this)
+                    .input(Items.POTATO, this)
+                    .offerTo(exporter);
 
                 createShaped(RecipeCategory.FOOD, CanadaItems.THERMOS)
                     .pattern(" X ")

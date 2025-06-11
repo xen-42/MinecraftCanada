@@ -49,7 +49,7 @@ public class BeaverChopTreeGoal extends Goal {
             return false;
         }
 
-        if (this.beaver.getRandom().nextInt(toGoalTicks(20)) != 0) {
+        if (!this.beaver.isFrenzied() && this.beaver.getRandom().nextInt(toGoalTicks(20)) != 0) {
             return false;
         }
 
@@ -215,7 +215,7 @@ public class BeaverChopTreeGoal extends Goal {
                 }
             }
         }
-        else if (this.beaver.getChoppingTreePos().toCenterPos().distanceTo(this.beaver.getPos()) < 1.4f) {
+        else if (this.beaver.getChoppingTreePos().toCenterPos().distanceTo(this.beaver.getPos()) < 1.6f) {
             // Reached the tree, chop it
             this.isChoppingTree = true;
             choppingTicks = MAX_BREAKING_TICKS;
