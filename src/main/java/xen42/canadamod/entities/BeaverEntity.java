@@ -117,7 +117,7 @@ public class BeaverEntity extends AnimalEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
 
-        builder.add(CHOP_FATIGUE, 0);
+        builder.add(CHOP_FATIGUE, this.random.nextBetween(20 * 60 * 3, 20 * 60 * 10));
         builder.add(CHOP_FRENZY, 0);
     }
 
