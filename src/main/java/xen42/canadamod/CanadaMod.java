@@ -8,9 +8,15 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnLocation;
+import net.minecraft.entity.SpawnLocationTypes;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
@@ -25,11 +31,19 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.structure.JigsawStructure;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
 import net.minecraft.world.poi.PointOfInterestType;
 import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.block.MooseSkullBlockEntity;
@@ -111,6 +125,10 @@ public class CanadaMod implements ModInitializer {
 		.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
 	);
 
+	public static final RegistryKey<Structure> MAPLE_CABIN_KEY = RegistryKey.of(RegistryKeys.STRUCTURE, Identifier.of(MOD_ID, "maple_cabin"));
+	public static final StructureType<JigsawStructure> MAPLE_CABIN_TYPE_KEY = Registry.register(Registries.STRUCTURE_TYPE, Identifier.of(MOD_ID, "maple_cabin"),
+		() -> JigsawStructure.CODEC);
+
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
@@ -137,18 +155,28 @@ public class CanadaMod implements ModInitializer {
 		BiomeModifications.addFeature(context -> context.getBiomeKey().getValue()
 			.equals(Identifier.of(CanadaMod.MOD_ID, "maple_forest")), GenerationStep.Feature.VEGETAL_DECORATION, CanadaPlacedFeatures.MAPLE_FOREST_VEGETATION);
 
+		SpawnRestriction.register(BEAVER_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
+		SpawnRestriction.register(MOOSE_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
+
 		var mooseBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
 			.or(BiomeSelectors.includeByKey(BiomeKeys.TAIGA))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_PINE_TAIGA))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.SNOWY_TAIGA));
-		BiomeModifications.addSpawn(mooseBiomes, SpawnGroup.AMBIENT, MOOSE_ENTITY, 1, 1, 3);
+		BiomeModifications.addSpawn(mooseBiomes, SpawnGroup.CREATURE, MOOSE_ENTITY, 60, 2, 2);
 
 		var beaverBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
 			.or(BiomeSelectors.includeByKey(BiomeKeys.RIVER))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.SWAMP));
-		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.AMBIENT, BEAVER_ENTITY, 1, 1, 3);
+		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, BEAVER_ENTITY, 100, 4, 4);
 
 		PayloadTypeRegistry.playS2C().register(BeaverChopTreeEffectPayload.PAYLOAD_ID, BeaverChopTreeEffectPayload.CODEC);
+	}
+
+	private static boolean canSpawn(EntityType type, ServerWorldAccess access, SpawnReason reason, BlockPos pos, Random random) {
+		var ground = access.getBlockState(pos.down());
+		var goodGround = ground.isIn(BlockTags.DIRT) || ground.isOf(Blocks.GRASS_BLOCK) || ground.isOf(Blocks.PODZOL) || ground.isOf(Blocks.SNOW);
+		var goodLight = access.getLightLevel(pos) > 8;
+		return goodGround && goodLight;
 	}
 }

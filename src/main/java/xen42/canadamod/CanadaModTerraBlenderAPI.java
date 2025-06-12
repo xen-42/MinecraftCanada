@@ -45,7 +45,7 @@ public class CanadaModTerraBlenderAPI implements TerraBlenderApi {
             new ParameterPointListBuilder()
                 .temperature(Temperature.span(Temperature.COOL, Temperature.ICY))
                 .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.HUMID))
-                .continentalness(Continentalness.FULL_RANGE)
+                .continentalness(Continentalness.INLAND)
                 .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
                 .depth(Depth.SURFACE, Depth.FLOOR)
                 .weirdness(Weirdness.PEAK_NORMAL)

@@ -17,7 +17,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
@@ -34,10 +33,9 @@ import net.minecraft.world.tick.ScheduledTickView;
 import xen42.canadamod.CanadaBlocks;
 import xen42.canadamod.CanadaItems;
 
-public class TreeTapBlock extends Block {
+public class TreeTapBlock extends HorizontalFacingBlock {
     public static int MAX_SAP = 4;
     public static IntProperty SAP_LEVEL = IntProperty.of("sap_level", 0, MAX_SAP);
-    public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING; 
     public static final MapCodec<TreeTapBlock> CODEC = createCodec(TreeTapBlock::new);
 
     public final VoxelShape northShape;

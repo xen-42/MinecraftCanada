@@ -123,7 +123,7 @@ public class CanadaVillagers {
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.CARTOGRAPHER, 3, factories -> {
 			// Map to sugar shack
 			factories.add((entity, random) -> SellMap(entity, random, 10,
-				CanadaTags.StructureTags.SUGAR_SHACK, MapDecorationTypes.TARGET_X, 4, 15));
+				CanadaTags.StructureTags.MAPLE_CABIN, MapDecorationTypes.TARGET_X, 4, 15));
 		});
     }
 

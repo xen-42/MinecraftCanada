@@ -1,4 +1,5 @@
 {
+  "biome.canadamod.maple_forest": "Maple Forest",
   "block.canadamod.cooking_pot": "Cooking Pot",
   "effect.canadamod.beaver_effect": "Busy Beaver",
   "effect.canadamod.moose_effect": "Moose's Strength",
@@ -7,6 +8,7 @@
   "entity.canadamod.villager.sugar_shack": "Lumberjack",
   "entity.minecraft.maple_boat": "Maple Boat",
   "entity.minecraft.maple_chest_boat": "Maple Boat with Chest",
+  "filled_map.canadamod.maple_cabin": "Maple Forest Cabin",
   "item.canadamod.antlers": "Antler",
   "item.canadamod.beaver_helmet": "Beaver Pelt Hat",
   "item.canadamod.beaver_spawn_egg": "Beaver Spawn Egg",
@@ -54,5 +56,5 @@
   "tag.item.canadamod.maple_logs": "Maple Logs",
   "tag.item.canadamod.red_meat": "Red Meat",
   "tag.item.canadamod.sap": "Sap",
-  "tag.worldgen.structure.canadamod.sugar_shack": "Sugar Shack"
+  "tag.worldgen.structure.canadamod.maple_cabin": "Maple Forest Cabin"
 }

@@ -1,4 +1,5 @@
 {
+  "biome.canadamod.maple_forest": "ʇsǝɹoℲ ǝꞁdɐW",
   "block.canadamod.cooking_pot": "ʇoԀ ᵷuᴉʞooƆ",
   "effect.canadamod.beaver_effect": "ɹǝʌɐǝᗺ ʎsnᗺ",
   "effect.canadamod.moose_effect": "ɥʇᵷuǝɹʇS s,ǝsooW",
@@ -7,6 +8,7 @@
   "entity.canadamod.villager.sugar_shack": "ʞɔɐɾɹǝqɯnꞀ",
   "entity.minecraft.maple_boat": "ʇɐoᗺ ǝꞁdɐW",
   "entity.minecraft.maple_chest_boat": "ʇsǝɥƆ ɥʇᴉʍ ʇɐoᗺ ǝꞁdɐW",
+  "filled_map.canadamod.maple_cabin": "uᴉqɐƆ ʇsǝɹoℲ ǝꞁdɐW",
   "item.canadamod.antlers": "ɹǝꞁʇuⱯ",
   "item.canadamod.beaver_helmet": "ʇɐH ʇꞁǝԀ ɹǝʌɐǝᗺ",
   "item.canadamod.beaver_spawn_egg": "ᵷᵷƎ uʍɐdS ɹǝʌɐǝᗺ",
@@ -54,5 +56,5 @@
   "tag.item.canadamod.maple_logs": "sᵷoꞀ ǝꞁdɐW",
   "tag.item.canadamod.red_meat": "ʇɐǝW pǝᴚ",
   "tag.item.canadamod.sap": "dɐS",
-  "tag.worldgen.structure.canadamod.sugar_shack": "ʞɔɐɥS ɹɐᵷnS"
+  "tag.worldgen.structure.canadamod.maple_cabin": "uᴉqɐƆ ʇsǝɹoℲ ǝꞁdɐW"
 }

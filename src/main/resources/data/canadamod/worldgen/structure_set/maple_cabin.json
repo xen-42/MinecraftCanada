@@ -1,0 +1,14 @@
+{
+    "structures": [
+        {
+            "structure": "canadamod:maple_cabin",
+            "weight": 1
+        }
+    ],
+    "placement": {
+        "type": "minecraft:random_spread",
+        "spacing": 40,
+        "separation": 20,
+        "salt": 42424242
+    }
+}

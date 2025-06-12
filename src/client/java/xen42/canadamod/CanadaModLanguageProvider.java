@@ -129,12 +129,16 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add("effect.canadamod.beaver_effect", "Busy Beaver");
 			translationBuilder.add("effect.canadamod.moose_effect", "Moose's Strength");
 
-			translationBuilder.add(CanadaTags.StructureTags.SUGAR_SHACK, "Sugar Shack");
+			translationBuilder.add(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
+			translationBuilder.addFilledMap(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
+			
 			translationBuilder.add(CanadaTags.ItemTags.MAPLE_LOGS, "Maple Logs");
 			translationBuilder.add(CanadaTags.ItemTags.RED_MEAT, "Red Meat");
 			translationBuilder.add(CanadaTags.ItemTags.SAP, "Sap");
 			translationBuilder.add(CanadaTags.BlockTags.MAPLE_LOGS, "Maple Logs");
 			translationBuilder.addVillagerProfession(CanadaVillagers.SUGAR_SHACK_VILLAGER_KEY, "Lumberjack");
+
+			translationBuilder.add("biome.canadamod.maple_forest", "Maple Forest");
 		}
 	}
 	
