@@ -10,6 +10,7 @@ aba537218c7dd933ec02741a81d994f0d6a3cab0 data/minecraft/tags/block/all_hanging_s
 8274c4be05aba93a68e3552387c0bb307952469b data/minecraft/tags/block/all_signs.json
 6585e92b311f42ef9c67e2e634f879419e188ee1 data/minecraft/tags/block/fence_gates.json
 e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/block/fences.json
+1ff05c42f837b53b1b92fa0c534ee95af326be14 data/minecraft/tags/block/flower_pots.json
 2c8ae194c54cdf79b288670fe8b6d5b8c7cddbb9 data/minecraft/tags/block/leaves.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/minecraft/tags/block/logs.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/minecraft/tags/block/logs_that_burn.json

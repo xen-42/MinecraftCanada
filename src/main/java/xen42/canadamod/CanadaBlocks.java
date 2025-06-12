@@ -15,6 +15,7 @@ import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
@@ -85,6 +86,10 @@ public class CanadaBlocks {
 	public static final Block MAPLE_SAPLING = register("maple_sapling", 
         settings -> new SaplingBlock(MAPLE_SAPLING_GENERATED, settings), 
         AbstractBlock.Settings.copy(Blocks.OAK_SAPLING).mapColor(MapColor.RED),
+		false);
+
+	public static final Block POTTED_MAPLE_SAPLING = register("potted_maple_sapling", 
+		settings -> new FlowerPotBlock(MAPLE_SAPLING, settings), Blocks.createFlowerPotSettings(), 
 		false);
 
 	public static Block TREE_TAP = register(

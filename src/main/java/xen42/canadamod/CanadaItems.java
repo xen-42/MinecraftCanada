@@ -156,6 +156,7 @@ public class CanadaItems {
         // Add custom items to groups
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register((itemGroup) -> { 
             itemGroup.add(PELT);
+            itemGroup.add(ANTLERS);
             itemGroup.add(FLOUR);
             itemGroup.add(SAP);
             itemGroup.add(MAPLE_SAP);
