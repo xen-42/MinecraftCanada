@@ -1,5 +1,6 @@
 {
     "type": "minecraft:jigsaw",
+    "spawn_overrides": { },
     "step": "surface_structures",
     "terrain_adaptation": "beard_thin",
     "start_pool": "canadamod:maple_cabin",
