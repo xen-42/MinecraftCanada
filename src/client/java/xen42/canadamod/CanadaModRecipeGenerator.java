@@ -61,6 +61,15 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(CanadaTags.ItemTags.MAPLE_LOGS)
                     .criterion(hasTag(CanadaTags.ItemTags.MAPLE_LOGS), conditionsFromTag(CanadaTags.ItemTags.MAPLE_LOGS))
                     .offerTo(exporter);
+
+                createShaped(RecipeCategory.TOOLS, CanadaBlocks.COOKING_POT)
+                    .pattern("X")
+                    .pattern("Y")
+                    .input('X', Items.CAULDRON)
+                    .input('Y', Items.FURNACE)
+                    .criterion(hasItem(Items.CAULDRON), conditionsFromItem(Items.CAULDRON))
+                    .criterion(hasItem(Items.FURNACE), conditionsFromItem(Items.FURNACE))
+                    .offerTo(exporter);
                 
                 createStairsRecipe(CanadaBlocks.MAPLE_STAIRS.asItem(), Ingredient.ofItem(CanadaBlocks.MAPLE_PLANKS.asItem()))
                     .criterion(hasItem(CanadaBlocks.MAPLE_PLANKS), conditionsFromItem(CanadaBlocks.MAPLE_PLANKS))
@@ -175,16 +184,14 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(Items.WATER_BUCKET, this)
                     .offerTo(exporter);   
 
-                createCookingPotRecipe(registryLookup, Items.SLIME_BALL, 3)
+                createCookingPotRecipe(registryLookup, Items.SLIME_BALL, 1)
                     .input(CanadaItems.FLOUR, this)
                     .input(CanadaTags.ItemTags.SAP, this)
                     .offerTo(exporter);   
                     
                 createCookingPotRecipe(registryLookup, CanadaItems.GRAVY, 1)
                     .input(CanadaItems.FLOUR, this)
-                    .input(Items.CHICKEN, this)
                     .input(CanadaTags.ItemTags.RED_MEAT, this)
-                    .input(Items.WATER_BUCKET, this)
                     .requiresBottle()
                     .offerTo(exporter);   
                 
@@ -233,7 +240,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
                     .offerTo(exporter);
 
-                createShaped(RecipeCategory.FOOD, CanadaBlocks.RUBBER_BLOCK)
+                createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.RUBBER_BLOCK)
                     .pattern("XX")
                     .pattern("XX")
                     .input('X', CanadaItems.RUBBER)

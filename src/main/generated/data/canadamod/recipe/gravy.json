@@ -2,9 +2,7 @@
   "type": "canadamod:cooking_pot",
   "ingredients": [
     "canadamod:flour",
-    "minecraft:chicken",
-    "#canadamod:red_meat",
-    "minecraft:water_bucket"
+    "#canadamod:red_meat"
   ],
   "requiresBottle": true,
   "result": {
