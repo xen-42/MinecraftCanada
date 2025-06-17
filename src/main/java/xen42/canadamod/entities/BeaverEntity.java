@@ -39,6 +39,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -49,6 +50,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
+import xen42.canadamod.CanadaSounds;
 
 public class BeaverEntity extends AnimalEntity {
     private static final TrackedData<Integer> CHOP_FATIGUE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -146,6 +148,21 @@ public class BeaverEntity extends AnimalEntity {
     }
 
     @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return CanadaSounds.SOUND_BEAVER_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return CanadaSounds.SOUND_BEAVER_DEATH;
+    }
+
+    @Nullable
+    protected SoundEvent getAmbientSound() {
+        return CanadaSounds.SOUND_BEAVER_AMBIENT;
+    }
+
+    @Override
     public float getScaleFactor() {
         return isBaby() ? 0.5F : 1.0F;
     }
@@ -226,7 +243,7 @@ public class BeaverEntity extends AnimalEntity {
                     this.getWorld().playSoundFromEntityClient(this, SoundEvents.ITEM_HONEY_BOTTLE_DRINK.value(), SoundCategory.NEUTRAL, 1f, 1f);
                 }
                 else {
-                    this.getWorld().playSoundFromEntityClient(this, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.NEUTRAL, 1f, 1f);
+                    this.getWorld().playSoundFromEntityClient(this, CanadaSounds.SOUND_BEAVER_EAT, SoundCategory.NEUTRAL, 1f, 1f);
                 }
                 return ActionResult.SUCCESS;
             }

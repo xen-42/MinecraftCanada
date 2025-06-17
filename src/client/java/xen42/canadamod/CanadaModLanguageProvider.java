@@ -138,6 +138,14 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.addVillagerProfession(CanadaVillagers.SUGAR_SHACK_VILLAGER_KEY, "Lumberjack");
 
 			translationBuilder.add("biome.canadamod.maple_forest", "Maple Forest");
+
+			translationBuilder.add("subtitles.canadamod.beaver_ambient", "Beaver grunts");
+			translationBuilder.add("subtitles.canadamod.beaver_death", "Beaver dies");
+			translationBuilder.add("subtitles.canadamod.beaver_hurt", "Beaver hurts");
+			translationBuilder.add("subtitles.canadamod.moose_ambient", "Moose calls");
+			translationBuilder.add("subtitles.canadamod.moose_angry", "Moose grunts angrily");
+			translationBuilder.add("subtitles.canadamod.moose_death", "Moose dies");
+			translationBuilder.add("subtitles.canadamod.moose_hurt", "Moose hurts");
 		}
 	}
 	

@@ -171,6 +171,8 @@ public class CanadaMod implements ModInitializer {
 		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, BEAVER_ENTITY, 100, 4, 4);
 
 		PayloadTypeRegistry.playS2C().register(BeaverChopTreeEffectPayload.PAYLOAD_ID, BeaverChopTreeEffectPayload.CODEC);
+
+		CanadaSounds.onInit();
 	}
 
 	private static boolean canSpawn(EntityType type, ServerWorldAccess access, SpawnReason reason, BlockPos pos, Random random) {

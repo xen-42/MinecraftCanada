@@ -55,6 +55,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
+import xen42.canadamod.CanadaSounds;
 
 public class MooseEntity extends AbstractHorseEntity implements Angerable {
     private static final TrackedData<Boolean> LEFT_ANTLER_MISSING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -78,6 +79,21 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         super.initDataTracker(builder);
 		builder.add(LEFT_ANTLER_MISSING, false);
 		builder.add(RIGHT_ANTLER_MISSING, false);
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return CanadaSounds.SOUND_MOOSE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return CanadaSounds.SOUND_MOOSE_DEATH;
+    }
+
+    @Nullable
+    protected SoundEvent getAmbientSound() {
+        return CanadaSounds.SOUND_MOOSE_AMBIENT;
     }
 
     public boolean isLeftAntlerMissing() {
@@ -348,7 +364,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     protected SoundEvent getAngrySound() {
-        return SoundEvents.ENTITY_HORSE_ANGRY;
+        return CanadaSounds.SOUND_MOOSE_ANGRY;
     }
 
     @Override

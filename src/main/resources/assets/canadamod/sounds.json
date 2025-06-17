@@ -1,0 +1,56 @@
+{
+    "beaver_ambient": {
+        "sounds": [
+            "canadamod:beaver_ambient1",
+            "canadamod:beaver_ambient2",
+            "canadamod:beaver_ambient3",
+            "canadamod:beaver_ambient4"
+        ],
+        "subtitle": "subtitles.canadamod.beaver_ambient"
+    },
+    "beaver_death": {
+        "sounds": [
+            "canadamod:beaver_death1",
+            "canadamod:beaver_death2"
+        ],
+        "subtitle": "subtitles.canadamod.beaver_death"
+    },
+    "beaver_hurt": {
+        "sounds": [
+            "canadamod:beaver_hurt1",
+            "canadamod:beaver_hurt2"
+        ],
+        "subtitle": "subtitles.canadamod.beaver_hurt"
+    },
+    "moose_ambient": {
+        "sounds": [
+            "canadamod:moose_ambient1",
+            "canadamod:moose_ambient2",
+            "canadamod:moose_ambient3"
+        ],
+        "subtitle": "subtitles.canadamod.moose_ambient"
+    },
+    "moose_angry": {
+        "sounds": [
+            "canadamod:moose_angry1",
+            "canadamod:moose_angry2",
+            "canadamod:moose_angry3",
+            "canadamod:moose_angry4"
+        ],
+        "subtitle": "subtitles.canadamod.moose_angry"
+    },
+    "moose_death": {
+        "sounds": [
+            "canadamod:moose_death1",
+            "canadamod:moose_death2"
+        ],
+        "subtitle": "subtitles.canadamod.moose_death"
+    },
+    "moose_hurt": {
+        "sounds": [
+            "canadamod:moose_hurt1",
+            "canadamod:moose_hurt2"
+        ],
+        "subtitle": "subtitles.canadamod.moose_hurt"
+    }
+}
