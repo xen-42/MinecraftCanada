@@ -41,8 +41,10 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -123,9 +125,9 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     public static DefaultAttributeContainer.Builder createMooseAttributes() {
         return AnimalEntity.createAnimalAttributes().add(EntityAttributes.MAX_HEALTH, 25.0f).add(EntityAttributes.MOVEMENT_SPEED, 0.25f)
             .add(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, 2f)
-            .add(EntityAttributes.ATTACK_DAMAGE, 6.0D)
+            .add(EntityAttributes.ATTACK_DAMAGE, 3.0D)
             .add(EntityAttributes.OXYGEN_BONUS)
-            .add(EntityAttributes.JUMP_STRENGTH, 0.4D)
+            .add(EntityAttributes.JUMP_STRENGTH, 0.6D)
             .add(EntityAttributes.STEP_HEIGHT, 1.5D)
             .add(EntityAttributes.FOLLOW_RANGE, 20.0D);
     }
@@ -191,7 +193,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.SEAGRASS);
+        return stack.isOf(Items.SEAGRASS) || stack.isIn(ItemTags.LEAVES);
     }
 
     @Override
