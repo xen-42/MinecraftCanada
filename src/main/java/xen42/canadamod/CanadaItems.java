@@ -44,6 +44,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
+import xen42.canadamod.item.DurabilityFoodItem;
 import xen42.canadamod.item.ThermosContentsComponent;
 import xen42.canadamod.item.ThermosItem;
 
@@ -52,8 +53,9 @@ public class CanadaItems {
     public static final Item FLOUR = register("flour", Item::new, new Item.Settings());
     public static final Item CHEESE_CURD = register("cheese_curd", Item::new, new Item.Settings()
         .food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.1f).build()));
-    public static final Item POUTINE = register("poutine", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON).maxCount(1)
-        .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).build()));
+    public static final Item POUTINE = register("poutine", DurabilityFoodItem::new, new Item.Settings().rarity(Rarity.UNCOMMON)
+        .maxCount(1).maxDamage(8).recipeRemainder(Items.BOWL).useRemainder(Items.BOWL)
+        .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).alwaysEdible().build()));
     public static final Item DONAIR = register("donair", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
         .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
     public static final Item PIEROGI = register("pierogi", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
