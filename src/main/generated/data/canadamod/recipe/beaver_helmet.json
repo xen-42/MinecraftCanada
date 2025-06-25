@@ -6,8 +6,9 @@
     "Y": "#canadamod:sap"
   },
   "pattern": [
+    " Y ",
     "XXX",
-    "XYX"
+    "X X"
   ],
   "result": {
     "count": 1,

@@ -34,8 +34,11 @@ public class CanadaModBlockLootTableGenerator extends FabricBlockLootTableProvid
         addDrop(CanadaBlocks.MAPLE_LEAVES, block -> leavesDrops(block, CanadaBlocks.MAPLE_SAPLING, SAPLING_DROP_CHANCE));   
         addDrop(CanadaBlocks.STRIPPED_MAPLE_LOG);
         addDrop(CanadaBlocks.STRIPPED_MAPLE_WOOD);
-        addDrop(CanadaBlocks.TREE_TAP);
+        addDrop(CanadaBlocks.TREE_TAP, block -> drops(CanadaItems.TREE_TAP));
         addDrop(CanadaBlocks.COOKING_POT);
         addDrop(CanadaBlocks.RUBBER_BLOCK);
+        addDrop(CanadaBlocks.POTTED_MAPLE_SAPLING, block -> pottedPlantDrops(CanadaItems.MAPLE_SAPLING));
+        addDrop(CanadaBlocks.MOOSE_HEAD, drops(CanadaItems.MOOSE_HEAD));
+        addDrop(CanadaBlocks.MOOSE_WALL_HEAD, drops(CanadaItems.MOOSE_HEAD));
     }
 }

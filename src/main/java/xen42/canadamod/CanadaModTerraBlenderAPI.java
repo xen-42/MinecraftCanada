@@ -46,7 +46,7 @@ public class CanadaModTerraBlenderAPI implements TerraBlenderApi {
                 .temperature(Temperature.span(Temperature.COOL, Temperature.ICY))
                 .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.HUMID))
                 .continentalness(Continentalness.INLAND)
-                .erosion(Erosion.EROSION_0, Erosion.EROSION_1)
+                .erosion(Erosion.FULL_RANGE)
                 .depth(Depth.SURFACE, Depth.FLOOR)
                 .weirdness(Weirdness.PEAK_NORMAL)
                 .build().forEach(point -> builder.add(point, CanadaMod.MAPLE_BIOME_KEY));

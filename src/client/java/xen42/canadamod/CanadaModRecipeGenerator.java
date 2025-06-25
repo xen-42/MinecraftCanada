@@ -121,14 +121,14 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                 offerBoatRecipe(CanadaItems.MAPLE_BOAT, CanadaBlocks.MAPLE_PLANKS);
                 offerChestBoatRecipe(CanadaItems.MAPLE_CHEST_BOAT, CanadaBlocks.MAPLE_PLANKS);
 
-                createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.MAPLE_WOOD)
+                createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.MAPLE_WOOD, 3)
                     .pattern("XX")
                     .pattern("XX")
                     .input('X', CanadaBlocks.MAPLE_LOG)
                     .criterion(hasItem(CanadaBlocks.MAPLE_LOG), conditionsFromItem(CanadaBlocks.MAPLE_LOG))
                     .offerTo(exporter);
                 
-                createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.STRIPPED_MAPLE_WOOD)
+                createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.STRIPPED_MAPLE_WOOD, 3)
                     .pattern("XX")
                     .pattern("XX")
                     .input('X', CanadaBlocks.STRIPPED_MAPLE_LOG)
@@ -248,8 +248,9 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .offerTo(exporter);
 
                 createShaped(RecipeCategory.COMBAT, CanadaItems.BEAVER_HELMET)
+                    .pattern(" Y ")
                     .pattern("XXX")
-                    .pattern("XYX")
+                    .pattern("X X")
                     .input('X', CanadaItems.PELT)
                     .input('Y', CanadaTags.ItemTags.SAP)
                     .criterion(hasItem(CanadaItems.PELT), conditionsFromItem(CanadaItems.PELT))

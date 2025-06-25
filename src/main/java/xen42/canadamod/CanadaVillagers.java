@@ -75,8 +75,8 @@ public class CanadaVillagers {
 				new TradedItem(CanadaItems.PELT, 9),
 				new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
-				new TradedItem(CanadaBlocks.MAPLE_PLANKS, 12),
-				new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
+				new TradedItem(Items.EMERALD, 2),
+				new ItemStack(CanadaItems.MAPLE_SAPLING, 4), 12, 5, 0.05f));
 		});
 
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 3, factories -> {

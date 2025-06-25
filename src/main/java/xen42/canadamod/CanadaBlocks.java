@@ -3,6 +3,7 @@ package xen42.canadamod;
 import java.util.Optional;
 import java.util.function.Function;
 
+import net.fabricmc.fabric.api.item.v1.FabricItem.Settings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
@@ -95,14 +96,15 @@ public class CanadaBlocks {
 	public static Block TREE_TAP = register(
 			"tree_tap",
 			TreeTapBlock::new,
-			AbstractBlock.Settings.copy(Blocks.CHAIN).pistonBehavior(PistonBehavior.DESTROY).breakInstantly(),
+			AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.CHAIN).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).breakInstantly(),
 			false
 		);
 	
 	public static Block COOKING_POT = register(
 		"cooking_pot",
 		CookingPotBlock::new,
-		AbstractBlock.Settings.copy(Blocks.CAULDRON).luminance(Blocks.createLightLevelFromLitBlockState(13)).nonOpaque(),
+		AbstractBlock.Settings.create().luminance(Blocks.createLightLevelFromLitBlockState(13)).nonOpaque()
+			.mapColor(MapColor.STONE_GRAY).pistonBehavior(PistonBehavior.DESTROY).hardness(0.3f),
 		true
 	);
 
@@ -112,14 +114,14 @@ public class CanadaBlocks {
 	public static Block MOOSE_HEAD = register(
 		"moose_head",
 		MooseSkullBlock::new,
-		AbstractBlock.Settings.copy(Blocks.ZOMBIE_HEAD),
+		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY),
 		false
 	);
 
 	public static Block MOOSE_WALL_HEAD = register(
 		"moose_head_wall",
 		MooseWallSkullBlock::new,
-		AbstractBlock.Settings.copy(Blocks.ZOMBIE_WALL_HEAD),
+		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY),
 		false
 	);
 
