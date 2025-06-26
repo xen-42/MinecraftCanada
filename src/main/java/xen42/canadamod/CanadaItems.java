@@ -169,6 +169,7 @@ public class CanadaItems {
             for (var block : CanadaBlocks.MAPLE_BLOCKS) {
                 itemGroup.add(block.asItem());
             }
+            itemGroup.add(CanadaBlocks.RUBBER_BLOCK);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register((itemGroup) -> { 
