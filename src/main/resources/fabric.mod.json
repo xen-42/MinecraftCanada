@@ -29,6 +29,7 @@
 			"xen42.canadamod.CanadaModTerraBlenderAPI"
 		]
 	},
+	"accessWidener": "canadamod.accesswidener",
 	"mixins": [
 		"canadamod.mixins.json",
 		{
