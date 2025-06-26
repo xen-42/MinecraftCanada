@@ -138,12 +138,12 @@ public class CanadaMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(MOOSE_ENTITY, MooseEntity.createMooseAttributes());
 
 		BEAVER_EFFECT = registerStatusEffect("beaver_effect",
-			(new StatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
+			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
 			.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 3f, Operation.ADD_MULTIPLIED_TOTAL)
 			.addAttributeModifier(EntityAttributes.SUBMERGED_MINING_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
 		);
 		MOOSE_EFFECT = registerStatusEffect("moose_effect",
-			(new StatusEffect(StatusEffectCategory.BENEFICIAL, 7079970))
+			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 7079970))
 			.addAttributeModifier(EntityAttributes.MAX_HEALTH, Identifier.of(MOD_ID, "effect.moose_effect"), 6.0, Operation.ADD_VALUE)
 			.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
 		);
