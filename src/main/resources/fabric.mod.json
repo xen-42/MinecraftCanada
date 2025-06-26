@@ -2,16 +2,17 @@
 	"schemaVersion": 1,
 	"id": "canadamod",
 	"version": "${version}",
-	"name": "CanadaMod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Canadian Content",
+	"description": "Adds Canadian stuff to Minecraft - Moose, beavers, cooking pot for new foods, tree tapping for maple syrup and more.",
 	"authors": [
-		"Me!"
+		"xen-42"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/xen-42/MinecraftCanada/releases",
+		"sources": "https://github.com/xen-42/MinecraftCanada",
+		"issues": "https://github.com/xen-42/MinecraftCanada/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/canadamod/icon.png",
 	"environment": "*",
 	"entrypoints": {
