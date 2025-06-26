@@ -37,10 +37,11 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.16.14",
+		"fabricloader": ">=0.16.10",
 		"minecraft": "~1.21.5",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"terrablender": "5.0.0.1"
 	},
 	"suggests": {
 
