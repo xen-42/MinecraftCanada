@@ -19,3 +19,7 @@ To flesh out these features the mod adds a number of minor features:
 - Thermos: Made from iron and rubber. Acts as a bundle that carries only single stack consumables. Lets you have a stack of 64 soups/drinks/potions. Interacting consumes the first one in the stack.
 - Gravy and cheese curd foods as ingredients for poutine. Both made in the cooking pot.
 - Lumberjack villager: If you can't find a maple biome, the lumberjack can sell you maple saplings at level 2 (workstation: tree tap).
+
+### Requirements:
+
+[TerraBlender](https://github.com/Glitchfiend/TerraBlender) without which the maple biome generation would not happen.
