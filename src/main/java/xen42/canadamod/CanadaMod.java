@@ -114,16 +114,8 @@ public class CanadaMod implements ModInitializer {
 	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);
 	}
-	public static final RegistryEntry<StatusEffect> BEAVER_EFFECT = registerStatusEffect("beaver_effect",
-		(new StatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
-		.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 3f, Operation.ADD_MULTIPLIED_TOTAL)
-		.addAttributeModifier(EntityAttributes.SUBMERGED_MINING_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
-	);
-	public static final RegistryEntry<StatusEffect> MOOSE_EFFECT = registerStatusEffect("moose_effect",
-		(new StatusEffect(StatusEffectCategory.BENEFICIAL, 7079970))
-		.addAttributeModifier(EntityAttributes.MAX_HEALTH, Identifier.of(MOD_ID, "effect.moose_effect"), 6.0, Operation.ADD_VALUE)
-		.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
-	);
+	public static RegistryEntry<StatusEffect> BEAVER_EFFECT;
+	public static RegistryEntry<StatusEffect> MOOSE_EFFECT;
 
 	public static final RegistryKey<Structure> MAPLE_CABIN_KEY = RegistryKey.of(RegistryKeys.STRUCTURE, Identifier.of(MOD_ID, "maple_cabin"));
 	public static final StructureType<JigsawStructure> MAPLE_CABIN_TYPE_KEY = Registry.register(Registries.STRUCTURE_TYPE, Identifier.of(MOD_ID, "maple_cabin"),
@@ -144,6 +136,17 @@ public class CanadaMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(BEAVER_ENTITY, BeaverEntity.createBeaverAttributes());
 		FabricDefaultAttributeRegistry.register(MOOSE_ENTITY, MooseEntity.createMooseAttributes());
+
+		BEAVER_EFFECT = registerStatusEffect("beaver_effect",
+			(new StatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
+			.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 3f, Operation.ADD_MULTIPLIED_TOTAL)
+			.addAttributeModifier(EntityAttributes.SUBMERGED_MINING_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
+		);
+		MOOSE_EFFECT = registerStatusEffect("moose_effect",
+			(new StatusEffect(StatusEffectCategory.BENEFICIAL, 7079970))
+			.addAttributeModifier(EntityAttributes.MAX_HEALTH, Identifier.of(MOD_ID, "effect.moose_effect"), 6.0, Operation.ADD_VALUE)
+			.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
+		);
 
 		CanadaBlocks.initialize();
 		CanadaConfiguredFeatures.onInitialize();
