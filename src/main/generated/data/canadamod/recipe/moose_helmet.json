@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "X": "minecraft:leather",
-    "Y": "#canadamod:sap",
+    "Y": "#c:sap",
     "Z": "canadamod:antlers"
   },
   "pattern": [

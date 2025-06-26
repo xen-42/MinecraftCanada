@@ -1,9 +1,9 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
-    "canadamod:flour",
-    "canadamod:flour",
-    "canadamod:flour",
+    "#c:flour",
+    "#c:flour",
+    "#c:flour",
     "minecraft:water_bucket"
   ],
   "result": {

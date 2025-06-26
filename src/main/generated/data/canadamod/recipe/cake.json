@@ -4,7 +4,7 @@
     "minecraft:milk_bucket",
     "minecraft:egg",
     "minecraft:sugar",
-    "canadamod:flour"
+    "#c:flour"
   ],
   "result": {
     "count": 1,

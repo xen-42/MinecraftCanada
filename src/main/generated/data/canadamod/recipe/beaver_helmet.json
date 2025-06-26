@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "X": "canadamod:pelt",
-    "Y": "#canadamod:sap"
+    "Y": "#c:sap"
   },
   "pattern": [
     " Y ",

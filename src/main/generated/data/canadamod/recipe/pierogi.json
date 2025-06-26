@@ -1,8 +1,8 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
-    "canadamod:flour",
-    "canadamod:cheese_curd",
+    "#c:flour",
+    "#c:cheese",
     "minecraft:potato"
   ],
   "result": {

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "X": "canadamod:rubber"
+    "X": "#c:rubber"
   },
   "pattern": [
     "XX",

@@ -168,7 +168,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(Items.MILK_BUCKET, this)
                     .input(Items.EGG, this)
                     .input(Items.SUGAR, this)
-                    .input(CanadaItems.FLOUR, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
                     .offerTo(exporter);
 
                 createCookingPotRecipe(registryLookup, Items.PUMPKIN_PIE, 3)
@@ -178,20 +178,20 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .offerTo(exporter);
 
                 createCookingPotRecipe(registryLookup, Items.BREAD, 3)
-                    .input(CanadaItems.FLOUR, this)
-                    .input(CanadaItems.FLOUR, this)
-                    .input(CanadaItems.FLOUR, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
                     .input(Items.WATER_BUCKET, this)
                     .offerTo(exporter);   
 
                 createCookingPotRecipe(registryLookup, Items.SLIME_BALL, 1)
-                    .input(CanadaItems.FLOUR, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
                     .input(CanadaTags.ItemTags.SAP, this)
                     .offerTo(exporter);   
                     
                 createCookingPotRecipe(registryLookup, CanadaItems.GRAVY, 1)
-                    .input(CanadaItems.FLOUR, this)
-                    .input(CanadaTags.ItemTags.RED_MEAT, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
+                    .input(CanadaTags.ItemTags.RAW_MEAT, this)
                     .requiresBottle()
                     .offerTo(exporter);   
                 
@@ -220,14 +220,14 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .offerTo(exporter);
                 
                 createCookingPotRecipe(registryLookup, CanadaItems.DONAIR, 2)
-                    .input(CanadaItems.FLOUR, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
                     .input(Items.BEEF, this)
                     .input(Items.SUGAR, this)
                     .offerTo(exporter);
 
                 createCookingPotRecipe(registryLookup, CanadaItems.PIEROGI, 2)
-                    .input(CanadaItems.FLOUR, this)
-                    .input(CanadaItems.CHEESE_CURD, this)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
+                    .input(CanadaTags.ItemTags.CHEESE, this)
                     .input(Items.POTATO, this)
                     .offerTo(exporter);
 
@@ -236,14 +236,14 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .pattern("Y Y")
                     .pattern("XXX")
                     .input('X', Items.IRON_INGOT)
-                    .input('Y', CanadaItems.RUBBER)
+                    .input('Y', CanadaTags.ItemTags.RUBBER)
                     .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
                     .offerTo(exporter);
 
                 createShaped(RecipeCategory.BUILDING_BLOCKS, CanadaBlocks.RUBBER_BLOCK)
                     .pattern("XX")
                     .pattern("XX")
-                    .input('X', CanadaItems.RUBBER)
+                    .input('X', CanadaTags.ItemTags.RUBBER)
                     .criterion(hasItem(CanadaItems.RUBBER), conditionsFromItem(CanadaItems.RUBBER))
                     .offerTo(exporter);
 

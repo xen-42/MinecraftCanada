@@ -1,27 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flour": {
-      "conditions": {
-        "items": [
-          {
-            "items": "canadamod:flour"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "canadamod:gravy"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.canadamod.red_meat', fallback='#canadamod:red_meat', args=[]}": {
+    "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}": {
       "conditions": {
         "items": [
           {
-            "items": "#canadamod:red_meat"
+            "items": "#c:flour"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_translation{key='tag.item.c.foods.raw_meat', fallback='#c:foods/raw_meat', args=[]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:foods/raw_meat"
           }
         ]
       },
@@ -31,8 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_flour",
-      "has_translation{key='tag.item.canadamod.red_meat', fallback='#canadamod:red_meat', args=[]}"
+      "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}",
+      "has_translation{key='tag.item.c.foods.raw_meat', fallback='#c:foods/raw_meat', args=[]}"
     ]
   ],
   "rewards": {

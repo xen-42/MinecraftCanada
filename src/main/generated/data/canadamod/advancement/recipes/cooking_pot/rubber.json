@@ -17,11 +17,11 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.canadamod.sap', fallback='#canadamod:sap', args=[]}": {
+    "has_translation{key='tag.item.c.sap', fallback='#c:sap', args=[]}": {
       "conditions": {
         "items": [
           {
-            "items": "#canadamod:sap"
+            "items": "#c:sap"
           }
         ]
       },
@@ -31,7 +31,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_translation{key='tag.item.canadamod.sap', fallback='#canadamod:sap', args=[]}",
+      "has_translation{key='tag.item.c.sap', fallback='#c:sap', args=[]}",
       "has_fermented_spider_eye"
     ]
   ],

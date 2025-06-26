@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "X": "minecraft:iron_ingot",
-    "Y": "canadamod:rubber"
+    "Y": "#c:rubber"
   },
   "pattern": [
     " X ",

@@ -1,27 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_flour": {
-      "conditions": {
-        "items": [
-          {
-            "items": "canadamod:flour"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "canadamod:slime_ball"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.canadamod.sap', fallback='#canadamod:sap', args=[]}": {
+    "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}": {
       "conditions": {
         "items": [
           {
-            "items": "#canadamod:sap"
+            "items": "#c:flour"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_translation{key='tag.item.c.sap', fallback='#c:sap', args=[]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:sap"
           }
         ]
       },
@@ -31,8 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_flour",
-      "has_translation{key='tag.item.canadamod.sap', fallback='#canadamod:sap', args=[]}"
+      "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}",
+      "has_translation{key='tag.item.c.sap', fallback='#c:sap', args=[]}"
     ]
   ],
   "rewards": {

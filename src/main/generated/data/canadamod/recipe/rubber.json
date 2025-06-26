@@ -1,9 +1,9 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
-    "#canadamod:sap",
-    "#canadamod:sap",
-    "#canadamod:sap",
+    "#c:sap",
+    "#c:sap",
+    "#c:sap",
     "minecraft:fermented_spider_eye"
   ],
   "result": {

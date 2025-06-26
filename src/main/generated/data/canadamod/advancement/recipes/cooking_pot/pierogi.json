@@ -1,26 +1,6 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cheese_curd": {
-      "conditions": {
-        "items": [
-          {
-            "items": "canadamod:cheese_curd"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_flour": {
-      "conditions": {
-        "items": [
-          {
-            "items": "canadamod:flour"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_potato": {
       "conditions": {
         "items": [
@@ -36,13 +16,33 @@
         "recipe": "canadamod:pierogi"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_translation{key='tag.item.c.cheese', fallback='#c:cheese', args=[]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:cheese"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:flour"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_flour",
-      "has_cheese_curd",
+      "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}",
+      "has_translation{key='tag.item.c.cheese', fallback='#c:cheese', args=[]}",
       "has_potato"
     ]
   ],

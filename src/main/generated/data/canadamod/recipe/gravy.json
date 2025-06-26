@@ -1,8 +1,8 @@
 {
   "type": "canadamod:cooking_pot",
   "ingredients": [
-    "canadamod:flour",
-    "#canadamod:red_meat"
+    "#c:flour",
+    "#c:foods/raw_meat"
   ],
   "requiresBottle": true,
   "result": {
