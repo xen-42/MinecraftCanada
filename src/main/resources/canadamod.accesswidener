@@ -21,9 +21,6 @@ accessible field net/minecraft/client/gui/screen/ingame/RecipeBookScreen recipeB
 
 accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addResults (Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
 accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addInputs (Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
-
-accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addResults (Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
-accessible method net/minecraft/client/gui/screen/recipebook/GhostRecipe addInputs (Lnet/minecraft/screen/slot/Slot;Lnet/minecraft/util/context/ContextParameterMap;Lnet/minecraft/recipe/display/SlotDisplay;)V
 accessible field net/minecraft/item/SpawnEggItem SPAWN_EGGS Ljava/util/Map;
 accessible field net/minecraft/item/SpawnEggItem type Lnet/minecraft/entity/EntityType;
 mutable field net/minecraft/item/SpawnEggItem type Lnet/minecraft/entity/EntityType;
@@ -41,8 +38,6 @@ accessible field net/minecraft/client/gui/screen/recipebook/GhostRecipe items Li
 accessible field net/minecraft/client/gui/screen/ingame/RecipeBookScreen recipeBook Lnet/minecraft/client/gui/screen/recipebook/RecipeBookWidget;
 accessible method net/minecraft/component/type/BundleContentsComponent getOccupancy (Lnet/minecraft/item/ItemStack;)Lorg/apache/commons/lang3/math/Fraction;
 accessible method net/minecraft/client/gui/DrawContext drawTooltip (Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V
-
-accessible method net/minecraft/entity/effect/StatusEffect <init> (Lnet/minecraft/entity/effect/StatusEffectCategory;I)V
 
 accessible method net/minecraft/entity/player/PlayerEntity isEquipped (Lnet/minecraft/item/Item;)Z
 
