@@ -23,3 +23,7 @@ To flesh out these features the mod adds a number of minor features:
 ### Requirements:
 
 [TerraBlender](https://github.com/Glitchfiend/TerraBlender) without which the maple biome generation would not happen.
+
+### Thank you:
+
+To MegaPiggy for helping with the last mod that I copy-pasted some stuff out of.
