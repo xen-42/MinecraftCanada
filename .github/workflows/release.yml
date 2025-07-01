@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 env:
-  PROJ_NAME: PeacefulProgression
+  PROJ_NAME: CanadaMod
 
 jobs:
   pre_job:
