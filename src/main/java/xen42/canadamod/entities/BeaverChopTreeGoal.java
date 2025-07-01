@@ -86,6 +86,7 @@ public class BeaverChopTreeGoal extends Goal {
     public void stop() {
         // In case somebody else broke it
         this.beaver.stopChopping();
+        this.sapling = null;
     }
 
     private BlockPos findChoppableTree(int radius) {
@@ -106,6 +107,7 @@ public class BeaverChopTreeGoal extends Goal {
     private boolean isTreeTrunk(BlockPos pos) {
         var world = beaver.getWorld();
         var trunk = world.getBlockState(pos);
+        this.sapling = null;
 
         // If its a log with dirt under it, it may be the start of a tree!
         // From this we move up to make sure it has leaves on the top, else we might be breaking somebody's house
@@ -120,9 +122,7 @@ public class BeaverChopTreeGoal extends Goal {
                     return false;
                 }
                 if (isNaturalLeaf(topBlock)) {
-                    if (sapling == null) {
-                        this.sapling = getSaplingFromLeaf(topBlockPos);
-                    }
+                    this.sapling = getSaplingFromLeaf(topBlockPos);
                     return true;
                 }
                 // Make sure it is a continuous tree
