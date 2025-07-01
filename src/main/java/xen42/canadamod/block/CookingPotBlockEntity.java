@@ -139,7 +139,7 @@ public class CookingPotBlockEntity extends LockableContainerBlockEntity implemen
         }
 
         // Only progress or use fuel if we actually can create an output
-        if (canAcceptOutput) {
+        if (canAcceptOutput && currentRecipeResult != ItemStack.EMPTY) {
             var fuelStack = blockEntity.getStack(CookingPotScreenHandler.FUEL_SLOT);
             if (!blockEntity.hasFuel() && !fuelStack.isEmpty()) {
                 blockEntity.burnTimeRemaining = world.getFuelRegistry().getFuelTicks(fuelStack);

@@ -55,7 +55,7 @@ public class CanadaItems {
         .food(new FoodComponent.Builder().nutrition(2).saturationModifier(0.1f).build()));
     public static final Item POUTINE = register("poutine", DurabilityFoodItem::new, new Item.Settings().rarity(Rarity.UNCOMMON)
         .maxCount(1).maxDamage(8).recipeRemainder(Items.BOWL).useRemainder(Items.BOWL)
-        .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).alwaysEdible().build()));
+        .food(new FoodComponent.Builder().nutrition(10).saturationModifier(2f).build()));
     public static final Item DONAIR = register("donair", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
         .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
     public static final Item PIEROGI = register("pierogi", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
