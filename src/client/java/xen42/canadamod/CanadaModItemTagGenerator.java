@@ -83,6 +83,7 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ConventionalItemTags.ARMORS).addTag(CanadaTags.ItemTags.HATS);
 
 		this.getOrCreateTagBuilder(ItemTags.SKULLS).add(CanadaItems.MOOSE_HEAD);
+		this.getOrCreateTagBuilder(ItemTags.NOTEBLOCK_TOP_INSTRUMENTS).add(CanadaItems.MOOSE_HEAD);
 
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.REPAIRS_PELT_ARMOR).add(CanadaItems.PELT);
 
