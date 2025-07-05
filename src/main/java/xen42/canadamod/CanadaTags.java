@@ -16,13 +16,10 @@ public class CanadaTags {
 	public class ItemTags {
         public static final TagKey<Item> MAPLE_LOGS = ofItem("maple_logs");
 
-        public static final TagKey<Item> RAW_MEAT = ofItemConventional("foods/raw_meat");
         public static final TagKey<Item> SAP = ofItemConventional("sap");
         public static final TagKey<Item> RUBBER = ofItemConventional("rubber");
         public static final TagKey<Item> CHEESE = ofItemConventional("cheese");
         public static final TagKey<Item> FLOUR = ofItemConventional("flour");
-
-        public static final TagKey<Item> FOODS = ofItemConventional("foods");
 	}
 	
 	public class StructureTags {

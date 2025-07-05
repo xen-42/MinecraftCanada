@@ -51,13 +51,16 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.copy(ConventionalBlockTags.STRIPPED_LOGS, ConventionalItemTags.STRIPPED_LOGS);
 		this.copy(ConventionalBlockTags.STRIPPED_WOODS, ConventionalItemTags.STRIPPED_WOODS);
 
-		this.getOrCreateTagBuilder(CanadaTags.ItemTags.RAW_MEAT).add(CanadaItems.VENISON);
+		this.getOrCreateTagBuilder(ItemTags.MEAT).add(CanadaItems.VENISON, CanadaItems.COOKED_VENISON);
+		this.getOrCreateTagBuilder(ConventionalItemTags.RAW_MEAT_FOODS).add(CanadaItems.VENISON);
+		this.getOrCreateTagBuilder(ConventionalItemTags.COOKED_MEAT_FOODS).add(CanadaItems.COOKED_VENISON);
+		this.getOrCreateTagBuilder(ConventionalItemTags.SOUP_FOODS).add(CanadaItems.POUTINE);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAP).add(CanadaItems.SAP, CanadaItems.MAPLE_SAP);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.RUBBER).add(CanadaItems.RUBBER);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.CHEESE).add(CanadaItems.CHEESE_CURD);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.FLOUR).add(CanadaItems.FLOUR);
-		this.getOrCreateTagBuilder(CanadaTags.ItemTags.FOODS)
-			.add(CanadaItems.COOKED_VENISON, CanadaItems.DONAIR, CanadaItems.PIEROGI, CanadaItems.GRAVY, 
+		this.getOrCreateTagBuilder(ConventionalItemTags.FOODS)
+			.add(CanadaItems.DONAIR, CanadaItems.PIEROGI, CanadaItems.GRAVY, 
 				CanadaItems.CHEESE_CURD, CanadaItems.POUTINE, CanadaItems.MAPLE_SYRUP_BOTTLE);
 
 		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
