@@ -1,5 +1,6 @@
 package xen42.canadamod;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -13,6 +14,7 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BundleContentsComponent;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
+import net.minecraft.component.type.FireworkExplosionComponent;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.FoodComponents;
 import net.minecraft.entity.EquipmentSlot;
@@ -32,6 +34,7 @@ import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.recipe.FireworkStarRecipe;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -221,5 +224,10 @@ public class CanadaItems {
             itemGroup.add(BEAVER_HELMET);
             itemGroup.add(MOOSE_HELMET);
         });
+
+        // Replace the original immutable map with a mutable one and add custom items
+        Map<Item, FireworkExplosionComponent.Type> fireworkExplosionTypeModifierMap = new HashMap<>(FireworkStarRecipe.TYPE_MODIFIER_MAP);
+        fireworkExplosionTypeModifierMap.put(MOOSE_HEAD, FireworkExplosionComponent.Type.CREEPER);
+        FireworkStarRecipe.TYPE_MODIFIER_MAP = fireworkExplosionTypeModifierMap;
     }
 }
