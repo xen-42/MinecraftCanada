@@ -20,14 +20,11 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
     
     @Override
     protected void configure(WrapperLookup wrapperLookup) {
-        this.getOrCreateTagBuilder(BlockTags.LOGS)
+        this.getOrCreateTagBuilder(CanadaTags.BlockTags.MAPLE_LOGS)
             .add(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD);
         
         this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-            .add(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD);
-
-        this.getOrCreateTagBuilder(CanadaTags.BlockTags.MAPLE_LOGS)
-            .add(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD);
+            .addTag(CanadaTags.BlockTags.MAPLE_LOGS);
         
         this.getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
             .add(CanadaBlocks.MAPLE_BUTTON);
@@ -45,7 +42,10 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
             .add(CanadaBlocks.MAPLE_STAIRS);
         
         this.getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS)
-            .add(CanadaBlocks.MAPLE_STAIRS);
+            .add(CanadaBlocks.MAPLE_TRAPDOOR);
+
+        this.getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
+            .add(CanadaBlocks.MAPLE_FENCE);
 
         this.getOrCreateTagBuilder(BlockTags.FENCES)
             .add(CanadaBlocks.MAPLE_FENCE);
@@ -70,6 +70,8 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
             .add(CanadaBlocks.MAPLE_TRAPDOOR)
             .add(CanadaBlocks.MAPLE_FENCE);
         
+        this.getOrCreateTagBuilder(BlockTags.PLANKS)
+            .add(CanadaBlocks.MAPLE_PLANKS);
         this.getOrCreateTagBuilder(BlockTags.LEAVES)
             .add(CanadaBlocks.MAPLE_LEAVES);
 
