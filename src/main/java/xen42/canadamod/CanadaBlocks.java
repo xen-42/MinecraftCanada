@@ -138,13 +138,13 @@ public class CanadaBlocks {
 		MAPLE_PLANKS = register(
 			"maple_planks",
 			Block::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_PLANKS),
+			AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_LOG = register(
 			"maple_log",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_LOG),
+			AbstractBlock.Settings.copy(Blocks.OAK_LOG).mapColor(MapColor.RED),
 			true
 		);
 		Registry.register(Registries.PARTICLE_TYPE,
@@ -153,97 +153,97 @@ public class CanadaBlocks {
 		MAPLE_LEAVES = register(
 			"maple_leaves",
 			(settings) -> new UntintedParticleLeavesBlock(0.01F, MAPLE_LEAF_PARTICLE, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_LEAVES),
+			AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.RED),
 			true
 		);
 		STRIPPED_MAPLE_LOG = register(
 			"stripped_maple_log",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG),
+			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_WOOD = register(
 			"maple_wood",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_WOOD),
+			AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.RED),
 			true
 		);
 		STRIPPED_MAPLE_WOOD = register(
 			"stripped_maple_wood",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD),
+			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_STAIRS = register(
 			"maple_stairs",
 			(settings) -> new StairsBlock(MAPLE_PLANKS.getDefaultState(), settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_STAIRS),
+			AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_BUTTON = register(
 			"maple_button",
 			(settings) -> new ButtonBlock(MAPLE_WOOD_SET, 30, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_BUTTON),
+			AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_SLAB = register(
 			"maple_slab",
 			SlabBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_SLAB),
+			AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_DOOR = register(
 			"maple_door",
 			(settings) -> new DoorBlock(MAPLE_WOOD_SET, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_DOOR),
+			AbstractBlock.Settings.copy(Blocks.OAK_DOOR).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_TRAPDOOR = register(
 			"maple_trapdoor",
 			(settings) -> new TrapdoorBlock(MAPLE_WOOD_SET, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR),
+			AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_FENCE = register(
 			"maple_fence",
 			FenceBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_FENCE),
+			AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_FENCE_GATE = register(
 			"maple_fence_gate",
 			(settings) -> new FenceGateBlock(MAPLE_WOOD_TYPE, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE),
+			AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_PRESSURE_PLATE = register(
 			"maple_pressure_plate",
 			(settings) -> new PressurePlateBlock(MAPLE_WOOD_SET, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE),
+			AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_SIGN = register(
 			"maple_sign",
 			MapleSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(MapColor.RED),
 			false
 		);
 		MAPLE_WALL_SIGN = register(
 			"maple_wall_sign",
 			MapleWallSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.RED),
 			false
 		);
 		MAPLE_HANGING_SIGN = register(
 			"maple_hanging_sign",
 			MapleHangingSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.RED),
 			false
 		);
 		MAPLE_WALL_HANGING_SIGN = register(
 			"maple_hanging_wall_sign",
 			MapleWallHangingSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.RED),
 			false
 		);
 
