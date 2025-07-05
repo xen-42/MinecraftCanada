@@ -19,8 +19,13 @@ public class CanadaTags {
         public static final TagKey<Item> SAP = ofItemConventional("sap");
         public static final TagKey<Item> RUBBER = ofItemConventional("rubber");
         public static final TagKey<Item> CHEESE = ofItemConventional("cheese");
+        public static final TagKey<Item> CHEESE_FOODS = ofItemConventional("foods/cheese");
+        public static final TagKey<Item> DAIRY_FOODS = ofItemConventional("foods/dairy");
         public static final TagKey<Item> FLOUR = ofItemConventional("flour");
+        public static final TagKey<Item> WHEAT_FLOUR = ofItemConventional("flour/wheat");
+        public static final TagKey<Item> FLOUR_FOODS = ofItemConventional("foods/flour");
     	public static final TagKey<Item> SYRUP_DRINKS = ofItemConventional("drinks/syrup");
+        public static final TagKey<Item> SAUCES = ofItemConventional("foods/sauces");
 	}
 	
 	public class StructureTags {

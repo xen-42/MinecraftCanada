@@ -5,6 +5,9 @@
     "canadamod:gravy",
     "canadamod:cheese_curd",
     "canadamod:poutine",
-    "canadamod:maple_syrup_bottle"
+    "canadamod:maple_syrup_bottle",
+    "#c:foods/flour",
+    "#c:foods/cheese",
+    "#c:foods/sauces"
   ]
 }

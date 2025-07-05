@@ -54,14 +54,23 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ItemTags.MEAT).add(CanadaItems.VENISON, CanadaItems.COOKED_VENISON);
 		this.getOrCreateTagBuilder(ConventionalItemTags.RAW_MEAT_FOODS).add(CanadaItems.VENISON);
 		this.getOrCreateTagBuilder(ConventionalItemTags.COOKED_MEAT_FOODS).add(CanadaItems.COOKED_VENISON);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAUCES).add(CanadaItems.GRAVY);
 		this.getOrCreateTagBuilder(ConventionalItemTags.SOUP_FOODS).add(CanadaItems.POUTINE);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAP).add(CanadaItems.SAP, CanadaItems.MAPLE_SAP);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.RUBBER).add(CanadaItems.RUBBER);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.CHEESE).add(CanadaItems.CHEESE_CURD);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.CHEESE_FOODS).add(CanadaItems.CHEESE_CURD);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.DAIRY_FOODS).add(CanadaItems.CHEESE_CURD);
+
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.FLOUR).add(CanadaItems.FLOUR);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.FLOUR_FOODS).add(CanadaItems.FLOUR);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.WHEAT_FLOUR).add(CanadaItems.FLOUR);
+
 		this.getOrCreateTagBuilder(ConventionalItemTags.FOODS)
 			.add(CanadaItems.DONAIR, CanadaItems.PIEROGI, CanadaItems.GRAVY, 
-				CanadaItems.CHEESE_CURD, CanadaItems.POUTINE, CanadaItems.MAPLE_SYRUP_BOTTLE);
+				CanadaItems.CHEESE_CURD, CanadaItems.POUTINE, CanadaItems.MAPLE_SYRUP_BOTTLE)
+			.addTags(CanadaTags.ItemTags.FLOUR_FOODS, CanadaTags.ItemTags.CHEESE_FOODS, CanadaTags.ItemTags.SAUCES);
+
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SYRUP_DRINKS).add(CanadaItems.MAPLE_SYRUP_BOTTLE);
 		this.getOrCreateTagBuilder(ConventionalItemTags.DRINKS).addTag(CanadaTags.ItemTags.SYRUP_DRINKS);
 		this.getOrCreateTagBuilder(ConventionalItemTags.DRINK_CONTAINING_BOTTLE).add(CanadaItems.MAPLE_SYRUP_BOTTLE);
