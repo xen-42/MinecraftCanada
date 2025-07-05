@@ -75,8 +75,12 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ConventionalItemTags.DRINKS).addTag(CanadaTags.ItemTags.SYRUP_DRINKS);
 		this.getOrCreateTagBuilder(ConventionalItemTags.DRINK_CONTAINING_BOTTLE).add(CanadaItems.MAPLE_SYRUP_BOTTLE);
 
-		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
-		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.HATS).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
+		this.getOrCreateTagBuilder(ItemTags.EQUIPPABLE_ENCHANTABLE).addTag(CanadaTags.ItemTags.HATS);
+		this.getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).addTag(CanadaTags.ItemTags.HATS);
+		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE).addTag(CanadaTags.ItemTags.HATS);
+		this.getOrCreateTagBuilder(ItemTags.FREEZE_IMMUNE_WEARABLES).addTag(CanadaTags.ItemTags.HATS);
+		this.getOrCreateTagBuilder(ConventionalItemTags.ARMORS).addTag(CanadaTags.ItemTags.HATS);
 
 		this.getOrCreateTagBuilder(ItemTags.SKULLS).add(CanadaItems.MOOSE_HEAD);
 
