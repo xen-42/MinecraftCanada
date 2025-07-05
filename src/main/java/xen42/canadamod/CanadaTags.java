@@ -15,6 +15,7 @@ public class CanadaTags {
 	
 	public class ItemTags {
         public static final TagKey<Item> MAPLE_LOGS = ofItem("maple_logs");
+        public static final TagKey<Item> REPAIRS_PELT_ARMOR = ofItem("repairs_pelt_armor");
 
         public static final TagKey<Item> SAP = ofItemConventional("sap");
         public static final TagKey<Item> RUBBER = ofItemConventional("rubber");
