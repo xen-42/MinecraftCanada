@@ -53,12 +53,16 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
         this.getOrCreateTagBuilder(BlockTags.FENCE_GATES)
             .add(CanadaBlocks.MAPLE_FENCE_GATE);
 
-        this.getOrCreateTagBuilder(BlockTags.ALL_SIGNS)
-            .add(CanadaBlocks.MAPLE_SIGN)
+        this.getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
+            .add(CanadaBlocks.MAPLE_SIGN);
+
+        this.getOrCreateTagBuilder(BlockTags.WALL_SIGNS)
             .add(CanadaBlocks.MAPLE_WALL_SIGN);
-        
-        this.getOrCreateTagBuilder(BlockTags.ALL_HANGING_SIGNS)
-            .add(CanadaBlocks.MAPLE_HANGING_SIGN)
+
+        this.getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS)
+            .add(CanadaBlocks.MAPLE_HANGING_SIGN);
+
+        this.getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS)
             .add(CanadaBlocks.MAPLE_WALL_HANGING_SIGN);
         
         this.getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
