@@ -20,6 +20,7 @@ import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
@@ -29,6 +30,7 @@ import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
@@ -153,7 +155,10 @@ public class CanadaModClient implements ClientModInitializer {
 
 			ModelPart part = model.get().createModel().getChild("hat");
 			part.copyTransform(contextModel.getHead());
-			part.render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(Identifier.of(CanadaMod.MOD_ID, "textures/armor/" + name + ".png"))),
+			boolean hasGlint = stack.hasGlint();
+			Identifier identifier = Identifier.of(CanadaMod.MOD_ID, "textures/armor/" + name + ".png");
+			VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(identifier), hasGlint);
+			part.render(matrices, vertexConsumer,
 				light, OverlayTexture.DEFAULT_UV);
 
 			MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ItemDisplayContext.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,
