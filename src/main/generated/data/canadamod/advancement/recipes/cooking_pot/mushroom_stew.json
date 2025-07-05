@@ -7,7 +7,7 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.c.mushrooms', fallback='#c:mushrooms', args=[]}": {
+    "has_mushrooms": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_translation{key='tag.item.c.mushrooms', fallback='#c:mushrooms', args=[]}"
+      "has_mushrooms"
     ]
   ],
   "rewards": {

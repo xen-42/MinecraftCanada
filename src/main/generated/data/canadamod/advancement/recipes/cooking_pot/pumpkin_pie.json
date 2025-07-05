@@ -27,7 +27,7 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.minecraft.eggs', fallback='#minecraft:eggs', args=[]}": {
+    "has_eggs": {
       "conditions": {
         "items": [
           {
@@ -42,7 +42,7 @@
     [
       "has_the_recipe",
       "has_pumpkin",
-      "has_translation{key='tag.item.minecraft.eggs', fallback='#minecraft:eggs', args=[]}",
+      "has_eggs",
       "has_sugar"
     ]
   ],

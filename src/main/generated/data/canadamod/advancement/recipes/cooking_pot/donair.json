@@ -27,7 +27,7 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}": {
+    "has_flour": {
       "conditions": {
         "items": [
           {
@@ -41,7 +41,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_translation{key='tag.item.c.flour', fallback='#c:flour', args=[]}",
+      "has_flour",
       "has_beef",
       "has_sugar"
     ]
