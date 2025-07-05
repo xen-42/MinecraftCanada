@@ -20,6 +20,7 @@ public class CanadaTags {
         public static final TagKey<Item> RUBBER = ofItemConventional("rubber");
         public static final TagKey<Item> CHEESE = ofItemConventional("cheese");
         public static final TagKey<Item> FLOUR = ofItemConventional("flour");
+    	public static final TagKey<Item> SYRUP_DRINKS = ofItemConventional("drinks/syrup");
 	}
 	
 	public class StructureTags {

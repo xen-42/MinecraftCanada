@@ -62,6 +62,9 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ConventionalItemTags.FOODS)
 			.add(CanadaItems.DONAIR, CanadaItems.PIEROGI, CanadaItems.GRAVY, 
 				CanadaItems.CHEESE_CURD, CanadaItems.POUTINE, CanadaItems.MAPLE_SYRUP_BOTTLE);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SYRUP_DRINKS).add(CanadaItems.MAPLE_SYRUP_BOTTLE);
+		this.getOrCreateTagBuilder(ConventionalItemTags.DRINKS).addTag(CanadaTags.ItemTags.SYRUP_DRINKS);
+		this.getOrCreateTagBuilder(ConventionalItemTags.DRINK_CONTAINING_BOTTLE).add(CanadaItems.MAPLE_SYRUP_BOTTLE);
 
 		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
 		this.getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE).add(CanadaItems.BEAVER_HELMET, CanadaItems.MOOSE_HELMET);
