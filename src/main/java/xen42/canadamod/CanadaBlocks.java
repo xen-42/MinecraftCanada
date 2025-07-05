@@ -33,6 +33,7 @@ import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HangingSignBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
@@ -96,7 +97,8 @@ public class CanadaBlocks {
 	public static Block TREE_TAP = register(
 			"tree_tap",
 			TreeTapBlock::new,
-			AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.CHAIN).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).breakInstantly(),
+			AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.CHAIN).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).breakInstantly()
+				.mapColor(MapColor.IRON_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE),
 			false
 		);
 	
@@ -104,24 +106,24 @@ public class CanadaBlocks {
 		"cooking_pot",
 		CookingPotBlock::new,
 		AbstractBlock.Settings.create().luminance(Blocks.createLightLevelFromLitBlockState(13)).nonOpaque()
-			.mapColor(MapColor.STONE_GRAY).pistonBehavior(PistonBehavior.DESTROY).hardness(0.3f),
+			.mapColor(MapColor.STONE_GRAY).pistonBehavior(PistonBehavior.DESTROY).hardness(0.3f).instrument(NoteBlockInstrument.BASEDRUM),
 		true
 	);
 
 	public static Block RUBBER_BLOCK = register("rubber_block", RubberBlock::new, AbstractBlock.Settings.create()
-		.sounds(BlockSoundGroup.FUNGUS).mapColor(MapColor.BLACK).hardness(0.1f), true);
+		.sounds(BlockSoundGroup.FUNGUS).mapColor(MapColor.BLACK).hardness(0.1f).instrument(NoteBlockInstrument.BASEDRUM), true);
 
 	public static Block MOOSE_HEAD = register(
 		"moose_head",
 		MooseSkullBlock::new,
-		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY),
+		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.BROWN).instrument(NoteBlockInstrument.CUSTOM_HEAD),
 		false
 	);
 
 	public static Block MOOSE_WALL_HEAD = register(
 		"moose_head_wall",
 		MooseWallSkullBlock::new,
-		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY),
+		AbstractBlock.Settings.copy(MOOSE_HEAD),
 		false
 	);
 

@@ -14,5 +14,5 @@ public class MooseSkullBlockEntity extends BlockEntity {
     @Override
     public boolean supports(BlockState state) {
         return CanadaMod.MOOSE_HEAD_ENTITY.supports(state);
-    }    
+    }
 }
