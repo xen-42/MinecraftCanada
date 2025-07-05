@@ -5,7 +5,7 @@
 	"client": [
 		"HangingSignEditScreenMixin",
 		"AbstractSignEditScreenMixin",
-		"DrawContextMixin",
+		"TooltipComponentMixin",
 		"HandledScreenMixin"
 	],
 	"injectors": {
