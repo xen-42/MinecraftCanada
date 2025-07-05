@@ -27,6 +27,12 @@
 		],
 		"terrablender": [
 			"xen42.canadamod.CanadaModTerraBlenderAPI"
+		],
+		"rei_client": [
+			"xen42.canadamod.rei.CookingPotClientPlugin"
+		],
+		"rei_common": [
+			"xen42.canadamod.rei.CookingPotServerPlugin"
 		]
 	},
 	"accessWidener": "canadamod.accesswidener",
@@ -45,6 +51,9 @@
 		"terrablender": "5.0.0.1"
 	},
 	"suggests": {
-
+		"roughlyenoughitems": ">=19.0.806"
+	},
+	"breaks": {
+		"jeb": "*"
 	}
 }
