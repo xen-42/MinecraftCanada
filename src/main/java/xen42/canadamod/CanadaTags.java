@@ -28,6 +28,9 @@ public class CanadaTags {
         public static final TagKey<Item> FLOUR_FOODS = ofItemConventional("foods/flour");
     	public static final TagKey<Item> SYRUP_DRINKS = ofItemConventional("drinks/syrup");
         public static final TagKey<Item> SAUCES = ofItemConventional("foods/sauces");
+        public static final TagKey<Item> SAUCES_GRAVY = ofItemConventional("foods/sauces/gravy");
+        public static final TagKey<Item> CONDIMENTS = ofItemConventional("condiments");
+        public static final TagKey<Item> CONDIMENTS_GRAVY = ofItemConventional("condiments/gravy");
 	}
 	
 	public class StructureTags {

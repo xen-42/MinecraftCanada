@@ -54,7 +54,10 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ItemTags.MEAT).add(CanadaItems.VENISON, CanadaItems.COOKED_VENISON);
 		this.getOrCreateTagBuilder(ConventionalItemTags.RAW_MEAT_FOODS).add(CanadaItems.VENISON);
 		this.getOrCreateTagBuilder(ConventionalItemTags.COOKED_MEAT_FOODS).add(CanadaItems.COOKED_VENISON);
-		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAUCES).add(CanadaItems.GRAVY);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAUCES_GRAVY).add(CanadaItems.GRAVY);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.CONDIMENTS_GRAVY).add(CanadaItems.GRAVY);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAUCES).addTag(CanadaTags.ItemTags.SAUCES_GRAVY);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.CONDIMENTS).addTag(CanadaTags.ItemTags.CONDIMENTS_GRAVY);
 		this.getOrCreateTagBuilder(ConventionalItemTags.SOUP_FOODS).add(CanadaItems.POUTINE);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.SAP).add(CanadaItems.SAP, CanadaItems.MAPLE_SAP);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.RUBBER).add(CanadaItems.RUBBER);
