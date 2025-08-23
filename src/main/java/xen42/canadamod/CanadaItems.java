@@ -16,6 +16,7 @@ import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.FoodComponents;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -139,7 +140,7 @@ public class CanadaItems {
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
-    public static final Item DUCK_EGG = register("duck_egg", CustomEggItem::new, new Item.Settings());
+    public static final Item DUCK_EGG = register("duck_egg", (settings) -> new CustomEggItem(settings, CanadaMod.DUCK_ENTITY), new Item.Settings().maxCount(16));
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.

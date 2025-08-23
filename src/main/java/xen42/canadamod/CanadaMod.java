@@ -49,6 +49,7 @@ import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.block.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
+import xen42.canadamod.entities.CustomEggEntity;
 import xen42.canadamod.entities.DuckEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
@@ -117,6 +118,12 @@ public class CanadaMod implements ModInitializer {
 		Registries.ENTITY_TYPE, 
 		Identifier.of(MOD_ID, "duck"), 
 		EntityType.Builder.create(DuckEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(DUCK_ENTITY_KEY));
+
+	public static final RegistryKey<EntityType<?>> CUSTOM_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"custom_egg_entity"));
+	public static final EntityType<CustomEggEntity> CUSTOM_EGG_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "custom_egg_entity"), 
+		EntityType.Builder.<CustomEggEntity>create(CustomEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(CUSTOM_EGG_ENTITY_KEY));
 
 	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);

@@ -1,8 +1,18 @@
 package xen42.canadamod.entities;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -10,8 +20,10 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -39,12 +51,21 @@ public class DuckEntity extends ChickenEntity {
             .add(EntityAttributes.OXYGEN_BONUS);
     }
 
+	@Override
+	protected void initGoals() {
+		this.goalSelector.add(0, new SwimGoal(this));
+		this.goalSelector.add(1, new EscapeDangerGoal(this, 1.4));
+		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
+		this.goalSelector.add(3, new TemptGoal(this, 1.0, stack -> stack.isOf(Items.BREAD), false));
+		this.goalSelector.add(4, new FollowParentGoal(this, 1.1));
+		this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0));
+		this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.add(7, new LookAroundGoal(this));
+	}
+
     @Override
 	public ChickenEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
 		ChickenEntity chickenEntity = CanadaMod.DUCK_ENTITY.create(serverWorld, SpawnReason.BREEDING);
-		if (chickenEntity != null && passiveEntity instanceof ChickenEntity chickenEntity2) {
-			chickenEntity.setVariant(this.random.nextBoolean() ? this.getVariant() : chickenEntity2.getVariant());
-		}
 
 		return chickenEntity;
 	}
@@ -73,7 +94,6 @@ public class DuckEntity extends ChickenEntity {
 
 		this.flapProgress = this.flapProgress + this.flapSpeed * 2.0F;
 		if (this.getWorld() instanceof ServerWorld serverWorld && this.isAlive() && !this.isBaby() && !this.hasJockey() && --this.eggLayTime <= 0) {
-            // TODO: Make duck egg
             var item = this.dropItem(serverWorld, CanadaItems.DUCK_EGG);
             item.setPosition(this.getPos());
 
