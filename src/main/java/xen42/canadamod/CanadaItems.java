@@ -8,6 +8,7 @@ import java.util.function.UnaryOperator;
 import com.google.common.collect.Maps;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BundleContentsComponent;
@@ -211,5 +212,7 @@ public class CanadaItems {
             itemGroup.add(BEAVER_HELMET);
             itemGroup.add(MOOSE_HELMET);
         });
+
+        CompostingChanceRegistry.INSTANCE.add(MAPLE_SAPLING, 0.3f);
     }
 }
