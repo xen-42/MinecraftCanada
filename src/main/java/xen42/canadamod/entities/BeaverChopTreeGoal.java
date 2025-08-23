@@ -114,7 +114,7 @@ public class BeaverChopTreeGoal extends Goal {
         var dirt = world.getBlockState(pos.down());
         if (trunk.isIn(BlockTags.LOGS) && (dirt.isIn(BlockTags.DIRT) || dirt.isOf(Blocks.GRASS_BLOCK) || dirt.isOf(Blocks.PODZOL))) {
             // Move up to find leaves
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 20; i++) {
                 var topBlockPos = pos.add(0, i, 0);
                 var topBlock = world.getBlockState(topBlockPos);
                 // TODO: also check for tree taps near the base
