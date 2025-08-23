@@ -58,7 +58,7 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 
 		this.getOrCreateTagBuilder(ItemTags.SKULLS).add(CanadaItems.MOOSE_HEAD);
 
-		this.getOrCreateTagBuilder(ItemTags.EGGS).add(CanadaItems.DUCK_EGG);
+		this.getOrCreateTagBuilder(ItemTags.EGGS).add(CanadaItems.DUCK_EGG, CanadaItems.GOOSE_EGG);
 
 	}
 }

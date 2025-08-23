@@ -31,6 +31,7 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.MOOSE_SPAWN_EGG, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.DUCK_SPAWN_EGG, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.GRIZZLY_SPAWN_EGG, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.GOOSE_SPAWN_EGG, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.VENISON, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.COOKED_VENISON, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.WATERFOWL, Models.GENERATED);
@@ -41,6 +42,7 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.BUTTER_TART, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.DONAIR, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.DUCK_EGG, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.GOOSE_EGG, Models.GENERATED);
     }
 
     @Override

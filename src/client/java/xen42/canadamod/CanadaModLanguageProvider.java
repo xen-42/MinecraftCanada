@@ -111,9 +111,11 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaItems.BEAVER_SPAWN_EGG, "Beaver Spawn Egg");
 			translationBuilder.add(CanadaItems.MOOSE_SPAWN_EGG, "Moose Spawn Egg");
 			translationBuilder.add(CanadaItems.DUCK_SPAWN_EGG, "Duck Spawn Egg");
+			translationBuilder.add(CanadaItems.GOOSE_SPAWN_EGG, "Goose Spawn Egg");
 			translationBuilder.add(CanadaItems.GRIZZLY_SPAWN_EGG, "Grizzly Bear Spawn Egg");
 
 			translationBuilder.add(CanadaItems.DUCK_EGG, "Duck Egg");
+			translationBuilder.add(CanadaItems.GOOSE_EGG, "Goose Egg");
 
 			translationBuilder.add(CanadaItems.ANTLERS, "Antler");
 			translationBuilder.add(CanadaItems.VENISON, "Venison");
@@ -124,6 +126,7 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaMod.MOOSE_ENTITY, "Moose");
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
 			translationBuilder.add(CanadaMod.DUCK_ENTITY, "Duck");
+			translationBuilder.add(CanadaMod.GOOSE_ENTITY, "Goose");
 			translationBuilder.add(CanadaMod.GRIZZLY_ENTITY, "Grizzly Bear");
 
 			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
@@ -151,6 +154,7 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add("subtitles.canadamod.beaver_ambient", "Beaver grunts");
 			translationBuilder.add("subtitles.canadamod.beaver_death", "Beaver dies");
 			translationBuilder.add("subtitles.canadamod.beaver_hurt", "Beaver hurts");
+			
 			translationBuilder.add("subtitles.canadamod.moose_ambient", "Moose calls");
 			translationBuilder.add("subtitles.canadamod.moose_angry", "Moose grunts angrily");
 			translationBuilder.add("subtitles.canadamod.moose_death", "Moose dies");

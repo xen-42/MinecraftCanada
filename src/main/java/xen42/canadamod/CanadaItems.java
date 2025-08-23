@@ -74,6 +74,9 @@ public class CanadaItems {
 
     public static final Item DUCK_SPAWN_EGG = register("duck_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.DUCK_ENTITY, settings), new Item.Settings());
+
+    public static final Item GOOSE_SPAWN_EGG = register("goose_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.GOOSE_ENTITY, settings), new Item.Settings());
     
     public static final Item GRIZZLY_SPAWN_EGG = register("grizzly_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.GRIZZLY_ENTITY, settings), new Item.Settings());
@@ -148,6 +151,7 @@ public class CanadaItems {
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
     public static final Item DUCK_EGG = register("duck_egg", (settings) -> new CustomEggItem(settings, CanadaMod.DUCK_ENTITY), new Item.Settings().maxCount(16));
+    public static final Item GOOSE_EGG = register("goose_egg", (settings) -> new CustomEggItem(settings, CanadaMod.GOOSE_ENTITY), new Item.Settings().maxCount(16));
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.
@@ -180,6 +184,7 @@ public class CanadaItems {
             itemGroup.add(MAPLE_SAP);
             itemGroup.add(RUBBER);
             itemGroup.add(DUCK_EGG);
+            itemGroup.add(GOOSE_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> { 
@@ -227,6 +232,7 @@ public class CanadaItems {
             itemGroup.add(MOOSE_SPAWN_EGG);
             itemGroup.add(DUCK_SPAWN_EGG);
             itemGroup.add(GRIZZLY_SPAWN_EGG);
+            itemGroup.add(GOOSE_SPAWN_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((itemGroup) -> {
