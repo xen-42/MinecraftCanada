@@ -74,6 +74,9 @@ public class CanadaItems {
 
     public static final Item DUCK_SPAWN_EGG = register("duck_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.DUCK_ENTITY, settings), new Item.Settings());
+    
+    public static final Item GRIZZLY_SPAWN_EGG = register("grizzly_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.GRIZZLY_ENTITY, settings), new Item.Settings());
 
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
     public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
@@ -223,6 +226,7 @@ public class CanadaItems {
             itemGroup.add(BEAVER_SPAWN_EGG);
             itemGroup.add(MOOSE_SPAWN_EGG);
             itemGroup.add(DUCK_SPAWN_EGG);
+            itemGroup.add(GRIZZLY_SPAWN_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((itemGroup) -> {

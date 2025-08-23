@@ -111,6 +111,7 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaItems.BEAVER_SPAWN_EGG, "Beaver Spawn Egg");
 			translationBuilder.add(CanadaItems.MOOSE_SPAWN_EGG, "Moose Spawn Egg");
 			translationBuilder.add(CanadaItems.DUCK_SPAWN_EGG, "Duck Spawn Egg");
+			translationBuilder.add(CanadaItems.GRIZZLY_SPAWN_EGG, "Grizzly Bear Spawn Egg");
 
 			translationBuilder.add(CanadaItems.DUCK_EGG, "Duck Egg");
 
@@ -123,6 +124,7 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaMod.MOOSE_ENTITY, "Moose");
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
 			translationBuilder.add(CanadaMod.DUCK_ENTITY, "Duck");
+			translationBuilder.add(CanadaMod.GRIZZLY_ENTITY, "Grizzly Bear");
 
 			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
 			translationBuilder.add(CanadaItems.BEAVER_HELMET, "Beaver Pelt Hat");

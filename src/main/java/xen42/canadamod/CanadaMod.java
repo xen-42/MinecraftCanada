@@ -51,6 +51,7 @@ import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.CustomEggEntity;
 import xen42.canadamod.entities.DuckEntity;
+import xen42.canadamod.entities.GrizzlyEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
 import xen42.canadamod.recipe.CookingPotRecipe;
@@ -119,6 +120,12 @@ public class CanadaMod implements ModInitializer {
 		Identifier.of(MOD_ID, "duck"), 
 		EntityType.Builder.create(DuckEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(DUCK_ENTITY_KEY));
 
+	public static final RegistryKey<EntityType<?>> GRIZZLY_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"grizzly"));
+	public static final EntityType<GrizzlyEntity> GRIZZLY_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "grizzly"), 
+		EntityType.Builder.create(GrizzlyEntity::new, SpawnGroup.CREATURE).dimensions(1.4f, 1.4f).build(GRIZZLY_ENTITY_KEY));
+
 	public static final RegistryKey<EntityType<?>> CUSTOM_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"custom_egg_entity"));
 	public static final EntityType<CustomEggEntity> CUSTOM_EGG_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
@@ -151,6 +158,7 @@ public class CanadaMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(BEAVER_ENTITY, BeaverEntity.createBeaverAttributes());
 		FabricDefaultAttributeRegistry.register(MOOSE_ENTITY, MooseEntity.createMooseAttributes());
 		FabricDefaultAttributeRegistry.register(DUCK_ENTITY, DuckEntity.createDuckAttributes());
+		FabricDefaultAttributeRegistry.register(GRIZZLY_ENTITY, GrizzlyEntity.createGrizzlyAttributes());
 
 		BEAVER_EFFECT = registerStatusEffect("beaver_effect",
 			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))

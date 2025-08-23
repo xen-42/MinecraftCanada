@@ -31,6 +31,7 @@ f1545a575c0ddb33d4818d1ffe9222283049e457 assets/canadamod/items/cooked_venison.j
 36e6368258f6c2b974fe0c53a7e92a1369d0c05a assets/canadamod/items/duck_spawn_egg.json
 94ab48763e9edf55065bde0858fc79bdb741b078 assets/canadamod/items/flour.json
 1d0635d88041f82fbb7d2eed5561d6df77f38a95 assets/canadamod/items/gravy.json
+a3736ac6360e637debd805def7286cf34c60a67f assets/canadamod/items/grizzly_spawn_egg.json
 79a37e5ab6d1c76f8ce126d4cf6f62a8ae8a86b5 assets/canadamod/items/maple_boat.json
 f7df5e92ce3d3ef273c66b2f6ac3ebdfa5686356 assets/canadamod/items/maple_button.json
 44d4008400ad251bee270cbc68db07cdc1ce0d51 assets/canadamod/items/maple_chest_boat.json
@@ -115,6 +116,7 @@ e129f0548b31db6935ac0d512b5c23436326e347 assets/canadamod/models/item/cooked_wat
 80b5aed0a51029020719e757ff7991874c572962 assets/canadamod/models/item/duck_spawn_egg.json
 1a8c882b051ac03b8d44aa7359343b6d905932b2 assets/canadamod/models/item/flour.json
 91bea5c96b8a31d72fc07ac1eb50b261c9a9a92b assets/canadamod/models/item/gravy.json
+75a0b17b78ea66ceb227d1f21423969150389e42 assets/canadamod/models/item/grizzly_spawn_egg.json
 09a26726853954e16e03fc7b0efe3f477e270eef assets/canadamod/models/item/maple_boat.json
 fc99e9cb93b4493d826388717cd6a705b9f29256 assets/canadamod/models/item/maple_chest_boat.json
 602d2b3d8baa2d8c22dac780bbde901eeec82549 assets/canadamod/models/item/maple_door.json
