@@ -19,17 +19,20 @@ public class CanadaModBlockLootTableGenerator extends FabricBlockLootTableProvid
         addDrop(CanadaBlocks.MAPLE_DOOR, block -> doorDrops(block));
         addDrop(CanadaBlocks.MAPLE_FENCE);
         addDrop(CanadaBlocks.MAPLE_FENCE_GATE);
-        addDrop(CanadaBlocks.MAPLE_HANGING_SIGN);
         addDrop(CanadaBlocks.MAPLE_LOG);
         addDrop(CanadaBlocks.MAPLE_PLANKS);
         addDrop(CanadaBlocks.MAPLE_PRESSURE_PLATE);
         addDrop(CanadaBlocks.MAPLE_SAPLING);
-        addDrop(CanadaBlocks.MAPLE_SIGN);
         addDrop(CanadaBlocks.MAPLE_STAIRS);
         addDrop(CanadaBlocks.MAPLE_SLAB, block -> slabDrops(block));
         addDrop(CanadaBlocks.MAPLE_TRAPDOOR);
-        addDrop(CanadaBlocks.MAPLE_WALL_HANGING_SIGN, block -> drops(CanadaBlocks.MAPLE_HANGING_SIGN));
-        addDrop(CanadaBlocks.MAPLE_WALL_SIGN, block -> drops(CanadaBlocks.MAPLE_SIGN));
+
+        addDrop(CanadaBlocks.MAPLE_HANGING_SIGN, block -> drops(CanadaItems.MAPLE_HANGING_SIGN_ITEM));
+        addDrop(CanadaBlocks.MAPLE_SIGN, block -> drops(CanadaItems.MAPLE_SIGN_ITEM));
+        // for some reason these lines make oak signs drop maple?
+        // addDrop(CanadaBlocks.MAPLE_WALL_HANGING_SIGN, block -> drops(CanadaItems.MAPLE_HANGING_SIGN_ITEM));
+        // addDrop(CanadaBlocks.MAPLE_WALL_SIGN, block -> drops(CanadaItems.MAPLE_SIGN_ITEM));
+
         addDrop(CanadaBlocks.MAPLE_WOOD);
         addDrop(CanadaBlocks.MAPLE_LEAVES, block -> leavesDrops(block, CanadaBlocks.MAPLE_SAPLING, SAPLING_DROP_CHANCE));   
         addDrop(CanadaBlocks.STRIPPED_MAPLE_LOG);
