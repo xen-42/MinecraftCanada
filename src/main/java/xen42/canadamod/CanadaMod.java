@@ -49,6 +49,7 @@ import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.block.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
+import xen42.canadamod.entities.DuckEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
 import xen42.canadamod.recipe.CookingPotRecipe;
@@ -111,6 +112,12 @@ public class CanadaMod implements ModInitializer {
 		Identifier.of(MOD_ID, "moose"), 
 		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.75f, 2.5f).build(MOOSE_ENTITY_KEY));
 
+	public static final RegistryKey<EntityType<?>> DUCK_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck"));
+	public static final EntityType<DuckEntity> DUCK_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "duck"), 
+		EntityType.Builder.create(DuckEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(DUCK_ENTITY_KEY));
+
 	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);
 	}
@@ -136,6 +143,7 @@ public class CanadaMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(BEAVER_ENTITY, BeaverEntity.createBeaverAttributes());
 		FabricDefaultAttributeRegistry.register(MOOSE_ENTITY, MooseEntity.createMooseAttributes());
+		FabricDefaultAttributeRegistry.register(DUCK_ENTITY, DuckEntity.createDuckAttributes());
 
 		BEAVER_EFFECT = registerStatusEffect("beaver_effect",
 			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))

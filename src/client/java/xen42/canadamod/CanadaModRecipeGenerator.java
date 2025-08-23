@@ -166,7 +166,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
 
                 createCookingPotRecipe(registryLookup, Items.CAKE, 1)
                     .input(Items.MILK_BUCKET, this)
-                    .input(Items.EGG, this)
+                    .input(ItemTags.EGGS, this)
                     .input(Items.SUGAR, this)
                     .input(CanadaTags.ItemTags.FLOUR, this)
                     .offerTo(exporter);

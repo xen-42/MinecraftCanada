@@ -22,6 +22,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BoatItem;
 import net.minecraft.item.BundleItem;
+import net.minecraft.item.EggItem;
 import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -44,6 +45,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 import xen42.canadamod.entities.MapleBoatEntity;
+import xen42.canadamod.item.CustomEggItem;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
 import xen42.canadamod.item.DurabilityFoodItem;
 import xen42.canadamod.item.ThermosContentsComponent;
@@ -67,6 +69,9 @@ public class CanadaItems {
 
     public static final Item MOOSE_SPAWN_EGG = register("moose_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.MOOSE_ENTITY, settings), new Item.Settings());
+
+    public static final Item DUCK_SPAWN_EGG = register("duck_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.DUCK_ENTITY, settings), new Item.Settings());
 
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
     public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
@@ -134,6 +139,8 @@ public class CanadaItems {
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
+    public static final Item DUCK_EGG = register("duck_egg", CustomEggItem::new, new Item.Settings());
+
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.
 		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(CanadaMod.MOD_ID, name));
@@ -164,6 +171,7 @@ public class CanadaItems {
             itemGroup.add(SAP);
             itemGroup.add(MAPLE_SAP);
             itemGroup.add(RUBBER);
+            itemGroup.add(DUCK_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> { 
@@ -206,6 +214,7 @@ public class CanadaItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register((itemGroup) -> {
             itemGroup.add(BEAVER_SPAWN_EGG);
             itemGroup.add(MOOSE_SPAWN_EGG);
+            itemGroup.add(DUCK_SPAWN_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((itemGroup) -> {
