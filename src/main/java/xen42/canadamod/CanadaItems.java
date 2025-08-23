@@ -64,6 +64,7 @@ public class CanadaItems {
         .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
     public static final Item PIEROGI = register("pierogi", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
         .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
+    public static final Item BUTTER_TART = register("butter_tart", Item::new, new Item.Settings().food(FoodComponents.PUMPKIN_PIE));
 
     public static final Item BEAVER_SPAWN_EGG = register("beaver_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.BEAVER_ENTITY, settings), new Item.Settings());
@@ -210,6 +211,7 @@ public class CanadaItems {
             itemGroup.add(POUTINE);
             itemGroup.add(DONAIR);
             itemGroup.add(PIEROGI);
+            itemGroup.add(BUTTER_TART);
             itemGroup.add(VENISON);
             itemGroup.add(COOKED_VENISON);
             itemGroup.add(WATERFOWL);

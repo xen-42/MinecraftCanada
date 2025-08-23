@@ -231,6 +231,13 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(Items.POTATO, this)
                     .offerTo(exporter);
 
+                createCookingPotRecipe(registryLookup, CanadaItems.BUTTER_TART, 4)
+                    .input(CanadaTags.ItemTags.FLOUR, this)
+                    .input(Items.MILK_BUCKET, this)
+                    .input(ItemTags.EGGS, this)
+                    .input(CanadaItems.MAPLE_SYRUP_BOTTLE, this)
+                    .offerTo(exporter);
+
                 createShaped(RecipeCategory.FOOD, CanadaItems.THERMOS)
                     .pattern(" X ")
                     .pattern("Y Y")

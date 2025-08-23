@@ -1,8 +1,8 @@
 // 1.21.5	-999999999-01-01T00:00:00	Canadian Content/CanadaModItemTagGenerator
 844d28538c6d35714a0447334227907ca9b79283 data/c/tags/item/cheese.json
 cf97ef1bd2b06057559ea238eb2e49f17186fd62 data/c/tags/item/flour.json
-6e6b7f9cb09165fdafd76649ed188bccd595fe8a data/c/tags/item/foods.json
-eced4a134771a3fa64b40c29301a24d6784512bc data/c/tags/item/foods/raw_meat.json
+442d7ca5241926e292b03ca9166f61fd8f847047 data/c/tags/item/foods.json
+6dd486359daebd6ade5d061a760b14e8332fdba9 data/c/tags/item/foods/raw_meat.json
 a93ae14800b8e0e2e06178e7018964a5a708c637 data/c/tags/item/rubber.json
 dcfd9f02e66f14b76ae6153ca457a83472efcb5b data/c/tags/item/sap.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/canadamod/tags/item/maple_logs.json
