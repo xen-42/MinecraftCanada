@@ -10,6 +10,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.world.World;
 import xen42.canadamod.entities.DuckEntity;
+import xen42.canadamod.entities.GooseEntity;
 
 @Mixin(ChickenEntity.class)
 public abstract class ChickenEntityMixin extends AnimalEntity{
@@ -20,7 +21,7 @@ public abstract class ChickenEntityMixin extends AnimalEntity{
 
     @Inject(method = "tickMovement", at = @At("HEAD"), cancellable = true)
 	public void tickMovementOverride(CallbackInfo info) {
-        if ((Object)this instanceof DuckEntity) {
+        if ((Object)this instanceof DuckEntity || (Object)this instanceof GooseEntity) {
             // Only call super
             super.tickMovement();
             info.cancel();
