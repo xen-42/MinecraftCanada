@@ -32,6 +32,8 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         itemModelGenerator.register(CanadaItems.DUCK_SPAWN_EGG, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.VENISON, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.COOKED_VENISON, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.WATERFOWL, Models.GENERATED);
+        itemModelGenerator.register(CanadaItems.COOKED_WATERFOWL, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.ANTLERS, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.THERMOS, Models.GENERATED);
         itemModelGenerator.register(CanadaItems.PIEROGI, Models.GENERATED);

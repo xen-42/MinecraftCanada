@@ -119,6 +119,9 @@ public class CanadaItems {
     public static final Item COOKED_VENISON = register("cooked_venison", Item::new, (new Item.Settings()).food(FoodComponents.COOKED_MUTTON));
     public static final Item ANTLERS = register("antlers", Item::new, new Item.Settings());
 
+    public static final Item WATERFOWL = register("waterfowl", Item::new, (new Item.Settings()).food(FoodComponents.CHICKEN));
+    public static final Item COOKED_WATERFOWL = register("cooked_waterfowl", Item::new, (new Item.Settings()).food(FoodComponents.COOKED_CHICKEN));
+
     public static final Item MAPLE_BOAT = register("maple_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_BOAT, settings), (new Item.Settings()).maxCount(1));
     public static final Item MAPLE_CHEST_BOAT = register("maple_chest_boat", settings -> 
@@ -209,6 +212,8 @@ public class CanadaItems {
             itemGroup.add(PIEROGI);
             itemGroup.add(VENISON);
             itemGroup.add(COOKED_VENISON);
+            itemGroup.add(WATERFOWL);
+            itemGroup.add(COOKED_WATERFOWL);
             itemGroup.add(THERMOS);
         });
 

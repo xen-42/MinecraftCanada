@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "group": "translation{key='item.canadamod.waterfowl', args=[]}",
+  "ingredient": "canadamod:waterfowl",
+  "result": {
+    "id": "canadamod:cooked_waterfowl"
+  }
+}

@@ -66,5 +66,29 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
                         )
                 )
             );
+
+        this.register(
+            CanadaMod.DUCK_ENTITY, 
+                LootTable.builder()
+                .pool(
+                    LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(0.5F))
+                        .with(
+                            ItemEntry.builder(CanadaItems.WATERFOWL)
+                                .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
+                                .apply((LootFunction.Builder)FurnaceSmeltLootFunction.builder()
+                                    .conditionally((LootCondition.Builder)createSmeltLootCondition()))  
+                        )
+                )
+                .pool(
+                    LootPool.builder()
+                        .rolls(ConstantLootNumberProvider.create(0.5F))
+                        .with(
+                            ItemEntry.builder(Items.FEATHER)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 2.0F)))
+                                .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0F, 3.0F)))
+                        )
+                )
+            );
     }
 }

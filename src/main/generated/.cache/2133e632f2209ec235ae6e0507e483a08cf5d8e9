@@ -24,6 +24,7 @@ cb1714182841e266c3e9bdd209d3dcc37c1b4ec8 assets/canadamod/items/antlers.json
 65c799a6b75dd68939ee57ce90911b4513957133 assets/canadamod/items/beaver_spawn_egg.json
 9d6bb469eeb7a9e66c339204c6ea881d537d8fcb assets/canadamod/items/cheese_curd.json
 f1545a575c0ddb33d4818d1ffe9222283049e457 assets/canadamod/items/cooked_venison.json
+37e6f645a6f144cfbbaa3c46279c3e701446f8a5 assets/canadamod/items/cooked_waterfowl.json
 0da0681b94d64606617af047ef00a7446d157109 assets/canadamod/items/donair.json
 4ee2ba732fc7284d39a8580547de24857902dd9a assets/canadamod/items/duck_egg.json
 36e6368258f6c2b974fe0c53a7e92a1369d0c05a assets/canadamod/items/duck_spawn_egg.json
@@ -60,6 +61,7 @@ ef0b330d77ba84cfa83b83cf36500c50d7e17987 assets/canadamod/items/stripped_maple_l
 69cdd0c150143d0be42efc7610d198b76d270ae8 assets/canadamod/items/thermos.json
 e5292a58fcf66e380204328b4772465334c296b4 assets/canadamod/items/tree_tap.json
 754dd39ce7d24f0d2a74df94a981530e7a020e35 assets/canadamod/items/venison.json
+fa7f6aedc83d3abb2df3b187e706e63306a58944 assets/canadamod/items/waterfowl.json
 2cef046f0675bc361177286afcbe1d8b1906dd79 assets/canadamod/models/block/maple_button.json
 d8d8d18beb2a9418a5ddc633bf2e1823eb1e2c4f assets/canadamod/models/block/maple_button_inventory.json
 bfcd23e16f06f3632eb17f502c42cd269f99ef6b assets/canadamod/models/block/maple_button_pressed.json
@@ -105,6 +107,7 @@ d2e29800ebedaa44179151fd15c3ca37ca640a97 assets/canadamod/models/block/stripped_
 e0163eba5dacb5e218501c045275cedabc473ba6 assets/canadamod/models/item/beaver_spawn_egg.json
 dd6b1eeacc2d2485e80b43b94871277e50aa04a7 assets/canadamod/models/item/cheese_curd.json
 77e2bb455396b71f4139682c4d3347a5e0b8b2a8 assets/canadamod/models/item/cooked_venison.json
+e129f0548b31db6935ac0d512b5c23436326e347 assets/canadamod/models/item/cooked_waterfowl.json
 97ccc41aa630f7ffe967456a69c6a5999204b194 assets/canadamod/models/item/donair.json
 76fe79aa25448bf848ea413a420a54ca7caec00c assets/canadamod/models/item/duck_egg.json
 80b5aed0a51029020719e757ff7991874c572962 assets/canadamod/models/item/duck_spawn_egg.json
@@ -127,3 +130,4 @@ ba2955566f913ba7032cad77b767e0f98283cc60 assets/canadamod/models/item/pelt.json
 5310c261bc3116d0bcd1a959f113ef04e0c36e7a assets/canadamod/models/item/thermos.json
 0a75f8995f75dfa1346f9cfcec9b1b8178f2051e assets/canadamod/models/item/tree_tap.json
 4436dcb783cdfceee55edc68db7c45a4f812a6fe assets/canadamod/models/item/venison.json
+ade2644a78b8e21f80efb878a7565a6ca0e120ba assets/canadamod/models/item/waterfowl.json

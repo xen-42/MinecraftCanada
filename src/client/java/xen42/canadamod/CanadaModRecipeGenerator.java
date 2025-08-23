@@ -267,6 +267,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .offerTo(exporter);
 
                 offerSmelting(List.of(CanadaItems.VENISON), RecipeCategory.FOOD, CanadaItems.COOKED_VENISON, 0.35f, 200, CanadaItems.VENISON.getName().toString());
+                offerSmelting(List.of(CanadaItems.WATERFOWL), RecipeCategory.FOOD, CanadaItems.COOKED_WATERFOWL, 0.35f, 200, CanadaItems.WATERFOWL.getName().toString());
             }
 
             public static CookingPotRecipeJsonBuilder createCookingPotRecipe(WrapperLookup registryLookup, ItemConvertible output, int count) {
