@@ -183,6 +183,8 @@ public class CanadaMod implements ModInitializer {
 
 		SpawnRestriction.register(BEAVER_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
 		SpawnRestriction.register(MOOSE_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
+		SpawnRestriction.register(DUCK_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
+		SpawnRestriction.register(GRIZZLY_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
 
 		var mooseBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
 			.or(BiomeSelectors.includeByKey(BiomeKeys.TAIGA))
@@ -190,11 +192,13 @@ public class CanadaMod implements ModInitializer {
 			.or(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_PINE_TAIGA))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.SNOWY_TAIGA));
 		BiomeModifications.addSpawn(mooseBiomes, SpawnGroup.CREATURE, MOOSE_ENTITY, 60, 2, 2);
+		BiomeModifications.addSpawn(mooseBiomes, SpawnGroup.CREATURE, GRIZZLY_ENTITY, 60, 1, 2);
 
 		var beaverBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
 			.or(BiomeSelectors.includeByKey(BiomeKeys.RIVER))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.SWAMP));
 		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, BEAVER_ENTITY, 100, 4, 4);
+		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, DUCK_ENTITY, 100, 4, 4);
 
 		PayloadTypeRegistry.playS2C().register(BeaverChopTreeEffectPayload.PAYLOAD_ID, BeaverChopTreeEffectPayload.CODEC);
 

@@ -7,8 +7,10 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.PolarBearEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
 public class GrizzlyEntity extends PolarBearEntity {
@@ -30,4 +32,8 @@ public class GrizzlyEntity extends PolarBearEntity {
 		return CanadaMod.GRIZZLY_ENTITY.create(world, SpawnReason.BREEDING);
 	}
     
+	@Override
+    public ItemStack getPickBlockStack() {
+        return new ItemStack(CanadaItems.GRIZZLY_SPAWN_EGG);
+    }
 }

@@ -124,4 +124,9 @@ public class DuckEntity extends ChickenEntity {
 	protected void playStepSound(BlockPos pos, BlockState state) {
 		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
 	}
+
+	@Override
+    public ItemStack getPickBlockStack() {
+        return new ItemStack(CanadaItems.DUCK_SPAWN_EGG);
+    }
 }

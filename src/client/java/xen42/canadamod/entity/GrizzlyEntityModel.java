@@ -21,9 +21,9 @@ public class GrizzlyEntityModel<T extends GrizzlyEntity> extends PolarBearEntity
     @Override
 	public void setAngles(PolarBearEntityRenderState livingEntityRenderState) {
         super.setAngles(livingEntityRenderState);
-		head.xScale = livingEntityRenderState.baby ? 1.5f : 1f;
-		head.yScale = livingEntityRenderState.baby ? 1.5f : 1f;
-		head.zScale = livingEntityRenderState.baby ? 1.5f : 1f;
+		head.xScale = livingEntityRenderState.baby ? 1.2f : 1f;
+		head.yScale = livingEntityRenderState.baby ? 1.2f : 1f;
+		head.zScale = livingEntityRenderState.baby ? 1.2f : 1f;
 	}
 
     public static TexturedModelData getTexturedModelData() {
