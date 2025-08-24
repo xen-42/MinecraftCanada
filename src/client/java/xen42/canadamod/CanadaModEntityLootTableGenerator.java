@@ -72,7 +72,7 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
                 LootTable.builder()
                 .pool(
                     LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(0.5F))
+                        .rolls(ConstantLootNumberProvider.create(1))
                         .with(
                             ItemEntry.builder(CanadaItems.WATERFOWL)
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
@@ -82,7 +82,7 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
                 )
                 .pool(
                     LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(0.5F))
+                        .rolls(ConstantLootNumberProvider.create(1))
                         .with(
                             ItemEntry.builder(Items.FEATHER)
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 2.0F)))
@@ -95,7 +95,7 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
                 LootTable.builder()
                 .pool(
                     LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(0.5F))
+                        .rolls(ConstantLootNumberProvider.create(1))
                         .with(
                             ItemEntry.builder(CanadaItems.WATERFOWL)
                                 .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1.0F)))
@@ -105,7 +105,7 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
                 )
                 .pool(
                     LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(0.5F))
+                        .rolls(ConstantLootNumberProvider.create(1))
                         .with(
                             ItemEntry.builder(Items.FEATHER)
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 2.0F)))
@@ -118,7 +118,7 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
                 LootTable.builder()
                 .pool(
                     LootPool.builder()
-                        .rolls(ConstantLootNumberProvider.create(0.5F))
+                        .rolls(ConstantLootNumberProvider.create(1))
                         .with(
                             ItemEntry.builder(Items.SALMON)
                                 .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(0.0F, 2.0F)))

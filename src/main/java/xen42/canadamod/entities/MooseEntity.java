@@ -1,5 +1,6 @@
 package xen42.canadamod.entities;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +33,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.IllagerEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.RavagerEntity;
+import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CamelEntity;
@@ -163,7 +169,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         super.tickControlled(controllingPlayer, movementInput);
 
         if (controllingPlayer.isSprinting() && !wasSprinting && this.dashCooldown <= 0) {
-            this.dashCooldown = 55;
+            this.dashCooldown = 20;
             this.setDashing(true);
         }
         wasSprinting = controllingPlayer.isSprinting();
@@ -181,11 +187,20 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
         if(this.isDashing()) {
             var dir = this.getControllingPassenger() == null ? this.getRotationVec(1.0F) : this.getControllingPassenger().getRotationVec(1.0F);
-            var forward = dir.normalize().multiply(1.5f);
-            this.setVelocity(forward.x, this.getVelocity().y, forward.z);
+            var forward = dir.normalize();
+            this.setVelocity(forward.x * 1.5, this.getVelocity().y, forward.z * 1.5);
+
+            var list = getWorld().getEntitiesByClass(LivingEntity.class, getBoundingBox().expand(2f).stretch(forward.multiply(2f)), 
+                (entity) -> entity instanceof Monster);
+            
+            for (LivingEntity livingEntity : list) {
+                knockBack(livingEntity);
+            }
+
+            this.playAngrySound();
         }
 
-        if (this.isDashing() && this.dashCooldown < 50) {
+        if (this.isDashing() && this.dashCooldown < 15) {
 			this.setDashing(false);
 		}
 
@@ -240,6 +255,16 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
                 this.playSound(SoundEvents.ITEM_AXE_STRIP, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
             }
+        }
+    }
+
+    private void knockBack(Entity entity) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            double d = entity.getX() - getX();
+            double e = entity.getZ() - getZ();
+            double f = Math.max(d * d + e * e, 0.001D);
+            entity.addVelocity(d / f * 3.0D, 0.2D, e / f * 3.0D);
+            entity.damage(serverWorld, getDamageSources().mobAttack(this.getControllingPassenger() == null ? this : this.getControllingPassenger()), 2);
         }
     }
 
