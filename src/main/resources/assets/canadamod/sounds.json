@@ -52,5 +52,46 @@
             "canadamod:moose_hurt2"
         ],
         "subtitle": "subtitles.canadamod.moose_hurt"
-    }
+    },
+    "grizzly_bear_ambient": {
+		"sounds": [
+			"canadamod:polar_bear_idle1",
+			"canadamod:polar_bear_idle2",
+			"canadamod:polar_bear_idle3",
+			"canadamod:polar_bear_idle4"
+		],
+		"subtitle": "subtitles.canadamod.grizzly_bear_ambient"
+	},
+	"grizzly_bear_ambient_baby": {
+		"sounds": [
+			"canadamod:polar_bear_baby_idle3"
+		],
+		"subtitle": "subtitles.canadamod.grizzly_bear_ambient_baby"
+	},
+	"grizzly_bear_death": {
+		"sounds": [
+			"canadamod:polar_bear_death1",
+			"canadamod:polar_bear_death2",
+			"canadamod:polar_bear_death3"
+		],
+		"subtitle": "subtitles.canadamod.grizzly_bear_death"
+	},
+	"grizzly_bear_hurt": {
+		"sounds": [
+			"canadamod:polar_bear_hurt1",
+			"canadamod:polar_bear_hurt2",
+			"canadamod:polar_bear_hurt3",
+			"canadamod:polar_bear_hurt4"
+		],
+		"subtitle": "subtitles.canadamod.grizzly_bear_hurt"
+	},
+	"grizzly_bear_warning": {
+		"sounds": [
+			"canadamod:polar_bear_roar1",
+			"canadamod:polar_bear_roar2",
+			"canadamod:polar_bear_roar3"
+
+		],
+		"subtitle": "subtitles.canadamod.grizzly_bear_warning"
+	}
 }
