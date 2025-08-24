@@ -5,20 +5,26 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.control.AquaticMoveControl;
+import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.ai.pathing.SwimNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -40,7 +46,7 @@ public class DuckEntity extends ChickenEntity {
     public DuckEntity(EntityType<? extends ChickenEntity> entityType, World world) {
         super(entityType, world);
         // Override that chickens don't like water
-        this.setPathfindingPenalty(PathNodeType.WATER, PathNodeType.WATER.getDefaultPenalty());
+        this.setPathfindingPenalty(PathNodeType.WATER, 0f);
     }
     
     public static DefaultAttributeContainer.Builder createDuckAttributes() {
@@ -55,6 +61,7 @@ public class DuckEntity extends ChickenEntity {
 	protected void initGoals() {
 		this.goalSelector.add(0, new SwimGoal(this));
 		this.goalSelector.add(1, new EscapeDangerGoal(this, 1.4));
+		this.goalSelector.add(1, new FleeEntityGoal(this, FoxEntity.class, 8.0F, 1.6, 1.4, entity -> true));
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
 		this.goalSelector.add(3, new TemptGoal(this, 1.0, stack -> stack.isOf(Items.BREAD), false));
 		this.goalSelector.add(4, new FollowParentGoal(this, 1.1));
@@ -80,9 +87,9 @@ public class DuckEntity extends ChickenEntity {
 		super.tickMovement();
 		this.lastFlapProgress = this.flapProgress;
 		this.lastMaxWingDeviation = this.maxWingDeviation;
-		this.maxWingDeviation = this.maxWingDeviation + (this.isOnGround() ? -1.0F : 4.0F) * 0.3F;
+		this.maxWingDeviation = this.maxWingDeviation + (this.isOnGround() && !this.isTouchingWater() ? -1.0F : 4.0F) * 0.3F;
 		this.maxWingDeviation = MathHelper.clamp(this.maxWingDeviation, 0.0F, 1.0F);
-		if (!this.isOnGround() && this.flapSpeed < 1.0F) {
+		if (!this.isOnGround() && this.flapSpeed < 1.0F && !this.isTouchingWater()) {
 			this.flapSpeed = 1.0F;
 		}
 
@@ -101,6 +108,14 @@ public class DuckEntity extends ChickenEntity {
             this.emitGameEvent(GameEvent.ENTITY_PLACE);
 
 			this.eggLayTime = this.random.nextInt(6000) + 6000;
+		}
+	}
+
+	@Override
+	public void travel(Vec3d movementInput) {
+		super.travel(movementInput);
+		if (this.isTouchingWater()) {
+			this.setVelocity(this.getVelocity().x, this.getVelocity().y - 0.03f, this.getVelocity().z);
 		}
 	}
 

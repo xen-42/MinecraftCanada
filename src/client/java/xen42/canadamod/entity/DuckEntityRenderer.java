@@ -5,9 +5,11 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.state.ChickenEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaModClient;
 import xen42.canadamod.entities.DuckEntity;
+import xen42.canadamod.entities.GooseEntity;
 
 public class DuckEntityRenderer extends MobEntityRenderer<DuckEntity, ChickenEntityRenderState, DuckEntityModel<DuckEntity>> {
 
@@ -33,4 +35,9 @@ public class DuckEntityRenderer extends MobEntityRenderer<DuckEntity, ChickenEnt
         super.scale(state, matrices);
     }
     
+    public void updateRenderState(DuckEntity chickenEntity, ChickenEntityRenderState chickenEntityRenderState, float f) {
+		super.updateRenderState(chickenEntity, chickenEntityRenderState, f);
+		chickenEntityRenderState.flapProgress = MathHelper.lerp(f, chickenEntity.lastFlapProgress, chickenEntity.flapProgress);
+		chickenEntityRenderState.maxWingDeviation = MathHelper.lerp(f, chickenEntity.lastMaxWingDeviation, chickenEntity.maxWingDeviation);
+	}
 }
