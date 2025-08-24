@@ -1,6 +1,5 @@
 package xen42.canadamod.entities;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.jetbrains.annotations.Nullable;
@@ -33,15 +32,9 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.IllagerEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
-import net.minecraft.entity.mob.RavagerEntity;
-import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.CamelEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -49,7 +42,6 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.ItemTags;
@@ -191,7 +183,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
             this.setVelocity(forward.x * 1.5, this.getVelocity().y, forward.z * 1.5);
 
             var list = getWorld().getEntitiesByClass(LivingEntity.class, getBoundingBox().expand(2f).stretch(forward.multiply(2f)), 
-                (entity) -> entity instanceof Monster);
+                (entity) -> entity instanceof Monster || entity instanceof PlayerEntity);
             
             for (LivingEntity livingEntity : list) {
                 knockBack(livingEntity);
@@ -263,7 +255,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
             double d = entity.getX() - getX();
             double e = entity.getZ() - getZ();
             double f = Math.max(d * d + e * e, 0.001D);
-            entity.addVelocity(d / f * 3.0D, 0.2D, e / f * 3.0D);
+            entity.addVelocity(d / f * 5.0D, 0.2D, e / f * 5.0D);
             entity.damage(serverWorld, getDamageSources().mobAttack(this.getControllingPassenger() == null ? this : this.getControllingPassenger()), 2);
         }
     }
