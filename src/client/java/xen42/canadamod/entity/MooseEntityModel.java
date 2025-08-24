@@ -87,5 +87,7 @@ public class MooseEntityModel extends QuadrupedEntityModel<MooseEntityRenderStat
 		head.xScale = livingEntityRenderState.baby ? 1.5f : 1f;
 		head.yScale = livingEntityRenderState.baby ? 1.5f : 1f;
 		head.zScale = livingEntityRenderState.baby ? 1.5f : 1f;
+
+		head.pitch = livingEntityRenderState.dashing ? (float)Math.toRadians(20f) : 0f;
 	}
 }

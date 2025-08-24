@@ -129,8 +129,6 @@ public class GooseEntity extends ChickenEntity implements Angerable {
 
 		var shouldFlap = (!this.isOnGround() && !this.isTouchingWater()) || this.isAngry();
 		
-		CanadaMod.LOGGER.info(this.isAngry() ? "gr" : "so calm");
-
 		this.maxWingDeviation = this.maxWingDeviation + (!shouldFlap ? -1.0F : 4.0F) * 0.3F;
 		this.maxWingDeviation = MathHelper.clamp(this.maxWingDeviation, 0.0F, 1.0F);
 		if (shouldFlap && this.flapSpeed < 1.0F) {

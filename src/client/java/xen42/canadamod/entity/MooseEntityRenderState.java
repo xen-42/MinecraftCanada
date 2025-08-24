@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class MooseEntityRenderState extends LivingEntityRenderState {
     public ItemStack saddleStack;
-    public boolean leftAntlerMissing, rightAntlerMissing;
+    public boolean leftAntlerMissing, rightAntlerMissing, dashing;
 
     public final AnimationState attackAnimationState = new AnimationState();
 
@@ -15,5 +15,6 @@ public class MooseEntityRenderState extends LivingEntityRenderState {
         saddleStack = ItemStack.EMPTY;
         leftAntlerMissing = false;
         rightAntlerMissing = false;
+        dashing = false;
     }
 }
