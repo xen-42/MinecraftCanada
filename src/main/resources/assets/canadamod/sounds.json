@@ -93,5 +93,57 @@
 
 		],
 		"subtitle": "subtitles.canadamod.grizzly_bear_warning"
-	}
+	},
+    "duck_ambient": {
+        "sounds": [
+            "canadamod:duck_ambient1",
+            "canadamod:duck_ambient2"
+        ],
+		"subtitle": "subtitles.canadamod.duck_ambient"
+    },
+    "duck_death": {
+        "sounds": [
+            "canadamod:duck_death"
+        ],
+		"subtitle": "subtitles.canadamod.duck_death"
+    },
+    "duck_hurt": {
+        "sounds": [
+            "canadamod:duck_hurt1",
+            "canadamod:duck_hurt2"
+        ],
+		"subtitle": "subtitles.canadamod.duck_hurt"
+    },
+    "duck_footstep": {
+        "sounds": [
+            "canadamod:duck_footstep1",
+            "canadamod:duck_footstep2"
+        ],
+		"subtitle": "subtitles.canadamod.duck_footstep"
+    },
+    "duck_plop": {
+        "sounds": [
+            "canadamod:duck_plop"
+        ],
+		"subtitle": "subtitles.canadamod.duck_plop"
+    },
+    "goose_plop": {
+        "sounds": [
+            "canadamod:goose_plop"
+        ],
+		"subtitle": "subtitles.canadamod.goose_plop"
+    },
+    "moose_grow_antler": {
+        "sounds": [
+            "canadamod:moose_grow_antler"
+        ],
+		"subtitle": "subtitles.canadamod.moose_grow_antler"
+    },
+    "moose_strip_antler": {
+        "sounds": [
+            "canadamod:moose_strip_antler1",
+            "canadamod:moose_strip_antler2"
+        ],
+		"subtitle": "subtitles.canadamod.moose_strip_antler"
+    }
 }

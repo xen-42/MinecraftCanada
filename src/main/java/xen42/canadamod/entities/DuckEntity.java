@@ -40,6 +40,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
+import xen42.canadamod.CanadaSounds;
 
 public class DuckEntity extends ChickenEntity {
 
@@ -104,7 +105,7 @@ public class DuckEntity extends ChickenEntity {
             var item = this.dropItem(serverWorld, CanadaItems.DUCK_EGG);
             item.setPosition(this.getPos());
 
-            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+            this.playSound(CanadaSounds.SOUND_DUCK_PLOP, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             this.emitGameEvent(GameEvent.ENTITY_PLACE);
 
 			this.eggLayTime = this.random.nextInt(6000) + 6000;
@@ -122,22 +123,22 @@ public class DuckEntity extends ChickenEntity {
     // TODO: Get duck sounds
     @Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_CHICKEN_AMBIENT;
+		return CanadaSounds.SOUND_DUCK_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SoundEvents.ENTITY_CHICKEN_HURT;
+		return CanadaSounds.SOUND_DUCK_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_CHICKEN_DEATH;
+		return CanadaSounds.SOUND_DUCK_DEATH;
 	}
 
     @Override
 	protected void playStepSound(BlockPos pos, BlockState state) {
-		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+		this.playSound(CanadaSounds.SOUND_DUCK_FOOTSTEP, 0.15F, 1.0F);
 	}
 
 	@Override

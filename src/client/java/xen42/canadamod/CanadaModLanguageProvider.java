@@ -159,12 +159,22 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add("subtitles.canadamod.moose_angry", "Moose grunts angrily");
 			translationBuilder.add("subtitles.canadamod.moose_death", "Moose dies");
 			translationBuilder.add("subtitles.canadamod.moose_hurt", "Moose hurts");
+			translationBuilder.add("subtitles.canadamod.moose_grow_antler", "Moose grows antler");
+			translationBuilder.add("subtitles.canadamod.moose_strip_antler", "Moose loses antler");
 
 			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient", "Grizzly Bear groans");
 			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient_baby", "Grizzly Bear hums");
 			translationBuilder.add("subtitles.canadamod.grizzly_bear_death", "Grizzly Bear dies");
 			translationBuilder.add("subtitles.canadamod.grizzly_bear_hurt", "Grizzly Bear hurts");
 			translationBuilder.add("subtitles.canadamod.grizzly_bear_warning", "Grizzly Bear roars");
+
+			translationBuilder.add("subtitles.canadamod.duck_ambient", "Duck quacks");
+			translationBuilder.add("subtitles.canadamod.duck_hurt", "Duck hurts");
+			translationBuilder.add("subtitles.canadamod.duck_death", "Duck dies");
+			translationBuilder.add("subtitles.canadamod.duck_plop", "Duck plops");
+			translationBuilder.add("subtitles.canadamod.duck_footstep", "Footsteps");
+
+			translationBuilder.add("subtitles.canadamod.goose_plop", "Goose plops");
 		}
 	}
 	

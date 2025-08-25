@@ -224,7 +224,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
             // Average length 5 minutes to regen antlers
             if (force || this.random.nextFloat() < 1f / (float)(5 * 60 * 20)) {
                 this.getDataTracker().set(left ? LEFT_ANTLER_MISSING : RIGHT_ANTLER_MISSING, false);
-                this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
+                this.playSound(CanadaSounds.SOUND_MOOSE_GROW_ANTLER, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
             }
         }
     }
@@ -245,7 +245,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
                 item.setPosition(antlerPos);
                 this.getDataTracker().set(left ? LEFT_ANTLER_MISSING : RIGHT_ANTLER_MISSING, true);
 
-                this.playSound(SoundEvents.ITEM_AXE_STRIP, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
+                this.playSound(CanadaSounds.SOUND_MOOSE_STRIP_ANTLER, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
             }
         }
     }
