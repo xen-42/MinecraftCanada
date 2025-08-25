@@ -120,7 +120,6 @@ public class DuckEntity extends ChickenEntity {
 		}
 	}
 
-    // TODO: Get duck sounds
     @Override
 	protected SoundEvent getAmbientSound() {
 		return CanadaSounds.SOUND_DUCK_AMBIENT;

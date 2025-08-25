@@ -30,6 +30,12 @@ public class CanadaSounds {
 	public static final SoundEvent SOUND_DUCK_FOOTSTEP = registerSound("duck_footstep");
 	public static final SoundEvent SOUND_DUCK_PLOP = registerSound("duck_plop");
 
+	public static final SoundEvent SOUND_GOOSE_AMBIENT = registerSound("goose_ambient");
+	public static final SoundEvent SOUND_GOOSE_HURT = registerSound("goose_hurt");
+	public static final SoundEvent SOUND_GOOSE_DEATH = registerSound("goose_death");
+	public static final SoundEvent SOUND_GOOSE_WARNING = registerSound("goose_warning");
+	public static final SoundEvent SOUND_GOOSE_PLOP = registerSound("goose_plop");
+
     public static SoundEvent registerSound(String name) {
         var id = Identifier.of(CanadaMod.MOD_ID, name);
         var event = SoundEvent.of(id);

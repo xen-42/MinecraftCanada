@@ -52,6 +52,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
+import xen42.canadamod.CanadaSounds;
 
 public class GooseEntity extends ChickenEntity implements Angerable {
 
@@ -146,7 +147,7 @@ public class GooseEntity extends ChickenEntity implements Angerable {
             var item = this.dropItem(serverWorld, CanadaItems.GOOSE_EGG);
             item.setPosition(this.getPos());
 
-            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+            this.playSound(CanadaSounds.SOUND_GOOSE_PLOP, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             this.emitGameEvent(GameEvent.ENTITY_PLACE);
 
 			this.eggLayTime = this.random.nextInt(6000) + 6000;
@@ -164,26 +165,26 @@ public class GooseEntity extends ChickenEntity implements Angerable {
     // TODO: Get duck sounds
     @Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_CHICKEN_AMBIENT;
+		return CanadaSounds.SOUND_GOOSE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SoundEvents.ENTITY_CHICKEN_HURT;
+		return CanadaSounds.SOUND_GOOSE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_CHICKEN_DEATH;
+		return CanadaSounds.SOUND_GOOSE_DEATH;
 	}
 
 	public SoundEvent getWarningSound() {
-		return SoundEvents.ENTITY_CHICKEN_HURT;
+		return CanadaSounds.SOUND_GOOSE_WARNING;
 	}
 
     @Override
 	protected void playStepSound(BlockPos pos, BlockState state) {
-		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+		this.playSound(CanadaSounds.SOUND_DUCK_FOOTSTEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -256,7 +257,7 @@ public class GooseEntity extends ChickenEntity implements Angerable {
 					this.resetCooldown();
 				}
 
-				if (this.getCooldown() <= 10) {
+				if (this.getCooldown() <= 20) {
 					GooseEntity.this.playSound(GooseEntity.this.getWarningSound());
 				}
 			} else {

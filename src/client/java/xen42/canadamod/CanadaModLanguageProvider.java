@@ -175,6 +175,10 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add("subtitles.canadamod.duck_footstep", "Footsteps");
 
 			translationBuilder.add("subtitles.canadamod.goose_plop", "Goose plops");
+			translationBuilder.add("subtitles.canadamod.goose_ambient", "Goose quacks");
+			translationBuilder.add("subtitles.canadamod.goose_hurt", "Goose hurts");
+			translationBuilder.add("subtitles.canadamod.goose_death", "Goose dies");
+			translationBuilder.add("subtitles.canadamod.goose_warning", "Goose hisses");
 		}
 	}
 	

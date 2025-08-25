@@ -145,5 +145,34 @@
             "canadamod:moose_strip_antler2"
         ],
 		"subtitle": "subtitles.canadamod.moose_strip_antler"
+    },
+    "goose_hurt": {
+        "sounds": [
+            "canadamod:goose_hurt1",
+            "canadamod:goose_hurt2"
+        ],
+		"subtitle": "subtitles.canadamod.goose_hurt"
+    },
+    "goose_ambient": {
+        "sounds": [
+            "canadamod:goose_ambient1",
+            "canadamod:goose_ambient2",
+            "canadamod:goose_ambient3"
+        ],
+		"subtitle": "subtitles.canadamod.goose_ambient"
+    },
+    "goose_death": {
+        "sounds": [
+            "canadamod:goose_death1",
+            "canadamod:goose_death2"
+        ],
+		"subtitle": "subtitles.canadamod.goose_death"
+    },
+    "goose_warning": {
+        "sounds": [
+            "canadamod:goose_warning1",
+            "canadamod:goose_warning2"
+        ],
+		"subtitle": "subtitles.canadamod.goose_warning"
     }
 }
