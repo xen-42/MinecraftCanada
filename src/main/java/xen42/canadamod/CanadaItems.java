@@ -46,11 +46,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 import xen42.canadamod.entities.MapleBoatEntity;
-import xen42.canadamod.item.CustomEggItem;
+import xen42.canadamod.entities.eggs.DuckEggEntity;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
 import xen42.canadamod.item.DurabilityFoodItem;
 import xen42.canadamod.item.ThermosContentsComponent;
 import xen42.canadamod.item.ThermosItem;
+import xen42.canadamod.item.eggs.CustomEggItem;
+import xen42.canadamod.item.eggs.DuckEggItem;
+import xen42.canadamod.item.eggs.GooseEggItem;
 
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
@@ -150,8 +153,8 @@ public class CanadaItems {
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
-    public static final Item DUCK_EGG = register("duck_egg", (settings) -> new CustomEggItem(settings, CanadaMod.DUCK_ENTITY), new Item.Settings().maxCount(16));
-    public static final Item GOOSE_EGG = register("goose_egg", (settings) -> new CustomEggItem(settings, CanadaMod.GOOSE_ENTITY), new Item.Settings().maxCount(16));
+    public static final Item DUCK_EGG = register("duck_egg", DuckEggItem::new, new Item.Settings().maxCount(16));
+    public static final Item GOOSE_EGG = register("goose_egg", GooseEggItem::new, new Item.Settings().maxCount(16));
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.

@@ -49,12 +49,14 @@ import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.block.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
-import xen42.canadamod.entities.CustomEggEntity;
 import xen42.canadamod.entities.DuckEntity;
 import xen42.canadamod.entities.GooseEntity;
 import xen42.canadamod.entities.GrizzlyEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
+import xen42.canadamod.entities.eggs.CustomEggEntity;
+import xen42.canadamod.entities.eggs.DuckEggEntity;
+import xen42.canadamod.entities.eggs.GooseEggEntity;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeDisplay;
 import xen42.canadamod.screen.CookingPotScreenHandler;
@@ -133,11 +135,17 @@ public class CanadaMod implements ModInitializer {
 		Identifier.of(MOD_ID, "grizzly"), 
 		EntityType.Builder.create(GrizzlyEntity::new, SpawnGroup.CREATURE).dimensions(1.4f, 1.4f).build(GRIZZLY_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> CUSTOM_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"custom_egg_entity"));
-	public static final EntityType<CustomEggEntity> CUSTOM_EGG_ENTITY = Registry.register(
+	public static final RegistryKey<EntityType<?>> DUCK_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck_egg_entity"));
+	public static final EntityType<CustomEggEntity> DUCK_EGG_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "custom_egg_entity"), 
-		EntityType.Builder.<CustomEggEntity>create(CustomEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(CUSTOM_EGG_ENTITY_KEY));
+		Identifier.of(MOD_ID, "duck_egg_entity"), 
+		EntityType.Builder.<CustomEggEntity>create(DuckEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(DUCK_EGG_ENTITY_KEY));
+
+	public static final RegistryKey<EntityType<?>> GOOSE_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"goose_egg_entity"));
+	public static final EntityType<CustomEggEntity> GOOSE_EGG_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "goose_egg_entity"), 
+		EntityType.Builder.<CustomEggEntity>create(GooseEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(GOOSE_EGG_ENTITY_KEY));
 
 	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);

@@ -1,6 +1,4 @@
-package xen42.canadamod.entities;
-
-import java.util.Optional;
+package xen42.canadamod.entities.eggs;
 
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityStatuses;
@@ -8,20 +6,18 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.projectile.thrown.EggEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
-public class CustomEggEntity<e extends AnimalEntity> extends ThrownItemEntity {
+public abstract class CustomEggEntity extends ThrownItemEntity {
 	private static final EntityDimensions EMPTY_DIMENSIONS = EntityDimensions.fixed(0.0F, 0.0F);
 
     public CustomEggEntity(EntityType<? extends ThrownItemEntity> entity, World world) {
@@ -73,7 +69,7 @@ public class CustomEggEntity<e extends AnimalEntity> extends ThrownItemEntity {
 				}
 
 				for (int j = 0; j < i; j++) {
-					AnimalEntity entity = CanadaMod.DUCK_ENTITY.create(this.getWorld(), SpawnReason.TRIGGERED);
+					AnimalEntity entity = getHatchedEntity().create(this.getWorld(), SpawnReason.TRIGGERED);
 					if (entity != null) {
 						entity.setBreedingAge(-24000);
 						entity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
@@ -92,7 +88,7 @@ public class CustomEggEntity<e extends AnimalEntity> extends ThrownItemEntity {
 	}
 
 	@Override
-	protected Item getDefaultItem() {
-		return CanadaItems.DUCK_EGG;
-	}
+	protected abstract Item getDefaultItem();
+
+	public abstract EntityType<? extends AnimalEntity> getHatchedEntity();
 }

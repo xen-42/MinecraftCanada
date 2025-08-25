@@ -257,7 +257,7 @@ public class GooseEntity extends ChickenEntity implements Angerable {
 					this.resetCooldown();
 				}
 
-				if (this.getCooldown() <= 20) {
+				if (this.getCooldown() <= 5 && this.mob.getRandom().nextInt(2) == 0) {
 					GooseEntity.this.playSound(GooseEntity.this.getWarningSound());
 				}
 			} else {
