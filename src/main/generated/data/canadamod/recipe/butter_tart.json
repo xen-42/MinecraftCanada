@@ -1,0 +1,13 @@
+{
+  "type": "canadamod:cooking_pot",
+  "ingredients": [
+    "#c:flour",
+    "minecraft:milk_bucket",
+    "#minecraft:eggs",
+    "canadamod:maple_syrup_bottle"
+  ],
+  "result": {
+    "count": 4,
+    "id": "canadamod:butter_tart"
+  }
+}

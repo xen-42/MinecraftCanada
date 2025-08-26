@@ -1,3 +1,6 @@
 // 1.21.5	-999999999-01-01T00:00:00	Canadian Content/CanadaModEntityLootTableGenerator
 4ade94c496f97f0e13ba06afd9738fd4e51a6c38 data/canadamod/loot_table/entities/beaver.json
+03cc0f6e49609629b244aaec6b979e77e0bc7ea7 data/canadamod/loot_table/entities/duck.json
+03cc0f6e49609629b244aaec6b979e77e0bc7ea7 data/canadamod/loot_table/entities/goose.json
+b0a4dd3c2e1eef2588c69eee4ee1f1dd9253d293 data/canadamod/loot_table/entities/grizzly.json
 602568d4ee21c72046068b69344d686d6ce50c14 data/canadamod/loot_table/entities/moose.json

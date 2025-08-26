@@ -20,6 +20,6 @@ public class MapleBoatEntity {
     
     public static void initialize() {
         DispenserBlock.registerBehavior(CanadaItems.MAPLE_CHEST_BOAT, new BoatDispenserBehavior(MAPLE_CHEST_BOAT));
-        DispenserBlock.registerBehavior(CanadaItems.MAPLE_BOAT, new BoatDispenserBehavior(EntityType.CHERRY_BOAT));
+        DispenserBlock.registerBehavior(CanadaItems.MAPLE_BOAT, new BoatDispenserBehavior(MAPLE_BOAT));
     }
 }
