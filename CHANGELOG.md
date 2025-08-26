@@ -1,4 +1,11 @@
-Bugfixes
-- Fixed a bug where beavers would replant the wrong trees.
-- Fixed poutine being eaten when not hungry.
-- Fixed cooking pot consuming immediately.
+Bug fixes:
+- Make maple saplings compostable
+- Fix maple boats turning into cherry when put in a dispenser
+- Fixed oak signs dropping maple signs
+- Fixed beavers not chopping jungle tress
+
+Features:
+- Added ducks, geese, grizzly bears
+- Added duck eggs, goose eggs, and waterfowl meat
+- Added butter tarts
+- Gave moose a charge attack (sprint when riding one to use)
