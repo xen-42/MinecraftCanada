@@ -2,7 +2,7 @@
   "type": "canadamod:cooking_pot",
   "ingredients": [
     "minecraft:milk_bucket",
-    "minecraft:egg",
+    "#minecraft:eggs",
     "minecraft:sugar",
     "#c:flour"
   ],

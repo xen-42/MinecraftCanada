@@ -49,8 +49,14 @@ import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.block.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
+import xen42.canadamod.entities.DuckEntity;
+import xen42.canadamod.entities.GooseEntity;
+import xen42.canadamod.entities.GrizzlyEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.MooseEntity;
+import xen42.canadamod.entities.eggs.CustomEggEntity;
+import xen42.canadamod.entities.eggs.DuckEggEntity;
+import xen42.canadamod.entities.eggs.GooseEggEntity;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeDisplay;
 import xen42.canadamod.screen.CookingPotScreenHandler;
@@ -111,6 +117,36 @@ public class CanadaMod implements ModInitializer {
 		Identifier.of(MOD_ID, "moose"), 
 		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.75f, 2.5f).build(MOOSE_ENTITY_KEY));
 
+	public static final RegistryKey<EntityType<?>> DUCK_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck"));
+	public static final EntityType<DuckEntity> DUCK_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "duck"), 
+		EntityType.Builder.create(DuckEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(DUCK_ENTITY_KEY));
+
+	public static final RegistryKey<EntityType<?>> GOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"goose"));
+	public static final EntityType<GooseEntity> GOOSE_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "goose"), 
+		EntityType.Builder.create(GooseEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(GOOSE_ENTITY_KEY));
+
+	public static final RegistryKey<EntityType<?>> GRIZZLY_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"grizzly"));
+	public static final EntityType<GrizzlyEntity> GRIZZLY_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "grizzly"), 
+		EntityType.Builder.create(GrizzlyEntity::new, SpawnGroup.CREATURE).dimensions(1.4f, 1.4f).build(GRIZZLY_ENTITY_KEY));
+
+	public static final RegistryKey<EntityType<?>> DUCK_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck_egg_entity"));
+	public static final EntityType<CustomEggEntity> DUCK_EGG_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "duck_egg_entity"), 
+		EntityType.Builder.<CustomEggEntity>create(DuckEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(DUCK_EGG_ENTITY_KEY));
+
+	public static final RegistryKey<EntityType<?>> GOOSE_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"goose_egg_entity"));
+	public static final EntityType<CustomEggEntity> GOOSE_EGG_ENTITY = Registry.register(
+		Registries.ENTITY_TYPE, 
+		Identifier.of(MOD_ID, "goose_egg_entity"), 
+		EntityType.Builder.<CustomEggEntity>create(GooseEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(GOOSE_EGG_ENTITY_KEY));
+
 	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);
 	}
@@ -136,6 +172,9 @@ public class CanadaMod implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(BEAVER_ENTITY, BeaverEntity.createBeaverAttributes());
 		FabricDefaultAttributeRegistry.register(MOOSE_ENTITY, MooseEntity.createMooseAttributes());
+		FabricDefaultAttributeRegistry.register(DUCK_ENTITY, DuckEntity.createDuckAttributes());
+		FabricDefaultAttributeRegistry.register(GOOSE_ENTITY, GooseEntity.createGooseAttributes());
+		FabricDefaultAttributeRegistry.register(GRIZZLY_ENTITY, GrizzlyEntity.createGrizzlyAttributes());
 
 		BEAVER_EFFECT = registerStatusEffect("beaver_effect",
 			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
@@ -160,6 +199,9 @@ public class CanadaMod implements ModInitializer {
 
 		SpawnRestriction.register(BEAVER_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
 		SpawnRestriction.register(MOOSE_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
+		SpawnRestriction.register(DUCK_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
+		SpawnRestriction.register(GRIZZLY_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
+		SpawnRestriction.register(GOOSE_ENTITY, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CanadaMod::canSpawn);
 
 		var mooseBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
 			.or(BiomeSelectors.includeByKey(BiomeKeys.TAIGA))
@@ -167,11 +209,14 @@ public class CanadaMod implements ModInitializer {
 			.or(BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_PINE_TAIGA))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.SNOWY_TAIGA));
 		BiomeModifications.addSpawn(mooseBiomes, SpawnGroup.CREATURE, MOOSE_ENTITY, 60, 2, 2);
+		BiomeModifications.addSpawn(mooseBiomes, SpawnGroup.CREATURE, GRIZZLY_ENTITY, 60, 1, 2);
 
 		var beaverBiomes = BiomeSelectors.includeByKey(MAPLE_BIOME_KEY)
 			.or(BiomeSelectors.includeByKey(BiomeKeys.RIVER))
 			.or(BiomeSelectors.includeByKey(BiomeKeys.SWAMP));
-		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, BEAVER_ENTITY, 100, 4, 4);
+		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, BEAVER_ENTITY, 100, 2, 3);
+		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, DUCK_ENTITY, 100, 2, 4);
+		BiomeModifications.addSpawn(beaverBiomes, SpawnGroup.CREATURE, GOOSE_ENTITY, 80, 1, 2);
 
 		PayloadTypeRegistry.playS2C().register(BeaverChopTreeEffectPayload.PAYLOAD_ID, BeaverChopTreeEffectPayload.CODEC);
 

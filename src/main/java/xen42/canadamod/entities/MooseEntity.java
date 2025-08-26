@@ -32,6 +32,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.AbstractHorseEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -41,11 +42,11 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -62,6 +63,10 @@ import xen42.canadamod.CanadaSounds;
 public class MooseEntity extends AbstractHorseEntity implements Angerable {
     private static final TrackedData<Boolean> LEFT_ANTLER_MISSING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> RIGHT_ANTLER_MISSING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+	public static final TrackedData<Boolean> DASHING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+    public int dashCooldown;
 
     public final AnimationState attackAnimationState;
     private int attackAnimationEnd;
@@ -81,6 +86,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         super.initDataTracker(builder);
 		builder.add(LEFT_ANTLER_MISSING, false);
 		builder.add(RIGHT_ANTLER_MISSING, false);
+		builder.add(DASHING, false);
     }
 
     @Override
@@ -148,11 +154,64 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         tryShedAntler(false, false);
     }
 
+    private boolean wasSprinting = false;
+
+    @Override
+    protected void tickControlled(PlayerEntity controllingPlayer, Vec3d movementInput) {
+        super.tickControlled(controllingPlayer, movementInput);
+
+        if (controllingPlayer.isSprinting() && !wasSprinting && this.dashCooldown <= 0) {
+            this.dashCooldown = 20;
+            this.setDashing(true);
+        }
+        wasSprinting = controllingPlayer.isSprinting();
+    }
+
+    @Override
+    public boolean canSprintAsVehicle() {
+        return true; 
+    }
+
     @Override
     public void tick() {
         super.tick();
         updateAnimations();
+
+        if(this.isDashing()) {
+            var dir = this.getControllingPassenger() == null ? this.getRotationVec(1.0F) : this.getControllingPassenger().getRotationVec(1.0F);
+            var forward = dir.normalize();
+            this.setVelocity(forward.x * 1.5, this.getVelocity().y, forward.z * 1.5);
+
+            var list = getWorld().getEntitiesByClass(LivingEntity.class, getBoundingBox().expand(2f).stretch(forward.multiply(2f)), 
+                (entity) -> entity instanceof Monster || entity instanceof PlayerEntity);
+            
+            for (LivingEntity livingEntity : list) {
+                knockBack(livingEntity);
+            }
+
+            this.playAngrySound();
+        }
+
+        if (this.isDashing() && this.dashCooldown < 15) {
+			this.setDashing(false);
+		}
+
+        if (this.dashCooldown > 0) {
+			this.dashCooldown--;
+			if (this.dashCooldown == 0) {
+				this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ENTITY_CAMEL_DASH_READY, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+			}
+		}
     }
+
+    public boolean isDashing() {
+		return this.dataTracker.get(DASHING);
+	}
+
+	public void setDashing(boolean dashing) {
+		this.dataTracker.set(DASHING, dashing);
+        this.playJumpSound();
+	}
 
     @Override
     public boolean isAngry() {
@@ -165,7 +224,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
             // Average length 5 minutes to regen antlers
             if (force || this.random.nextFloat() < 1f / (float)(5 * 60 * 20)) {
                 this.getDataTracker().set(left ? LEFT_ANTLER_MISSING : RIGHT_ANTLER_MISSING, false);
-                this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
+                this.playSound(CanadaSounds.SOUND_MOOSE_GROW_ANTLER, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
             }
         }
     }
@@ -186,8 +245,18 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
                 item.setPosition(antlerPos);
                 this.getDataTracker().set(left ? LEFT_ANTLER_MISSING : RIGHT_ANTLER_MISSING, true);
 
-                this.playSound(SoundEvents.ITEM_AXE_STRIP, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
+                this.playSound(CanadaSounds.SOUND_MOOSE_STRIP_ANTLER, 1.0f, (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
             }
+        }
+    }
+
+    private void knockBack(Entity entity) {
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            double d = entity.getX() - getX();
+            double e = entity.getZ() - getZ();
+            double f = Math.max(d * d + e * e, 0.001D);
+            entity.addVelocity(d / f * 5.0D, 0.2D, e / f * 5.0D);
+            entity.damage(serverWorld, getDamageSources().mobAttack(this.getControllingPassenger() == null ? this : this.getControllingPassenger()), 2);
         }
     }
 
@@ -222,8 +291,11 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
     @Override
     public void tickMovement() {
         if (this.getControllingPassenger() != null) {
-            if (this.isSubmergedInWater() || (this.isTouchingWater() && this.jumping)) {
+            if (this.isSubmergedInWater()) {
                 this.swimUpward(FluidTags.WATER);
+            }
+            if ((this.isTouchingWater() && this.jumping)) {
+                this.setVelocity(this.getVelocity().x, 0.5, this.getVelocity().z);
             }
         }
         super.tickMovement();
@@ -448,6 +520,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         writeAngerToNbt(nbt);
         nbt.putBoolean("IsLeftAntlerMissing", this.getDataTracker().get(LEFT_ANTLER_MISSING));
         nbt.putBoolean("IsRightAntlerMissing", this.getDataTracker().get(RIGHT_ANTLER_MISSING));
+        nbt.putBoolean("IsDashing", this.getDataTracker().get(DASHING));
     }
 
     @Override
@@ -456,6 +529,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
         readAngerFromNbt(getWorld(), nbt);
         this.getDataTracker().set(LEFT_ANTLER_MISSING, nbt.getBoolean("IsLeftAntlerMissing").orElse(false));
         this.getDataTracker().set(RIGHT_ANTLER_MISSING, nbt.getBoolean("IsRightAntlerMissing").orElse(false));
+        this.getDataTracker().set(DASHING, nbt.getBoolean("IsDashing").orElse(false));
     }
 
     public void setPlayerTarget(@Nullable PlayerEntity attacking) {

@@ -47,6 +47,12 @@ import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entity.BeaverEntityModel;
 import xen42.canadamod.entity.BeaverEntityRenderer;
+import xen42.canadamod.entity.DuckEntityModel;
+import xen42.canadamod.entity.DuckEntityRenderer;
+import xen42.canadamod.entity.GooseEntityModel;
+import xen42.canadamod.entity.GooseEntityRenderer;
+import xen42.canadamod.entity.GrizzlyEntityModel;
+import xen42.canadamod.entity.GrizzlyEntityRenderer;
 import xen42.canadamod.entity.MooseEntityModel;
 import xen42.canadamod.entity.MooseEntityRenderer;
 import xen42.canadamod.entity.MooseSkullBlockEntityRenderer;
@@ -57,6 +63,9 @@ public class CanadaModClient implements ClientModInitializer {
 	public static final EntityModelLayer MAPLE_CHEST_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "chest_boat/maple"), "main");
 	public static final EntityModelLayer MODEL_BEAVER_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "beaver"), "main");
 	public static final EntityModelLayer MODEL_MOOSE_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "moose"), "main");
+	public static final EntityModelLayer MODEL_DUCK_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "duck"), "main");
+	public static final EntityModelLayer MODEL_GOOSE_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "goose"), "main");
+	public static final EntityModelLayer MODEL_GRIZZLY_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "grizzly"), "main");
 
 	public class MapleBoat implements EntityModelLayerRegistry.TexturedModelDataProvider {
 		@Override
@@ -98,6 +107,15 @@ public class CanadaModClient implements ClientModInitializer {
 
 		EntityRendererRegistry.register(CanadaMod.MOOSE_ENTITY, context -> new MooseEntityRenderer(context));
 		EntityModelLayerRegistry.registerModelLayer(MODEL_MOOSE_LAYER, MooseEntityModel::getTexturedModelData);
+
+		EntityRendererRegistry.register(CanadaMod.DUCK_ENTITY, context -> new DuckEntityRenderer(context));
+		EntityModelLayerRegistry.registerModelLayer(MODEL_DUCK_LAYER, DuckEntityModel::getTexturedModelData);
+
+		EntityRendererRegistry.register(CanadaMod.GOOSE_ENTITY, context -> new GooseEntityRenderer(context));
+		EntityModelLayerRegistry.registerModelLayer(MODEL_GOOSE_LAYER, GooseEntityModel::getTexturedModelData);
+
+		EntityRendererRegistry.register(CanadaMod.GRIZZLY_ENTITY, context -> new GrizzlyEntityRenderer(context));
+		EntityModelLayerRegistry.registerModelLayer(MODEL_GRIZZLY_LAYER, GrizzlyEntityModel::getTexturedModelData);
 
 		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
 		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
