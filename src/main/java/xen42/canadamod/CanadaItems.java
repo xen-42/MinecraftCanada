@@ -8,6 +8,7 @@ import java.util.function.UnaryOperator;
 import com.google.common.collect.Maps;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BundleContentsComponent;
@@ -15,12 +16,14 @@ import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.FoodComponents;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BoatItem;
 import net.minecraft.item.BundleItem;
+import net.minecraft.item.EggItem;
 import net.minecraft.item.HangingSignItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -43,10 +46,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
 import xen42.canadamod.entities.MapleBoatEntity;
+import xen42.canadamod.entities.eggs.DuckEggEntity;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
 import xen42.canadamod.item.DurabilityFoodItem;
 import xen42.canadamod.item.ThermosContentsComponent;
 import xen42.canadamod.item.ThermosItem;
+import xen42.canadamod.item.eggs.CustomEggItem;
+import xen42.canadamod.item.eggs.DuckEggItem;
+import xen42.canadamod.item.eggs.GooseEggItem;
 
 public class CanadaItems {
     public static final Item PELT = register("pelt", Item::new, new Item.Settings());
@@ -60,12 +67,22 @@ public class CanadaItems {
         .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
     public static final Item PIEROGI = register("pierogi", Item::new, new Item.Settings().rarity(Rarity.UNCOMMON)
         .food(new FoodComponent.Builder().nutrition(6).saturationModifier(2f).build()));
+    public static final Item BUTTER_TART = register("butter_tart", Item::new, new Item.Settings().food(FoodComponents.PUMPKIN_PIE));
 
     public static final Item BEAVER_SPAWN_EGG = register("beaver_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.BEAVER_ENTITY, settings), new Item.Settings());
 
     public static final Item MOOSE_SPAWN_EGG = register("moose_spawn_egg", (settings) -> 
         new DispensibleSpawnEggItem(CanadaMod.MOOSE_ENTITY, settings), new Item.Settings());
+
+    public static final Item DUCK_SPAWN_EGG = register("duck_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.DUCK_ENTITY, settings), new Item.Settings());
+
+    public static final Item GOOSE_SPAWN_EGG = register("goose_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.GOOSE_ENTITY, settings), new Item.Settings());
+    
+    public static final Item GRIZZLY_SPAWN_EGG = register("grizzly_spawn_egg", (settings) -> 
+        new DispensibleSpawnEggItem(CanadaMod.GRIZZLY_ENTITY, settings), new Item.Settings());
 
     public static final Item TREE_TAP = register("tree_tap", (settings) -> new BlockItem(CanadaBlocks.TREE_TAP, settings), new Item.Settings());
     public static final Item MAPLE_SAPLING = register("maple_sapling", (settings) -> new BlockItem(CanadaBlocks.MAPLE_SAPLING, settings), new Item.Settings());
@@ -112,6 +129,9 @@ public class CanadaItems {
     public static final Item COOKED_VENISON = register("cooked_venison", Item::new, (new Item.Settings()).food(FoodComponents.COOKED_MUTTON));
     public static final Item ANTLERS = register("antlers", Item::new, new Item.Settings());
 
+    public static final Item WATERFOWL = register("waterfowl", Item::new, (new Item.Settings()).food(FoodComponents.CHICKEN));
+    public static final Item COOKED_WATERFOWL = register("cooked_waterfowl", Item::new, (new Item.Settings()).food(FoodComponents.COOKED_CHICKEN));
+
     public static final Item MAPLE_BOAT = register("maple_boat", settings -> 
         new BoatItem(MapleBoatEntity.MAPLE_BOAT, settings), (new Item.Settings()).maxCount(1));
     public static final Item MAPLE_CHEST_BOAT = register("maple_chest_boat", settings -> 
@@ -132,6 +152,9 @@ public class CanadaItems {
         new Item.Settings().armor(NO_ARMOR, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
+
+    public static final Item DUCK_EGG = register("duck_egg", DuckEggItem::new, new Item.Settings().maxCount(16));
+    public static final Item GOOSE_EGG = register("goose_egg", GooseEggItem::new, new Item.Settings().maxCount(16));
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
 		// Create the item key.
@@ -163,6 +186,8 @@ public class CanadaItems {
             itemGroup.add(SAP);
             itemGroup.add(MAPLE_SAP);
             itemGroup.add(RUBBER);
+            itemGroup.add(DUCK_EGG);
+            itemGroup.add(GOOSE_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> { 
@@ -197,19 +222,27 @@ public class CanadaItems {
             itemGroup.add(POUTINE);
             itemGroup.add(DONAIR);
             itemGroup.add(PIEROGI);
+            itemGroup.add(BUTTER_TART);
             itemGroup.add(VENISON);
             itemGroup.add(COOKED_VENISON);
+            itemGroup.add(WATERFOWL);
+            itemGroup.add(COOKED_WATERFOWL);
             itemGroup.add(THERMOS);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register((itemGroup) -> {
             itemGroup.add(BEAVER_SPAWN_EGG);
             itemGroup.add(MOOSE_SPAWN_EGG);
+            itemGroup.add(DUCK_SPAWN_EGG);
+            itemGroup.add(GRIZZLY_SPAWN_EGG);
+            itemGroup.add(GOOSE_SPAWN_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((itemGroup) -> {
             itemGroup.add(BEAVER_HELMET);
             itemGroup.add(MOOSE_HELMET);
         });
+
+        CompostingChanceRegistry.INSTANCE.add(MAPLE_SAPLING, 0.3f);
     }
 }

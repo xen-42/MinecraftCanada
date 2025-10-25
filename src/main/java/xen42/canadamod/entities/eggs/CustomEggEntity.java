@@ -1,0 +1,94 @@
+package xen42.canadamod.entities.eggs;
+
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityStatuses;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ItemStackParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.world.World;
+import xen42.canadamod.CanadaItems;
+import xen42.canadamod.CanadaMod;
+
+public abstract class CustomEggEntity extends ThrownItemEntity {
+	private static final EntityDimensions EMPTY_DIMENSIONS = EntityDimensions.fixed(0.0F, 0.0F);
+
+    public CustomEggEntity(EntityType<? extends ThrownItemEntity> entity, World world) {
+        super(EntityType.EGG, world);
+    }
+
+	public CustomEggEntity(World world, LivingEntity owner, ItemStack stack) {
+		super(EntityType.EGG, owner, world, stack);
+	}
+
+	public CustomEggEntity(World world, double x, double y, double z, ItemStack stack) {
+		super(EntityType.EGG, x, y, z, world, stack);
+	}
+
+	@Override
+	public void handleStatus(byte status) {
+		if (status == EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES) {
+			double d = 0.08;
+
+			for (int i = 0; i < 8; i++) {
+				this.getWorld()
+					.addParticleClient(
+						new ItemStackParticleEffect(ParticleTypes.ITEM, this.getStack()),
+						this.getX(),
+						this.getY(),
+						this.getZ(),
+						(this.random.nextFloat() - 0.5) * 0.08,
+						(this.random.nextFloat() - 0.5) * 0.08,
+						(this.random.nextFloat() - 0.5) * 0.08
+					);
+			}
+		}
+	}
+
+	@Override
+	protected void onEntityHit(EntityHitResult entityHitResult) {
+		super.onEntityHit(entityHitResult);
+		entityHitResult.getEntity().serverDamage(this.getDamageSources().thrown(this, this.getOwner()), 0.0F);
+	}
+
+	@Override
+	protected void onCollision(HitResult hitResult) {
+		super.onCollision(hitResult);
+		if (!this.getWorld().isClient) {
+			if (this.random.nextInt(8) == 0) {
+				int i = 1;
+				if (this.random.nextInt(32) == 0) {
+					i = 4;
+				}
+
+				for (int j = 0; j < i; j++) {
+					AnimalEntity entity = getHatchedEntity().create(this.getWorld(), SpawnReason.TRIGGERED);
+					if (entity != null) {
+						entity.setBreedingAge(-24000);
+						entity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), 0.0F);
+						if (!entity.recalculateDimensions(EMPTY_DIMENSIONS)) {
+							break;
+						}
+
+						this.getWorld().spawnEntity(entity);
+					}
+				}
+			}
+
+			this.getWorld().sendEntityStatus(this, EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES);
+			this.discard();
+		}
+	}
+
+	@Override
+	protected abstract Item getDefaultItem();
+
+	public abstract EntityType<? extends AnimalEntity> getHatchedEntity();
+}

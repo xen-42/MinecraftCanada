@@ -103,19 +103,31 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaItems.POUTINE, "Poutine");
 			translationBuilder.add(CanadaItems.DONAIR, "Donair");
 			translationBuilder.add(CanadaItems.PIEROGI, "Pierogi");
+			translationBuilder.add(CanadaItems.BUTTER_TART, "Butter Tart");
 
 			translationBuilder.add(CanadaBlocks.COOKING_POT, "Cooking Pot");
 			translationBuilder.add("block." + CanadaMod.MOD_ID + ".cooking_pot", "Cooking Pot");
 
 			translationBuilder.add(CanadaItems.BEAVER_SPAWN_EGG, "Beaver Spawn Egg");
 			translationBuilder.add(CanadaItems.MOOSE_SPAWN_EGG, "Moose Spawn Egg");
+			translationBuilder.add(CanadaItems.DUCK_SPAWN_EGG, "Duck Spawn Egg");
+			translationBuilder.add(CanadaItems.GOOSE_SPAWN_EGG, "Goose Spawn Egg");
+			translationBuilder.add(CanadaItems.GRIZZLY_SPAWN_EGG, "Grizzly Bear Spawn Egg");
+
+			translationBuilder.add(CanadaItems.DUCK_EGG, "Duck Egg");
+			translationBuilder.add(CanadaItems.GOOSE_EGG, "Goose Egg");
 
 			translationBuilder.add(CanadaItems.ANTLERS, "Antler");
 			translationBuilder.add(CanadaItems.VENISON, "Venison");
 			translationBuilder.add(CanadaItems.COOKED_VENISON, "Cooked venison");
+			translationBuilder.add(CanadaItems.WATERFOWL, "Waterfowl");
+			translationBuilder.add(CanadaItems.COOKED_WATERFOWL, "Cooked waterfowl");
 			
 			translationBuilder.add(CanadaMod.MOOSE_ENTITY, "Moose");
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
+			translationBuilder.add(CanadaMod.DUCK_ENTITY, "Duck");
+			translationBuilder.add(CanadaMod.GOOSE_ENTITY, "Goose");
+			translationBuilder.add(CanadaMod.GRIZZLY_ENTITY, "Grizzly Bear");
 
 			translationBuilder.add(CanadaItems.THERMOS, "Thermos");
 			translationBuilder.add(CanadaItems.BEAVER_HELMET, "Beaver Pelt Hat");
@@ -142,10 +154,31 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add("subtitles.canadamod.beaver_ambient", "Beaver grunts");
 			translationBuilder.add("subtitles.canadamod.beaver_death", "Beaver dies");
 			translationBuilder.add("subtitles.canadamod.beaver_hurt", "Beaver hurts");
+			
 			translationBuilder.add("subtitles.canadamod.moose_ambient", "Moose calls");
 			translationBuilder.add("subtitles.canadamod.moose_angry", "Moose grunts angrily");
 			translationBuilder.add("subtitles.canadamod.moose_death", "Moose dies");
 			translationBuilder.add("subtitles.canadamod.moose_hurt", "Moose hurts");
+			translationBuilder.add("subtitles.canadamod.moose_grow_antler", "Moose grows antler");
+			translationBuilder.add("subtitles.canadamod.moose_strip_antler", "Moose loses antler");
+
+			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient", "Grizzly Bear groans");
+			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient_baby", "Grizzly Bear hums");
+			translationBuilder.add("subtitles.canadamod.grizzly_bear_death", "Grizzly Bear dies");
+			translationBuilder.add("subtitles.canadamod.grizzly_bear_hurt", "Grizzly Bear hurts");
+			translationBuilder.add("subtitles.canadamod.grizzly_bear_warning", "Grizzly Bear roars");
+
+			translationBuilder.add("subtitles.canadamod.duck_ambient", "Duck quacks");
+			translationBuilder.add("subtitles.canadamod.duck_hurt", "Duck hurts");
+			translationBuilder.add("subtitles.canadamod.duck_death", "Duck dies");
+			translationBuilder.add("subtitles.canadamod.duck_plop", "Duck plops");
+			translationBuilder.add("subtitles.canadamod.duck_footstep", "Footsteps");
+
+			translationBuilder.add("subtitles.canadamod.goose_plop", "Goose plops");
+			translationBuilder.add("subtitles.canadamod.goose_ambient", "Goose quacks");
+			translationBuilder.add("subtitles.canadamod.goose_hurt", "Goose hurts");
+			translationBuilder.add("subtitles.canadamod.goose_death", "Goose dies");
+			translationBuilder.add("subtitles.canadamod.goose_warning", "Goose hisses");
 		}
 	}
 	

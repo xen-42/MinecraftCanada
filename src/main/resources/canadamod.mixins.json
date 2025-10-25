@@ -6,7 +6,8 @@
 		"PlayerEntityMixin",
 		"DrownedEntityMixin",
 		"FleeEntityGoalMixin",
-		"ConsumableComponentMixin"
+		"ConsumableComponentMixin",
+		"ChickenEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
