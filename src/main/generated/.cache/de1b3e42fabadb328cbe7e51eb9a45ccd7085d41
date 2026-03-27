@@ -9,8 +9,8 @@ da2c76c510e22eac95a2da2156669526ee55a0da data/c/tags/block/villager_job_sites.js
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/canadamod/tags/block/maple_logs.json
 aba537218c7dd933ec02741a81d994f0d6a3cab0 data/minecraft/tags/block/all_hanging_signs.json
 8274c4be05aba93a68e3552387c0bb307952469b data/minecraft/tags/block/all_signs.json
-6585e92b311f42ef9c67e2e634f879419e188ee1 data/minecraft/tags/block/fence_gates.json
-e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/block/fences.json
+b832d5febf130d532468f847ce77ea23cb5f8f92 data/minecraft/tags/block/fence_gates.json
+37022bbaf1c4c668067944e154893f8b802b23f6 data/minecraft/tags/block/fences.json
 1ff05c42f837b53b1b92fa0c534ee95af326be14 data/minecraft/tags/block/flower_pots.json
 2c8ae194c54cdf79b288670fe8b6d5b8c7cddbb9 data/minecraft/tags/block/leaves.json
 22d504c3cec1c4654f850908e2b1e0cf5c3edafb data/minecraft/tags/block/logs.json
@@ -19,6 +19,7 @@ e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/block/fences.json
 5b7df77812d18ef992c2126e40a855b3def78d4d data/minecraft/tags/block/saplings.json
 b589454461d4984095cc3d656f4c2bb09302f970 data/minecraft/tags/block/wooden_buttons.json
 1f42b77e8c6e68a78e6b48deab9976eadc45e537 data/minecraft/tags/block/wooden_doors.json
+e57451c135199c63ac114f113c09b49996c263b0 data/minecraft/tags/block/wooden_fences.json
 190cd66d942f1d044a58f6f715ecb0b16364b56f data/minecraft/tags/block/wooden_pressure_plates.json
 89520cdd9ac28a6d804bb6093a6e7b8f38530127 data/minecraft/tags/block/wooden_slabs.json
 54db9bfbbd003500655a258d0a1c289259440acf data/minecraft/tags/block/wooden_stairs.json
