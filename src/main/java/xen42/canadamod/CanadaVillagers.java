@@ -64,10 +64,10 @@ public class CanadaVillagers {
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 1, factories -> {
             factories.add((entity, random) -> new TradeOffer(
 				new TradedItem(CanadaItems.SAP, 4),
-				new ItemStack(Items.EMERALD, 1), 16, 2, 0.05f));
+				new ItemStack(CanadaItems.PELT, 1), 16, 2, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
 				new TradedItem(CanadaItems.MAPLE_SAP, 4),
-				new ItemStack(Items.EMERALD, 2), 16, 2, 0.05f));
+				new ItemStack(CanadaItems.PELT, 2), 16, 2, 0.05f));
 		});
 
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 2, factories -> {
@@ -75,34 +75,34 @@ public class CanadaVillagers {
 				new TradedItem(CanadaItems.PELT, 9),
 				new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
-				new TradedItem(Items.EMERALD, 2),
+				new TradedItem(CanadaItems.PELT, 2),
 				new ItemStack(CanadaItems.MAPLE_SAPLING, 4), 12, 5, 0.05f));
 		});
 
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 3, factories -> {
             factories.add((entity, random) -> new TradeOffer(
-				new TradedItem(CanadaItems.ANTLERS, 4),
-				new ItemStack(Items.EMERALD, 1), 12, 5, 0.05f));
+				new TradedItem(CanadaItems.ANTLERS, 2),
+				new ItemStack(CanadaItems.PELT, 9), 12, 5, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
-                new TradedItem(Items.EMERALD, 2),
+                new TradedItem(CanadaItems.PELT, 2),
                 new ItemStack(CanadaItems.CHEESE_CURD, 3), 12, 5, 0.05f));
 		});
 
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 4, factories -> {
             factories.add((entity, random) -> new TradeOffer(
-                new TradedItem(Items.EMERALD, 3),
+                new TradedItem(CanadaItems.PELT, 3),
                 new ItemStack(CanadaItems.MAPLE_SYRUP_BOTTLE, 1), 12, 5, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
-                new TradedItem(Items.EMERALD, 3),
+                new TradedItem(CanadaItems.PELT, 6),
                 new ItemStack(CanadaItems.POUTINE, 1), 12, 5, 0.05f));
 		});
 
         TradeOfferHelper.registerVillagerOffers(SUGAR_SHACK_VILLAGER_KEY, 5, factories -> {
             factories.add((entity, random) -> new TradeOffer(
-                new TradedItem(Items.EMERALD, 12),
+                new TradedItem(CanadaItems.PELT, 16),
                 new ItemStack(CanadaItems.MOOSE_HELMET, 1), 12, 5, 0.05f));
             factories.add((entity, random) -> new TradeOffer(
-                new TradedItem(Items.EMERALD, 12),
+                new TradedItem(CanadaItems.PELT, 16),
                 new ItemStack(CanadaItems.BEAVER_HELMET, 1), 12, 5, 0.05f));
 		});
 
@@ -116,11 +116,15 @@ public class CanadaVillagers {
                 new TradeOfferFactory(new TradeOffer(
 					new TradedItem(Items.EMERALD, 4),
 					new ItemStack(CanadaItems.MOOSE_HEAD, 1), 12, 20, 0.05f)
+				),
+                new TradeOfferFactory(new TradeOffer(
+					new TradedItem(Items.EMERALD, 1),
+					new ItemStack(CanadaItems.GOOSE_EGG, 1), 12, 20, 0.05f)
 				)
 			);
 		});
 
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.CARTOGRAPHER, 3, factories -> {
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.CARTOGRAPHER, 1, factories -> {
 			// Map to sugar shack
 			factories.add((entity, random) -> SellMap(entity, random, 10,
 				CanadaTags.StructureTags.MAPLE_CABIN, MapDecorationTypes.TARGET_X, 4, 15));
