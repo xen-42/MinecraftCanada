@@ -125,6 +125,9 @@ public class GooseEntity extends ChickenEntity implements Angerable {
     @Override
 	public void tickMovement() {
 		super.tickMovement();
+
+		this.fallDistance = 0.0;
+
 		this.lastFlapProgress = this.flapProgress;
 		this.lastMaxWingDeviation = this.maxWingDeviation;
 

@@ -86,6 +86,9 @@ public class DuckEntity extends ChickenEntity {
     @Override
 	public void tickMovement() {
 		super.tickMovement();
+		
+		this.fallDistance = 0.0;
+
 		this.lastFlapProgress = this.flapProgress;
 		this.lastMaxWingDeviation = this.maxWingDeviation;
 		this.maxWingDeviation = this.maxWingDeviation + (this.isOnGround() && !this.isTouchingWater() ? -1.0F : 4.0F) * 0.3F;
