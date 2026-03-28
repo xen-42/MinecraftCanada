@@ -188,13 +188,13 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
                     .input(CanadaTags.ItemTags.FLOUR, this)
                     .input(CanadaTags.ItemTags.SAP, this)
                     .offerTo(exporter);   
-                    
+
                 createCookingPotRecipe(registryLookup, CanadaItems.GRAVY, 1)
                     .input(CanadaTags.ItemTags.FLOUR, this)
-                    .input(CanadaTags.ItemTags.RAW_MEAT, this)
+                    .input(ConventionalItemTags.RAW_MEAT_FOODS, this)
                     .requiresBottle()
                     .offerTo(exporter);   
-                
+
                 createCookingPotRecipe(registryLookup, CanadaItems.CHEESE_CURD, 3)
                     .input(Items.MILK_BUCKET, this)
                     .input(Items.FERMENTED_SPIDER_EYE, this)

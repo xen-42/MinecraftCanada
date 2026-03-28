@@ -20,14 +20,12 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
     
     @Override
     protected void configure(WrapperLookup wrapperLookup) {
-        this.getOrCreateTagBuilder(BlockTags.LOGS)
-            .add(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD);
-        
-        this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-            .add(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD);
-
         this.getOrCreateTagBuilder(CanadaTags.BlockTags.MAPLE_LOGS)
             .add(CanadaBlocks.MAPLE_LOG, CanadaBlocks.STRIPPED_MAPLE_LOG, CanadaBlocks.MAPLE_WOOD, CanadaBlocks.STRIPPED_MAPLE_WOOD);
+        
+        // Extends to BlockTags.LOGS
+        this.getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+            .addTag(CanadaTags.BlockTags.MAPLE_LOGS);
         
         this.getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
             .add(CanadaBlocks.MAPLE_BUTTON);
@@ -45,20 +43,20 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
             .add(CanadaBlocks.MAPLE_STAIRS);
         
         this.getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS)
-            .add(CanadaBlocks.MAPLE_STAIRS);
+            .add(CanadaBlocks.MAPLE_TRAPDOOR);
 
-        this.getOrCreateTagBuilder(BlockTags.FENCES)
-            .add(CanadaBlocks.MAPLE_FENCE);
+        // Both extend to ALL_SIGNS
+        this.getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
+            .add(CanadaBlocks.MAPLE_SIGN);
 
-        this.getOrCreateTagBuilder(BlockTags.FENCE_GATES)
-            .add(CanadaBlocks.MAPLE_FENCE_GATE);
-
-        this.getOrCreateTagBuilder(BlockTags.ALL_SIGNS)
-            .add(CanadaBlocks.MAPLE_SIGN)
+        this.getOrCreateTagBuilder(BlockTags.WALL_SIGNS)
             .add(CanadaBlocks.MAPLE_WALL_SIGN);
-        
-        this.getOrCreateTagBuilder(BlockTags.ALL_HANGING_SIGNS)
-            .add(CanadaBlocks.MAPLE_HANGING_SIGN)
+
+        // Both extend to ALL_HANGING_SIGNS
+        this.getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS) 
+            .add(CanadaBlocks.MAPLE_HANGING_SIGN);
+
+        this.getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS)
             .add(CanadaBlocks.MAPLE_WALL_HANGING_SIGN);
         
         this.getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
@@ -70,6 +68,8 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
             .add(CanadaBlocks.MAPLE_TRAPDOOR)
             .add(CanadaBlocks.MAPLE_FENCE);
         
+        this.getOrCreateTagBuilder(BlockTags.PLANKS)
+            .add(CanadaBlocks.MAPLE_PLANKS);
         this.getOrCreateTagBuilder(BlockTags.LEAVES)
             .add(CanadaBlocks.MAPLE_LEAVES);
 

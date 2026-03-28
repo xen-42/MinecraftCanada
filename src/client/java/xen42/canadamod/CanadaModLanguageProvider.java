@@ -119,9 +119,9 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 			translationBuilder.add(CanadaItems.ANTLERS, "Antler");
 			translationBuilder.add(CanadaItems.VENISON, "Venison");
-			translationBuilder.add(CanadaItems.COOKED_VENISON, "Cooked venison");
+			translationBuilder.add(CanadaItems.COOKED_VENISON, "Cooked Venison");
 			translationBuilder.add(CanadaItems.WATERFOWL, "Waterfowl");
-			translationBuilder.add(CanadaItems.COOKED_WATERFOWL, "Cooked waterfowl");
+			translationBuilder.add(CanadaItems.COOKED_WATERFOWL, "Cooked Waterfowl");
 			
 			translationBuilder.add(CanadaMod.MOOSE_ENTITY, "Moose");
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
@@ -144,8 +144,16 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.addFilledMap(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
 			
 			translationBuilder.add(CanadaTags.ItemTags.MAPLE_LOGS, "Maple Logs");
-			translationBuilder.add(CanadaTags.ItemTags.RAW_MEAT, "Red Meat");
 			translationBuilder.add(CanadaTags.ItemTags.SAP, "Sap");
+			translationBuilder.add(CanadaTags.ItemTags.RUBBER, "Rubber");
+			translationBuilder.add(CanadaTags.ItemTags.CHEESE, "Cheese");
+			translationBuilder.add(CanadaTags.ItemTags.CHEESE_FOODS, "Cheese");
+			translationBuilder.add(CanadaTags.ItemTags.DAIRY_FOODS, "Dairy");
+			translationBuilder.add(CanadaTags.ItemTags.FLOUR, "Flour");
+			translationBuilder.add(CanadaTags.ItemTags.FLOUR_FOODS, "Flour");
+			translationBuilder.add(CanadaTags.ItemTags.WHEAT_FLOUR, "Wheat Flour");
+			translationBuilder.add(CanadaTags.ItemTags.SYRUP_DRINKS, "Syrup Drinks");
+			translationBuilder.add(CanadaTags.ItemTags.SAUCES, "Sauces");
 			translationBuilder.add(CanadaTags.BlockTags.MAPLE_LOGS, "Maple Logs");
 			translationBuilder.addVillagerProfession(CanadaVillagers.SUGAR_SHACK_VILLAGER_KEY, "Lumberjack");
 

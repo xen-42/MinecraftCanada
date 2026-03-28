@@ -1,5 +1,6 @@
 package xen42.canadamod;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -14,6 +15,7 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BundleContentsComponent;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
+import net.minecraft.component.type.FireworkExplosionComponent;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.FoodComponents;
 import net.minecraft.entity.EntityType;
@@ -35,6 +37,7 @@ import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.recipe.FireworkStarRecipe;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -45,6 +48,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
+import net.minecraft.component.type.EquippableComponent;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.entities.eggs.DuckEggEntity;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
@@ -115,11 +119,20 @@ public class CanadaItems {
     public static final Item RUBBER = register("rubber", Item::new, new Item.Settings());
 
     private static Map<EquipmentType, Integer> NO_DEFENSE_MAP = Maps.newEnumMap(Map.of(EquipmentType.BOOTS, 0, EquipmentType.LEGGINGS, 0, EquipmentType.CHESTPLATE, 0, EquipmentType.HELMET, 0, EquipmentType.BODY, 0));
-    public static final ArmorMaterial NO_ARMOR = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, ItemTags.REPAIRS_LEATHER_ARMOR, EquipmentAssetKeys.LEATHER);
+    public static final ArmorMaterial PELT_ARMOR = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, CanadaTags.ItemTags.REPAIRS_PELT_ARMOR, EquipmentAssetKeys.LEATHER);
+    public static final ArmorMaterial LEATHER_ARMOR_NO_DEFENSE = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, ItemTags.REPAIRS_LEATHER_ARMOR, EquipmentAssetKeys.LEATHER);
 
     public static final Item MOOSE_HEAD = register("moose_head", (settings) -> {
         return new VerticallyAttachableBlockItem(CanadaBlocks.MOOSE_HEAD, CanadaBlocks.MOOSE_WALL_HEAD, Direction.DOWN, settings);
-    }, new Item.Settings().armor(NO_ARMOR, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
+    }, armorNoDurability(LEATHER_ARMOR_NO_DEFENSE, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
+
+    public static Item.Settings armorNoDurability(ArmorMaterial material, EquipmentType type) {
+        return new Item.Settings().attributeModifiers(material.createAttributeModifiers(type))
+            .enchantable(material.enchantmentValue())
+            .component(
+                DataComponentTypes.EQUIPPABLE, EquippableComponent.builder(type.getEquipmentSlot()).equipSound(material.equipSound()).model(material.assetId()).build()
+            );
+    }
 
     public static final Item GRAVY = register("gravy", Item::new, new Item.Settings()
         .recipeRemainder(Items.GLASS_BOTTLE).food(GRAVY_FOOD, GRAVY_CONSUME)
@@ -147,9 +160,9 @@ public class CanadaItems {
         settings -> new ThermosItem(settings), (new Item.Settings()).maxCount(1).component(THERMOS_CONTENTS, ThermosContentsComponent.DEFAULT));
 
     public static final Item BEAVER_HELMET = register("beaver_helmet", Item::new, 
-        new Item.Settings().armor(NO_ARMOR, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
+        new Item.Settings().armor(PELT_ARMOR, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
     public static final Item MOOSE_HELMET = register("moose_helmet", Item::new, 
-        new Item.Settings().armor(NO_ARMOR, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
+        new Item.Settings().armor(LEATHER_ARMOR_NO_DEFENSE, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
 
@@ -244,5 +257,10 @@ public class CanadaItems {
         });
 
         CompostingChanceRegistry.INSTANCE.add(MAPLE_SAPLING, 0.3f);
+        
+        // Replace the original immutable map with a mutable one and add custom items
+        Map<Item, FireworkExplosionComponent.Type> fireworkExplosionTypeModifierMap = new HashMap<>(FireworkStarRecipe.TYPE_MODIFIER_MAP);
+        fireworkExplosionTypeModifierMap.put(MOOSE_HEAD, FireworkExplosionComponent.Type.CREEPER);
+        FireworkStarRecipe.TYPE_MODIFIER_MAP = fireworkExplosionTypeModifierMap;
     }
 }

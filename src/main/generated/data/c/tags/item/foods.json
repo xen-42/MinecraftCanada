@@ -1,6 +1,5 @@
 {
   "values": [
-    "canadamod:cooked_venison",
     "canadamod:donair",
     "canadamod:pierogi",
     "canadamod:gravy",
@@ -8,6 +7,9 @@
     "canadamod:poutine",
     "canadamod:maple_syrup_bottle",
     "canadamod:cooked_waterfowl",
-    "canadamod:butter_tart"
+    "canadamod:butter_tart",
+    "#c:foods/flour",
+    "#c:foods/cheese",
+    "#c:foods/sauces"
   ]
 }

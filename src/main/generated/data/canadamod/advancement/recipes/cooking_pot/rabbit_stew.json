@@ -17,7 +17,7 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.c.foods.vegetable', fallback='#c:foods/vegetable', args=[]}": {
+    "has_foods/vegetable": {
       "conditions": {
         "items": [
           {
@@ -32,7 +32,7 @@
     [
       "has_the_recipe",
       "has_rabbit",
-      "has_translation{key='tag.item.c.foods.vegetable', fallback='#c:foods/vegetable', args=[]}"
+      "has_foods/vegetable"
     ]
   ],
   "rewards": {

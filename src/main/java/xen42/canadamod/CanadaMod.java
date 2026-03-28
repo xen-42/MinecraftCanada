@@ -57,6 +57,7 @@ import xen42.canadamod.entities.MooseEntity;
 import xen42.canadamod.entities.eggs.CustomEggEntity;
 import xen42.canadamod.entities.eggs.DuckEggEntity;
 import xen42.canadamod.entities.eggs.GooseEggEntity;
+import xen42.canadamod.recipe.CanadaRecipeBookCategory;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeDisplay;
 import xen42.canadamod.screen.CookingPotScreenHandler;
@@ -79,12 +80,12 @@ public class CanadaMod implements ModInitializer {
 	});
 	public static final RecipeSerializer<CookingPotRecipe> COOKING_POT_RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(MOD_ID, "cooking_pot"), new CookingPotRecipe.Serializer());
 	public static final RecipeDisplay.Serializer<CookingPotRecipeDisplay> COOKING_POT_RECIPE_DISPLAY = Registry.register(Registries.RECIPE_DISPLAY, Identifier.of(MOD_ID, "cooking_pot"), CookingPotRecipeDisplay.SERIALIZER);
-	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = Registry.register(Registries.RECIPE_BOOK_CATEGORY, 
-		Identifier.of(MOD_ID, "cooking_pot"), new RecipeBookCategory() {
-		public String toString() {
-			return "COOKING_POT";
-		}
-	});
+	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = registerRecipeBookCategory("cooking_pot");
+
+	public static RecipeBookCategory registerRecipeBookCategory(String path) {
+		Identifier id = Identifier.of(MOD_ID, path);
+		return Registry.register(Registries.RECIPE_BOOK_CATEGORY, id, new CanadaRecipeBookCategory(id));
+	}
 
 	public static final ScreenHandlerType<CookingPotScreenHandler> COOKING_POT_SCREEN_HANDLER_TYPE = Registry.register(
 		Registries.SCREEN_HANDLER,
