@@ -1,6 +1,8 @@
 {
   "values": [
     "canadamod:venison",
-    "canadamod:cooked_venison"
+    "canadamod:cooked_venison",
+    "canadamod:waterfowl",
+    "canadamod:cooked_waterfowl"
   ]
 }
