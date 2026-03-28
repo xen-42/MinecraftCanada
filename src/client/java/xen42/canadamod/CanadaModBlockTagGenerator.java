@@ -99,6 +99,8 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
         this.getOrCreateTagBuilder(BlockTags.SAPLINGS).add(CanadaBlocks.MAPLE_SAPLING);
         this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS).add(CanadaBlocks.POTTED_MAPLE_SAPLING);
 
+        this.getOrCreateTagBuilder(ConventionalBlockTags.SKULLS).add(CanadaBlocks.MOOSE_HEAD);
+
         this.getOrCreateTagBuilder(ConventionalBlockTags.VILLAGER_JOB_SITES).add(CanadaBlocks.TREE_TAP);
     }
 }
