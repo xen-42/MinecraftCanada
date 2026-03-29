@@ -22,6 +22,14 @@
         ],
         "subtitle": "subtitles.canadamod.entity.beaver.hurt"
     },
+    "entity.beaver.eat": {
+        "sounds": [
+            "canadamod:mob/beaver/eat1",
+            "canadamod:mob/beaver/eat2",
+            "canadamod:mob/beaver/eat3"
+        ],
+        "subtitle": "subtitles.canadamod.entity.beaver.eat"
+    },
     "entity.moose.ambient": {
         "sounds": [
             "canadamod:mob/moose/ambient1",
