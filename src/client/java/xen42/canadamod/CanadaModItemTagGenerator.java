@@ -91,6 +91,7 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.REPAIRS_PELT_ARMOR).add(CanadaItems.PELT);
 
 		this.getOrCreateTagBuilder(ItemTags.EGGS).add(CanadaItems.DUCK_EGG, CanadaItems.GOOSE_EGG);
+		this.getOrCreateTagBuilder(ConventionalItemTags.EGGS).add(CanadaItems.DUCK_EGG, CanadaItems.GOOSE_EGG);
 
 	}
 }
