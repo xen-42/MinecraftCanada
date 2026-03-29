@@ -12,6 +12,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.gen.structure.Structure;
 import xen42.canadamod.entities.MapleBoatEntity;
@@ -176,34 +177,35 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 			translationBuilder.add("biome.canadamod.maple_forest", "Maple Forest");
 
-			translationBuilder.add("subtitles.canadamod.beaver_ambient", "Beaver grunts");
-			translationBuilder.add("subtitles.canadamod.beaver_death", "Beaver dies");
-			translationBuilder.add("subtitles.canadamod.beaver_hurt", "Beaver hurts");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_AMBIENT, "Beaver grunts");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_DEATH, "Beaver dies");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_HURT, "Beaver hurts");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_EAT, "Beaver eats");
+
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_AMBIENT, "Moose calls");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_ANGRY, "Moose grunts angrily");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_DEATH, "Moose dies");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_HURT, "Moose hurts");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_GROW_ANTLER, "Moose grows antler");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_STRIP_ANTLER, "Moose loses antler");
+
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_AMBIENT, "Grizzly Bear groans");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_AMBIENT_BABY, "Grizzly Bear hums");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_DEATH, "Grizzly Bear dies");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_HURT, "Grizzly Bear hurts");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_WARNING, "Grizzly Bear roars");
 			
-			translationBuilder.add("subtitles.canadamod.moose_ambient", "Moose calls");
-			translationBuilder.add("subtitles.canadamod.moose_angry", "Moose grunts angrily");
-			translationBuilder.add("subtitles.canadamod.moose_death", "Moose dies");
-			translationBuilder.add("subtitles.canadamod.moose_hurt", "Moose hurts");
-			translationBuilder.add("subtitles.canadamod.moose_grow_antler", "Moose grows antler");
-			translationBuilder.add("subtitles.canadamod.moose_strip_antler", "Moose loses antler");
-
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient", "Grizzly Bear groans");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient_baby", "Grizzly Bear hums");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_death", "Grizzly Bear dies");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_hurt", "Grizzly Bear hurts");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_warning", "Grizzly Bear roars");
-
-			translationBuilder.add("subtitles.canadamod.duck_ambient", "Duck quacks");
-			translationBuilder.add("subtitles.canadamod.duck_hurt", "Duck hurts");
-			translationBuilder.add("subtitles.canadamod.duck_death", "Duck dies");
-			translationBuilder.add("subtitles.canadamod.duck_plop", "Duck plops");
-			translationBuilder.add("subtitles.canadamod.duck_footstep", "Footsteps");
-
-			translationBuilder.add("subtitles.canadamod.goose_plop", "Goose plops");
-			translationBuilder.add("subtitles.canadamod.goose_ambient", "Goose quacks");
-			translationBuilder.add("subtitles.canadamod.goose_hurt", "Goose hurts");
-			translationBuilder.add("subtitles.canadamod.goose_death", "Goose dies");
-			translationBuilder.add("subtitles.canadamod.goose_warning", "Goose hisses");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_AMBIENT, "Duck quacks");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_HURT, "Duck hurts");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_DEATH, "Duck dies");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_PLOP, "Duck plops");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_FOOTSTEP, "Footsteps");
+			
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_PLOP, "Goose plops");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_AMBIENT, "Goose quacks");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_HURT, "Goose hurts");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_DEATH, "Goose dies");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_WARNING, "Goose hisses");
 		}
 	}
 	
