@@ -41,6 +41,10 @@ public class CanadaTags {
 		return TagKey.of(RegistryKeys.BLOCK, Identifier.of(CanadaMod.MOD_ID, name));
 	}
 
+	public static TagKey<Block> ofBlockConventional(String name) {
+		return TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", name));
+	}
+
 	public static TagKey<Item> ofItem(String name) {
 		return TagKey.of(RegistryKeys.ITEM, Identifier.of(CanadaMod.MOD_ID, name));
 	}
