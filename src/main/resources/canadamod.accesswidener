@@ -47,3 +47,5 @@ accessible class net/minecraft/entity/effect/StatusEffect
 accessible method net/minecraft/entity/effect/StatusEffect <init> (Lnet/minecraft/entity/effect/StatusEffectCategory;I)V
 
 accessible field net/minecraft/entity/passive/PolarBearEntity warningSoundCooldown I
+
+accessible class net/minecraft/block/enums/NoteBlockInstrument$Type

@@ -2,9 +2,12 @@ package xen42.canadamod;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
@@ -51,6 +54,18 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 		public void addFilledMap(TagKey<Structure> structure, String value) {
 			add("filled_map." + structure.id().getNamespace() + "." + structure.id().getPath(), value);
+		}
+		
+		public void add(NoteBlockInstrument instrument, String value) {
+			var serializedName = instrument.asString();
+			String key;
+			if(instrument.canBePitched()) {
+				key = "gui.ipp.jei.instrument.%s".formatted(serializedName);
+			} else {
+				key = "gui.ipp.jei.mob.%s".formatted(serializedName);
+			}
+			add(key, value);
+			add("jade.instrument.%s".formatted(serializedName), value);
 		}
 	}
 	
@@ -156,6 +171,8 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaTags.ItemTags.SAUCES, "Sauces");
 			translationBuilder.add(CanadaTags.BlockTags.MAPLE_LOGS, "Maple Logs");
 			translationBuilder.addVillagerProfession(CanadaVillagers.SUGAR_SHACK_VILLAGER_KEY, "Lumberjack");
+
+			translationBuilder.add(CanadaNoteBlockInstruments.MOOSE.get(), "Moose");
 
 			translationBuilder.add("biome.canadamod.maple_forest", "Maple Forest");
 

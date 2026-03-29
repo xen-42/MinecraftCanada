@@ -53,6 +53,15 @@
         ],
         "subtitle": "subtitles.canadamod.moose_hurt"
     },
+    "moose_note_block_imitate": {
+        "sounds": [
+        {
+            "name": "moose_ambient",
+            "type": "event"
+        }
+        ],
+        "subtitle": "subtitles.canadamod.moose_ambient"
+    },
     "grizzly_bear_ambient": {
 		"sounds": [
 			"canadamod:polar_bear_idle1",

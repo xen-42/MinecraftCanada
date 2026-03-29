@@ -8,7 +8,7 @@
 		"FleeEntityGoalMixin",
 		"ConsumableComponentMixin",
 		"ChickenEntityMixin",
-		"NoteBlockMixin"
+		"NoteBlockInstrumentMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

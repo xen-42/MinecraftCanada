@@ -116,7 +116,7 @@ public class CanadaBlocks {
 	public static Block MOOSE_HEAD = register(
 		"moose_head",
 		MooseSkullBlock::new,
-		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.BROWN).instrument(NoteBlockInstrument.CUSTOM_HEAD),
+		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.BROWN).instrument(CanadaNoteBlockInstruments.MOOSE.get()),
 		false
 	);
 
