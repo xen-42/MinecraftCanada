@@ -11,6 +11,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.RegistryByteBuf;
@@ -91,8 +93,8 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
 
 	@Override
 	public List<RecipeDisplay> getDisplays() {
-        var containerItem = this.requiresBottle ? Items.GLASS_BOTTLE : (this.requiresBowl ? Items.BOWL : null);
-        var containerDisplay = containerItem == null ? SlotDisplay.EmptySlotDisplay.INSTANCE : new SlotDisplay.ItemSlotDisplay(containerItem);
+        var containerItem = this.container();
+        var containerDisplay = containerItem.isEmpty() ? SlotDisplay.EmptySlotDisplay.INSTANCE : new SlotDisplay.ItemSlotDisplay(containerItem.getItem());
         var ingredientDisplays = this.ingredients.stream().map(Ingredient::toDisplay).toList();
         var cookingPotItem = CanadaBlocks.COOKING_POT.asItem();
 		return List.of(
@@ -194,5 +196,13 @@ public class CookingPotRecipe implements Recipe<CookingPotRecipeInput> {
             buf.writeBoolean(recipe.requiresBottle);
             buf.writeBoolean(recipe.requiresBowl);
 		}
+	}
+
+	public ItemStack result() {
+		return this.result;
+	}
+
+	public ItemStack container() {
+		return this.requiresBottle ? Items.GLASS_BOTTLE.getDefaultStack() : (this.requiresBowl ? Items.BOWL.getDefaultStack() : ItemStack.EMPTY);
 	}
 }
