@@ -12,6 +12,11 @@ public class CanadaModBlockLootTableGenerator extends FabricBlockLootTableProvid
             CompletableFuture<WrapperLookup> registryLookup) {
         super(dataOutput, registryLookup);
     }
+    
+    @Override
+    public String getName() {
+        return "Block Loot Tables";
+    }
 
     @Override
     public void generate() {

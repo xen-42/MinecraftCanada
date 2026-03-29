@@ -15,7 +15,7 @@ public class CanadaModBlockTagGenerator extends BlockTagProvider {
 
     @Override
     public String getName() {
-        return "CanadaModBlockTagGenerator";
+        return "Block Tags";
     }
     
     @Override

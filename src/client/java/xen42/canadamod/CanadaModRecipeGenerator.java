@@ -28,7 +28,7 @@ public class CanadaModRecipeGenerator extends FabricRecipeProvider {
 
     @Override
     public String getName() {
-        return "CanadaModRecipeGenerator";
+        return "Recipes";
     }
 
     @Override
