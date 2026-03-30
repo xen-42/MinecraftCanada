@@ -1,5 +1,7 @@
 package xen42.canadamod.block;
 
+import java.util.Map;
+
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.block.Block;
@@ -25,6 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
@@ -38,41 +41,13 @@ public class TreeTapBlock extends HorizontalFacingBlock {
     public static IntProperty SAP_LEVEL = IntProperty.of("sap_level", 0, MAX_SAP);
     public static final MapCodec<TreeTapBlock> CODEC = createCodec(TreeTapBlock::new);
 
-    public final VoxelShape northShape;
-    public final VoxelShape southShape;
-    public final VoxelShape eastShape;
-    public final VoxelShape westShape;
-
     public TreeTapBlock(Settings settings) {
         super(settings);
         setDefaultState((this.stateManager.getDefaultState()).with(SAP_LEVEL, 0));
-
-        var width = 12;
-        this.southShape = Block.createCuboidShape(0, 0, 0, 16f, 16f, width);
-        this.northShape = Block.createCuboidShape(0, 0, 16 - width, 16f, 16f, 16f);
-        this.eastShape = Block.createCuboidShape(0, 0, 0, width, 16f, 16f);
-        this.westShape = Block.createCuboidShape(16 - width, 0, 0, 16f, 16f, 16f);
     }
 
     public MapCodec<? extends TreeTapBlock> getCodec() {
         return CODEC;
-    }
-
-    @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (state.get(FACING)) {
-            case NORTH:
-                return northShape;
-            case SOUTH:
-                return southShape;
-            case EAST:
-                return eastShape;
-            case WEST:
-                return westShape;
-            default:
-                break; 
-        }
-        return westShape;
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
@@ -172,5 +147,25 @@ public class TreeTapBlock extends HorizontalFacingBlock {
             dir = Direction.NORTH;
         }
         return getDefaultState().with(SAP_LEVEL, 0).with(FACING, dir);
+    }
+    
+    
+    public static final VoxelShape SHAPE = Block.createCuboidShape(12 - 8, 15 - 13, 16 - 9, 12, 15, 16);
+    public static final Map<Direction, VoxelShape> FACING_SHAPES = VoxelShapes.createHorizontalFacingShapeMap(SHAPE);
+
+    private VoxelShape getShape(BlockState state) {
+        Direction direction = state.get(FACING);
+
+        return (VoxelShape)FACING_SHAPES.get(direction);
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return this.getShape(state);
+    }
+
+    @Override
+    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return this.getShape(state);
     }
 }
