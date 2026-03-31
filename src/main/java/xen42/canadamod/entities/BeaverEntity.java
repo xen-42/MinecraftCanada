@@ -51,6 +51,7 @@ import net.minecraft.world.World;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaSounds;
+import xen42.canadamod.CanadaTags;
 
 public class BeaverEntity extends AnimalEntity {
     private static final TrackedData<Integer> CHOP_FATIGUE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -125,15 +126,15 @@ public class BeaverEntity extends AnimalEntity {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.STICK);
+        return stack.isIn(CanadaTags.ItemTags.BEAVER_BREED_FOOD);
     }
 
     public boolean isFrenzyItem(ItemStack stack) {
-        return stack.isOf(CanadaItems.DONAIR) || stack.isOf(CanadaItems.POUTINE) || stack.isOf(CanadaItems.PIEROGI);
+        return stack.isIn(CanadaTags.ItemTags.BEAVER_FRENZY_FOOD);
     }
 
     public boolean isFatigueRefreshItem(ItemStack stack) {
-        return stack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE);
+        return stack.isIn(CanadaTags.ItemTags.BEAVER_FATIGUE_REFRESH_FOOD);
     }
 
     public boolean isTemptItem(ItemStack stack) {

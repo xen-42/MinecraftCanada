@@ -41,6 +41,7 @@ import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaSounds;
+import xen42.canadamod.CanadaTags;
 
 public class DuckEntity extends ChickenEntity {
 
@@ -64,7 +65,7 @@ public class DuckEntity extends ChickenEntity {
 		this.goalSelector.add(1, new EscapeDangerGoal(this, 1.4));
 		this.goalSelector.add(1, new FleeEntityGoal(this, FoxEntity.class, 8.0F, 1.6, 1.4, entity -> true));
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
-		this.goalSelector.add(3, new TemptGoal(this, 1.0, stack -> stack.isOf(Items.BREAD), false));
+		this.goalSelector.add(3, new TemptGoal(this, 1.0, stack -> isBreedingItem(stack), false));
 		this.goalSelector.add(4, new FollowParentGoal(this, 1.1));
 		this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0));
 		this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -80,7 +81,7 @@ public class DuckEntity extends ChickenEntity {
 
     @Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return stack.isOf(Items.BREAD);
+		return stack.isIn(CanadaTags.ItemTags.DUCK_FOOD);
 	}
 
     @Override

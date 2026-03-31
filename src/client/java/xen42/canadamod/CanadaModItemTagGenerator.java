@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider.ItemTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.BlockTags;
@@ -92,6 +93,13 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 
 		this.getOrCreateTagBuilder(ItemTags.EGGS).add(CanadaItems.DUCK_EGG, CanadaItems.GOOSE_EGG);
 		this.getOrCreateTagBuilder(ConventionalItemTags.EGGS).add(CanadaItems.DUCK_EGG, CanadaItems.GOOSE_EGG);
+
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.BEAVER_BREED_FOOD).add(Items.STICK);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.BEAVER_FRENZY_FOOD).add(CanadaItems.DONAIR, CanadaItems.POUTINE, CanadaItems.PIEROGI);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.BEAVER_FATIGUE_REFRESH_FOOD).add(CanadaItems.MAPLE_SYRUP_BOTTLE);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.DUCK_FOOD).add(Items.BREAD);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.GOOSE_FOOD).add(Items.BREAD);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.MOOSE_FOOD).add(Items.SEAGRASS).addTag(ItemTags.LEAVES);
 
 	}
 }

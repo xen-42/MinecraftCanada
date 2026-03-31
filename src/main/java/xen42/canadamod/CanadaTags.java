@@ -17,6 +17,13 @@ public class CanadaTags {
         public static final TagKey<Item> MAPLE_LOGS = ofItem("maple_logs");
         public static final TagKey<Item> REPAIRS_PELT_ARMOR = ofItem("repairs_pelt_armor");
         public static final TagKey<Item> HATS = ofItem("hats");
+        
+        public static final TagKey<Item> BEAVER_BREED_FOOD = ofItem("beaver_breed_food");
+        public static final TagKey<Item> BEAVER_FRENZY_FOOD = ofItem("beaver_frenzy_food");
+        public static final TagKey<Item> BEAVER_FATIGUE_REFRESH_FOOD = ofItem("beaver_fatigue_refresh_food");
+        public static final TagKey<Item> DUCK_FOOD = ofItem("duck_food");
+        public static final TagKey<Item> GOOSE_FOOD = ofItem("goose_food");
+        public static final TagKey<Item> MOOSE_FOOD = ofItem("moose_food");
 
         public static final TagKey<Item> SAP = ofItemConventional("sap");
         public static final TagKey<Item> RUBBER = ofItemConventional("rubber");

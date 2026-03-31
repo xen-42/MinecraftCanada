@@ -59,6 +59,7 @@ import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaSounds;
+import xen42.canadamod.CanadaTags;
 
 public class MooseEntity extends AbstractHorseEntity implements Angerable {
     private static final TrackedData<Boolean> LEFT_ANTLER_MISSING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -262,7 +263,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.SEAGRASS) || stack.isIn(ItemTags.LEAVES);
+        return stack.isIn(CanadaTags.ItemTags.MOOSE_FOOD);
     }
 
     @Override
