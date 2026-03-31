@@ -10,8 +10,8 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.RotationPropertyHelper;
 import net.minecraft.util.math.Vec3d;
 import xen42.canadamod.CanadaBlocks;
-import xen42.canadamod.block.MooseSkullBlock;
-import xen42.canadamod.block.MooseSkullBlockEntity;
+import xen42.canadamod.block.skull.MooseSkullBlock;
+import xen42.canadamod.block.skull.MooseSkullBlockEntity;
 
 public class MooseSkullBlockEntityRenderer implements BlockEntityRenderer<MooseSkullBlockEntity> {
     public MooseSkullBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {

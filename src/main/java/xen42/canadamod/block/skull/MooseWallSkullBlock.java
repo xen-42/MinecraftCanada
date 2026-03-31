@@ -1,4 +1,4 @@
-package xen42.canadamod.block;
+package xen42.canadamod.block.skull;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -42,7 +42,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import xen42.canadamod.armor.BeaverHatModel;
 import xen42.canadamod.armor.MooseHatModel;
-import xen42.canadamod.block.MooseSkullBlock;
+import xen42.canadamod.block.skull.MooseSkullBlock;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverChopTreeGoal;
 import xen42.canadamod.entities.BeaverEntity;

@@ -48,7 +48,7 @@ import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
 import net.minecraft.world.poi.PointOfInterestType;
 import xen42.canadamod.block.CookingPotBlockEntity;
-import xen42.canadamod.block.MooseSkullBlockEntity;
+import xen42.canadamod.block.skull.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.DuckEntity;

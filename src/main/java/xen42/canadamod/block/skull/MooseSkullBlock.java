@@ -1,4 +1,4 @@
-package xen42.canadamod.block;
+package xen42.canadamod.block.skull;
 
 
 import com.mojang.serialization.MapCodec;
