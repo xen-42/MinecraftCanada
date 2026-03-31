@@ -8,9 +8,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.village.VillagerProfession;
@@ -18,9 +20,9 @@ import net.minecraft.world.gen.structure.Structure;
 import xen42.canadamod.entities.MapleBoatEntity;
 
 public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
-    public CanadaModLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-    	super(output, languageCode, registryLookup);
-    }
+	public CanadaModLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+		super(output, languageCode, registryLookup);
+	}
 
 	public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
 		generate(registryLookup, new ModTranslationBuilder(translationBuilder));
@@ -153,8 +155,9 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaBlocks.RUBBER_BLOCK, "Rubber Block");
 
 			translationBuilder.add("item.canadamod.thermos.empty.description", "Can hold a mixed stack of soups, drinks, and potions");
-			translationBuilder.add("effect.canadamod.beaver_effect", "Busy Beaver");
-			translationBuilder.add("effect.canadamod.moose_effect", "Moose's Strength");
+
+			translationBuilder.add(CanadaEffects.BEAVER_EFFECT.value(), "Busy Beaver");
+			translationBuilder.add(CanadaEffects.MOOSE_EFFECT.value(), "Moose's Strength");
 
 			translationBuilder.add(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
 			translationBuilder.addFilledMap(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");

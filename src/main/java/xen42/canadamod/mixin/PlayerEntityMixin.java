@@ -10,6 +10,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.registry.tag.ItemTags;
+import xen42.canadamod.CanadaEffects;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 
@@ -26,10 +27,10 @@ public abstract class PlayerEntityMixin {
         var doMoose = isEquipped(CanadaItems.MOOSE_HELMET);
 
         if (doMoose) {
-            player.addStatusEffect(new StatusEffectInstance(CanadaMod.MOOSE_EFFECT, 110, 0, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(CanadaEffects.MOOSE_EFFECT, 110, 0, false, false, true));
         }
         if (doBeaver) {
-            player.addStatusEffect(new StatusEffectInstance(CanadaMod.BEAVER_EFFECT, 110, 0, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(CanadaEffects.BEAVER_EFFECT, 110, 0, false, false, true));
         }
     }
 }

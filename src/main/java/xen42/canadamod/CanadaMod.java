@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,6 +23,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.item.Items;
+import net.minecraft.potion.Potions;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
@@ -148,12 +150,6 @@ public class CanadaMod implements ModInitializer {
 		Identifier.of(MOD_ID, "goose_egg_entity"), 
 		EntityType.Builder.<CustomEggEntity>create(GooseEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(GOOSE_EGG_ENTITY_KEY));
 
-	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
-		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);
-	}
-	public static RegistryEntry<StatusEffect> BEAVER_EFFECT;
-	public static RegistryEntry<StatusEffect> MOOSE_EFFECT;
-
 	public static final RegistryKey<Structure> MAPLE_CABIN_KEY = RegistryKey.of(RegistryKeys.STRUCTURE, Identifier.of(MOD_ID, "maple_cabin"));
 	public static final StructureType<JigsawStructure> MAPLE_CABIN_TYPE_KEY = Registry.register(Registries.STRUCTURE_TYPE, Identifier.of(MOD_ID, "maple_cabin"),
 		() -> JigsawStructure.CODEC);
@@ -177,16 +173,10 @@ public class CanadaMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(GOOSE_ENTITY, GooseEntity.createGooseAttributes());
 		FabricDefaultAttributeRegistry.register(GRIZZLY_ENTITY, GrizzlyEntity.createGrizzlyAttributes());
 
-		BEAVER_EFFECT = registerStatusEffect("beaver_effect",
-			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
-			.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 3f, Operation.ADD_MULTIPLIED_TOTAL)
-			.addAttributeModifier(EntityAttributes.SUBMERGED_MINING_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
-		);
-		MOOSE_EFFECT = registerStatusEffect("moose_effect",
-			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 7079970))
-			.addAttributeModifier(EntityAttributes.MAX_HEALTH, Identifier.of(MOD_ID, "effect.moose_effect"), 6.0, Operation.ADD_VALUE)
-			.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
-		);
+		CanadaEffects.initialize();
+		CanadaPotions.initialize();
+		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+		});
 
 		CanadaBlocks.initialize();
 		CanadaConfiguredFeatures.onInitialize();
