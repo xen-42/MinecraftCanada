@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.potion.Potion;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
@@ -31,6 +32,11 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 	public String processValue(String value) {
 		return value;
 	}
+
+	public abstract String makeDrinkablePotionText(String effectName);
+	public abstract String makeSplashPotionText(String effectName);
+	public abstract String makeLingeringPotionText(String effectName);
+	public abstract String makeTippedArrowText(String effectName);
 
 	public abstract void generate(RegistryWrapper.WrapperLookup registryLookup, ModTranslationBuilder translationBuilder);
 	
@@ -70,6 +76,14 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			add(key, value);
 			add("jade.instrument.%s".formatted(serializedName), value);
 		}
+
+		public void add(Potion potion, String name) {
+			var baseName = potion.getBaseName();
+			add("item.minecraft.potion.effect." + baseName, makeDrinkablePotionText(name));
+			add("item.minecraft.splash_potion.effect." + baseName, makeSplashPotionText(name));
+			add("item.minecraft.lingering_potion.effect." + baseName, makeLingeringPotionText(name));
+			add("item.minecraft.tipped_arrow.effect." + baseName, makeTippedArrowText(name));
+		}
 	}
 	
 	public static class English extends CanadaModLanguageProvider {
@@ -80,6 +94,26 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 		public English(FabricDataOutput output, CompletableFuture<WrapperLookup> registryLookup) {
 			this(output, "en_us", registryLookup);
+		}
+
+		@Override
+		public String makeDrinkablePotionText(String effectName) {
+			return "Potion of " + effectName;
+		}
+
+		@Override
+		public String makeSplashPotionText(String effectName) {
+			return "Splash Potion of " + effectName;
+		}
+
+		@Override
+		public String makeLingeringPotionText(String effectName) {
+			return "Lingering Potion of " + effectName;
+		}
+
+		@Override
+		public String makeTippedArrowText(String effectName) {
+			return "Arrow of " + effectName;
 		}
 
 		@Override
