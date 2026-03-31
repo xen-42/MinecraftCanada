@@ -27,10 +27,10 @@ public abstract class PlayerEntityMixin {
         var doMoose = isEquipped(CanadaItems.MOOSE_HELMET);
 
         if (doMoose) {
-            player.addStatusEffect(new StatusEffectInstance(CanadaEffects.MOOSE_EFFECT, 110, 0, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(CanadaEffects.MOOSES_STRENGTH, 110, 0, false, false, true));
         }
         if (doBeaver) {
-            player.addStatusEffect(new StatusEffectInstance(CanadaEffects.BEAVER_EFFECT, 110, 0, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(CanadaEffects.BUSY_BEAVER, 110, 0, false, false, true));
         }
     }
 }

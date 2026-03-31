@@ -1,8 +1,8 @@
 {
   "biome.canadamod.maple_forest": "Maple Forest",
   "block.canadamod.cooking_pot": "Cooking Pot",
-  "effect.canadamod.beaver_effect": "Busy Beaver",
-  "effect.canadamod.moose_effect": "Moose's Strength",
+  "effect.canadamod.busy_beaver": "Busy Beaver",
+  "effect.canadamod.mooses_strength": "Moose's Strength",
   "entity.canadamod.beaver": "Beaver",
   "entity.canadamod.duck": "Duck",
   "entity.canadamod.goose": "Goose",

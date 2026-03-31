@@ -190,8 +190,8 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 			translationBuilder.add("item.canadamod.thermos.empty.description", "Can hold a mixed stack of soups, drinks, and potions");
 
-			translationBuilder.add(CanadaEffects.BEAVER_EFFECT.value(), "Busy Beaver");
-			translationBuilder.add(CanadaEffects.MOOSE_EFFECT.value(), "Moose's Strength");
+			translationBuilder.add(CanadaEffects.BUSY_BEAVER.value(), "Busy Beaver");
+			translationBuilder.add(CanadaEffects.MOOSES_STRENGTH.value(), "Moose's Strength");
 
 			translationBuilder.add(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
 			translationBuilder.addFilledMap(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
