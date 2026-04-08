@@ -72,26 +72,32 @@ import org.slf4j.LoggerFactory;
 public class CanadaMod implements ModInitializer {
 	public static final String MOD_ID = "canadamod";
 
-	public static final RegistryKey<Biome> MAPLE_BIOME_KEY = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(CanadaMod.MOD_ID, "maple_forest"));
+	public static final Identifier MAPLE_BIOME_ID = Identifier.of(MOD_ID, "maple_forest");
+	public static final RegistryKey<Biome> MAPLE_BIOME_KEY = RegistryKey.of(RegistryKeys.BIOME, MAPLE_BIOME_ID);
 
-	public static final RegistryKey<RecipeType<?>> COOKING_POT_RECIPE_TYPE_KEY = RegistryKey.of(RegistryKeys.RECIPE_TYPE, Identifier.of(MOD_ID, "cooking_pot"));
-	public static final RecipeType<CookingPotRecipe> COOKING_POT_RECIPE_TYPE = Registry.register(Registries.RECIPE_TYPE, Identifier.of(MOD_ID, "cooking_pot"), new RecipeType<CookingPotRecipe>() {
+	public static final Identifier COOKING_POT_ID = Identifier.of(MOD_ID, "cooking_pot");
+	public static final RegistryKey<RecipeType<?>> COOKING_POT_RECIPE_TYPE_KEY = RegistryKey.of(RegistryKeys.RECIPE_TYPE, COOKING_POT_ID);
+	public static final RecipeType<CookingPotRecipe> COOKING_POT_RECIPE_TYPE = Registry.register(Registries.RECIPE_TYPE, COOKING_POT_ID, new RecipeType<CookingPotRecipe>() {
 		public String toString() {
 			return "cooking_pot";
 		}
 	});
-	public static final RecipeSerializer<CookingPotRecipe> COOKING_POT_RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(MOD_ID, "cooking_pot"), new CookingPotRecipe.Serializer());
-	public static final RecipeDisplay.Serializer<CookingPotRecipeDisplay> COOKING_POT_RECIPE_DISPLAY = Registry.register(Registries.RECIPE_DISPLAY, Identifier.of(MOD_ID, "cooking_pot"), CookingPotRecipeDisplay.SERIALIZER);
-	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = registerRecipeBookCategory("cooking_pot");
+	public static final RecipeSerializer<CookingPotRecipe> COOKING_POT_RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, COOKING_POT_ID, new CookingPotRecipe.Serializer());
+	public static final RecipeDisplay.Serializer<CookingPotRecipeDisplay> COOKING_POT_RECIPE_DISPLAY = Registry.register(Registries.RECIPE_DISPLAY, COOKING_POT_ID, CookingPotRecipeDisplay.SERIALIZER);
+	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = registerRecipeBookCategory(COOKING_POT_ID);
 
 	public static RecipeBookCategory registerRecipeBookCategory(String path) {
 		Identifier id = Identifier.of(MOD_ID, path);
+		return registerRecipeBookCategory(id);
+	}
+
+	public static RecipeBookCategory registerRecipeBookCategory(Identifier id) {
 		return Registry.register(Registries.RECIPE_BOOK_CATEGORY, id, new CanadaRecipeBookCategory(id));
 	}
 
 	public static final ScreenHandlerType<CookingPotScreenHandler> COOKING_POT_SCREEN_HANDLER_TYPE = Registry.register(
 		Registries.SCREEN_HANDLER,
-		Identifier.of(MOD_ID, "cooking_pot"),
+		COOKING_POT_ID,
 		new ScreenHandlerType<CookingPotScreenHandler>(CookingPotScreenHandler::new, null));
 
 	public static final BlockEntityType<CookingPotBlockEntity> COOKING_POT_ENTITY = registerBlockEntityType(
@@ -108,50 +114,58 @@ public class CanadaMod implements ModInitializer {
 		return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(CanadaMod.MOD_ID, path), blockEntityType);
 	}
 
-	public static final RegistryKey<EntityType<?>> BEAVER_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"beaver"));
+	public static final Identifier BEAVER_ENTITY_ID = Identifier.of(MOD_ID, "beaver");
+	public static final RegistryKey<EntityType<?>> BEAVER_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, BEAVER_ENTITY_ID);
 	public static final EntityType<BeaverEntity> BEAVER_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "beaver"), 
+		BEAVER_ENTITY_ID, 
 		EntityType.Builder.create(BeaverEntity::new, SpawnGroup.CREATURE).dimensions(0.5f, 0.5f).build(BEAVER_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> MOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"moose"));
+	public static final Identifier MOOSE_ENTITY_ID = Identifier.of(MOD_ID, "moose");
+	public static final RegistryKey<EntityType<?>> MOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, MOOSE_ENTITY_ID);
 	public static final EntityType<MooseEntity> MOOSE_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "moose"), 
+		MOOSE_ENTITY_ID, 
 		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.75f, 2.5f).build(MOOSE_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> DUCK_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck"));
+	public static final Identifier DUCK_ENTITY_ID = Identifier.of(MOD_ID, "duck");
+	public static final RegistryKey<EntityType<?>> DUCK_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, DUCK_ENTITY_ID);
 	public static final EntityType<DuckEntity> DUCK_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "duck"), 
+		DUCK_ENTITY_ID, 
 		EntityType.Builder.create(DuckEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(DUCK_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> GOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"goose"));
+	public static final Identifier GOOSE_ENTITY_ID = Identifier.of(MOD_ID, "goose");
+	public static final RegistryKey<EntityType<?>> GOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, GOOSE_ENTITY_ID);
 	public static final EntityType<GooseEntity> GOOSE_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "goose"), 
+		GOOSE_ENTITY_ID, 
 		EntityType.Builder.create(GooseEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(GOOSE_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> GRIZZLY_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"grizzly"));
+	public static final Identifier GRIZZLY_ENTITY_ID = Identifier.of(MOD_ID, "grizzly");
+	public static final RegistryKey<EntityType<?>> GRIZZLY_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, GRIZZLY_ENTITY_ID);
 	public static final EntityType<GrizzlyEntity> GRIZZLY_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "grizzly"), 
+		GRIZZLY_ENTITY_ID, 
 		EntityType.Builder.create(GrizzlyEntity::new, SpawnGroup.CREATURE).dimensions(1.4f, 1.4f).build(GRIZZLY_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> DUCK_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck_egg_entity"));
+	public static final Identifier DUCK_EGG_ENTITY_ID = Identifier.of(MOD_ID, "duck_egg_entity");
+	public static final RegistryKey<EntityType<?>> DUCK_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, DUCK_EGG_ENTITY_ID);
 	public static final EntityType<CustomEggEntity> DUCK_EGG_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "duck_egg_entity"), 
+		DUCK_EGG_ENTITY_ID, 
 		EntityType.Builder.<CustomEggEntity>create(DuckEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(DUCK_EGG_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> GOOSE_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"goose_egg_entity"));
+	public static final Identifier GOOSE_EGG_ENTITY_ID = Identifier.of(MOD_ID, "goose_egg_entity");
+	public static final RegistryKey<EntityType<?>> GOOSE_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, GOOSE_EGG_ENTITY_ID);
 	public static final EntityType<CustomEggEntity> GOOSE_EGG_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "goose_egg_entity"), 
+		GOOSE_EGG_ENTITY_ID, 
 		EntityType.Builder.<CustomEggEntity>create(GooseEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(GOOSE_EGG_ENTITY_KEY));
 
-	public static final RegistryKey<Structure> MAPLE_CABIN_KEY = RegistryKey.of(RegistryKeys.STRUCTURE, Identifier.of(MOD_ID, "maple_cabin"));
-	public static final StructureType<JigsawStructure> MAPLE_CABIN_TYPE_KEY = Registry.register(Registries.STRUCTURE_TYPE, Identifier.of(MOD_ID, "maple_cabin"),
+	public static final Identifier MAPLE_CABIN_ID = Identifier.of(MOD_ID, "maple_cabin");
+	public static final RegistryKey<Structure> MAPLE_CABIN_KEY = RegistryKey.of(RegistryKeys.STRUCTURE, MAPLE_CABIN_ID);
+	public static final StructureType<JigsawStructure> MAPLE_CABIN_TYPE_KEY = Registry.register(Registries.STRUCTURE_TYPE, MAPLE_CABIN_ID,
 		() -> JigsawStructure.CODEC);
 
 	// This logger is used to write text to the console and the log file.
