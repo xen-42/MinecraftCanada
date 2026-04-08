@@ -1,6 +1,7 @@
 {
   "biome.canadamod.maple_forest": "Maple Forest",
   "block.canadamod.cooking_pot": "Cooking Pot",
+  "config.jade.plugin_canadamod.beaver": "Beaver",
   "effect.canadamod.busy_beaver": "Busy Beaver",
   "effect.canadamod.mooses_strength": "Moose's Strength",
   "entity.canadamod.beaver": "Beaver",
@@ -64,6 +65,8 @@
   "item.canadamod.tree_tap": "Tree Tap",
   "item.canadamod.venison": "Venison",
   "item.canadamod.waterfowl": "Waterfowl",
+  "jade.beaver.chop.fatigue.time": "Fatigue time: %s",
+  "jade.beaver.chop.frenzy.time": "Frenzy time: %s",
   "jade.instrument.moose": "Moose",
   "subtitles.canadamod.entity.beaver.ambient": "Beaver grunts",
   "subtitles.canadamod.entity.beaver.death": "Beaver dies",

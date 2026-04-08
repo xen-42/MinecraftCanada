@@ -304,4 +304,12 @@ public class BeaverEntity extends AnimalEntity {
         this.getDataTracker().set(CHOP_FATIGUE, nbt.getInt("chopFatigue").orElse(0));
         this.getDataTracker().set(CHOP_FRENZY, nbt.getInt("chopFrenzy").orElse(0));
     }
+
+	public int getFatigueAge() {
+		return this.getDataTracker().get(CHOP_FATIGUE);
+	}
+
+	public int getFrenzyAge() {
+		return this.getDataTracker().get(CHOP_FRENZY);
+	}
 }

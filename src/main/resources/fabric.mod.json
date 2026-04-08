@@ -28,6 +28,9 @@
 		"terrablender": [
 			"xen42.canadamod.CanadaModTerraBlenderAPI"
 		],
+		"jade": [
+			"xen42.canadamod.jade.CanadaJadePlugin"
+		],
 		"rei_client": [
 			"xen42.canadamod.rei.CookingPotClientPlugin"
 		],

@@ -16,9 +16,11 @@ import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.gen.structure.Structure;
 import xen42.canadamod.entities.MapleBoatEntity;
+import xen42.canadamod.jade.BeaverChopProvider;
 
 public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 	public CanadaModLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
@@ -63,6 +65,10 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 		public void addFilledMap(TagKey<Structure> structure, String value) {
 			add("filled_map." + structure.id().getNamespace() + "." + structure.id().getPath(), value);
+		}
+
+		public void addJadePlugin(Identifier plugin, String value) {
+			add("config.jade.plugin_" + plugin.getNamespace() + "." + plugin.getPath(), value);
 		}
 		
 		public void add(NoteBlockInstrument instrument, String value) {
@@ -243,6 +249,10 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaSounds.SOUND_GOOSE_HURT, "Goose hurts");
 			translationBuilder.add(CanadaSounds.SOUND_GOOSE_DEATH, "Goose dies");
 			translationBuilder.add(CanadaSounds.SOUND_GOOSE_WARNING, "Goose hisses");
+
+			translationBuilder.addJadePlugin(CanadaMod.BEAVER_ENTITY_ID, "Beaver");
+			translationBuilder.add(BeaverChopProvider.FATIGUE_KEY, "Fatigue time: %s");
+			translationBuilder.add(BeaverChopProvider.FRENZY_KEY, "Frenzy time: %s");
 		}
 	}
 	
