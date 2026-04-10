@@ -80,7 +80,7 @@ public class CookingPotCategory implements DisplayCategory<CookingPotREIDisplay>
 				//.animationDurationMS(10000));
 				.animationDurationTicks(COOK_TIME));
 
-		List<InputIngredient<EntryStack<?>>> input = display.getInputIngredients(2, 2);
+		List<InputIngredient<EntryStack<?>>> input = display.getInputIngredients();
 		List<Slot> slots = Lists.newArrayList();
 
 		for (int y = 0; y < 2; y++) {
@@ -121,7 +121,7 @@ public class CookingPotCategory implements DisplayCategory<CookingPotREIDisplay>
 			@Override
 			public boolean canMerge(CookingPotREIDisplay first, CookingPotREIDisplay second) {
 				if (!first.getCategoryIdentifier().equals(second.getCategoryIdentifier())) return false;
-				if (!equals(first.getOrganisedInputEntries(2, 2), second.getOrganisedInputEntries(2, 2))) return false;
+				if (!equals(first.getOrganisedInputEntries(), second.getOrganisedInputEntries())) return false;
 				if (!equals(first.getContainerEntries(), second.getContainerEntries())) return false;
 				if (!equals(first.getOutputEntries(), second.getOutputEntries())) return false;
 				return true;
@@ -129,7 +129,7 @@ public class CookingPotCategory implements DisplayCategory<CookingPotREIDisplay>
 			
 			@Override
 			public int hashOf(CookingPotREIDisplay display) {
-				return display.getCategoryIdentifier().hashCode() * 31 * 31 + display.getOrganisedInputEntries(2, 2).hashCode() * 31 + display.getContainerEntries().hashCode() * 31 + display.getOutputEntries().hashCode();
+				return display.getCategoryIdentifier().hashCode() * 31 * 31 + display.getOrganisedInputEntries().hashCode() * 31 + display.getContainerEntries().hashCode() * 31 + display.getOutputEntries().hashCode();
 			}
 			
 			private boolean equals(List<EntryIngredient> l1, List<EntryIngredient> l2) {

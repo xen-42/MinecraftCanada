@@ -145,6 +145,14 @@ public class CookingPotREIDisplay extends BasicDisplay implements SimpleGridMenu
 		return getSlotWithSize(getInputWidth(craftingGridWidth, craftingGridHeight), index, craftingGridWidth, craftingGridHeight);
 	}
 	
+	public int getSlotWithSize(int index) {
+		return getSlotWithSize(index, WIDTH, HEIGHT);
+	}
+	
+	public List<EntryIngredient> getOrganisedInputEntries() {
+		return getOrganisedInputEntries(WIDTH, HEIGHT);
+	}
+	
 	public List<EntryIngredient> getOrganisedInputEntries(int menuWidth, int menuHeight) {
 		List<EntryIngredient> list = new ArrayList<EntryIngredient>(menuWidth * menuHeight);
 		for (int i = 0; i < menuWidth * menuHeight; i++) {
@@ -157,7 +165,11 @@ public class CookingPotREIDisplay extends BasicDisplay implements SimpleGridMenu
 	}
 	
 	public List<InputIngredient<EntryStack<?>>> getInputAndContainerIngredients(@Nullable ScreenHandler menu, @Nullable PlayerEntity player) {
-		var inputIngredients = getInputIngredients(menu, player);
+		return getInputAndContainerIngredients();
+	}
+	
+	public List<InputIngredient<EntryStack<?>>> getInputAndContainerIngredients() {
+		var inputIngredients = getInputIngredients();
 		InputIngredient<EntryStack<?>> containerIngredient = !hasContainer() ? InputIngredient.empty(WIDTH_X_HEIGHT) : InputIngredient.of(WIDTH_X_HEIGHT, WIDTH_X_HEIGHT, getContainerEntry());
 		inputIngredients.add(containerIngredient);
 		return inputIngredients;
@@ -165,6 +177,10 @@ public class CookingPotREIDisplay extends BasicDisplay implements SimpleGridMenu
 	
 	@Override
 	public List<InputIngredient<EntryStack<?>>> getInputIngredients(@Nullable ScreenHandler menu, @Nullable PlayerEntity player) {
+		return getInputIngredients();
+	}
+
+	public List<InputIngredient<EntryStack<?>>> getInputIngredients() {
 		return getInputIngredients(WIDTH, HEIGHT);
 	}
 	
