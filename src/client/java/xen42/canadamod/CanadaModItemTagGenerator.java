@@ -97,8 +97,8 @@ public class CanadaModItemTagGenerator extends ItemTagProvider {
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.BEAVER_BREED_FOOD).add(Items.STICK);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.BEAVER_FRENZY_FOOD).add(CanadaItems.DONAIR, CanadaItems.POUTINE, CanadaItems.PIEROGI);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.BEAVER_FATIGUE_REFRESH_FOOD).add(CanadaItems.MAPLE_SYRUP_BOTTLE);
-		this.getOrCreateTagBuilder(CanadaTags.ItemTags.DUCK_FOOD).add(Items.BREAD);
-		this.getOrCreateTagBuilder(CanadaTags.ItemTags.GOOSE_FOOD).add(Items.BREAD);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.DUCK_FOOD).add(Items.BREAD).addOptionalTag(ItemTags.CHICKEN_FOOD);
+		this.getOrCreateTagBuilder(CanadaTags.ItemTags.GOOSE_FOOD).add(Items.BREAD).add(Items.WHEAT).addOptionalTag(ItemTags.CHICKEN_FOOD);
 		this.getOrCreateTagBuilder(CanadaTags.ItemTags.MOOSE_FOOD).add(Items.SEAGRASS).addTag(ItemTags.LEAVES);
 
 	}
