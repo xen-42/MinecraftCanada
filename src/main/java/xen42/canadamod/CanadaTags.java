@@ -15,14 +15,29 @@ public class CanadaTags {
 	
 	public class ItemTags {
         public static final TagKey<Item> MAPLE_LOGS = ofItem("maple_logs");
+        public static final TagKey<Item> REPAIRS_PELT_ARMOR = ofItem("repairs_pelt_armor");
+        public static final TagKey<Item> HATS = ofItem("hats");
+        
+        public static final TagKey<Item> BEAVER_BREED_FOOD = ofItem("beaver_breed_food");
+        public static final TagKey<Item> BEAVER_FRENZY_FOOD = ofItem("beaver_frenzy_food");
+        public static final TagKey<Item> BEAVER_FATIGUE_REFRESH_FOOD = ofItem("beaver_fatigue_refresh_food");
+        public static final TagKey<Item> DUCK_FOOD = ofItem("duck_food");
+        public static final TagKey<Item> GOOSE_FOOD = ofItem("goose_food");
+        public static final TagKey<Item> MOOSE_FOOD = ofItem("moose_food");
 
-        public static final TagKey<Item> RAW_MEAT = ofItemConventional("foods/raw_meat");
         public static final TagKey<Item> SAP = ofItemConventional("sap");
         public static final TagKey<Item> RUBBER = ofItemConventional("rubber");
         public static final TagKey<Item> CHEESE = ofItemConventional("cheese");
+        public static final TagKey<Item> CHEESE_FOODS = ofItemConventional("foods/cheese");
+        public static final TagKey<Item> DAIRY_FOODS = ofItemConventional("foods/dairy");
         public static final TagKey<Item> FLOUR = ofItemConventional("flour");
-
-        public static final TagKey<Item> FOODS = ofItemConventional("foods");
+        public static final TagKey<Item> WHEAT_FLOUR = ofItemConventional("flour/wheat");
+        public static final TagKey<Item> FLOUR_FOODS = ofItemConventional("foods/flour");
+    	public static final TagKey<Item> SYRUP_DRINKS = ofItemConventional("drinks/syrup");
+        public static final TagKey<Item> SAUCES = ofItemConventional("foods/sauces");
+        public static final TagKey<Item> SAUCES_GRAVY = ofItemConventional("foods/sauces/gravy");
+        public static final TagKey<Item> CONDIMENTS = ofItemConventional("condiments");
+        public static final TagKey<Item> CONDIMENTS_GRAVY = ofItemConventional("condiments/gravy");
 	}
 	
 	public class StructureTags {
@@ -31,6 +46,10 @@ public class CanadaTags {
 
 	public static TagKey<Block> ofBlock(String name) {
 		return TagKey.of(RegistryKeys.BLOCK, Identifier.of(CanadaMod.MOD_ID, name));
+	}
+
+	public static TagKey<Block> ofBlockConventional(String name) {
+		return TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", name));
 	}
 
 	public static TagKey<Item> ofItem(String name) {

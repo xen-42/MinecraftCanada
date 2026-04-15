@@ -11,7 +11,6 @@ import net.minecraft.block.WallHangingSignBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.util.math.BlockPos;
 import xen42.canadamod.CanadaBlocks;

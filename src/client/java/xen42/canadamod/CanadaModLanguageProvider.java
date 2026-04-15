@@ -4,19 +4,22 @@ import java.util.concurrent.CompletableFuture;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.block.Block;
+import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.potion.Potion;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.gen.structure.Structure;
 import xen42.canadamod.entities.MapleBoatEntity;
+import xen42.canadamod.jade.BeaverChopProvider;
 
 public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
-    public CanadaModLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-    	super(output, languageCode, registryLookup);
-    }
+	public CanadaModLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+		super(output, languageCode, registryLookup);
+	}
 
 	public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
 		generate(registryLookup, new ModTranslationBuilder(translationBuilder));
@@ -25,6 +28,11 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 	public String processValue(String value) {
 		return value;
 	}
+
+	public abstract String makeDrinkablePotionText(String effectName);
+	public abstract String makeSplashPotionText(String effectName);
+	public abstract String makeLingeringPotionText(String effectName);
+	public abstract String makeTippedArrowText(String effectName);
 
 	public abstract void generate(RegistryWrapper.WrapperLookup registryLookup, ModTranslationBuilder translationBuilder);
 	
@@ -39,11 +47,6 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 		public void add(String key, String value) {
 			original.add(key, processValue(value));
 		}
-		
-		@Override
-		public void add(Block block, String value) {
-			add(block.asItem(), value);
-		}
 
 		public void addVillagerProfession(RegistryKey<VillagerProfession> key, String value) {
 			add("entity." + key.getValue().getNamespace() + ".villager." + key.getValue().getPath(), value);
@@ -51,6 +54,30 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 		public void addFilledMap(TagKey<Structure> structure, String value) {
 			add("filled_map." + structure.id().getNamespace() + "." + structure.id().getPath(), value);
+		}
+
+		public void addJadePlugin(Identifier plugin, String value) {
+			add("config.jade.plugin_" + plugin.getNamespace() + "." + plugin.getPath(), value);
+		}
+		
+		public void add(NoteBlockInstrument instrument, String value) {
+			var serializedName = instrument.asString();
+			String key;
+			if(instrument.canBePitched()) {
+				key = "gui.ipp.jei.instrument.%s".formatted(serializedName);
+			} else {
+				key = "gui.ipp.jei.mob.%s".formatted(serializedName);
+			}
+			add(key, value);
+			add("jade.instrument.%s".formatted(serializedName), value);
+		}
+
+		public void add(Potion potion, String name) {
+			var baseName = potion.getBaseName();
+			add("item.minecraft.potion.effect." + baseName, makeDrinkablePotionText(name));
+			add("item.minecraft.splash_potion.effect." + baseName, makeSplashPotionText(name));
+			add("item.minecraft.lingering_potion.effect." + baseName, makeLingeringPotionText(name));
+			add("item.minecraft.tipped_arrow.effect." + baseName, makeTippedArrowText(name));
 		}
 	}
 	
@@ -62,6 +89,26 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 		public English(FabricDataOutput output, CompletableFuture<WrapperLookup> registryLookup) {
 			this(output, "en_us", registryLookup);
+		}
+
+		@Override
+		public String makeDrinkablePotionText(String effectName) {
+			return "Potion of " + effectName;
+		}
+
+		@Override
+		public String makeSplashPotionText(String effectName) {
+			return "Splash Potion of " + effectName;
+		}
+
+		@Override
+		public String makeLingeringPotionText(String effectName) {
+			return "Lingering Potion of " + effectName;
+		}
+
+		@Override
+		public String makeTippedArrowText(String effectName) {
+			return "Arrow of " + effectName;
 		}
 
 		@Override
@@ -119,9 +166,9 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 			translationBuilder.add(CanadaItems.ANTLERS, "Antler");
 			translationBuilder.add(CanadaItems.VENISON, "Venison");
-			translationBuilder.add(CanadaItems.COOKED_VENISON, "Cooked venison");
+			translationBuilder.add(CanadaItems.COOKED_VENISON, "Cooked Venison");
 			translationBuilder.add(CanadaItems.WATERFOWL, "Waterfowl");
-			translationBuilder.add(CanadaItems.COOKED_WATERFOWL, "Cooked waterfowl");
+			translationBuilder.add(CanadaItems.COOKED_WATERFOWL, "Cooked Waterfowl");
 			
 			translationBuilder.add(CanadaMod.MOOSE_ENTITY, "Moose");
 			translationBuilder.add(CanadaMod.BEAVER_ENTITY, "Beaver");
@@ -137,48 +184,64 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.add(CanadaBlocks.RUBBER_BLOCK, "Rubber Block");
 
 			translationBuilder.add("item.canadamod.thermos.empty.description", "Can hold a mixed stack of soups, drinks, and potions");
-			translationBuilder.add("effect.canadamod.beaver_effect", "Busy Beaver");
-			translationBuilder.add("effect.canadamod.moose_effect", "Moose's Strength");
+
+			translationBuilder.add(CanadaEffects.BUSY_BEAVER.value(), "Busy Beaver");
+			translationBuilder.add(CanadaEffects.MOOSES_STRENGTH.value(), "Moose's Strength");
 
 			translationBuilder.add(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
 			translationBuilder.addFilledMap(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
 			
 			translationBuilder.add(CanadaTags.ItemTags.MAPLE_LOGS, "Maple Logs");
-			translationBuilder.add(CanadaTags.ItemTags.RAW_MEAT, "Red Meat");
 			translationBuilder.add(CanadaTags.ItemTags.SAP, "Sap");
+			translationBuilder.add(CanadaTags.ItemTags.RUBBER, "Rubber");
+			translationBuilder.add(CanadaTags.ItemTags.CHEESE, "Cheese");
+			translationBuilder.add(CanadaTags.ItemTags.CHEESE_FOODS, "Cheese");
+			translationBuilder.add(CanadaTags.ItemTags.DAIRY_FOODS, "Dairy");
+			translationBuilder.add(CanadaTags.ItemTags.FLOUR, "Flour");
+			translationBuilder.add(CanadaTags.ItemTags.FLOUR_FOODS, "Flour");
+			translationBuilder.add(CanadaTags.ItemTags.WHEAT_FLOUR, "Wheat Flour");
+			translationBuilder.add(CanadaTags.ItemTags.SYRUP_DRINKS, "Syrup Drinks");
+			translationBuilder.add(CanadaTags.ItemTags.SAUCES, "Sauces");
 			translationBuilder.add(CanadaTags.BlockTags.MAPLE_LOGS, "Maple Logs");
 			translationBuilder.addVillagerProfession(CanadaVillagers.SUGAR_SHACK_VILLAGER_KEY, "Lumberjack");
 
+			translationBuilder.add(CanadaNoteBlockInstruments.MOOSE.get(), "Moose");
+
 			translationBuilder.add("biome.canadamod.maple_forest", "Maple Forest");
 
-			translationBuilder.add("subtitles.canadamod.beaver_ambient", "Beaver grunts");
-			translationBuilder.add("subtitles.canadamod.beaver_death", "Beaver dies");
-			translationBuilder.add("subtitles.canadamod.beaver_hurt", "Beaver hurts");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_AMBIENT, "Beaver grunts");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_DEATH, "Beaver dies");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_HURT, "Beaver hurts");
+			translationBuilder.add(CanadaSounds.SOUND_BEAVER_EAT, "Beaver eats");
+
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_AMBIENT, "Moose calls");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_ANGRY, "Moose grunts angrily");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_DEATH, "Moose dies");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_HURT, "Moose hurts");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_GROW_ANTLER, "Moose grows antler");
+			translationBuilder.add(CanadaSounds.SOUND_MOOSE_STRIP_ANTLER, "Moose loses antler");
+
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_AMBIENT, "Grizzly Bear groans");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_AMBIENT_BABY, "Grizzly Bear hums");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_DEATH, "Grizzly Bear dies");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_HURT, "Grizzly Bear hurts");
+			translationBuilder.add(CanadaSounds.ENTITY_GRIZZLY_BEAR_WARNING, "Grizzly Bear roars");
 			
-			translationBuilder.add("subtitles.canadamod.moose_ambient", "Moose calls");
-			translationBuilder.add("subtitles.canadamod.moose_angry", "Moose grunts angrily");
-			translationBuilder.add("subtitles.canadamod.moose_death", "Moose dies");
-			translationBuilder.add("subtitles.canadamod.moose_hurt", "Moose hurts");
-			translationBuilder.add("subtitles.canadamod.moose_grow_antler", "Moose grows antler");
-			translationBuilder.add("subtitles.canadamod.moose_strip_antler", "Moose loses antler");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_AMBIENT, "Duck quacks");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_HURT, "Duck hurts");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_DEATH, "Duck dies");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_PLOP, "Duck plops");
+			translationBuilder.add(CanadaSounds.SOUND_DUCK_FOOTSTEP, "Footsteps");
+			
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_PLOP, "Goose plops");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_AMBIENT, "Goose quacks");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_HURT, "Goose hurts");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_DEATH, "Goose dies");
+			translationBuilder.add(CanadaSounds.SOUND_GOOSE_WARNING, "Goose hisses");
 
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient", "Grizzly Bear groans");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_ambient_baby", "Grizzly Bear hums");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_death", "Grizzly Bear dies");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_hurt", "Grizzly Bear hurts");
-			translationBuilder.add("subtitles.canadamod.grizzly_bear_warning", "Grizzly Bear roars");
-
-			translationBuilder.add("subtitles.canadamod.duck_ambient", "Duck quacks");
-			translationBuilder.add("subtitles.canadamod.duck_hurt", "Duck hurts");
-			translationBuilder.add("subtitles.canadamod.duck_death", "Duck dies");
-			translationBuilder.add("subtitles.canadamod.duck_plop", "Duck plops");
-			translationBuilder.add("subtitles.canadamod.duck_footstep", "Footsteps");
-
-			translationBuilder.add("subtitles.canadamod.goose_plop", "Goose plops");
-			translationBuilder.add("subtitles.canadamod.goose_ambient", "Goose quacks");
-			translationBuilder.add("subtitles.canadamod.goose_hurt", "Goose hurts");
-			translationBuilder.add("subtitles.canadamod.goose_death", "Goose dies");
-			translationBuilder.add("subtitles.canadamod.goose_warning", "Goose hisses");
+			translationBuilder.addJadePlugin(CanadaMod.BEAVER_ENTITY_ID, "Beaver");
+			translationBuilder.add(BeaverChopProvider.FATIGUE_KEY, "Fatigue time: %s");
+			translationBuilder.add(BeaverChopProvider.FRENZY_KEY, "Frenzy time: %s");
 		}
 	}
 	

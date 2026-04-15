@@ -9,12 +9,11 @@ import net.minecraft.util.math.MathHelper;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaModClient;
 import xen42.canadamod.entities.DuckEntity;
-import xen42.canadamod.entities.GooseEntity;
 
 public class DuckEntityRenderer extends MobEntityRenderer<DuckEntity, ChickenEntityRenderState, DuckEntityModel<DuckEntity>> {
 
     public DuckEntityRenderer(Context context) {
-        super(context, new DuckEntityModel(context.getPart(CanadaModClient.MODEL_DUCK_LAYER)), 0.3f);
+        super(context, new DuckEntityModel<>(context.getPart(CanadaModClient.MODEL_DUCK_LAYER)), 0.3f);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class CanadaModPOITagGenerator extends FabricTagProvider<PointOfInterestT
 
     @Override
     public String getName() {
-        return "CanadaModPOITagGenerator";
+        return "POI Tags";
     }
 
     @Override

@@ -34,14 +34,11 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.BlockPos;
@@ -53,6 +50,7 @@ import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaSounds;
+import xen42.canadamod.CanadaTags;
 
 public class GooseEntity extends ChickenEntity implements Angerable {
 
@@ -95,18 +93,18 @@ public class GooseEntity extends ChickenEntity implements Angerable {
 		this.goalSelector.add(0, new SwimGoal(this));
 		this.goalSelector.add(1, new GooseEntity.AttackGoal());
 		this.goalSelector.add(1, new EscapeDangerGoal(this, 1.4));
-		this.goalSelector.add(1, new FleeEntityGoal(this, PlayerEntity.class, 8.0F, 1.6, 1.4, 
-			entity -> this.getHealth() <= 4 && !((PlayerEntity)entity).isHolding(Items.BREAD)));
-		this.goalSelector.add(1, new FleeEntityGoal(this, FoxEntity.class, 8.0F, 1.6, 1.4, entity -> !this.isAngry()));
+		this.goalSelector.add(1, new FleeEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6, 1.4, 
+			entity -> this.getHealth() <= 4 && !((PlayerEntity)entity).isHolding(stack -> isBreedingItem(stack))));
+		this.goalSelector.add(1, new FleeEntityGoal<>(this, FoxEntity.class, 8.0F, 1.6, 1.4, entity -> !this.isAngry()));
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
-		this.goalSelector.add(3, new TemptGoal(this, 1.0, stack -> stack.isOf(Items.BREAD), false));
+		this.goalSelector.add(3, new TemptGoal(this, 1.0, stack -> isBreedingItem(stack), false));
 		this.goalSelector.add(4, new FollowParentGoal(this, 1.1));
 		this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0));
 		this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
 		this.goalSelector.add(7, new LookAroundGoal(this));
 
 		this.targetSelector.add(1, new GooseEntity.GooseRevengeGoal());
-		this.targetSelector.add(3, new ActiveTargetGoal(this, PlayerEntity.class, 10, true, false, this::shouldAngerAt));
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::shouldAngerAt));
 		this.targetSelector.add(5, new UniversalAngerGoal<>(this, false));
 	}
 
@@ -119,12 +117,15 @@ public class GooseEntity extends ChickenEntity implements Angerable {
 
     @Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return stack.isOf(Items.BREAD);
+		return stack.isIn(CanadaTags.ItemTags.GOOSE_FOOD);
 	}
 
     @Override
 	public void tickMovement() {
 		super.tickMovement();
+
+		this.fallDistance = 0.0;
+
 		this.lastFlapProgress = this.flapProgress;
 		this.lastMaxWingDeviation = this.maxWingDeviation;
 

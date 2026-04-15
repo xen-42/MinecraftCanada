@@ -3,7 +3,6 @@ package xen42.canadamod;
 import java.util.Optional;
 import java.util.function.Function;
 
-import net.fabricmc.fabric.api.item.v1.FabricItem.Settings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
@@ -22,17 +21,15 @@ import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.SaplingGenerator;
-import net.minecraft.block.SkullBlock;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.SlimeBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.UntintedParticleLeavesBlock;
-import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HangingSignBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
@@ -46,10 +43,10 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.block.CookingPotBlock;
-import xen42.canadamod.block.MooseSkullBlock;
-import xen42.canadamod.block.MooseWallSkullBlock;
 import xen42.canadamod.block.RubberBlock;
 import xen42.canadamod.block.TreeTapBlock;
+import xen42.canadamod.block.skull.MooseSkullBlock;
+import xen42.canadamod.block.skull.MooseWallSkullBlock;
 import xen42.canadamod.sign.MapleHangingSignBlock;
 import xen42.canadamod.sign.MapleHangingSignBlockEntity;
 import xen42.canadamod.sign.MapleSignBlock;
@@ -96,7 +93,8 @@ public class CanadaBlocks {
 	public static Block TREE_TAP = register(
 			"tree_tap",
 			TreeTapBlock::new,
-			AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.CHAIN).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).breakInstantly(),
+			AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.CHAIN).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).breakInstantly()
+				.mapColor(MapColor.IRON_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE),
 			false
 		);
 	
@@ -104,24 +102,24 @@ public class CanadaBlocks {
 		"cooking_pot",
 		CookingPotBlock::new,
 		AbstractBlock.Settings.create().luminance(Blocks.createLightLevelFromLitBlockState(13)).nonOpaque()
-			.mapColor(MapColor.STONE_GRAY).pistonBehavior(PistonBehavior.DESTROY).hardness(0.3f),
+			.mapColor(MapColor.STONE_GRAY).pistonBehavior(PistonBehavior.DESTROY).hardness(0.3f).instrument(NoteBlockInstrument.BASEDRUM),
 		true
 	);
 
 	public static Block RUBBER_BLOCK = register("rubber_block", RubberBlock::new, AbstractBlock.Settings.create()
-		.sounds(BlockSoundGroup.FUNGUS).mapColor(MapColor.BLACK).hardness(0.1f), true);
+		.sounds(BlockSoundGroup.FUNGUS).mapColor(MapColor.BLACK).hardness(0.1f).instrument(NoteBlockInstrument.BASEDRUM), true);
 
 	public static Block MOOSE_HEAD = register(
 		"moose_head",
 		MooseSkullBlock::new,
-		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY),
+		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.BROWN).instrument(CanadaNoteBlockInstruments.MOOSE.get()),
 		false
 	);
 
 	public static Block MOOSE_WALL_HEAD = register(
 		"moose_head_wall",
 		MooseWallSkullBlock::new,
-		AbstractBlock.Settings.create().strength(1.0F).pistonBehavior(PistonBehavior.DESTROY),
+		AbstractBlock.Settings.copy(MOOSE_HEAD),
 		false
 	);
 
@@ -138,13 +136,13 @@ public class CanadaBlocks {
 		MAPLE_PLANKS = register(
 			"maple_planks",
 			Block::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_PLANKS),
+			AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_LOG = register(
 			"maple_log",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_LOG),
+			AbstractBlock.Settings.copy(Blocks.OAK_LOG).mapColor(MapColor.RED),
 			true
 		);
 		Registry.register(Registries.PARTICLE_TYPE,
@@ -153,97 +151,97 @@ public class CanadaBlocks {
 		MAPLE_LEAVES = register(
 			"maple_leaves",
 			(settings) -> new UntintedParticleLeavesBlock(0.01F, MAPLE_LEAF_PARTICLE, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_LEAVES),
+			AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.RED),
 			true
 		);
 		STRIPPED_MAPLE_LOG = register(
 			"stripped_maple_log",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG),
+			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_WOOD = register(
 			"maple_wood",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_WOOD),
+			AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.RED),
 			true
 		);
 		STRIPPED_MAPLE_WOOD = register(
 			"stripped_maple_wood",
 			PillarBlock::new,
-			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD),
+			AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_STAIRS = register(
 			"maple_stairs",
 			(settings) -> new StairsBlock(MAPLE_PLANKS.getDefaultState(), settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_STAIRS),
+			AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_BUTTON = register(
 			"maple_button",
 			(settings) -> new ButtonBlock(MAPLE_WOOD_SET, 30, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_BUTTON),
+			AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_SLAB = register(
 			"maple_slab",
 			SlabBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_SLAB),
+			AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_DOOR = register(
 			"maple_door",
 			(settings) -> new DoorBlock(MAPLE_WOOD_SET, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_DOOR),
+			AbstractBlock.Settings.copy(Blocks.OAK_DOOR).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_TRAPDOOR = register(
 			"maple_trapdoor",
 			(settings) -> new TrapdoorBlock(MAPLE_WOOD_SET, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR),
+			AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_FENCE = register(
 			"maple_fence",
 			FenceBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_FENCE),
+			AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_FENCE_GATE = register(
 			"maple_fence_gate",
 			(settings) -> new FenceGateBlock(MAPLE_WOOD_TYPE, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE),
+			AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_PRESSURE_PLATE = register(
 			"maple_pressure_plate",
 			(settings) -> new PressurePlateBlock(MAPLE_WOOD_SET, settings),
-			AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE),
+			AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.RED),
 			true
 		);
 		MAPLE_SIGN = register(
 			"maple_sign",
 			MapleSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(MapColor.RED),
 			false
 		);
 		MAPLE_WALL_SIGN = register(
 			"maple_wall_sign",
 			MapleWallSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.RED),
 			false
 		);
 		MAPLE_HANGING_SIGN = register(
 			"maple_hanging_sign",
 			MapleHangingSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.RED),
 			false
 		);
 		MAPLE_WALL_HANGING_SIGN = register(
 			"maple_hanging_wall_sign",
 			MapleWallHangingSignBlock::new,
-			AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN),
+			AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.RED),
 			false
 		);
 

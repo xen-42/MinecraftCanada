@@ -13,7 +13,7 @@ import xen42.canadamod.entities.GooseEntity;
 public class GooseEntityRenderer extends MobEntityRenderer<GooseEntity, ChickenEntityRenderState, GooseEntityModel<GooseEntity>> {
 
     public GooseEntityRenderer(Context context) {
-        super(context, new GooseEntityModel(context.getPart(CanadaModClient.MODEL_GOOSE_LAYER)), 0.4f);
+        super(context, new GooseEntityModel<>(context.getPart(CanadaModClient.MODEL_GOOSE_LAYER)), 0.4f);
     }
 
     @Override

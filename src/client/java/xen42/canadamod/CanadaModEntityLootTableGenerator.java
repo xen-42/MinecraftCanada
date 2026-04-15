@@ -24,7 +24,7 @@ public class CanadaModEntityLootTableGenerator extends FabricEntityLootTableProv
 
     @Override
     public String getName() {
-        return "CanadaModEntityLootTableGenerator";
+        return "Entity Loot Tables";
     }
 
     @Override

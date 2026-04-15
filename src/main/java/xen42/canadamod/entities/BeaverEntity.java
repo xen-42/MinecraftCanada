@@ -31,9 +31,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
@@ -51,6 +49,7 @@ import net.minecraft.world.World;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaSounds;
+import xen42.canadamod.CanadaTags;
 
 public class BeaverEntity extends AnimalEntity {
     private static final TrackedData<Integer> CHOP_FATIGUE = DataTracker.registerData(BeaverEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -125,15 +124,15 @@ public class BeaverEntity extends AnimalEntity {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.STICK);
+        return stack.isIn(CanadaTags.ItemTags.BEAVER_BREED_FOOD);
     }
 
     public boolean isFrenzyItem(ItemStack stack) {
-        return stack.isOf(CanadaItems.DONAIR) || stack.isOf(CanadaItems.POUTINE) || stack.isOf(CanadaItems.PIEROGI);
+        return stack.isIn(CanadaTags.ItemTags.BEAVER_FRENZY_FOOD);
     }
 
     public boolean isFatigueRefreshItem(ItemStack stack) {
-        return stack.isOf(CanadaItems.MAPLE_SYRUP_BOTTLE);
+        return stack.isIn(CanadaTags.ItemTags.BEAVER_FATIGUE_REFRESH_FOOD);
     }
 
     public boolean isTemptItem(ItemStack stack) {
@@ -172,13 +171,13 @@ public class BeaverEntity extends AnimalEntity {
         return isBaby() ? BABY_BASE_DIMENSIONS : super.getBaseDimensions(pose);
     }
 
-    private static class BeaverMoveControl extends AquaticMoveControl {
+    public static class BeaverMoveControl extends AquaticMoveControl {
         public BeaverMoveControl(MobEntity entity) {
             super(entity, 45, 10, 0.1F, 0.5F, false);
         }
     }
 
-    private static class SwimToRandomPlaceGoal extends SwimAroundGoal { 
+    public static class SwimToRandomPlaceGoal extends SwimAroundGoal { 
         public SwimToRandomPlaceGoal(BeaverEntity beaver) {
             super(beaver, 1.0D, 40);
         }
@@ -303,4 +302,12 @@ public class BeaverEntity extends AnimalEntity {
         this.getDataTracker().set(CHOP_FATIGUE, nbt.getInt("chopFatigue").orElse(0));
         this.getDataTracker().set(CHOP_FRENZY, nbt.getInt("chopFrenzy").orElse(0));
     }
+
+	public int getFatigueAge() {
+		return this.getDataTracker().get(CHOP_FATIGUE);
+	}
+
+	public int getFrenzyAge() {
+		return this.getDataTracker().get(CHOP_FRENZY);
+	}
 }

@@ -28,7 +28,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import xen42.canadamod.CanadaItems;
-import xen42.canadamod.CanadaMod;
 
 public class ThermosItem extends Item {
     @Nullable

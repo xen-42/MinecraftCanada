@@ -38,13 +38,11 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -59,6 +57,7 @@ import net.minecraft.world.event.GameEvent;
 import xen42.canadamod.CanadaItems;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.CanadaSounds;
+import xen42.canadamod.CanadaTags;
 
 public class MooseEntity extends AbstractHorseEntity implements Angerable {
     private static final TrackedData<Boolean> LEFT_ANTLER_MISSING = DataTracker.registerData(MooseEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -262,7 +261,7 @@ public class MooseEntity extends AbstractHorseEntity implements Angerable {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.SEAGRASS) || stack.isIn(ItemTags.LEAVES);
+        return stack.isIn(CanadaTags.ItemTags.MOOSE_FOOD);
     }
 
     @Override
