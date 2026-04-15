@@ -29,7 +29,7 @@ public class CanadaModTerraBlenderAPI implements TerraBlenderApi {
     @Override
     public void onTerraBlenderInitialized() 
     {
-        Regions.register(new MapleForestRegion(Identifier.of(CanadaMod.MOD_ID, "maple_forest"), TerraBlender.CONFIG.vanillaOverworldRegionWeight));
+        Regions.register(new MapleForestRegion(CanadaMod.MAPLE_BIOME_ID, TerraBlender.CONFIG.vanillaOverworldRegionWeight));
     }
 
     public class MapleForestRegion extends Region
