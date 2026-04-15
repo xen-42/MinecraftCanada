@@ -3,7 +3,6 @@ package xen42.canadamod;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.StringIdentifiable;
 
 public enum CanadaNoteBlockInstruments implements StringIdentifiable {

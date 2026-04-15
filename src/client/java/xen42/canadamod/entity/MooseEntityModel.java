@@ -18,7 +18,8 @@ public class MooseEntityModel extends QuadrupedEntityModel<MooseEntityRenderStat
 		this.harness = head.getChild("oops_the_head_is_backwards").getChild("harness");
 		this.saddle = body.getChild("saddle");
     }
-    
+
+    @SuppressWarnings("unused")
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();

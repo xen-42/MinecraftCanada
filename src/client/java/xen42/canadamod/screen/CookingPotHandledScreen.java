@@ -15,12 +15,13 @@ public class CookingPotHandledScreen extends RecipeBookScreen<CookingPotScreenHa
     private static final Identifier BURN_PROGRESS_TEXTURE = Identifier.ofVanilla("container/furnace/burn_progress");
     private static final Identifier TEXTURE = Identifier.of(CanadaMod.MOD_ID, "textures/gui/cooking_pot_gui.png");
 
+    @SuppressWarnings("unused")
+	private final CookingPotRecipeBookWidget recipeBookWidget;
+
     public CookingPotHandledScreen(CookingPotScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, new CookingPotRecipeBookWidget(handler), inventory, title);
         this.recipeBookWidget = (CookingPotRecipeBookWidget)this.recipeBook;
     }
-
-    private final CookingPotRecipeBookWidget recipeBookWidget;
 
     @Override
     protected ScreenPos getRecipeBookButtonPos() {

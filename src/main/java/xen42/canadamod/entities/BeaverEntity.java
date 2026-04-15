@@ -31,9 +31,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
@@ -173,13 +171,13 @@ public class BeaverEntity extends AnimalEntity {
         return isBaby() ? BABY_BASE_DIMENSIONS : super.getBaseDimensions(pose);
     }
 
-    private static class BeaverMoveControl extends AquaticMoveControl {
+    public static class BeaverMoveControl extends AquaticMoveControl {
         public BeaverMoveControl(MobEntity entity) {
             super(entity, 45, 10, 0.1F, 0.5F, false);
         }
     }
 
-    private static class SwimToRandomPlaceGoal extends SwimAroundGoal { 
+    public static class SwimToRandomPlaceGoal extends SwimAroundGoal { 
         public SwimToRandomPlaceGoal(BeaverEntity beaver) {
             super(beaver, 1.0D, 40);
         }

@@ -3,7 +3,6 @@ package xen42.canadamod.block.skull;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.SkullBlock.SkullType;
 import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;

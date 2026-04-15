@@ -6,24 +6,14 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnLocation;
 import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potions;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
@@ -32,7 +22,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
@@ -46,7 +35,6 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.structure.JigsawStructure;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
-import net.minecraft.world.poi.PointOfInterestType;
 import xen42.canadamod.block.CookingPotBlockEntity;
 import xen42.canadamod.block.skull.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
@@ -189,8 +177,6 @@ public class CanadaMod implements ModInitializer {
 
 		CanadaEffects.initialize();
 		CanadaPotions.initialize();
-		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
-		});
 
 		CanadaBlocks.initialize();
 		CanadaConfiguredFeatures.onInitialize();
@@ -228,7 +214,7 @@ public class CanadaMod implements ModInitializer {
 		CanadaSounds.onInit();
 	}
 
-	private static boolean canSpawn(EntityType type, ServerWorldAccess access, SpawnReason reason, BlockPos pos, Random random) {
+	private static boolean canSpawn(EntityType<?> type, ServerWorldAccess access, SpawnReason reason, BlockPos pos, Random random) {
 		var ground = access.getBlockState(pos.down());
 		var goodGround = ground.isIn(BlockTags.DIRT) || ground.isOf(Blocks.GRASS_BLOCK) || ground.isOf(Blocks.PODZOL) || ground.isOf(Blocks.SNOW);
 		var goodLight = access.getLightLevel(pos) > 8;

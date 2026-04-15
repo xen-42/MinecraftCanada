@@ -19,10 +19,9 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import xen42.canadamod.CanadaBlocks;
-import xen42.canadamod.CanadaMod;
 
 public class BeaverChopTreeGoal extends Goal {
-    public static Map<LeavesBlock, SaplingBlock> saplingMap = new HashMap();
+    public static Map<LeavesBlock, SaplingBlock> saplingMap = new HashMap<>();
 
     private final BeaverEntity beaver;
 

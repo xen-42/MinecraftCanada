@@ -14,15 +14,17 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
-import xen42.canadamod.CanadaItems;
-import xen42.canadamod.CanadaMod;
 
 public abstract class CustomEggEntity extends ThrownItemEntity {
 	private static final EntityDimensions EMPTY_DIMENSIONS = EntityDimensions.fixed(0.0F, 0.0F);
 
-    public CustomEggEntity(EntityType<? extends ThrownItemEntity> entity, World world) {
-        super(EntityType.EGG, world);
-    }
+	public CustomEggEntity(EntityType<? extends ThrownItemEntity> entity, World world) {
+		super(entity, world);
+	}
+
+	public CustomEggEntity(World world) {
+		super(EntityType.EGG, world);
+	}
 
 	public CustomEggEntity(World world, LivingEntity owner, ItemStack stack) {
 		super(EntityType.EGG, owner, world, stack);
@@ -44,14 +46,15 @@ public abstract class CustomEggEntity extends ThrownItemEntity {
 						this.getX(),
 						this.getY(),
 						this.getZ(),
-						(this.random.nextFloat() - 0.5) * 0.08,
-						(this.random.nextFloat() - 0.5) * 0.08,
-						(this.random.nextFloat() - 0.5) * 0.08
+						(this.random.nextFloat() - 0.5) * d,
+						(this.random.nextFloat() - 0.5) * d,
+						(this.random.nextFloat() - 0.5) * d
 					);
 			}
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onEntityHit(EntityHitResult entityHitResult) {
 		super.onEntityHit(entityHitResult);

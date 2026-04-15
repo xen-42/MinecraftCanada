@@ -34,14 +34,11 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.BlockPos;
@@ -96,9 +93,9 @@ public class GooseEntity extends ChickenEntity implements Angerable {
 		this.goalSelector.add(0, new SwimGoal(this));
 		this.goalSelector.add(1, new GooseEntity.AttackGoal());
 		this.goalSelector.add(1, new EscapeDangerGoal(this, 1.4));
-		this.goalSelector.add(1, new FleeEntityGoal(this, PlayerEntity.class, 8.0F, 1.6, 1.4, 
+		this.goalSelector.add(1, new FleeEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6, 1.4, 
 			entity -> this.getHealth() <= 4 && !((PlayerEntity)entity).isHolding(stack -> isBreedingItem(stack))));
-		this.goalSelector.add(1, new FleeEntityGoal(this, FoxEntity.class, 8.0F, 1.6, 1.4, entity -> !this.isAngry()));
+		this.goalSelector.add(1, new FleeEntityGoal<>(this, FoxEntity.class, 8.0F, 1.6, 1.4, entity -> !this.isAngry()));
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
 		this.goalSelector.add(3, new TemptGoal(this, 1.0, stack -> isBreedingItem(stack), false));
 		this.goalSelector.add(4, new FollowParentGoal(this, 1.1));
@@ -107,7 +104,7 @@ public class GooseEntity extends ChickenEntity implements Angerable {
 		this.goalSelector.add(7, new LookAroundGoal(this));
 
 		this.targetSelector.add(1, new GooseEntity.GooseRevengeGoal());
-		this.targetSelector.add(3, new ActiveTargetGoal(this, PlayerEntity.class, 10, true, false, this::shouldAngerAt));
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::shouldAngerAt));
 		this.targetSelector.add(5, new UniversalAngerGoal<>(this, false));
 	}
 

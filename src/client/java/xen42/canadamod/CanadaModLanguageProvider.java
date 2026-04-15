@@ -2,20 +2,14 @@ package xen42.canadamod;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.apache.commons.lang3.StringUtils;
-
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.block.Block;
 import net.minecraft.block.enums.NoteBlockInstrument;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.gen.structure.Structure;
@@ -52,11 +46,6 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 		@Override
 		public void add(String key, String value) {
 			original.add(key, processValue(value));
-		}
-		
-		@Override
-		public void add(Block block, String value) {
-			add(block.asItem(), value);
 		}
 
 		public void addVillagerProfession(RegistryKey<VillagerProfession> key, String value) {

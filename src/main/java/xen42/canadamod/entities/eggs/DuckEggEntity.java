@@ -13,7 +13,11 @@ import xen42.canadamod.CanadaMod;
 public class DuckEggEntity extends CustomEggEntity {
 
     public DuckEggEntity(EntityType<? extends ThrownItemEntity> entity, World world) {
-        super(EntityType.EGG, world);
+        super(world);
+    }
+
+    public DuckEggEntity(World world) {
+        super(world);
     }
 
 	public DuckEggEntity(World world, LivingEntity owner, ItemStack stack) {

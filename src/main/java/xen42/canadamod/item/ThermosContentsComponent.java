@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,8 +19,6 @@ import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.screen.slot.Slot;
-import xen42.canadamod.CanadaItems;
-
 import org.apache.commons.lang3.math.Fraction;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,8 +27,7 @@ public class ThermosContentsComponent implements TooltipData {
     public static final ThermosContentsComponent DEFAULT = new ThermosContentsComponent(List.of());
     public static final Codec<ThermosContentsComponent> CODEC;
     public static final PacketCodec<RegistryByteBuf, ThermosContentsComponent> PACKET_CODEC;
-    private static final int ADD_TO_NEW_SLOT = -1;
-    public static final int field_52591 = -1;
+    public static final int ADD_TO_NEW_SLOT = -1;
     final List<ItemStack> stacks;
     final Fraction occupancy;
     final int selectedStackIndex;
@@ -61,7 +57,7 @@ public class ThermosContentsComponent implements TooltipData {
         Fraction fraction = Fraction.ZERO;
 
         ItemStack itemStack;
-        for(Iterator var2 = stacks.iterator(); var2.hasNext(); fraction = fraction.add(getOccupancy(itemStack).multiplyBy(Fraction.getFraction(itemStack.getCount(), 1)))) {
+        for(Iterator<ItemStack> var2 = stacks.iterator(); var2.hasNext(); fraction = fraction.add(getOccupancy(itemStack).multiplyBy(Fraction.getFraction(itemStack.getCount(), 1)))) {
             itemStack = (ItemStack)var2.next();
         }
 
@@ -130,7 +126,8 @@ public class ThermosContentsComponent implements TooltipData {
         return this.selectedStackIndex != -1;
     }
 
-    public boolean equals(Object o) {
+    @SuppressWarnings("deprecation")
+	public boolean equals(Object o) {
         if (this == o) {
             return true;
         } else if (!(o instanceof ThermosContentsComponent)) {
@@ -141,7 +138,8 @@ public class ThermosContentsComponent implements TooltipData {
         }
     }
 
-    public int hashCode() {
+    @SuppressWarnings("deprecation")
+	public int hashCode() {
         return ItemStack.listHashCode(this.stacks);
     }
 
@@ -164,7 +162,7 @@ public class ThermosContentsComponent implements TooltipData {
         private int selectedStackIndex;
 
         public Builder(ThermosContentsComponent base) {
-            this.stacks = new ArrayList(base.stacks);
+            this.stacks = new ArrayList<>(base.stacks);
             this.occupancy = base.occupancy;
             this.selectedStackIndex = base.selectedStackIndex;
         }

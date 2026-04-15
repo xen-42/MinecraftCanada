@@ -12,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.tag.ItemTags;
 import xen42.canadamod.CanadaEffects;
 import xen42.canadamod.CanadaItems;
-import xen42.canadamod.CanadaMod;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
