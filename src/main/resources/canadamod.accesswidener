@@ -49,3 +49,5 @@ accessible method net/minecraft/entity/effect/StatusEffect <init> (Lnet/minecraf
 accessible field net/minecraft/entity/passive/PolarBearEntity warningSoundCooldown I
 
 accessible class net/minecraft/block/enums/NoteBlockInstrument$Type
+
+mutable field net/minecraft/entity/ai/goal/FleeEntityGoal fleeingEntityNavigation Lnet/minecraft/entity/ai/pathing/EntityNavigation;
