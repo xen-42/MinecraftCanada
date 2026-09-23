@@ -9,7 +9,6 @@ import xen42.canadamod.CanadaMod;
 import xen42.canadamod.recipe.CookingPotRecipe;
 
 public class CookingPotServerPlugin implements REICommonPlugin {
-	public static final Identifier COOKING_POT = Identifier.of(CanadaMod.MOD_ID, "plugins/cooking_pot");
 	public static final CategoryIdentifier<CookingPotREIDisplay> COOKING_POT_CATEGORY = CategoryIdentifier.of(CanadaMod.MOD_ID, "plugins/cooking_pot");
 
 	public CookingPotServerPlugin() {
@@ -20,7 +19,7 @@ public class CookingPotServerPlugin implements REICommonPlugin {
 	public void registerDisplaySerializer(DisplaySerializerRegistry registry) {
 		CanadaMod.LOGGER.info("Registering REI display serializers");
 
-		registry.register(COOKING_POT, CookingPotREIDisplay.SERIALIZER);
+		registry.register(COOKING_POT_CATEGORY.getIdentifier(), CookingPotREIDisplay.SERIALIZER);
 	}
 
 	@Override
