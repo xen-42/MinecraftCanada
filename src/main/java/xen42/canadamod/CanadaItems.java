@@ -10,6 +10,7 @@ import com.google.common.collect.Maps;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.minecraft.block.Blocks;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
@@ -18,6 +19,7 @@ import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.component.type.FireworkExplosionComponent;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.component.type.FoodComponents;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -109,21 +111,9 @@ public class CanadaItems {
 
     public static final Item RUBBER = register("rubber", Item::new, new Item.Settings());
 
-    private static Map<EquipmentType, Integer> NO_DEFENSE_MAP = Maps.newEnumMap(Map.of(EquipmentType.BOOTS, 0, EquipmentType.LEGGINGS, 0, EquipmentType.CHESTPLATE, 0, EquipmentType.HELMET, 0, EquipmentType.BODY, 0));
-    public static final ArmorMaterial PELT_ARMOR = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, CanadaTags.ItemTags.REPAIRS_PELT_ARMOR, EquipmentAssetKeys.LEATHER);
-    public static final ArmorMaterial LEATHER_ARMOR_NO_DEFENSE = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, ItemTags.REPAIRS_LEATHER_ARMOR, EquipmentAssetKeys.LEATHER);
-
     public static final Item MOOSE_HEAD = register("moose_head", (settings) -> {
         return new VerticallyAttachableBlockItem(CanadaBlocks.MOOSE_HEAD, CanadaBlocks.MOOSE_WALL_HEAD, Direction.DOWN, settings);
-    }, armorNoDurability(LEATHER_ARMOR_NO_DEFENSE, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
-
-    public static Item.Settings armorNoDurability(ArmorMaterial material, EquipmentType type) {
-        return new Item.Settings().attributeModifiers(material.createAttributeModifiers(type))
-            .enchantable(material.enchantmentValue())
-            .component(
-                DataComponentTypes.EQUIPPABLE, EquippableComponent.builder(type.getEquipmentSlot()).equipSound(material.equipSound()).model(material.assetId()).build()
-            );
-    }
+    }, new Item.Settings().rarity(Rarity.UNCOMMON).equippableUnswappable(EquipmentSlot.HEAD));
 
     public static final Item GRAVY = register("gravy", Item::new, new Item.Settings()
         .recipeRemainder(Items.GLASS_BOTTLE).food(GRAVY_FOOD, GRAVY_CONSUME)
@@ -150,6 +140,10 @@ public class CanadaItems {
     public static final Item THERMOS = register("thermos",
         settings -> new ThermosItem(settings), (new Item.Settings()).maxCount(1).component(THERMOS_CONTENTS, ThermosContentsComponent.DEFAULT));
 
+    private static Map<EquipmentType, Integer> NO_DEFENSE_MAP = Maps.newEnumMap(Map.of(EquipmentType.BOOTS, 0, EquipmentType.LEGGINGS, 0, EquipmentType.CHESTPLATE, 0, EquipmentType.HELMET, 0, EquipmentType.BODY, 0));
+    public static final ArmorMaterial PELT_ARMOR = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, CanadaTags.ItemTags.REPAIRS_PELT_ARMOR, EquipmentAssetKeys.LEATHER);
+    public static final ArmorMaterial LEATHER_ARMOR_NO_DEFENSE = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, ItemTags.REPAIRS_LEATHER_ARMOR, EquipmentAssetKeys.LEATHER);
+    
     public static final Item BEAVER_HELMET = register("beaver_helmet", Item::new, 
         new Item.Settings().armor(PELT_ARMOR, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
     public static final Item MOOSE_HELMET = register("moose_helmet", Item::new, 

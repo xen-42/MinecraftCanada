@@ -6,14 +6,18 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.RotationPropertyHelper;
 import net.minecraft.util.math.Vec3d;
 import xen42.canadamod.CanadaBlocks;
+import xen42.canadamod.CanadaMod;
 import xen42.canadamod.block.skull.MooseSkullBlock;
 import xen42.canadamod.block.skull.MooseSkullBlockEntity;
 
 public class MooseSkullBlockEntityRenderer implements BlockEntityRenderer<MooseSkullBlockEntity> {
+    public static final Identifier TEXTURE = Identifier.of(CanadaMod.MOD_ID, "textures/block/moose.png");
+    
     public MooseSkullBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 

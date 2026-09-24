@@ -51,3 +51,5 @@ accessible field net/minecraft/entity/passive/PolarBearEntity warningSoundCooldo
 accessible class net/minecraft/block/enums/NoteBlockInstrument$Type
 
 mutable field net/minecraft/entity/ai/goal/FleeEntityGoal fleeingEntityNavigation Lnet/minecraft/entity/ai/pathing/EntityNavigation;
+
+accessible field net/minecraft/client/render/block/entity/SkullBlockEntityRenderer TEXTURES Ljava/util/Map;

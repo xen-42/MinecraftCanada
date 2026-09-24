@@ -23,6 +23,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
+import net.minecraft.client.render.block.entity.SkullBlockEntityRenderer;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
@@ -32,6 +33,7 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
@@ -40,6 +42,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import xen42.canadamod.armor.BeaverHatModel;
 import xen42.canadamod.armor.MooseHatModel;
+import xen42.canadamod.block.skull.CanadaSkullType;
 import xen42.canadamod.block.skull.MooseSkullBlock;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
@@ -54,6 +57,7 @@ import xen42.canadamod.entity.GrizzlyEntityModel;
 import xen42.canadamod.entity.GrizzlyEntityRenderer;
 import xen42.canadamod.entity.MooseEntityModel;
 import xen42.canadamod.entity.MooseEntityRenderer;
+import xen42.canadamod.entity.MooseSkullBlockEntityModel;
 import xen42.canadamod.entity.MooseSkullBlockEntityRenderer;
 import xen42.canadamod.screen.CookingPotHandledScreen;
 
@@ -62,6 +66,7 @@ public class CanadaModClient implements ClientModInitializer {
 	public static final EntityModelLayer MAPLE_CHEST_BOAT = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "chest_boat/maple"), "main");
 	public static final EntityModelLayer MODEL_BEAVER_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "beaver"), "main");
 	public static final EntityModelLayer MODEL_MOOSE_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "moose"), "main");
+	public static final EntityModelLayer MODEL_MOOSE_SKULL_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "moose_skull"), "main");
 	public static final EntityModelLayer MODEL_DUCK_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "duck"), "main");
 	public static final EntityModelLayer MODEL_GOOSE_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "goose"), "main");
 	public static final EntityModelLayer MODEL_GRIZZLY_LAYER = new EntityModelLayer(Identifier.of(CanadaMod.MOD_ID, "grizzly"), "main");
@@ -115,12 +120,15 @@ public class CanadaModClient implements ClientModInitializer {
 
 		EntityRendererRegistry.register(CanadaMod.GRIZZLY_ENTITY, context -> new GrizzlyEntityRenderer(context));
 		EntityModelLayerRegistry.registerModelLayer(MODEL_GRIZZLY_LAYER, GrizzlyEntityModel::getTexturedModelData);
+		
+		SkullBlockEntityRenderer.TEXTURES.put(CanadaSkullType.MOOSE, MooseSkullBlockEntityRenderer.TEXTURE);
 
 		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
 		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
 		ArmorRenderer.register(new BlockOnHeadArmorRenderer(CanadaBlocks.MOOSE_HEAD), CanadaItems.MOOSE_HEAD);
 
 		BlockEntityRendererFactories.register(CanadaMod.MOOSE_HEAD_ENTITY, MooseSkullBlockEntityRenderer::new);
+		EntityModelLayerRegistry.registerModelLayer(MODEL_MOOSE_SKULL_LAYER, MooseSkullBlockEntityModel::getTexturedModelData);
 
 		ClientPlayNetworking.registerGlobalReceiver(BeaverChopTreeEffectPayload.PAYLOAD_ID, (payload, context) -> {
 			context.client().execute(() -> {
@@ -213,8 +221,13 @@ public class CanadaModClient implements ClientModInitializer {
 				state = state.with(MooseSkullBlock.WEIRD_HACK, false);
 			}
 
-			MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(state, matrices, vertexConsumers,
-				light, OverlayTexture.DEFAULT_UV);
+			MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(
+				state,
+				matrices,
+				vertexConsumers,
+				light,
+				OverlayTexture.DEFAULT_UV
+			);
 
 			matrices.pop();
 		}
