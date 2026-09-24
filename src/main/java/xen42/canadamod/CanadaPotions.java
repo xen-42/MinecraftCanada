@@ -16,10 +16,9 @@ public class CanadaPotions {
         "duck_master",
         new Potion(
             "duck_master",
-            new StatusEffectInstance(CanadaEffects.DUCK_MASTER, 400), 
-            new StatusEffectInstance(StatusEffects.SLOW_FALLING, 400),
-            new StatusEffectInstance(StatusEffects.SPEED, 400, 1),
-            new StatusEffectInstance(StatusEffects.WEAKNESS, 400, 1)
+			new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600),
+			new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 600),
+			new StatusEffectInstance(StatusEffects.WEAKNESS, 600, 1)
         )
     );
 
@@ -27,21 +26,9 @@ public class CanadaPotions {
         "long_duck_master",
         new Potion(
             "duck_master",
-            new StatusEffectInstance(CanadaEffects.DUCK_MASTER, 800), 
-            new StatusEffectInstance(StatusEffects.SLOW_FALLING, 800),
-            new StatusEffectInstance(StatusEffects.SPEED, 800, 1),
-            new StatusEffectInstance(StatusEffects.WEAKNESS, 800, 1)
-        )
-    );
-
-    public static final RegistryEntry<Potion> STRONG_DUCK_MASTER = registerPotion(
-        "strong_duck_master",
-        new Potion(
-            "duck_master",
-            new StatusEffectInstance(CanadaEffects.DUCK_MASTER, 400), 
-            new StatusEffectInstance(StatusEffects.SLOW_FALLING, 400),
-            new StatusEffectInstance(StatusEffects.SPEED, 400, 2),
-            new StatusEffectInstance(StatusEffects.WEAKNESS, 400, 2)
+			new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200),
+			new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 1200),
+			new StatusEffectInstance(StatusEffects.WEAKNESS, 1200, 1)
         )
     );
 
@@ -54,7 +41,6 @@ public class CanadaPotions {
 		FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
 			builder.registerPotionRecipe(Potions.AWKWARD, CanadaItems.WATERFOWL, CanadaPotions.DUCK_MASTER);
 			builder.registerPotionRecipe(CanadaPotions.DUCK_MASTER, Items.REDSTONE, CanadaPotions.LONG_DUCK_MASTER);
-			builder.registerPotionRecipe(CanadaPotions.DUCK_MASTER, Items.GLOWSTONE_DUST, CanadaPotions.STRONG_DUCK_MASTER);
 		});
     }
 }
