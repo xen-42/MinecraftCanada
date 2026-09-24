@@ -188,6 +188,11 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 
 			translationBuilder.add(CanadaEffects.BUSY_BEAVER.value(), "Busy Beaver");
 			translationBuilder.add(CanadaEffects.MOOSES_STRENGTH.value(), "Moose's Strength");
+			translationBuilder.add(CanadaEffects.DUCK_MASTER.value(), "Duck Master");
+
+			translationBuilder.add(CanadaPotions.DUCK_MASTER.value(), "Duck Master");
+			//translationBuilder.add(CanadaPotions.LONG_DUCK_MASTER.value(), "Duck Master");
+			//translationBuilder.add(CanadaPotions.STRONG_DUCK_MASTER.value(), "Duck Master");
 
 			translationBuilder.add(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");
 			translationBuilder.addFilledMap(CanadaTags.StructureTags.MAPLE_CABIN, "Maple Forest Cabin");

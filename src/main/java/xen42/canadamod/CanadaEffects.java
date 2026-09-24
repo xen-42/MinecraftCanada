@@ -10,6 +10,11 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
 public class CanadaEffects {
+    public static final RegistryEntry<StatusEffect> DUCK_MASTER = registerStatusEffect("duck_master",
+            (new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x2F5D3A))
+            .addAttributeModifier(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, Identifier.of(CanadaMod.MOD_ID, "effect.duck_master"), 20, Operation.ADD_MULTIPLIED_TOTAL)
+        );
+
     public static final RegistryEntry<StatusEffect> BUSY_BEAVER = registerStatusEffect("busy_beaver",
             (new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x9B7441))
             .addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(CanadaMod.MOD_ID, "effect.busy_beaver"), 3f, Operation.ADD_MULTIPLIED_TOTAL)
