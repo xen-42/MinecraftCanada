@@ -25,6 +25,9 @@ import net.minecraft.client.render.block.entity.HangingSignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SignBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.SkullBlockEntityRenderer;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
+import net.minecraft.client.render.entity.PiglinEntityRenderer;
+import net.minecraft.client.render.entity.VillagerEntityRenderer;
+import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
@@ -32,6 +35,7 @@ import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemDisplayContext;
@@ -123,8 +127,8 @@ public class CanadaModClient implements ClientModInitializer {
 		
 		SkullBlockEntityRenderer.TEXTURES.put(CanadaSkullType.MOOSE, MooseSkullBlockEntityRenderer.TEXTURE);
 
-		ArmorRenderer.register(new CustomArmorRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
-		ArmorRenderer.register(new CustomArmorRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
+		ArmorRenderer.register(new HatRenderer(BeaverHatModel::getModel), CanadaItems.BEAVER_HELMET);
+		ArmorRenderer.register(new HatRenderer(MooseHatModel::getModel), CanadaItems.MOOSE_HELMET);
 		ArmorRenderer.register(new BlockOnHeadArmorRenderer(CanadaBlocks.MOOSE_HEAD), CanadaItems.MOOSE_HEAD);
 
 		BlockEntityRendererFactories.register(CanadaMod.MOOSE_HEAD_ENTITY, MooseSkullBlockEntityRenderer::new);
@@ -159,16 +163,66 @@ public class CanadaModClient implements ClientModInitializer {
 		TexturedRenderLayers.HANGING_SIGN_TYPE_TEXTURES.put(type, hangingSpriteId);
 	}
 
-	private class CustomArmorRenderer implements ArmorRenderer {
+	private boolean isPiglin(BipedEntityRenderState renderState) {
+		return renderState.entityType == EntityType.PIGLIN
+				|| renderState.entityType == EntityType.PIGLIN_BRUTE
+				|| renderState.entityType == EntityType.ZOMBIFIED_PIGLIN;
+	}
+
+	private boolean isVillager(BipedEntityRenderState renderState) {
+		return renderState.entityType == EntityType.VILLAGER
+				|| renderState.entityType == EntityType.ZOMBIE_VILLAGER;
+	}
+
+	private HeadFeatureRenderer.HeadTransformation getHeadTransformation(BipedEntityRenderState renderState) {
+		if (isPiglin(renderState)) {
+			return PiglinEntityRenderer.HEAD_TRANSFORMATION;
+		}
+
+		if (isVillager(renderState)) {
+			return VillagerEntityRenderer.HEAD_TRANSFORMATION;
+		}
+
+		return HeadFeatureRenderer.HeadTransformation.DEFAULT;
+	}
+
+	private class HatRenderer implements ArmorRenderer {
 		private Supplier<TexturedModelData> model;
 
-		public CustomArmorRenderer(Supplier<TexturedModelData> model) {
+		public HatRenderer(Supplier<TexturedModelData> model) {
 			this.model = model;
+		}
+
+		private void renderHat(ModelPart hat, MatrixStack matrices, VertexConsumer vertexConsumer, int light,
+				BipedEntityRenderState renderState, BipedEntityModel<BipedEntityRenderState> contextModel) {
+			HeadFeatureRenderer.HeadTransformation transformation = getHeadTransformation(renderState);
+
+			matrices.push();
+
+			float horizontalScale = transformation.horizontalScale();
+			matrices.scale(horizontalScale, 1.0F, horizontalScale);
+			contextModel.getRootPart().applyTransform(matrices);
+			contextModel.getHead().applyTransform(matrices);
+
+			matrices.translate(0.0F, transformation.yOffset(), 0.0F);
+
+			hat.originX = 0.0F;
+			hat.originY = 0.0F;
+			hat.originZ = 0.0F;
+			hat.pitch = 0.0F;
+			hat.yaw = 0.0F;
+			hat.roll = 0.0F;
+			hat.xScale = 1.0F;
+			hat.yScale = 1.0F;
+			hat.zScale = 1.0F;
+			hat.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
+
+			matrices.pop();
 		}
 
 		@Override
 		public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack,
-				BipedEntityRenderState bipedEntityRenderState, EquipmentSlot slot, int light,
+				BipedEntityRenderState renderState, EquipmentSlot slot, int light,
 				BipedEntityModel<BipedEntityRenderState> contextModel) {
 			if (slot != EquipmentSlot.HEAD) {
 				return;
@@ -177,12 +231,10 @@ public class CanadaModClient implements ClientModInitializer {
 			var name = stack.getItem().toString().split(":")[1];
 
 			ModelPart part = model.get().createModel().getChild("hat");
-			part.copyTransform(contextModel.getHead());
 			boolean hasGlint = stack.hasGlint();
 			Identifier identifier = Identifier.of(CanadaMod.MOD_ID, "textures/armor/" + name + ".png");
 			VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(identifier), hasGlint);
-			part.render(matrices, vertexConsumer,
-				light, OverlayTexture.DEFAULT_UV);
+			renderHat(part, matrices, vertexConsumer, light, renderState, contextModel);
 
 			MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ItemDisplayContext.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,
 				vertexConsumers, MinecraftClient.getInstance().world, 0);
@@ -198,7 +250,7 @@ public class CanadaModClient implements ClientModInitializer {
 
 		@Override
 		public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack,
-				BipedEntityRenderState bipedEntityRenderState, EquipmentSlot slot, int light,
+				BipedEntityRenderState renderState, EquipmentSlot slot, int light,
 				BipedEntityModel<BipedEntityRenderState> contextModel) {
 			if (slot != EquipmentSlot.HEAD) {
 				return;
@@ -206,11 +258,12 @@ public class CanadaModClient implements ClientModInitializer {
 
 			matrices.push();
 
-			var head = contextModel.getHead();
-			matrices.translate(head.originX / 16.0f, head.originY / 16.0f, head.originZ / 16.0f);
-			matrices.multiply(RotationAxis.POSITIVE_Z.rotation(head.roll));
-			matrices.multiply(RotationAxis.POSITIVE_Y.rotation(head.yaw));
-			matrices.multiply(RotationAxis.POSITIVE_X.rotation(head.pitch));
+			HeadFeatureRenderer.HeadTransformation transformation = getHeadTransformation(renderState);
+
+			contextModel.getRootPart().applyTransform(matrices);
+			contextModel.getHead().applyTransform(matrices);
+			matrices.translate(0.0F, transformation.yOffset(), 0.0F);
+
 			matrices.translate(0.5f, -0.025f, -0.75f);
 			matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float)Math.PI));
 			matrices.scale(1.05f, 1.05f, 1.05f);
