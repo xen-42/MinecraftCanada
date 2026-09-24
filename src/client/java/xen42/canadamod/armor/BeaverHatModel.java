@@ -8,7 +8,8 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 
 public class BeaverHatModel {
-    
+
+    @SuppressWarnings("unused")
     public static TexturedModelData getModel() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();

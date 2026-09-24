@@ -1,25 +1,21 @@
 package xen42.canadamod.block;
 
+import java.util.Map;
+
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.BrushableBlockEntity;
-import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -36,6 +32,9 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import xen42.canadamod.CanadaMod;
 
@@ -85,7 +84,6 @@ public class CookingPotBlock extends BlockWithEntity {
         var direction = state.get(FACING);
         var axis = direction.getAxis();
 
-        double g = 0.52D;
         double h = random.nextDouble() * 0.6D - 0.3D;
         double i = (axis == Direction.Axis.X) ? (direction.getOffsetX() * 0.52D) : h;
         double j = random.nextDouble() * 6.0D / 16.0D;
@@ -147,4 +145,35 @@ public class CookingPotBlock extends BlockWithEntity {
             return null;
         }
     }
+
+    public static final VoxelShape SHAPE = VoxelShapes.union(
+		    // Furnace
+		    Block.createCuboidShape(0, 0, 0, 16, 8, 16),
+
+		    // Pot
+		    Block.createCuboidShape(2, 9, 2, 14, 16, 14), // taper
+		    Block.createCuboidShape(3, 8, 3, 13, 15, 13), // bottom and soup
+		    
+		    // Pot handles
+		    Block.createCuboidShape(0, 14, 6, 2, 16, 10),  // west
+		    Block.createCuboidShape(14, 14, 6, 16, 16, 10) // east
+		);
+    public static final Map<Direction, VoxelShape> FACING_SHAPES = VoxelShapes.createHorizontalFacingShapeMap(SHAPE);
+
+    
+	private VoxelShape getShape(BlockState state) {
+		Direction direction = state.get(FACING);
+
+		return (VoxelShape)FACING_SHAPES.get(direction);
+	}
+
+	@Override
+	protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return this.getShape(state);
+	}
+
+	@Override
+	protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return this.getShape(state);
+	}
 }

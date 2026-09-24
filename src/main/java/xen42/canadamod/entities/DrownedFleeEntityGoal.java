@@ -1,15 +1,19 @@
 package xen42.canadamod.entities;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.mob.DrownedEntity;
 
-// This class exists solely to allow patching the tick method to update the nagiation field which is final (can modify only in a mixin)
-public class DrownedFleeEntityGoal extends FleeEntityGoal {
+public class DrownedFleeEntityGoal<T extends LivingEntity> extends FleeEntityGoal<T> {
 
-    public DrownedEntity drowned;
-
-    public DrownedFleeEntityGoal(DrownedEntity mob, Class fleeFromType, float distance, double slowSpeed, double fastSpeed) {
+    public DrownedFleeEntityGoal(DrownedEntity mob, Class<T> fleeFromType, float distance, double slowSpeed, double fastSpeed) {
         super(mob, fleeFromType, distance, slowSpeed, fastSpeed);
-        drowned = mob;
-    }     
+    }
+
+	@Override
+	public void tick() {
+		// Refresh due to Drowned switching between land and water navigation
+		this.fleeingEntityNavigation = this.mob.getNavigation();
+		super.tick();
+	}
 }

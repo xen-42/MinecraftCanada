@@ -12,7 +12,7 @@ import xen42.canadamod.entities.GrizzlyEntity;
 public class GrizzlyEntityRenderer extends MobEntityRenderer<GrizzlyEntity, PolarBearEntityRenderState, GrizzlyEntityModel<GrizzlyEntity>> {
 
     public GrizzlyEntityRenderer(Context context) {
-        super(context, new GrizzlyEntityModel(context.getPart(CanadaModClient.MODEL_GRIZZLY_LAYER)), 1f);
+        super(context, new GrizzlyEntityModel<>(context.getPart(CanadaModClient.MODEL_GRIZZLY_LAYER)), 1f);
     }
 
     @Override

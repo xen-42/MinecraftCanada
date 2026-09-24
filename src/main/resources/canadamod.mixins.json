@@ -5,9 +5,9 @@
 	"mixins": [
 		"PlayerEntityMixin",
 		"DrownedEntityMixin",
-		"FleeEntityGoalMixin",
 		"ConsumableComponentMixin",
-		"ChickenEntityMixin"
+		"ChickenEntityMixin",
+		"NoteBlockInstrumentMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -16,7 +16,7 @@ public class CanadaModEntityTagGenerator extends EntityTypeTagProvider {
 
     @Override
 	public String getName() {
-		return "CanadaModEntityTagGenerator";
+		return "Entity Tags";
 	}
 
     @Override

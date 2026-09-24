@@ -1,178 +1,195 @@
 {
-    "beaver_ambient": {
+    "entity.beaver.ambient": {
         "sounds": [
-            "canadamod:beaver_ambient1",
-            "canadamod:beaver_ambient2",
-            "canadamod:beaver_ambient3",
-            "canadamod:beaver_ambient4"
+            "canadamod:mob/beaver/ambient1",
+            "canadamod:mob/beaver/ambient2",
+            "canadamod:mob/beaver/ambient3",
+            "canadamod:mob/beaver/ambient4"
         ],
-        "subtitle": "subtitles.canadamod.beaver_ambient"
+        "subtitle": "subtitles.canadamod.entity.beaver.ambient"
     },
-    "beaver_death": {
+    "entity.beaver.death": {
         "sounds": [
-            "canadamod:beaver_death1",
-            "canadamod:beaver_death2"
+            "canadamod:mob/beaver/death1",
+            "canadamod:mob/beaver/death2"
         ],
-        "subtitle": "subtitles.canadamod.beaver_death"
+        "subtitle": "subtitles.canadamod.entity.beaver.death"
     },
-    "beaver_hurt": {
+    "entity.beaver.hurt": {
         "sounds": [
-            "canadamod:beaver_hurt1",
-            "canadamod:beaver_hurt2"
+            "canadamod:mob/beaver/hurt1",
+            "canadamod:mob/beaver/hurt2"
         ],
-        "subtitle": "subtitles.canadamod.beaver_hurt"
+        "subtitle": "subtitles.canadamod.entity.beaver.hurt"
     },
-    "moose_ambient": {
+    "entity.beaver.eat": {
         "sounds": [
-            "canadamod:moose_ambient1",
-            "canadamod:moose_ambient2",
-            "canadamod:moose_ambient3"
+            "canadamod:mob/beaver/eat1",
+            "canadamod:mob/beaver/eat2",
+            "canadamod:mob/beaver/eat3"
         ],
-        "subtitle": "subtitles.canadamod.moose_ambient"
+        "subtitle": "subtitles.canadamod.entity.beaver.eat"
     },
-    "moose_angry": {
+    "entity.moose.ambient": {
         "sounds": [
-            "canadamod:moose_angry1",
-            "canadamod:moose_angry2",
-            "canadamod:moose_angry3",
-            "canadamod:moose_angry4"
+            "canadamod:mob/moose/ambient1",
+            "canadamod:mob/moose/ambient2",
+            "canadamod:mob/moose/ambient3"
         ],
-        "subtitle": "subtitles.canadamod.moose_angry"
+        "subtitle": "subtitles.canadamod.entity.moose.ambient"
     },
-    "moose_death": {
+    "entity.moose.angry": {
         "sounds": [
-            "canadamod:moose_death1",
-            "canadamod:moose_death2"
+            "canadamod:mob/moose/angry1",
+            "canadamod:mob/moose/angry2",
+            "canadamod:mob/moose/angry3",
+            "canadamod:mob/moose/angry4"
         ],
-        "subtitle": "subtitles.canadamod.moose_death"
+        "subtitle": "subtitles.canadamod.entity.moose.angry"
     },
-    "moose_hurt": {
+    "entity.moose.death": {
         "sounds": [
-            "canadamod:moose_hurt1",
-            "canadamod:moose_hurt2"
+            "canadamod:mob/moose/death1",
+            "canadamod:mob/moose/death2"
         ],
-        "subtitle": "subtitles.canadamod.moose_hurt"
+        "subtitle": "subtitles.canadamod.entity.moose.death"
     },
-    "grizzly_bear_ambient": {
+    "entity.moose.hurt": {
+        "sounds": [
+            "canadamod:mob/moose/hurt1",
+            "canadamod:mob/moose/hurt2"
+        ],
+        "subtitle": "subtitles.canadamod.entity.moose.hurt"
+    },
+    "entity.moose.note_block_imitate": {
+        "sounds": [
+        {
+            "name": "canadamod:entity.moose.ambient",
+            "type": "event"
+        }
+        ],
+        "subtitle": "subtitles.canadamod.entity.moose.ambient"
+    },
+    "entity.grizzly.ambient": {
 		"sounds": [
-			"canadamod:polar_bear_idle1",
-			"canadamod:polar_bear_idle2",
-			"canadamod:polar_bear_idle3",
-			"canadamod:polar_bear_idle4"
+			"canadamod:mob/grizzly/idle1",
+			"canadamod:mob/grizzly/idle2",
+			"canadamod:mob/grizzly/idle3",
+			"canadamod:mob/grizzly/idle4"
 		],
-		"subtitle": "subtitles.canadamod.grizzly_bear_ambient"
+		"subtitle": "subtitles.canadamod.entity.grizzly.ambient"
 	},
-	"grizzly_bear_ambient_baby": {
+	"entity.grizzly.ambient_baby": {
 		"sounds": [
-			"canadamod:polar_bear_baby_idle3"
+			"canadamod:mob/grizzly/baby_idle"
 		],
-		"subtitle": "subtitles.canadamod.grizzly_bear_ambient_baby"
+		"subtitle": "subtitles.canadamod.entity.grizzly.ambient_baby"
 	},
-	"grizzly_bear_death": {
+	"entity.grizzly.death": {
 		"sounds": [
-			"canadamod:polar_bear_death1",
-			"canadamod:polar_bear_death2",
-			"canadamod:polar_bear_death3"
+			"canadamod:mob/grizzly/death1",
+			"canadamod:mob/grizzly/death2",
+			"canadamod:mob/grizzly/death3"
 		],
-		"subtitle": "subtitles.canadamod.grizzly_bear_death"
+		"subtitle": "subtitles.canadamod.entity.grizzly.death"
 	},
-	"grizzly_bear_hurt": {
+	"entity.grizzly.hurt": {
 		"sounds": [
-			"canadamod:polar_bear_hurt1",
-			"canadamod:polar_bear_hurt2",
-			"canadamod:polar_bear_hurt3",
-			"canadamod:polar_bear_hurt4"
+			"canadamod:mob/grizzly/hurt1",
+			"canadamod:mob/grizzly/hurt2",
+			"canadamod:mob/grizzly/hurt3",
+			"canadamod:mob/grizzly/hurt4"
 		],
-		"subtitle": "subtitles.canadamod.grizzly_bear_hurt"
+		"subtitle": "subtitles.canadamod.entity.grizzly.hurt"
 	},
-	"grizzly_bear_warning": {
+	"entity.grizzly.warning": {
 		"sounds": [
-			"canadamod:polar_bear_roar1",
-			"canadamod:polar_bear_roar2",
-			"canadamod:polar_bear_roar3"
+			"canadamod:mob/grizzly/roar1",
+			"canadamod:mob/grizzly/roar2",
+			"canadamod:mob/grizzly/roar3"
 
 		],
-		"subtitle": "subtitles.canadamod.grizzly_bear_warning"
+		"subtitle": "subtitles.canadamod.entity.grizzly.warning"
 	},
-    "duck_ambient": {
+    "entity.duck.ambient": {
         "sounds": [
-            "canadamod:duck_ambient1",
-            "canadamod:duck_ambient2"
+            "canadamod:mob/duck/ambient1",
+            "canadamod:mob/duck/ambient2"
         ],
-		"subtitle": "subtitles.canadamod.duck_ambient"
+		"subtitle": "subtitles.canadamod.entity.duck.ambient"
     },
-    "duck_death": {
+    "entity.duck.death": {
         "sounds": [
-            "canadamod:duck_death"
+            "canadamod:mob/duck/death"
         ],
-		"subtitle": "subtitles.canadamod.duck_death"
+		"subtitle": "subtitles.canadamod.entity.duck.death"
     },
-    "duck_hurt": {
+    "entity.duck.hurt": {
         "sounds": [
-            "canadamod:duck_hurt1",
-            "canadamod:duck_hurt2"
+            "canadamod:mob/duck/hurt1",
+            "canadamod:mob/duck/hurt2"
         ],
-		"subtitle": "subtitles.canadamod.duck_hurt"
+		"subtitle": "subtitles.canadamod.entity.duck.hurt"
     },
-    "duck_footstep": {
+    "entity.duck.footstep": {
         "sounds": [
-            "canadamod:duck_footstep1",
-            "canadamod:duck_footstep2"
+            "canadamod:mob/duck/footstep1",
+            "canadamod:mob/duck/footstep2"
         ],
-		"subtitle": "subtitles.canadamod.duck_footstep"
+		"subtitle": "subtitles.canadamod.entity.duck.footstep"
     },
-    "duck_plop": {
+    "entity.duck.plop": {
         "sounds": [
-            "canadamod:duck_plop"
+            "canadamod:mob/duck/plop"
         ],
-		"subtitle": "subtitles.canadamod.duck_plop"
+		"subtitle": "subtitles.canadamod.entity.duck.plop"
     },
-    "goose_plop": {
+    "entity.goose.plop": {
         "sounds": [
-            "canadamod:goose_plop"
+            "canadamod:mob/goose/plop"
         ],
-		"subtitle": "subtitles.canadamod.goose_plop"
+		"subtitle": "subtitles.canadamod.entity.goose.plop"
     },
-    "moose_grow_antler": {
+    "entity.moose.grow_antler": {
         "sounds": [
-            "canadamod:moose_grow_antler"
+            "canadamod:mob/moose/grow_antler"
         ],
-		"subtitle": "subtitles.canadamod.moose_grow_antler"
+		"subtitle": "subtitles.canadamod.entity.moose.grow_antler"
     },
-    "moose_strip_antler": {
+    "entity.moose.strip_antler": {
         "sounds": [
-            "canadamod:moose_strip_antler1",
-            "canadamod:moose_strip_antler2"
+            "canadamod:mob/moose/strip_antler1",
+            "canadamod:mob/moose/strip_antler2"
         ],
-		"subtitle": "subtitles.canadamod.moose_strip_antler"
+		"subtitle": "subtitles.canadamod.entity.moose.strip_antler"
     },
-    "goose_hurt": {
+    "entity.goose.hurt": {
         "sounds": [
-            "canadamod:goose_hurt1",
-            "canadamod:goose_hurt2"
+            "canadamod:mob/goose/hurt1",
+            "canadamod:mob/goose/hurt2"
         ],
-		"subtitle": "subtitles.canadamod.goose_hurt"
+		"subtitle": "subtitles.canadamod.entity.goose.hurt"
     },
-    "goose_ambient": {
+    "entity.goose.ambient": {
         "sounds": [
-            "canadamod:goose_ambient1",
-            "canadamod:goose_ambient2",
-            "canadamod:goose_ambient3"
+            "canadamod:mob/goose/ambient1",
+            "canadamod:mob/goose/ambient2",
+            "canadamod:mob/goose/ambient3"
         ],
-		"subtitle": "subtitles.canadamod.goose_ambient"
+		"subtitle": "subtitles.canadamod.entity.goose.ambient"
     },
-    "goose_death": {
+    "entity.goose.death": {
         "sounds": [
-            "canadamod:goose_death1",
-            "canadamod:goose_death2"
+            "canadamod:mob/goose/death1",
+            "canadamod:mob/goose/death2"
         ],
-		"subtitle": "subtitles.canadamod.goose_death"
+		"subtitle": "subtitles.canadamod.entity.goose.death"
     },
-    "goose_warning": {
+    "entity.goose.warning": {
         "sounds": [
-            "canadamod:goose_warning1",
-            "canadamod:goose_warning2"
+            "canadamod:mob/goose/warning1",
+            "canadamod:mob/goose/warning2"
         ],
-		"subtitle": "subtitles.canadamod.goose_warning"
+		"subtitle": "subtitles.canadamod.entity.goose.warning"
     }
 }

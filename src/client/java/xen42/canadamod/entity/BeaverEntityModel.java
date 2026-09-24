@@ -18,6 +18,7 @@ public class BeaverEntityModel extends QuadrupedEntityModel<BeaverEntityRenderSt
       	this.tail = root.getChild("tail");	
 	}
 
+    @SuppressWarnings("unused")
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();

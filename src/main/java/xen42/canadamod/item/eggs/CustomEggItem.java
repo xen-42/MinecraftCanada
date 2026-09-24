@@ -1,8 +1,6 @@
 package xen42.canadamod.item.eggs;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
@@ -16,7 +14,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public abstract class CustomEggItem<e extends AnimalEntity> extends Item implements ProjectileItem {
+public abstract class CustomEggItem extends Item implements ProjectileItem {
 	public static final float POWER = 1.5F;
 
 	public CustomEggItem(Item.Settings settings) {

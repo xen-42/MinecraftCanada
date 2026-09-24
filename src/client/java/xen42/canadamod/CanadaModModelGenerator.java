@@ -11,6 +11,11 @@ public class CanadaModModelGenerator extends FabricModelProvider {
     public CanadaModModelGenerator(FabricDataOutput output) {
         super(output);
     }
+    
+    @Override
+    public String getName() {
+        return "Models";
+    }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
@@ -55,10 +60,5 @@ public class CanadaModModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(CanadaBlocks.MAPLE_SAPLING, CanadaBlocks.POTTED_MAPLE_SAPLING, CrossType.NOT_TINTED);
 
         blockStateModelGenerator.registerSimpleCubeAll(CanadaBlocks.RUBBER_BLOCK);
-    }
-
-    @Override
-    public String getName() {
-        return "CanadaModModelGenerator";
     }
 }

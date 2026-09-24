@@ -7,8 +7,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -296,6 +294,10 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
     public static boolean isContainer(ItemStack item) {
         return item.isOf(Items.BOWL) || item.isOf(Items.GLASS_BOTTLE);
     }
+    
+    public static boolean isAir(ItemStack item) {
+        return item.isOf(Items.AIR);
+    }
 
     private class CookingPotSimpleInventory extends SimpleInventory implements RecipeInputInventory {
         private ScreenHandler _screen;
@@ -334,10 +336,38 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
             _handler.onContentChanged(_handler.inventory);
             _handler.inventory.markDirty();
         }
+        
+        @Override
+    	public ItemStack getStack() {
+	    	var stack = super.getStack();
+	    	//CanadaMod.LOGGER.warn(getIndex() + " getStack " + stack.toString());
+	        return stack;
+    	}
+        
+        @Override
+    	public void setStackNoCallbacks(ItemStack stack) {
+	    	//CanadaMod.LOGGER.warn(getIndex() + " setStack " + stack.toString());
+	        super.setStackNoCallbacks(stack);
+    	}
+
+        @Override
+    	public ItemStack takeStack(int amount) {
+	    	var stack = super.takeStack(amount);
+	    	//CanadaMod.LOGGER.warn(getIndex() + " takeStack " + stack.toString());
+	        return stack;
+    	}
+
+	    @Override
+		public boolean canTakePartial(PlayerEntity player) {
+	    	var canModify = super.canTakePartial(player);
+	    	//CanadaMod.LOGGER.warn(getIndex() + " allowModification " + canModify);
+	        return canModify;
+	    }
 
         @Override
         public boolean canInsert(ItemStack stack) {
-            return !_handler.isContainer(stack);
+	    	//CanadaMod.LOGGER.warn(getIndex() + " Input canInsert " + stack.toString());
+            return isAir(stack) || !isContainer(stack);
         }
     }
 
@@ -348,7 +378,8 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
         @Override
         public boolean canInsert(ItemStack stack) {
-            return _handler.isContainer(stack);
+	    	//CanadaMod.LOGGER.warn(getIndex() + " Container canInsert " + stack.toString());
+            return isAir(stack) || isContainer(stack);
         }
     }
 
@@ -359,6 +390,7 @@ public class CookingPotScreenHandler extends AbstractRecipeScreenHandler {
 
         @Override
         public boolean canInsert(ItemStack stack) {
+	    	//CanadaMod.LOGGER.warn(getIndex() + " Output canInsert " + stack.toString());
             return false;
         }
     }

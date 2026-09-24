@@ -17,7 +17,7 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_translation{key='tag.item.c.sap', fallback='#c:sap', args=[]}": {
+    "has_sap": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_translation{key='tag.item.c.sap', fallback='#c:sap', args=[]}",
+      "has_sap",
       "has_fermented_spider_eye"
     ]
   ],

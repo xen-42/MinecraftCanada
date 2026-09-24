@@ -29,7 +29,8 @@ public class GooseEntityModel<T extends GooseEntity> extends ChickenEntityModel 
 		head.zScale = livingEntityRenderState.baby ? 1.5f : 1f;
 	}
 
-    public static TexturedModelData getTexturedModelData() {
+    @SuppressWarnings("unused")
+	public static TexturedModelData getTexturedModelData() {
         ModelData meshdefinition = new ModelData();
 		ModelPartData partdefinition = meshdefinition.getRoot();
 

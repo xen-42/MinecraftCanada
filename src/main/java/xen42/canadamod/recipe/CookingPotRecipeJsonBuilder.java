@@ -64,7 +64,7 @@ public class CookingPotRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
 
 	public CookingPotRecipeJsonBuilder input(TagKey<Item> tag, RecipeGenerator recipeGenerator) {
 		this._inputsList.add(Ingredient.fromTag(_registryLookup.getOrThrow(tag)));
-        return this.criterion("has_" + tag.getName(), recipeGenerator.conditionsFromTag(tag));
+        return this.criterion("has_" + tag.id().getPath(), recipeGenerator.conditionsFromTag(tag));
 	}
 
     @Override

@@ -1,15 +1,10 @@
 package xen42.canadamod.mixin.client;
 
-import net.minecraft.block.WoodType;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HangingSignEditScreen;
 import net.minecraft.util.Identifier;
 import xen42.canadamod.CanadaBlocks;
 import xen42.canadamod.CanadaMod;
 import xen42.canadamod.sign.MapleHangingSignBlockEntity;
-
-import javax.swing.text.html.HTMLDocument.BlockElement;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;

@@ -6,22 +6,14 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnLocation;
 import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.item.Items;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.book.RecipeBookCategory;
@@ -30,7 +22,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
@@ -44,9 +35,8 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.structure.JigsawStructure;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
-import net.minecraft.world.poi.PointOfInterestType;
 import xen42.canadamod.block.CookingPotBlockEntity;
-import xen42.canadamod.block.MooseSkullBlockEntity;
+import xen42.canadamod.block.skull.MooseSkullBlockEntity;
 import xen42.canadamod.entities.BeaverChopTreeEffectPayload;
 import xen42.canadamod.entities.BeaverEntity;
 import xen42.canadamod.entities.DuckEntity;
@@ -57,6 +47,7 @@ import xen42.canadamod.entities.MooseEntity;
 import xen42.canadamod.entities.eggs.CustomEggEntity;
 import xen42.canadamod.entities.eggs.DuckEggEntity;
 import xen42.canadamod.entities.eggs.GooseEggEntity;
+import xen42.canadamod.recipe.CanadaRecipeBookCategory;
 import xen42.canadamod.recipe.CookingPotRecipe;
 import xen42.canadamod.recipe.CookingPotRecipeDisplay;
 import xen42.canadamod.screen.CookingPotScreenHandler;
@@ -69,26 +60,32 @@ import org.slf4j.LoggerFactory;
 public class CanadaMod implements ModInitializer {
 	public static final String MOD_ID = "canadamod";
 
-	public static final RegistryKey<Biome> MAPLE_BIOME_KEY = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(CanadaMod.MOD_ID, "maple_forest"));
+	public static final Identifier MAPLE_BIOME_ID = Identifier.of(MOD_ID, "maple_forest");
+	public static final RegistryKey<Biome> MAPLE_BIOME_KEY = RegistryKey.of(RegistryKeys.BIOME, MAPLE_BIOME_ID);
 
-	public static final RegistryKey<RecipeType<?>> COOKING_POT_RECIPE_TYPE_KEY = RegistryKey.of(RegistryKeys.RECIPE_TYPE, Identifier.of(MOD_ID, "cooking_pot"));
-	public static final RecipeType<CookingPotRecipe> COOKING_POT_RECIPE_TYPE = Registry.register(Registries.RECIPE_TYPE, Identifier.of(MOD_ID, "cooking_pot"), new RecipeType<CookingPotRecipe>() {
+	public static final Identifier COOKING_POT_ID = Identifier.of(MOD_ID, "cooking_pot");
+	public static final RegistryKey<RecipeType<?>> COOKING_POT_RECIPE_TYPE_KEY = RegistryKey.of(RegistryKeys.RECIPE_TYPE, COOKING_POT_ID);
+	public static final RecipeType<CookingPotRecipe> COOKING_POT_RECIPE_TYPE = Registry.register(Registries.RECIPE_TYPE, COOKING_POT_ID, new RecipeType<CookingPotRecipe>() {
 		public String toString() {
 			return "cooking_pot";
 		}
 	});
-	public static final RecipeSerializer<CookingPotRecipe> COOKING_POT_RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(MOD_ID, "cooking_pot"), new CookingPotRecipe.Serializer());
-	public static final RecipeDisplay.Serializer<CookingPotRecipeDisplay> COOKING_POT_RECIPE_DISPLAY = Registry.register(Registries.RECIPE_DISPLAY, Identifier.of(MOD_ID, "cooking_pot"), CookingPotRecipeDisplay.SERIALIZER);
-	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = Registry.register(Registries.RECIPE_BOOK_CATEGORY, 
-		Identifier.of(MOD_ID, "cooking_pot"), new RecipeBookCategory() {
-		public String toString() {
-			return "COOKING_POT";
-		}
-	});
+	public static final RecipeSerializer<CookingPotRecipe> COOKING_POT_RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, COOKING_POT_ID, new CookingPotRecipe.Serializer());
+	public static final RecipeDisplay.Serializer<CookingPotRecipeDisplay> COOKING_POT_RECIPE_DISPLAY = Registry.register(Registries.RECIPE_DISPLAY, COOKING_POT_ID, CookingPotRecipeDisplay.SERIALIZER);
+	public static final RecipeBookCategory COOKING_POT_RECIPE_BOOK_CATEGORY = registerRecipeBookCategory(COOKING_POT_ID);
+
+	public static RecipeBookCategory registerRecipeBookCategory(String path) {
+		Identifier id = Identifier.of(MOD_ID, path);
+		return registerRecipeBookCategory(id);
+	}
+
+	public static RecipeBookCategory registerRecipeBookCategory(Identifier id) {
+		return Registry.register(Registries.RECIPE_BOOK_CATEGORY, id, new CanadaRecipeBookCategory(id));
+	}
 
 	public static final ScreenHandlerType<CookingPotScreenHandler> COOKING_POT_SCREEN_HANDLER_TYPE = Registry.register(
 		Registries.SCREEN_HANDLER,
-		Identifier.of(MOD_ID, "cooking_pot"),
+		COOKING_POT_ID,
 		new ScreenHandlerType<CookingPotScreenHandler>(CookingPotScreenHandler::new, null));
 
 	public static final BlockEntityType<CookingPotBlockEntity> COOKING_POT_ENTITY = registerBlockEntityType(
@@ -105,56 +102,58 @@ public class CanadaMod implements ModInitializer {
 		return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(CanadaMod.MOD_ID, path), blockEntityType);
 	}
 
-	public static final RegistryKey<EntityType<?>> BEAVER_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"beaver"));
+	public static final Identifier BEAVER_ENTITY_ID = Identifier.of(MOD_ID, "beaver");
+	public static final RegistryKey<EntityType<?>> BEAVER_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, BEAVER_ENTITY_ID);
 	public static final EntityType<BeaverEntity> BEAVER_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "beaver"), 
+		BEAVER_ENTITY_ID, 
 		EntityType.Builder.create(BeaverEntity::new, SpawnGroup.CREATURE).dimensions(0.5f, 0.5f).build(BEAVER_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> MOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"moose"));
+	public static final Identifier MOOSE_ENTITY_ID = Identifier.of(MOD_ID, "moose");
+	public static final RegistryKey<EntityType<?>> MOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, MOOSE_ENTITY_ID);
 	public static final EntityType<MooseEntity> MOOSE_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "moose"), 
+		MOOSE_ENTITY_ID, 
 		EntityType.Builder.create(MooseEntity::new, SpawnGroup.CREATURE).dimensions(1.75f, 2.5f).build(MOOSE_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> DUCK_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck"));
+	public static final Identifier DUCK_ENTITY_ID = Identifier.of(MOD_ID, "duck");
+	public static final RegistryKey<EntityType<?>> DUCK_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, DUCK_ENTITY_ID);
 	public static final EntityType<DuckEntity> DUCK_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "duck"), 
+		DUCK_ENTITY_ID, 
 		EntityType.Builder.create(DuckEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(DUCK_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> GOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"goose"));
+	public static final Identifier GOOSE_ENTITY_ID = Identifier.of(MOD_ID, "goose");
+	public static final RegistryKey<EntityType<?>> GOOSE_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, GOOSE_ENTITY_ID);
 	public static final EntityType<GooseEntity> GOOSE_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "goose"), 
+		GOOSE_ENTITY_ID, 
 		EntityType.Builder.create(GooseEntity::new, SpawnGroup.CREATURE).dimensions(0.4f, 0.7f).build(GOOSE_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> GRIZZLY_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"grizzly"));
+	public static final Identifier GRIZZLY_ENTITY_ID = Identifier.of(MOD_ID, "grizzly");
+	public static final RegistryKey<EntityType<?>> GRIZZLY_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, GRIZZLY_ENTITY_ID);
 	public static final EntityType<GrizzlyEntity> GRIZZLY_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "grizzly"), 
+		GRIZZLY_ENTITY_ID, 
 		EntityType.Builder.create(GrizzlyEntity::new, SpawnGroup.CREATURE).dimensions(1.4f, 1.4f).build(GRIZZLY_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> DUCK_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"duck_egg_entity"));
+	public static final Identifier DUCK_EGG_ENTITY_ID = Identifier.of(MOD_ID, "duck_egg_entity");
+	public static final RegistryKey<EntityType<?>> DUCK_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, DUCK_EGG_ENTITY_ID);
 	public static final EntityType<CustomEggEntity> DUCK_EGG_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "duck_egg_entity"), 
+		DUCK_EGG_ENTITY_ID, 
 		EntityType.Builder.<CustomEggEntity>create(DuckEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(DUCK_EGG_ENTITY_KEY));
 
-	public static final RegistryKey<EntityType<?>> GOOSE_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(MOD_ID,"goose_egg_entity"));
+	public static final Identifier GOOSE_EGG_ENTITY_ID = Identifier.of(MOD_ID, "goose_egg_entity");
+	public static final RegistryKey<EntityType<?>> GOOSE_EGG_ENTITY_KEY = RegistryKey.of(RegistryKeys.ENTITY_TYPE, GOOSE_EGG_ENTITY_ID);
 	public static final EntityType<CustomEggEntity> GOOSE_EGG_ENTITY = Registry.register(
 		Registries.ENTITY_TYPE, 
-		Identifier.of(MOD_ID, "goose_egg_entity"), 
+		GOOSE_EGG_ENTITY_ID, 
 		EntityType.Builder.<CustomEggEntity>create(GooseEggEntity::new, SpawnGroup.MISC).dimensions(0.0f, 0.0f).build(GOOSE_EGG_ENTITY_KEY));
 
-	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect statusEffect) {
-		return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(MOD_ID, id), statusEffect);
-	}
-	public static RegistryEntry<StatusEffect> BEAVER_EFFECT;
-	public static RegistryEntry<StatusEffect> MOOSE_EFFECT;
-
-	public static final RegistryKey<Structure> MAPLE_CABIN_KEY = RegistryKey.of(RegistryKeys.STRUCTURE, Identifier.of(MOD_ID, "maple_cabin"));
-	public static final StructureType<JigsawStructure> MAPLE_CABIN_TYPE_KEY = Registry.register(Registries.STRUCTURE_TYPE, Identifier.of(MOD_ID, "maple_cabin"),
+	public static final Identifier MAPLE_CABIN_ID = Identifier.of(MOD_ID, "maple_cabin");
+	public static final RegistryKey<Structure> MAPLE_CABIN_KEY = RegistryKey.of(RegistryKeys.STRUCTURE, MAPLE_CABIN_ID);
+	public static final StructureType<JigsawStructure> MAPLE_CABIN_TYPE_KEY = Registry.register(Registries.STRUCTURE_TYPE, MAPLE_CABIN_ID,
 		() -> JigsawStructure.CODEC);
 
 	// This logger is used to write text to the console and the log file.
@@ -176,16 +175,8 @@ public class CanadaMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(GOOSE_ENTITY, GooseEntity.createGooseAttributes());
 		FabricDefaultAttributeRegistry.register(GRIZZLY_ENTITY, GrizzlyEntity.createGrizzlyAttributes());
 
-		BEAVER_EFFECT = registerStatusEffect("beaver_effect",
-			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 10187841))
-			.addAttributeModifier(EntityAttributes.BLOCK_BREAK_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 3f, Operation.ADD_MULTIPLIED_TOTAL)
-			.addAttributeModifier(EntityAttributes.SUBMERGED_MINING_SPEED, Identifier.of(MOD_ID, "effect.beaver_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
-		);
-		MOOSE_EFFECT = registerStatusEffect("moose_effect",
-			(new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 7079970))
-			.addAttributeModifier(EntityAttributes.MAX_HEALTH, Identifier.of(MOD_ID, "effect.moose_effect"), 6.0, Operation.ADD_VALUE)
-			.addAttributeModifier(EntityAttributes.KNOCKBACK_RESISTANCE, Identifier.of(MOD_ID, "effect.moose_effect"), 2f, Operation.ADD_MULTIPLIED_TOTAL)
-		);
+		CanadaEffects.initialize();
+		CanadaPotions.initialize();
 
 		CanadaBlocks.initialize();
 		CanadaConfiguredFeatures.onInitialize();
@@ -223,7 +214,7 @@ public class CanadaMod implements ModInitializer {
 		CanadaSounds.onInit();
 	}
 
-	private static boolean canSpawn(EntityType type, ServerWorldAccess access, SpawnReason reason, BlockPos pos, Random random) {
+	private static boolean canSpawn(EntityType<?> type, ServerWorldAccess access, SpawnReason reason, BlockPos pos, Random random) {
 		var ground = access.getBlockState(pos.down());
 		var goodGround = ground.isIn(BlockTags.DIRT) || ground.isOf(Blocks.GRASS_BLOCK) || ground.isOf(Blocks.PODZOL) || ground.isOf(Blocks.SNOW);
 		var goodLight = access.getLightLevel(pos) > 8;

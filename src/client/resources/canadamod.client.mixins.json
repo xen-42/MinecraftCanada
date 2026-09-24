@@ -5,8 +5,10 @@
 	"client": [
 		"HangingSignEditScreenMixin",
 		"AbstractSignEditScreenMixin",
-		"DrawContextMixin",
-		"HandledScreenMixin"
+		"TooltipComponentMixin",
+		"HandledScreenMixin",
+		"SkullBlockEntityRendererMixin",
+		"LivingEntityRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
