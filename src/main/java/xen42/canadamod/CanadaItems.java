@@ -47,6 +47,7 @@ import net.minecraft.util.math.Direction;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.item.DispensibleSpawnEggItem;
 import xen42.canadamod.item.DurabilityFoodItem;
+import xen42.canadamod.item.HatItem;
 import xen42.canadamod.item.ThermosContentsComponent;
 import xen42.canadamod.item.ThermosItem;
 import xen42.canadamod.item.eggs.DuckEggItem;
@@ -144,9 +145,11 @@ public class CanadaItems {
     public static final ArmorMaterial PELT_ARMOR = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, CanadaTags.ItemTags.REPAIRS_PELT_ARMOR, EquipmentAssetKeys.LEATHER);
     public static final ArmorMaterial LEATHER_ARMOR_NO_DEFENSE = new ArmorMaterial(5, NO_DEFENSE_MAP, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, ItemTags.REPAIRS_LEATHER_ARMOR, EquipmentAssetKeys.LEATHER);
     
-    public static final Item BEAVER_HELMET = register("beaver_helmet", Item::new, 
+    public static final Item BEAVER_HELMET = register("beaver_helmet", 
+        HatItem::new, 
         new Item.Settings().armor(PELT_ARMOR, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
-    public static final Item MOOSE_HELMET = register("moose_helmet", Item::new, 
+    public static final Item MOOSE_HELMET = register("moose_helmet", 
+        HatItem::new, 
         new Item.Settings().armor(LEATHER_ARMOR_NO_DEFENSE, EquipmentType.HELMET).rarity(Rarity.UNCOMMON));
 
     public static Item MAPLE_HANGING_SIGN_ITEM, MAPLE_SIGN_ITEM;
