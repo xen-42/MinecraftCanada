@@ -5,7 +5,7 @@ import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;
 
 import xen42.canadamod.CanadaMod;
-import xen42.canadamod.entities.BeaverEntity;
+import xen42.canadamod.entities.*;
 
 @WailaPlugin(CanadaMod.MOD_ID)
 public class CanadaJadePlugin implements IWailaPlugin {
@@ -17,5 +17,6 @@ public class CanadaJadePlugin implements IWailaPlugin {
 	public void registerClient(IWailaClientRegistration registration) {
 		CanadaMod.LOGGER.info("Registering client components");
 		registration.registerEntityComponent(BeaverChopProvider.INSTANCE, BeaverEntity.class);
+		registration.registerEntityComponent(MooseAntlerProvider.INSTANCE, MooseEntity.class);
 	}
 }

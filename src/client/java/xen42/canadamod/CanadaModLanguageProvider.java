@@ -16,6 +16,7 @@ import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.gen.structure.Structure;
 import xen42.canadamod.entities.MapleBoatEntity;
 import xen42.canadamod.jade.BeaverChopProvider;
+import xen42.canadamod.jade.MooseAntlerProvider;
 
 public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 	public CanadaModLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
@@ -244,6 +245,13 @@ public abstract class CanadaModLanguageProvider extends FabricLanguageProvider {
 			translationBuilder.addJadePlugin(CanadaMod.BEAVER_ENTITY_ID, "Beaver");
 			translationBuilder.add(BeaverChopProvider.FATIGUE_KEY, "Fatigue time: %s");
 			translationBuilder.add(BeaverChopProvider.FRENZY_KEY, "Frenzy time: %s");
+
+			translationBuilder.addJadePlugin(CanadaMod.MOOSE_ENTITY_ID, "Moose");
+			translationBuilder.add(MooseAntlerProvider.ANTLERS_KEY, "Antlers: %s/2");
+			translationBuilder.add(MooseAntlerProvider.LEFT_SHED_KEY, "Left antler sheds in: %s");
+			translationBuilder.add(MooseAntlerProvider.RIGHT_SHED_KEY, "Right antler sheds in: %s");
+			translationBuilder.add(MooseAntlerProvider.LEFT_REGROW_KEY, "Left antler regrows in: %s");
+			translationBuilder.add(MooseAntlerProvider.RIGHT_REGROW_KEY, "Right antler regrows in: %s");
 		}
 	}
 	
